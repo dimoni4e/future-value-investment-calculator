@@ -7,7 +7,6 @@ import ScenarioSlider from './ScenarioSlider'
 import ShareButtons from './ShareButtons'
 import ExportButton from './ExportButton'
 import CurrencySelector from './CurrencySelector'
-import { Button } from '@/components/ui/button'
 import { ChevronDown } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import {
@@ -344,7 +343,7 @@ const CalculatorForm = () => {
           />
           {/* Sentry Test Button - Development only */}
           {process.env.NODE_ENV === 'development' && (
-            <Button
+            <button
               onClick={() => {
                 try {
                   throw new Error('Client-side test error for Sentry')
@@ -353,12 +352,10 @@ const CalculatorForm = () => {
                   alert('Error sent to Sentry (check console)')
                 }
               }}
-              variant="outline"
-              size="sm"
-              className="text-xs"
+              className="px-3 py-2 border border-slate-300 text-slate-600 hover:bg-slate-50 rounded-md text-xs transition-colors"
             >
               Test Sentry
-            </Button>
+            </button>
           )}
         </div>
       )}

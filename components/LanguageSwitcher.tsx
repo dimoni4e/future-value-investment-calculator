@@ -2,7 +2,6 @@
 
 import { useLocale } from 'next-intl'
 import { useRouter, usePathname } from 'next/navigation'
-import { Button } from '@/components/ui/button'
 import { ChevronDown, Globe } from 'lucide-react'
 import { useState } from 'react'
 
@@ -31,31 +30,30 @@ export function LanguageSwitcher() {
 
   return (
     <div className="relative">
-      <Button
-        variant="ghost"
+      <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center space-x-2 text-slate-600 hover:text-slate-900"
+        className="flex items-center space-x-2 px-4 py-2.5 text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl transition-all duration-200 font-medium"
       >
         <Globe className="w-4 h-4" />
         <span className="hidden sm:inline">{currentLanguage?.name}</span>
         <span className="sm:hidden">{currentLanguage?.flag}</span>
         <ChevronDown className="w-4 h-4" />
-      </Button>
+      </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 bg-white border border-slate-200 rounded-lg shadow-lg z-50">
+        <div className="absolute right-0 mt-2 w-52 bg-white/95 backdrop-blur-lg border border-slate-200/50 rounded-2xl shadow-xl z-50 overflow-hidden">
           {languages.map((language) => (
             <button
               key={language.code}
               onClick={() => handleLanguageChange(language.code)}
-              className={`w-full px-4 py-2 text-left flex items-center space-x-3 hover:bg-slate-50 first:rounded-t-lg last:rounded-b-lg ${
+              className={`w-full px-4 py-3 text-left flex items-center space-x-3 hover:bg-indigo-50 transition-all duration-200 ${
                 locale === language.code
-                  ? 'bg-blue-50 text-blue-600'
+                  ? 'bg-indigo-50 text-indigo-600 font-semibold'
                   : 'text-slate-700'
               }`}
             >
               <span className="text-lg">{language.flag}</span>
-              <span className="font-medium">{language.name}</span>
+              <span>{language.name}</span>
             </button>
           ))}
         </div>

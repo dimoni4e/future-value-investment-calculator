@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react'
 import { Download, FileText, FileSpreadsheet, ChevronDown } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 import { generateShareableUrl, type CalculatorParams } from '@/lib/urlState'
 import { useTranslations } from 'next-intl'
 
@@ -53,11 +52,10 @@ const ExportButton: React.FC<ExportButtonProps> = ({
 
   return (
     <div className="relative">
-      <Button
+      <button
         onClick={() => setIsOpen(!isOpen)}
         disabled={isExporting}
-        className="flex items-center space-x-2 bg-emerald-600 hover:bg-emerald-700 text-white"
-        size="sm"
+        className="flex items-center space-x-2 px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-md font-medium transition-colors"
       >
         <Download className="w-4 h-4" />
         <span>{isExporting ? t('exporting') : t('export')}</span>
@@ -66,7 +64,7 @@ const ExportButton: React.FC<ExportButtonProps> = ({
             isOpen ? 'rotate-180' : ''
           }`}
         />
-      </Button>
+      </button>
 
       {isOpen && (
         <div className="absolute top-full mt-1 left-0 bg-white border border-gray-200 rounded-lg shadow-lg z-10 min-w-[160px]">

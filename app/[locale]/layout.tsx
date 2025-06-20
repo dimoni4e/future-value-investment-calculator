@@ -83,7 +83,7 @@ export default async function LocaleLayout({
       lang={locale}
       className={`h-full ${inter.variable} ${playfair.variable}`}
     >
-      <body className="h-full flex flex-col bg-gradient-to-br from-slate-50 via-blue-50/30 to-emerald-50/20 font-sans antialiased">
+      <body className="h-full flex flex-col bg-gradient-to-br from-indigo-50 via-white to-cyan-50 font-sans antialiased">
         <NextIntlClientProvider messages={messages} locale={locale}>
           <Header />
           <main className="flex-1">{children}</main>
