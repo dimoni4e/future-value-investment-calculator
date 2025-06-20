@@ -10,7 +10,7 @@
     }
   },
   "env": {
-    "NEXT_PUBLIC_BASE_URL": "@next_public_base_url",
+    "NEXT_PUBLIC_BASE_URL": "https://nature2pixel.com",
     "SENTRY_DSN": "@sentry_dsn",
     "NEXT_PUBLIC_SENTRY_DSN": "@next_public_sentry_dsn",
     "SENTRY_ORG": "@sentry_org",
