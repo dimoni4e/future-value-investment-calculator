@@ -53,6 +53,39 @@ The project is organized into several directories and files, each serving a spec
 - View the growth chart for a visual representation of your investment.
 - Share your results using the social media buttons.
 
+## Deployment
+
+This application is configured for deployment on Vercel with automatic preview deployments for pull requests.
+
+### Production Deployment
+
+1. **Push to GitHub**: The project automatically deploys to production when changes are pushed to the `main` branch.
+
+2. **Environment Variables**: Set up the following environment variables in Vercel:
+   ```
+   NEXT_PUBLIC_BASE_URL=https://your-domain.com
+   SENTRY_DSN=your-sentry-dsn
+   NEXT_PUBLIC_SENTRY_DSN=your-public-sentry-dsn
+   SENTRY_ORG=your-sentry-org
+   SENTRY_PROJECT=your-sentry-project
+   SENTRY_AUTH_TOKEN=your-sentry-auth-token
+   ```
+
+### Preview Deployments
+
+- **Automatic PR Previews**: Every pull request automatically generates a preview deployment
+- **Preview URLs**: Commented automatically on pull requests
+- **Testing**: All preview deployments run through the CI/CD pipeline
+
+### CI/CD Pipeline
+
+The project includes GitHub Actions workflows that:
+
+- Run ESLint and TypeScript checks
+- Execute Playwright tests
+- Deploy preview builds for pull requests
+- Generate test reports and artifacts
+
 ## Contributing
 
 Contributions are welcome! Please submit a pull request or open an issue for any suggestions or improvements.
