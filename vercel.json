@@ -4,11 +4,6 @@
   "devCommand": "npm run dev",
   "installCommand": "npm install",
   "framework": "nextjs",
-  "functions": {
-    "app/api/**": {
-      "runtime": "nodejs18.x"
-    }
-  },
   "env": {
     "NEXT_PUBLIC_BASE_URL": "https://nature2pixel.com",
     "SENTRY_DSN": "https://placeholder@o123456.ingest.sentry.io/4507123456789012",
