@@ -1,33 +1,115 @@
 import { MetadataRoute } from 'next'
 import { locales } from '@/i18n/request'
+import { PREDEFINED_SCENARIOS } from '@/lib/scenarios'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+// This function fetches user-generated scenarios for the sitemap
+async function getUserGeneratedScenarios() {
+  try {
+    // In production, this would fetch from your database
+    // For now, we'll return an empty array since we're using in-memory storage
+    const response = await fetch(
+      `${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/api/scenarios`,
+      {
+        next: { revalidate: 3600 }, // Revalidate every hour
+      }
+    )
+
+    if (response.ok) {
+      const data = await response.json()
+      return data.scenarios || []
+    }
+  } catch (error) {
+    console.error('Error fetching user scenarios for sitemap:', error)
+  }
+
+  return []
+}
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
   const currentDate = new Date()
 
   const sitemapEntries: MetadataRoute.Sitemap = []
 
-  // Add home page for each locale
+  // 1. Core pages - highest priority
   locales.forEach((locale) => {
+    // Homepage
     sitemapEntries.push({
-      url: `${baseUrl}/${locale}`,
+      url: locale === 'en' ? baseUrl : `${baseUrl}/${locale}`,
       lastModified: currentDate,
       changeFrequency: 'daily',
       priority: 1,
     })
   })
 
-  // Add future pages that will be implemented
-  const futurePages = ['about', 'legal', 'legal/privacy', 'legal/terms']
+  // 2. Static pages
+  const staticPages = [
+    { path: 'about', priority: 0.8 },
+    { path: 'legal/privacy', priority: 0.6 },
+    { path: 'legal/terms', priority: 0.6 },
+    { path: 'legal/cookies', priority: 0.5 },
+  ]
 
-  futurePages.forEach((page) => {
+  staticPages.forEach((page) => {
     locales.forEach((locale) => {
       sitemapEntries.push({
-        url: `${baseUrl}/${locale}/${page}`,
+        url:
+          locale === 'en'
+            ? `${baseUrl}/${page.path}`
+            : `${baseUrl}/${locale}/${page.path}`,
         lastModified: currentDate,
         changeFrequency: 'monthly',
-        priority: page === 'about' ? 0.8 : 0.6,
+        priority: page.priority,
       })
+    })
+  })
+
+  // 3. Predefined scenarios - high priority for SEO
+  PREDEFINED_SCENARIOS.forEach((scenario) => {
+    locales.forEach((locale) => {
+      sitemapEntries.push({
+        url:
+          locale === 'en'
+            ? `${baseUrl}/scenario/${scenario.id}`
+            : `${baseUrl}/${locale}/scenario/${scenario.id}`,
+        lastModified: currentDate,
+        changeFrequency: 'weekly',
+        priority: 0.9, // High priority for predefined scenarios
+      })
+    })
+  })
+
+  // 4. User-generated scenarios - programmatic SEO gold mine
+  try {
+    const userScenarios = await getUserGeneratedScenarios()
+
+    userScenarios.forEach((scenario: any) => {
+      locales.forEach((locale) => {
+        sitemapEntries.push({
+          url:
+            locale === 'en'
+              ? `${baseUrl}/scenario/${scenario.slug}`
+              : `${baseUrl}/${locale}/scenario/${scenario.slug}`,
+          lastModified: new Date(scenario.createdAt),
+          changeFrequency: 'monthly',
+          priority: 0.7, // Good priority for user scenarios
+        })
+      })
+    })
+  } catch (error) {
+    console.error('Error adding user scenarios to sitemap:', error)
+  }
+
+  // 5. Scenario discovery pages
+  locales.forEach((locale) => {
+    sitemapEntries.push({
+      url:
+        locale === 'en'
+          ? `${baseUrl}/scenarios`
+          : `${baseUrl}/${locale}/scenarios`,
+      lastModified: currentDate,
+      changeFrequency: 'daily',
+      priority: 0.8,
     })
   })
 

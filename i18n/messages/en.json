@@ -176,5 +176,62 @@
       "email": "Send us an email",
       "privacy": "Read our privacy policy"
     }
+  },
+  "scenarios": {
+    "title": "Investment Scenarios Library",
+    "subtitle": "Explore Investment Strategies",
+    "description": "Discover proven investment scenarios from conservative retirement plans to aggressive growth strategies. Get inspired and create your own financial roadmap.",
+    "browseByCategory": "Browse by Category",
+    "expertCurated": "Expert-Curated Scenarios",
+    "statistics": {
+      "expertScenarios": "Expert Scenarios",
+      "userCreated": "User Created",
+      "totalScenarios": "Total Scenarios",
+      "languages": "Languages"
+    },
+    "categories": {
+      "conservative": {
+        "title": "Conservative Strategies",
+        "description": "Low-risk, steady growth plans for capital preservation",
+        "link": "View Conservative Scenarios"
+      },
+      "moderate": {
+        "title": "Moderate Growth",
+        "description": "Balanced risk-reward for steady wealth building",
+        "link": "View Moderate Scenarios"
+      },
+      "aggressive": {
+        "title": "Aggressive Growth",
+        "description": "High-risk, high-reward strategies for maximum returns",
+        "link": "View Aggressive Scenarios"
+      },
+      "shortTerm": {
+        "title": "Short-term Plans",
+        "description": "1-5 year investment strategies for near-term goals",
+        "link": "View Short-term Plans"
+      },
+      "retirement": {
+        "title": "Retirement Planning",
+        "description": "Long-term strategies for retirement security",
+        "link": "View Retirement Plans"
+      },
+      "all": {
+        "title": "All Scenarios",
+        "description": "Browse the complete library of investment scenarios",
+        "link": "View All Scenarios"
+      }
+    },
+    "scenarioCard": {
+      "initial": "Initial",
+      "monthly": "Monthly",
+      "return": "Return",
+      "years": "Years",
+      "projectedResult": "Projected Result"
+    },
+    "cta": {
+      "title": "Ready to Create Your Own Scenario?",
+      "description": "Use our free investment calculator to model your financial future and share your strategy with others.",
+      "button": "Start Calculating"
+    }
   }
 }

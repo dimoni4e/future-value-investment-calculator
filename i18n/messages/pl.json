@@ -180,5 +180,62 @@
       "email": "Wyślij nam e-mail",
       "privacy": "Przeczytaj naszą politykę prywatności"
     }
+  },
+  "scenarios": {
+    "title": "Biblioteka Scenariuszy Inwestycyjnych",
+    "subtitle": "Odkryj Strategie Inwestycyjne",
+    "description": "Odkryj sprawdzone scenariusze inwestycyjne od konserwatywnych planów emerytalnych po agresywne strategie wzrostu. Zainspiruj się i stwórz własną mapę drogową finansową.",
+    "browseByCategory": "Przeglądaj według Kategorii",
+    "expertCurated": "Scenariusze Wybrane przez Ekspertów",
+    "statistics": {
+      "expertScenarios": "Scenariusze Ekspertów",
+      "userCreated": "Stworzone przez Użytkowników",
+      "totalScenarios": "Wszystkie Scenariusze",
+      "languages": "Języki"
+    },
+    "categories": {
+      "conservative": {
+        "title": "Strategie Konserwatywne",
+        "description": "Plany niskiego ryzyka i stałego wzrostu dla zachowania kapitału",
+        "link": "Zobacz Scenariusze Konserwatywne"
+      },
+      "moderate": {
+        "title": "Wzrost Umiarkowany",
+        "description": "Zbalansowane ryzyko-zysk dla stałego budowania bogactwa",
+        "link": "Zobacz Scenariusze Umiarkowane"
+      },
+      "aggressive": {
+        "title": "Wzrost Agresywny",
+        "description": "Strategie wysokiego ryzyka i wysokiej nagrody dla maksymalnych zwrotów",
+        "link": "Zobacz Scenariusze Agresywne"
+      },
+      "shortTerm": {
+        "title": "Plany Krótkoterminowe",
+        "description": "Strategie inwestycyjne 1-5 lat dla celów krótkoterminowych",
+        "link": "Zobacz Plany Krótkoterminowe"
+      },
+      "retirement": {
+        "title": "Planowanie Emerytury",
+        "description": "Strategie długoterminowe dla bezpieczeństwa emerytalnego",
+        "link": "Zobacz Plany Emerytalne"
+      },
+      "all": {
+        "title": "Wszystkie Scenariusze",
+        "description": "Przeglądaj kompletną bibliotekę scenariuszy inwestycyjnych",
+        "link": "Zobacz Wszystkie Scenariusze"
+      }
+    },
+    "scenarioCard": {
+      "initial": "Początkowy",
+      "monthly": "Miesięczny",
+      "return": "Zwrot",
+      "years": "Lata",
+      "projectedResult": "Przewidywany Wynik"
+    },
+    "cta": {
+      "title": "Gotowy na Stworzenie Własnego Scenariusza?",
+      "description": "Użyj naszej bezpłatnej kalkulatora inwestycji, aby zamodelować swoją przyszłość finansową i podzielić się strategią z innymi.",
+      "button": "Zacznij Liczyć"
+    }
   }
 }

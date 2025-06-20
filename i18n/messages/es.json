@@ -176,5 +176,62 @@
       "email": "Envíenos un correo electrónico",
       "privacy": "Lea nuestra política de privacidad"
     }
+  },
+  "scenarios": {
+    "title": "Biblioteca de Escenarios de Inversión",
+    "subtitle": "Explora Estrategias de Inversión",
+    "description": "Descubre escenarios de inversión probados desde planes conservadores de jubilación hasta estrategias agresivas de crecimiento. Inspírate y crea tu propia hoja de ruta financiera.",
+    "browseByCategory": "Navegar por Categoría",
+    "expertCurated": "Escenarios Seleccionados por Expertos",
+    "statistics": {
+      "expertScenarios": "Escenarios de Expertos",
+      "userCreated": "Creados por Usuarios",
+      "totalScenarios": "Escenarios Totales",
+      "languages": "Idiomas"
+    },
+    "categories": {
+      "conservative": {
+        "title": "Estrategias Conservadoras",
+        "description": "Planes de bajo riesgo y crecimiento constante para preservar el capital",
+        "link": "Ver Escenarios Conservadores"
+      },
+      "moderate": {
+        "title": "Crecimiento Moderado",
+        "description": "Equilibrio riesgo-recompensa para construcción constante de riqueza",
+        "link": "Ver Escenarios Moderados"
+      },
+      "aggressive": {
+        "title": "Crecimiento Agresivo",
+        "description": "Estrategias de alto riesgo y alta recompensa para máximos retornos",
+        "link": "Ver Escenarios Agresivos"
+      },
+      "shortTerm": {
+        "title": "Planes a Corto Plazo",
+        "description": "Estrategias de inversión de 1-5 años para objetivos a corto plazo",
+        "link": "Ver Planes a Corto Plazo"
+      },
+      "retirement": {
+        "title": "Planificación de Jubilación",
+        "description": "Estrategias a largo plazo para seguridad en la jubilación",
+        "link": "Ver Planes de Jubilación"
+      },
+      "all": {
+        "title": "Todos los Escenarios",
+        "description": "Navega la biblioteca completa de escenarios de inversión",
+        "link": "Ver Todos los Escenarios"
+      }
+    },
+    "scenarioCard": {
+      "initial": "Inicial",
+      "monthly": "Mensual",
+      "return": "Retorno",
+      "years": "Años",
+      "projectedResult": "Resultado Proyectado"
+    },
+    "cta": {
+      "title": "¿Listo para Crear Tu Propio Escenario?",
+      "description": "Usa nuestra calculadora gratuita de inversiones para modelar tu futuro financiero y compartir tu estrategia con otros.",
+      "button": "Comenzar a Calcular"
+    }
   }
 }
