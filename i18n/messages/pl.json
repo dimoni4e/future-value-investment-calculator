@@ -1,0 +1,175 @@
+{
+  "layout": {
+    "title": "Planer Wzrostu Finansowego",
+    "tools": "Narzędzia",
+    "resources": "Zasoby",
+    "investmentCalculator": "Planer Wzrostu Finansowego",
+    "compoundInterest": "Odsetki Składane",
+    "description": "Zaplanuj Swoją Przyszłość Finansową"
+  },
+  "navigation": {
+    "home": "Strona główna",
+    "about": "O nas",
+    "contact": "Kontakt",
+    "getStarted": "Rozpocznij"
+  },
+  "hero": {
+    "badge": "Profesjonalne Planowanie Inwestycji",
+    "subtitle": "Podejmuj świadome decyzje inwestycyjne dzięki naszemu zaawansowanemu kalkulatorowi odsetek składanych. Wizualizuj scenariusze wzrostu, porównuj strategie i buduj pewność w swojej podróży finansowej.",
+    "startCalculating": "Rozpocznij Obliczenia",
+    "watchDemo": "Zobacz Demo",
+    "compoundInterest": "Odsetki Składane",
+    "interactiveCharts": "Interaktywne Wykresy",
+    "scenarioPlanning": "Planowanie Scenariuszy",
+    "exportResults": "Eksport Wyników"
+  },
+  "features": {
+    "title": "Kompletny Pakiet Planowania Finansowego",
+    "subtitle": "Zaawansowane narzędzia i analityka pomagające podejmować świadome decyzje inwestycyjne z pewnością siebie",
+    "advancedCalculator": "Zaawansowany Kalkulator",
+    "advancedCalculatorDesc": "Precyzyjne obliczenia odsetek składanych z konfigurowalnymi parametrami dla każdego scenariusza inwestycyjnego",
+    "visualAnalytics": "Analityka Wizualna",
+    "visualAnalyticsDesc": "Interaktywne wykresy i grafy, które ożywiają twoje prognozy inwestycyjne",
+    "goalPlanning": "Planowanie Celów",
+    "goalPlanningDesc": "Ustaw cele finansowe i zobacz dokładnie, co trzeba zrobić, aby osiągnąć swoje cele inwestycyjne"
+  },
+  "calculator": {
+    "title": "Planer Wzrostu Finansowego",
+    "subtitle": "Wprowadź szczegóły swojej inwestycji poniżej, aby zobaczyć, jak twoje pieniądze mogą rosnąć w czasie dzięki odsetkom składanym",
+    "currency": "Waluta",
+    "loadingRates": "Ładowanie kursów walut...",
+    "searchCurrencies": "Szukaj walut...",
+    "noCurrenciesFound": "Nie znaleziono walut",
+    "selectedCurrency": "Wybrana waluta",
+    "initialInvestment": "Inwestycja początkowa",
+    "initialAmount": "Kwota początkowa",
+    "monthlyContribution": "Miesięczny wkład",
+    "annualReturn": "Oczekiwany roczny zwrot (%)",
+    "timeHorizon": "Horyzont czasowy (lata)",
+    "years": "Lata",
+    "calculate": "Oblicz wartość przyszłą",
+    "adjustTimeHorizon": "Dostosuj horyzont czasowy",
+    "sliderDescription": "Przeciągnij suwak, aby zobaczyć, jak różne horyzonty czasowe wpływają na wzrost Twojej inwestycji",
+    "result": "Wartość przyszła",
+    "totalContributions": "Łączne składki",
+    "totalGrowth": "Łączny wzrost",
+    "futureValue": "Wartość przyszła",
+    "projectionResults": "Wyniki Projekcji Inwestycji"
+  },
+  "share": {
+    "title": "Udostępnij Te Obliczenia",
+    "copyLink": "Kopiuj Link",
+    "copied": "Skopiowano!",
+    "facebook": "Facebook",
+    "twitter": "Twitter",
+    "linkedin": "LinkedIn",
+    "description": "Udostępnij swoje obliczenia inwestycyjne innym lub zapisz link na później."
+  },
+  "export": {
+    "export": "Eksportuj",
+    "exporting": "Eksportowanie...",
+    "downloadCsv": "Pobierz CSV",
+    "downloadPdf": "Pobierz PDF",
+    "title": "Eksportuj Swoje Obliczenia",
+    "description": "Pobierz dane swoich obliczeń inwestycyjnych do dalszej analizy lub prowadzenia dokumentacji."
+  },
+  "chart": {
+    "title": "Wzrost Inwestycji w Czasie",
+    "year": "Rok",
+    "totalValue": "Łączna Wartość",
+    "totalContributions": "Łączne Składki",
+    "investmentGrowth": "Wzrost Inwestycji"
+  },
+  "footer": {
+    "rights": "Wszelkie prawa zastrzeżone",
+    "description": "Przekształć swoje planowanie finansowe dzięki naszej zaawansowanej platformie prognozowania wzrostu. Analizuj scenariusze inwestycyjne, wizualizuj wzrost składany i podejmuj decyzje oparte na danych dla swojej finansowej przyszłości.",
+    "tools": "Narzędzia",
+    "resources": "Zasoby",
+    "investmentCalculator": "Kalkulator Inwestycji",
+    "compoundInterest": "Odsetki Składane",
+    "scenarioPlanning": "Planowanie Scenariuszy",
+    "growthCharts": "Wykresy Wzrostu",
+    "aboutUs": "O nas",
+    "helpFaq": "Pomoc i FAQ",
+    "financialBlog": "Blog Finansowy",
+    "contact": "Kontakt",
+    "privacyPolicy": "Polityka Prywatności",
+    "termsOfService": "Warunki Usługi",
+    "cookiePolicy": "Polityka Cookies"
+  },
+  "legal": {
+    "title": "Informacje Prawne",
+    "lastUpdated": "Ostatnia aktualizacja",
+    "privacy": {
+      "title": "Polityka Prywatności",
+      "description": "Dowiedz się, jak zbieramy, używamy i chronimy Twoje dane osobowe podczas korzystania z naszych narzędzi planowania finansowego."
+    },
+    "terms": {
+      "title": "Warunki Usługi",
+      "description": "Poznaj swoje prawa i obowiązki podczas korzystania z naszej platformy kalkulacji inwestycji."
+    },
+    "cookies": {
+      "title": "Polityka Cookies",
+      "description": "Informacje o tym, jak używamy plików cookie i podobnych technologii, aby poprawić Twoje doświadczenia podczas przeglądania."
+    }
+  },
+  "about": {
+    "meta": {
+      "title": "O Nas - Kalkulator Wartości Przyszłej Inwestycji",
+      "description": "Poznaj naszą misję demokratyzacji planowania finansowego za pomocą dokładnych, dostępnych narzędzi kalkulacji inwestycji.",
+      "keywords": "o nas, planowanie finansowe, kalkulator inwestycji, wartość przyszła, misja, zespół"
+    },
+    "hero": {
+      "title": "O Naszej Misji",
+      "description": "Jesteśmy dedykowani demokratyzacji planowania finansowego poprzez dostarczanie dokładnych, dostępnych i przejrzystych narzędzi kalkulacji inwestycji dla wszystkich."
+    },
+    "mission": {
+      "title": "Nasza Misja",
+      "description": "Planowanie finansowe nie powinno być przywilejem zarezerwowanym dla bogatych. Wierzymy, że każdy zasługuje na dostęp do potężnych, dokładnych narzędzi, które pomagają zrozumieć potencjał swoich inwestycji i planować swoją finansową przyszłość.",
+      "secure": "Podejście stawiające prywatność na pierwszym miejscu",
+      "global": "Wsparcie wielu walut",
+      "accessible": "Darmowe dla wszystkich",
+      "accurate": "Kursy wymiany w czasie rzeczywistym"
+    },
+    "features": {
+      "calculator": "Inteligentny Kalkulator",
+      "calculatorDesc": "Zaawansowane obliczenia wartości przyszłej z oprocentowaniem składanym",
+      "charts": "Wykresy Wizualne",
+      "chartsDesc": "Interaktywna wizualizacja wzrostu w czasie",
+      "insights": "Inteligentne Spostrzeżenia",
+      "insightsDesc": "Planowanie scenariuszy z regulowanymi parametrami",
+      "trust": "Przejrzysty",
+      "trustDesc": "Obliczenia open-source, które możesz zweryfikować"
+    },
+    "values": {
+      "title": "Nasze Podstawowe Wartości",
+      "description": "Wszystko, co budujemy, kieruje się tymi fundamentalnymi zasadami.",
+      "privacy": {
+        "title": "Prywatność Przede Wszystkim",
+        "description": "Twoje dane finansowe pozostają w Twojej przeglądarce. Nie śledzimy, nie przechowujemy ani nie udostępniamy Twoich osobistych obliczeń."
+      },
+      "accuracy": {
+        "title": "Precyzja Matematyczna",
+        "description": "Każde obliczenie opiera się na sprawdzonych formułach finansowych z danymi rynkowymi w czasie rzeczywistym dla konwersji walut."
+      },
+      "accessibility": {
+        "title": "Uniwersalny Dostęp",
+        "description": "Darmowe narzędzia dostępne w wielu językach, zaprojektowane do pracy na każdym urządzeniu, wszędzie na świecie."
+      }
+    },
+    "technology": {
+      "title": "Zbudowane z Nowoczesną Technologią",
+      "description": "Szybka, niezawodna i bezpieczna platforma napędzana przez wiodące w branży technologie.",
+      "nextjs": "Renderowanie po stronie serwera",
+      "react": "Interaktywne komponenty",
+      "typescript": "Bezpieczny kod typów",
+      "tailwind": "Piękny design"
+    },
+    "contact": {
+      "title": "Skontaktuj się z Nami",
+      "description": "Masz pytania, sugestie lub opinie? Chcielibyśmy o Tobie usłyszeć.",
+      "email": "Wyślij nam e-mail",
+      "privacy": "Przeczytaj naszą politykę prywatności"
+    }
+  }
+}

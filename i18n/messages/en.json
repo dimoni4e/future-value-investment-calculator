@@ -1,0 +1,171 @@
+{
+  "layout": {
+    "title": "Financial Growth Planner",
+    "description": "Plan Your Financial Future"
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "getStarted": "Get Started"
+  },
+  "hero": {
+    "badge": "Professional Investment Planning",
+    "subtitle": "Make informed investment decisions with our advanced compound interest calculator. Visualize growth scenarios, compare strategies, and build confidence in your financial journey.",
+    "startCalculating": "Start Calculating",
+    "watchDemo": "Watch Demo",
+    "compoundInterest": "Compound Interest",
+    "interactiveCharts": "Interactive Charts",
+    "scenarioPlanning": "Scenario Planning",
+    "exportResults": "Export Results"
+  },
+  "features": {
+    "title": "Your Complete Financial Planning Suite",
+    "subtitle": "Advanced tools and analytics to help you make informed investment decisions with confidence",
+    "advancedCalculator": "Advanced Calculator",
+    "advancedCalculatorDesc": "Precise compound interest calculations with customizable parameters for any investment scenario",
+    "visualAnalytics": "Visual Analytics",
+    "visualAnalyticsDesc": "Interactive charts and graphs that bring your investment projections to life",
+    "goalPlanning": "Goal Planning",
+    "goalPlanningDesc": "Set financial targets and see exactly what it takes to achieve your investment goals"
+  },
+  "calculator": {
+    "title": "Financial Growth Planner",
+    "subtitle": "Enter your investment details below to see how your money can grow over time with compound interest",
+    "currency": "Currency",
+    "loadingRates": "Loading exchange rates...",
+    "searchCurrencies": "Search currencies...",
+    "noCurrenciesFound": "No currencies found",
+    "selectedCurrency": "Selected currency",
+    "initialInvestment": "Initial Investment",
+    "initialAmount": "Initial Amount",
+    "monthlyContribution": "Monthly Contribution",
+    "annualReturn": "Expected Annual Return (%)",
+    "timeHorizon": "Time Horizon (Years)",
+    "years": "Years",
+    "calculate": "Calculate Future Value",
+    "adjustTimeHorizon": "Adjust Time Horizon",
+    "sliderDescription": "Drag the slider to see how different time horizons affect your investment growth",
+    "result": "Future Value",
+    "totalContributions": "Total Contributions",
+    "totalGrowth": "Total Growth",
+    "futureValue": "Future Value",
+    "projectionResults": "Your Investment Projection Results"
+  },
+  "share": {
+    "title": "Share This Calculation",
+    "copyLink": "Copy Link",
+    "copied": "Copied!",
+    "facebook": "Facebook",
+    "twitter": "Twitter",
+    "linkedin": "LinkedIn",
+    "description": "Share your investment calculation with others or save the link for later reference."
+  },
+  "export": {
+    "export": "Export",
+    "exporting": "Exporting...",
+    "downloadCsv": "Download CSV",
+    "downloadPdf": "Download PDF",
+    "title": "Export Your Calculation",
+    "description": "Download your investment calculation data for further analysis or record keeping."
+  },
+  "chart": {
+    "title": "Investment Growth Over Time",
+    "year": "Year",
+    "totalValue": "Total Value",
+    "totalContributions": "Total Contributions",
+    "investmentGrowth": "Investment Growth"
+  },
+  "footer": {
+    "rights": "All rights reserved",
+    "description": "Transform your financial planning with our advanced growth projection platform. Analyze investment scenarios, visualize compound growth, and make data-driven decisions for your financial future.",
+    "tools": "Tools",
+    "resources": "Resources",
+    "investmentCalculator": "Financial Growth Planner",
+    "compoundInterest": "Compound Interest",
+    "scenarioPlanning": "Scenario Planning",
+    "growthCharts": "Growth Charts",
+    "aboutUs": "About Us",
+    "helpFaq": "Help & FAQ",
+    "financialBlog": "Financial Blog",
+    "contact": "Contact",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "cookiePolicy": "Cookie Policy"
+  },
+  "legal": {
+    "title": "Legal Information",
+    "lastUpdated": "Last updated",
+    "privacy": {
+      "title": "Privacy Policy",
+      "description": "Learn how we collect, use, and protect your personal information when using our financial planning tools."
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "description": "Understand your rights and responsibilities when using our investment calculation platform."
+    },
+    "cookies": {
+      "title": "Cookie Policy",
+      "description": "Information about how we use cookies and similar technologies to enhance your browsing experience."
+    }
+  },
+  "about": {
+    "meta": {
+      "title": "About Us - Future Value Investment Calculator",
+      "description": "Learn about our mission to democratize financial planning with accurate, accessible investment calculation tools.",
+      "keywords": "about, financial planning, investment calculator, future value, mission, team"
+    },
+    "hero": {
+      "title": "About Our Mission",
+      "description": "We're dedicated to democratizing financial planning by providing accurate, accessible, and transparent investment calculation tools for everyone."
+    },
+    "mission": {
+      "title": "Our Mission",
+      "description": "Financial planning shouldn't be a privilege reserved for the wealthy. We believe everyone deserves access to powerful, accurate tools that help them understand the potential of their investments and plan for their financial future.",
+      "secure": "Privacy-first approach",
+      "global": "Multi-currency support",
+      "accessible": "Free for everyone",
+      "accurate": "Real-time exchange rates"
+    },
+    "features": {
+      "calculator": "Smart Calculator",
+      "calculatorDesc": "Advanced future value calculations with compound interest",
+      "charts": "Visual Charts",
+      "chartsDesc": "Interactive growth visualization over time",
+      "insights": "Smart Insights",
+      "insightsDesc": "Scenario planning with adjustable parameters",
+      "trust": "Transparent",
+      "trustDesc": "Open-source calculations you can verify"
+    },
+    "values": {
+      "title": "Our Core Values",
+      "description": "Everything we build is guided by these fundamental principles.",
+      "privacy": {
+        "title": "Privacy First",
+        "description": "Your financial data stays in your browser. We don't track, store, or share your personal calculations."
+      },
+      "accuracy": {
+        "title": "Mathematical Precision",
+        "description": "Every calculation is based on proven financial formulas with real-time market data for currency conversions."
+      },
+      "accessibility": {
+        "title": "Universal Access",
+        "description": "Free tools available in multiple languages, designed to work on any device, anywhere in the world."
+      }
+    },
+    "technology": {
+      "title": "Built with Modern Technology",
+      "description": "Fast, reliable, and secure platform powered by industry-leading technologies.",
+      "nextjs": "Server-side rendering",
+      "react": "Interactive components",
+      "typescript": "Type-safe code",
+      "tailwind": "Beautiful design"
+    },
+    "contact": {
+      "title": "Get in Touch",
+      "description": "Have questions, suggestions, or feedback? We'd love to hear from you.",
+      "email": "Send us an email",
+      "privacy": "Read our privacy policy"
+    }
+  }
+}

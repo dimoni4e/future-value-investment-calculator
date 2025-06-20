@@ -1,0 +1,171 @@
+{
+  "layout": {
+    "title": "Planificador de Crecimiento Financiero",
+    "description": "Planifica Tu Futuro Financiero"
+  },
+  "navigation": {
+    "home": "Inicio",
+    "about": "Acerca de",
+    "contact": "Contacto",
+    "getStarted": "Comenzar"
+  },
+  "hero": {
+    "badge": "Planificación de Inversiones Profesional",
+    "subtitle": "Toma decisiones de inversión informadas con nuestra calculadora avanzada de interés compuesto. Visualiza escenarios de crecimiento, compara estrategias y construye confianza en tu viaje financiero.",
+    "startCalculating": "Comenzar Cálculo",
+    "watchDemo": "Ver Demo",
+    "compoundInterest": "Interés Compuesto",
+    "interactiveCharts": "Gráficos Interactivos",
+    "scenarioPlanning": "Planificación de Escenarios",
+    "exportResults": "Exportar Resultados"
+  },
+  "features": {
+    "title": "Tu Suite Completa de Planificación Financiera",
+    "subtitle": "Herramientas avanzadas y análisis para ayudarte a tomar decisiones de inversión informadas con confianza",
+    "advancedCalculator": "Calculadora Avanzada",
+    "advancedCalculatorDesc": "Cálculos precisos de interés compuesto con parámetros personalizables para cualquier escenario de inversión",
+    "visualAnalytics": "Análisis Visual",
+    "visualAnalyticsDesc": "Gráficos interactivos que dan vida a tus proyecciones de inversión",
+    "goalPlanning": "Planificación de Objetivos",
+    "goalPlanningDesc": "Establece metas financieras y ve exactamente lo que se necesita para lograr tus objetivos de inversión"
+  },
+  "calculator": {
+    "title": "Planificador de Crecimiento Financiero",
+    "subtitle": "Ingresa los detalles de tu inversión a continuación para ver cómo tu dinero puede crecer con el tiempo con interés compuesto",
+    "currency": "Moneda",
+    "loadingRates": "Cargando tipos de cambio...",
+    "searchCurrencies": "Buscar monedas...",
+    "noCurrenciesFound": "No se encontraron monedas",
+    "selectedCurrency": "Moneda seleccionada",
+    "initialInvestment": "Inversión inicial",
+    "initialAmount": "Cantidad inicial",
+    "monthlyContribution": "Contribución mensual",
+    "annualReturn": "Retorno anual esperado (%)",
+    "timeHorizon": "Horizonte temporal (años)",
+    "years": "Años",
+    "calculate": "Calcular valor futuro",
+    "adjustTimeHorizon": "Ajustar horizonte temporal",
+    "sliderDescription": "Arrastra el deslizador para ver cómo diferentes horizontes temporales afectan el crecimiento de tu inversión",
+    "result": "Valor futuro",
+    "totalContributions": "Contribuciones Totales",
+    "totalGrowth": "Crecimiento Total",
+    "futureValue": "Valor Futuro",
+    "projectionResults": "Resultados de Proyección de Inversión"
+  },
+  "share": {
+    "title": "Compartir Este Cálculo",
+    "copyLink": "Copiar Enlace",
+    "copied": "¡Copiado!",
+    "facebook": "Facebook",
+    "twitter": "Twitter",
+    "linkedin": "LinkedIn",
+    "description": "Comparte tu cálculo de inversión con otros o guarda el enlace para referencia posterior."
+  },
+  "export": {
+    "export": "Exportar",
+    "exporting": "Exportando...",
+    "downloadCsv": "Descargar CSV",
+    "downloadPdf": "Descargar PDF",
+    "title": "Exportar Tu Cálculo",
+    "description": "Descarga los datos de tu cálculo de inversión para análisis adicional o mantenimiento de registros."
+  },
+  "chart": {
+    "title": "Crecimiento de Inversión en el Tiempo",
+    "year": "Año",
+    "totalValue": "Valor Total",
+    "totalContributions": "Contribuciones Totales",
+    "investmentGrowth": "Crecimiento de Inversión"
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados",
+    "description": "Transforma tu planificación financiera con nuestra plataforma avanzada de proyección de crecimiento. Analiza escenarios de inversión, visualiza el crecimiento compuesto y toma decisiones basadas en datos para tu futuro financiero.",
+    "tools": "Herramientas",
+    "resources": "Recursos",
+    "investmentCalculator": "Planificador de Crecimiento Financiero",
+    "compoundInterest": "Interés Compuesto",
+    "scenarioPlanning": "Planificación de Escenarios",
+    "growthCharts": "Gráficos de Crecimiento",
+    "aboutUs": "Acerca de Nosotros",
+    "helpFaq": "Ayuda y FAQ",
+    "financialBlog": "Blog Financiero",
+    "contact": "Contacto",
+    "privacyPolicy": "Política de Privacidad",
+    "termsOfService": "Términos de Servicio",
+    "cookiePolicy": "Política de Cookies"
+  },
+  "legal": {
+    "title": "Información Legal",
+    "lastUpdated": "Última actualización",
+    "privacy": {
+      "title": "Política de Privacidad",
+      "description": "Aprenda cómo recopilamos, usamos y protegemos su información personal al usar nuestras herramientas de planificación financiera."
+    },
+    "terms": {
+      "title": "Términos de Servicio",
+      "description": "Entienda sus derechos y responsabilidades al usar nuestra plataforma de cálculo de inversiones."
+    },
+    "cookies": {
+      "title": "Política de Cookies",
+      "description": "Información sobre cómo usamos cookies y tecnologías similares para mejorar su experiencia de navegación."
+    }
+  },
+  "about": {
+    "meta": {
+      "title": "Acerca de Nosotros - Calculadora de Valor Futuro de Inversiones",
+      "description": "Conozca nuestra misión de democratizar la planificación financiera con herramientas de cálculo de inversiones precisas y accesibles.",
+      "keywords": "acerca de, planificación financiera, calculadora de inversiones, valor futuro, misión, equipo"
+    },
+    "hero": {
+      "title": "Acerca de Nuestra Misión",
+      "description": "Estamos dedicados a democratizar la planificación financiera proporcionando herramientas de cálculo de inversiones precisas, accesibles y transparentes para todos."
+    },
+    "mission": {
+      "title": "Nuestra Misión",
+      "description": "La planificación financiera no debería ser un privilegio reservado para los ricos. Creemos que todos merecen acceso a herramientas poderosas y precisas que les ayuden a entender el potencial de sus inversiones y planificar su futuro financiero.",
+      "secure": "Enfoque que prioriza la privacidad",
+      "global": "Soporte multi-moneda",
+      "accessible": "Gratis para todos",
+      "accurate": "Tipos de cambio en tiempo real"
+    },
+    "features": {
+      "calculator": "Calculadora Inteligente",
+      "calculatorDesc": "Cálculos avanzados de valor futuro con interés compuesto",
+      "charts": "Gráficos Visuales",
+      "chartsDesc": "Visualización interactiva del crecimiento a lo largo del tiempo",
+      "insights": "Perspectivas Inteligentes",
+      "insightsDesc": "Planificación de escenarios con parámetros ajustables",
+      "trust": "Transparente",
+      "trustDesc": "Cálculos de código abierto que puedes verificar"
+    },
+    "values": {
+      "title": "Nuestros Valores Fundamentales",
+      "description": "Todo lo que construimos está guiado por estos principios fundamentales.",
+      "privacy": {
+        "title": "Privacidad Primero",
+        "description": "Sus datos financieros permanecen en su navegador. No rastreamos, almacenamos ni compartimos sus cálculos personales."
+      },
+      "accuracy": {
+        "title": "Precisión Matemática",
+        "description": "Cada cálculo se basa en fórmulas financieras probadas con datos de mercado en tiempo real para conversiones de moneda."
+      },
+      "accessibility": {
+        "title": "Acceso Universal",
+        "description": "Herramientas gratuitas disponibles en múltiples idiomas, diseñadas para funcionar en cualquier dispositivo, en cualquier lugar del mundo."
+      }
+    },
+    "technology": {
+      "title": "Construido con Tecnología Moderna",
+      "description": "Plataforma rápida, confiable y segura impulsada por tecnologías líderes en la industria.",
+      "nextjs": "Renderizado del lado del servidor",
+      "react": "Componentes interactivos",
+      "typescript": "Código seguro de tipos",
+      "tailwind": "Diseño hermoso"
+    },
+    "contact": {
+      "title": "Póngase en Contacto",
+      "description": "¿Tiene preguntas, sugerencias o comentarios? Nos encantaría saber de usted.",
+      "email": "Envíenos un correo electrónico",
+      "privacy": "Lea nuestra política de privacidad"
+    }
+  }
+}
