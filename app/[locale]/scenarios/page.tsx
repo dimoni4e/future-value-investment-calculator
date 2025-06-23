@@ -1,8 +1,9 @@
 import { getTranslations } from 'next-intl/server'
-import { PREDEFINED_SCENARIOS } from '@/lib/scenarios'
+import { getPredefinedScenarios } from '@/lib/db/queries'
 import { calculateFutureValue, type InvestmentParameters } from '@/lib/finance'
 import Link from 'next/link'
 import { TrendingUp, Users, Clock, Target } from 'lucide-react'
+import { RecentScenarios } from '@/components/RecentScenarios'
 import type { Metadata } from 'next'
 
 interface Props {
@@ -61,6 +62,9 @@ export default async function ScenariosPage({ params }: Props) {
     locale: params.locale,
     namespace: 'scenarios',
   })
+
+  // Get scenarios from database
+  const predefinedScenarios = await getPredefinedScenarios(params.locale)
   const userScenarios = await getUserScenarios()
 
   return (
@@ -91,7 +95,7 @@ export default async function ScenariosPage({ params }: Props) {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
             <div className="text-center">
               <div className="text-3xl font-bold text-indigo-600 mb-2">
-                {PREDEFINED_SCENARIOS.length}
+                {predefinedScenarios.length}
               </div>
               <div className="text-sm text-slate-600">
                 {t('statistics.expertScenarios')}
@@ -109,7 +113,7 @@ export default async function ScenariosPage({ params }: Props) {
 
             <div className="text-center">
               <div className="text-3xl font-bold text-purple-600 mb-2">
-                {PREDEFINED_SCENARIOS.length + userScenarios.length}
+                {predefinedScenarios.length + userScenarios.length}
               </div>
               <div className="text-sm text-slate-600">
                 {t('statistics.totalScenarios')}
@@ -247,6 +251,62 @@ export default async function ScenariosPage({ params }: Props) {
         </div>
       </section>
 
+      {/* Community Scenarios Section */}
+      <section className="py-16 bg-white/50 backdrop-blur-sm">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-green-100 to-emerald-100 px-4 py-2 rounded-full text-green-700 text-sm font-medium mb-6">
+                <Users className="w-4 h-4" />
+                <span>Community Created</span>
+              </div>
+              <h2 className="text-3xl font-bold mb-4">
+                User-Created Scenarios
+              </h2>
+              <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+                Discover investment scenarios created by our community members.
+                Get inspired by real-world planning strategies.
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-3 gap-8">
+              <div className="lg:col-span-2">
+                <RecentScenarios locale={params.locale} limit={6} />
+              </div>
+
+              <div className="bg-white rounded-2xl p-6 border border-slate-200/50 shadow-lg h-fit">
+                <h3 className="text-xl font-semibold mb-4">
+                  Create Your Own Scenario
+                </h3>
+                <p className="text-gray-600 mb-6">
+                  Use our calculator to create custom investment scenarios. Save
+                  and share your strategies with the community.
+                </p>
+                <Link
+                  href={`/${params.locale}`}
+                  className="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+                >
+                  <TrendingUp className="w-5 h-5 mr-2" />
+                  Start Calculating
+                </Link>
+
+                <div className="mt-6 pt-6 border-t border-gray-200">
+                  <h4 className="font-medium mb-3">
+                    Benefits of Saving Scenarios:
+                  </h4>
+                  <ul className="space-y-2 text-sm text-gray-600">
+                    <li>• Compare different strategies</li>
+                    <li>• Share with financial advisors</li>
+                    <li>• Track progress over time</li>
+                    <li>• Get inspired by others</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Featured Predefined Scenarios */}
       <section className="py-16">
         <div className="container mx-auto px-4 lg:px-8">
@@ -255,24 +315,24 @@ export default async function ScenariosPage({ params }: Props) {
           </h2>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {PREDEFINED_SCENARIOS.slice(0, 6).map((scenario) => {
+            {predefinedScenarios.slice(0, 6).map((scenario) => {
               const investmentParams: InvestmentParameters = {
-                initialAmount: scenario.params.initialAmount,
-                monthlyContribution: scenario.params.monthlyContribution,
-                annualReturnRate: scenario.params.annualReturn,
-                timeHorizonYears: scenario.params.timeHorizon,
+                initialAmount: Number(scenario.initialAmount),
+                monthlyContribution: Number(scenario.monthlyContribution),
+                annualReturnRate: Number(scenario.annualReturn),
+                timeHorizonYears: scenario.timeHorizon,
               }
 
               const result = calculateFutureValue(investmentParams)
 
               return (
                 <Link
-                  key={scenario.id}
-                  href={`/${params.locale}/scenario/${scenario.id}`}
+                  key={scenario.slug}
+                  href={`/${params.locale}/scenario/${scenario.slug}`}
                   className="bg-white/70 backdrop-blur-sm rounded-3xl p-6 border border-slate-200/50 shadow-xl hover:shadow-2xl transition-all duration-300 group"
                 >
                   <div className="flex items-center space-x-2 mb-4">
-                    {scenario.tags.map((tag) => (
+                    {scenario.tags?.map((tag) => (
                       <span
                         key={tag}
                         className="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded-full"
@@ -296,7 +356,7 @@ export default async function ScenariosPage({ params }: Props) {
                         {t('scenarioCard.initial')}
                       </div>
                       <div className="font-semibold">
-                        ${scenario.params.initialAmount.toLocaleString()}
+                        ${Number(scenario.initialAmount).toLocaleString()}
                       </div>
                     </div>
                     <div>
@@ -304,7 +364,7 @@ export default async function ScenariosPage({ params }: Props) {
                         {t('scenarioCard.monthly')}
                       </div>
                       <div className="font-semibold">
-                        ${scenario.params.monthlyContribution.toLocaleString()}
+                        ${Number(scenario.monthlyContribution).toLocaleString()}
                       </div>
                     </div>
                     <div>
@@ -312,7 +372,7 @@ export default async function ScenariosPage({ params }: Props) {
                         {t('scenarioCard.return')}
                       </div>
                       <div className="font-semibold">
-                        {scenario.params.annualReturn}%
+                        {Number(scenario.annualReturn)}%
                       </div>
                     </div>
                     <div>
@@ -320,7 +380,7 @@ export default async function ScenariosPage({ params }: Props) {
                         {t('scenarioCard.years')}
                       </div>
                       <div className="font-semibold">
-                        {scenario.params.timeHorizon}
+                        {scenario.timeHorizon}
                       </div>
                     </div>
                   </div>

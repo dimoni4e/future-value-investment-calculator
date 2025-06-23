@@ -1,4 +1,8 @@
 import CalculatorForm from '@/components/CalculatorForm'
+import {
+  getHomeContentData,
+  getContentWithFallback,
+} from '@/lib/content-provider'
 import { TrendingUp } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 import { type Metadata } from 'next'
@@ -77,6 +81,9 @@ export default async function HomePage({ params: { locale } }: Props) {
   const tLayout = await getTranslations({ locale, namespace: 'layout' })
   const tHero = await getTranslations({ locale, namespace: 'hero' })
 
+  // Get content from database with fallback to static translations
+  const dbContent = await getHomeContentData(locale)
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -91,20 +98,46 @@ export default async function HomePage({ params: { locale } }: Props) {
             <div className="inline-flex items-center gap-2 bg-indigo-50 text-indigo-700 px-4 py-2 rounded-full text-sm font-medium border border-indigo-100 mb-6">
               <div className="w-2 h-2 bg-indigo-500 rounded-full animate-pulse"></div>
               <TrendingUp className="w-3.5 h-3.5" />
-              <span>{tHero('badge')}</span>
+              <span>
+                {getContentWithFallback(
+                  dbContent,
+                  'hero',
+                  'badge',
+                  tHero('badge'),
+                  locale
+                )}
+              </span>
             </div>
 
             {/* Focused Heading - More concise */}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-playfair text-slate-900 leading-tight mb-4">
-              {tLayout('title')}
+              {getContentWithFallback(
+                dbContent,
+                'layout',
+                'title',
+                tLayout('title'),
+                locale
+              )}
               <span className="block text-2xl sm:text-3xl lg:text-4xl bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent mt-2 font-semibold">
-                {tLayout('description')}
+                {getContentWithFallback(
+                  dbContent,
+                  'layout',
+                  'description',
+                  tLayout('description'),
+                  locale
+                )}
               </span>
             </h1>
 
             {/* Concise description */}
             <p className="text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto mb-8">
-              {tHero('subtitle')}
+              {getContentWithFallback(
+                dbContent,
+                'hero',
+                'subtitle',
+                tHero('subtitle'),
+                locale
+              )}
             </p>
 
             {/* Streamlined Feature Pills */}

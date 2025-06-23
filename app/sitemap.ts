@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next'
 import { locales } from '@/i18n/request'
-import { PREDEFINED_SCENARIOS } from '@/lib/scenarios'
+import { getPredefinedScenarios } from '@/lib/db/queries'
 
 // This function fetches user-generated scenarios for the sitemap
 async function getUserGeneratedScenarios() {
@@ -64,20 +64,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
   })
 
-  // 3. Predefined scenarios - high priority for SEO
-  PREDEFINED_SCENARIOS.forEach((scenario) => {
-    locales.forEach((locale) => {
-      sitemapEntries.push({
-        url:
-          locale === 'en'
-            ? `${baseUrl}/scenario/${scenario.id}`
-            : `${baseUrl}/${locale}/scenario/${scenario.id}`,
-        lastModified: currentDate,
-        changeFrequency: 'weekly',
-        priority: 0.9, // High priority for predefined scenarios
+  // 3. Database scenarios - high priority for SEO
+  for (const locale of locales) {
+    try {
+      const scenarios = await getPredefinedScenarios(locale)
+      scenarios.forEach((scenario) => {
+        sitemapEntries.push({
+          url:
+            locale === 'en'
+              ? `${baseUrl}/scenario/${scenario.slug}`
+              : `${baseUrl}/${locale}/scenario/${scenario.slug}`,
+          lastModified: scenario.updatedAt || currentDate,
+          changeFrequency: 'weekly',
+          priority: 0.9, // High priority for predefined scenarios
+        })
       })
-    })
-  })
+    } catch (error) {
+      console.error(`Error fetching scenarios for sitemap (${locale}):`, error)
+    }
+  }
 
   // 4. User-generated scenarios - programmatic SEO gold mine
   try {

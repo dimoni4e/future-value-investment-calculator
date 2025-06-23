@@ -1,12 +1,42 @@
 import { notFound } from 'next/navigation'
-import { getTranslations } from 'next-intl/server'
-import { PREDEFINED_SCENARIOS, getScenarioById } from '@/lib/scenarios'
+import { getTranslations, getMessages } from 'next-intl/server'
 import { locales } from '@/i18n/request'
 import { calculateFutureValue, type InvestmentParameters } from '@/lib/finance'
 import type { Metadata } from 'next'
+import { getScenarioBySlug, getPredefinedScenarios } from '@/lib/db/queries'
+import type { Scenario as DBScenario } from '@/lib/db/schema'
 
-// This will also handle user-generated scenarios
-async function getUserScenario(slug: string) {
+// Force dynamic rendering to test if SSG is causing translation issues
+export const dynamic = 'force-dynamic'
+
+// Get scenario data from database (primary) with fallback to legacy API
+async function getScenarioData(slug: string, locale: string) {
+  try {
+    // Primary: Get from database
+    const dbScenario = await getScenarioBySlug(slug, locale)
+    if (dbScenario) {
+      return {
+        scenario: {
+          id: dbScenario.slug,
+          name: dbScenario.name,
+          description: dbScenario.description || '',
+          params: {
+            initialAmount: Number(dbScenario.initialAmount),
+            monthlyContribution: Number(dbScenario.monthlyContribution),
+            annualReturn: Number(dbScenario.annualReturn),
+            timeHorizon: dbScenario.timeHorizon,
+          },
+          tags: dbScenario.tags || [],
+        },
+        source: 'database',
+        isUserGenerated: !dbScenario.isPredefined,
+      }
+    }
+  } catch (error) {
+    console.error('Error fetching scenario from database:', error)
+  }
+
+  // Fallback: Try legacy API for user-generated scenarios (if any exist)
   try {
     const response = await fetch(
       `${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/api/scenarios?slug=${slug}`,
@@ -17,10 +47,27 @@ async function getUserScenario(slug: string) {
 
     if (response.ok) {
       const data = await response.json()
-      return data.scenario
+      if (data.scenario) {
+        return {
+          scenario: {
+            id: data.scenario.id,
+            name: data.scenario.name,
+            description: data.scenario.description || '',
+            params: {
+              initialAmount: data.scenario.params.initialAmount,
+              monthlyContribution: data.scenario.params.monthlyContribution,
+              annualReturn: data.scenario.params.annualReturnRate,
+              timeHorizon: data.scenario.params.timeHorizonYears,
+            },
+            tags: data.scenario.tags,
+          },
+          source: 'api',
+          isUserGenerated: true,
+        }
+      }
     }
   } catch (error) {
-    console.error('Error fetching user scenario:', error)
+    console.error('Error fetching scenario from API:', error)
   }
 
   return null
@@ -33,29 +80,63 @@ interface Props {
   }
 }
 
-// Generate static paths for all scenarios
+// Generate static paths for all database scenarios
 export async function generateStaticParams() {
   const paths: Array<{ locale: string; slug: string }> = []
 
-  locales.forEach((locale) => {
-    PREDEFINED_SCENARIOS.forEach((scenario) => {
-      paths.push({
-        locale,
-        slug: scenario.id,
+  // Get all scenarios from database for each locale
+  for (const locale of locales) {
+    try {
+      const scenarios = await getPredefinedScenarios(locale)
+      scenarios.forEach((scenario) => {
+        paths.push({
+          locale,
+          slug: scenario.slug,
+        })
       })
-    })
-  })
+    } catch (error) {
+      console.error(
+        `Error generating static params for locale ${locale}:`,
+        error
+      )
+    }
+  }
 
   return paths
 }
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const scenario = getScenarioById(params.slug)
+  // Get scenario from database, static data, or API
+  const scenarioData = await getScenarioData(params.slug, params.locale)
 
-  if (!scenario) {
+  if (!scenarioData) {
     return {
       title: 'Scenario Not Found',
+    }
+  }
+
+  const { scenario, isUserGenerated } = scenarioData
+
+  // Get translations for metadata
+  const metadataMessages = await getMessages({ locale: params.locale })
+  const metadataPredefinedScenarios =
+    (metadataMessages?.scenarios as any)?.predefinedScenarios || {}
+
+  // Use translated content for predefined scenarios
+  let scenarioName = scenario.name
+  let scenarioDescription = scenario.description
+
+  if (!isUserGenerated) {
+    try {
+      const translatedName = metadataPredefinedScenarios?.[scenario.id]?.name
+      const translatedDescription =
+        metadataPredefinedScenarios?.[scenario.id]?.description
+
+      if (translatedName) scenarioName = translatedName
+      if (translatedDescription) scenarioDescription = translatedDescription
+    } catch (error) {
+      // Use original if translation fails
     }
   }
 
@@ -69,55 +150,78 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const result = calculateFutureValue(investmentParams)
 
   return {
-    title: `${scenario.name} - Financial Growth Calculator`,
-    description: `${scenario.description}. Starting with $${calcParams.initialAmount.toLocaleString()}, contributing $${calcParams.monthlyContribution.toLocaleString()}/month at ${calcParams.annualReturn}% return over ${calcParams.timeHorizon} years. Final value: $${result.futureValue.toLocaleString()}`,
+    title: `${scenarioName} - Financial Growth Calculator`,
+    description: `${scenarioDescription}. Starting with $${calcParams.initialAmount.toLocaleString()}, contributing $${calcParams.monthlyContribution.toLocaleString()}/month at ${calcParams.annualReturn}% return over ${calcParams.timeHorizon} years. Final value: $${result.futureValue.toLocaleString()}`,
     keywords: [
       'financial planning',
       'investment calculator',
-      scenario.name.toLowerCase(),
+      scenarioName.toLowerCase(),
       ...scenario.tags,
       `${calcParams.annualReturn}% return`,
       `${calcParams.timeHorizon} year investment`,
     ].join(', '),
     openGraph: {
-      title: `${scenario.name} Investment Scenario`,
-      description: scenario.description,
+      title: `${scenarioName} Investment Scenario`,
+      description: scenarioDescription,
       type: 'website',
     },
   }
 }
 
 export default async function ScenarioPage({ params }: Props) {
-  // Try to get predefined scenario first
-  let scenario = getScenarioById(params.slug)
-  let isUserGenerated = false
+  // Get scenario from database, static data, or API
+  const scenarioData = await getScenarioData(params.slug, params.locale)
 
-  // If not found in predefined, try user-generated scenarios
-  if (!scenario) {
-    const userScenario = await getUserScenario(params.slug)
-    if (userScenario) {
-      scenario = {
-        id: userScenario.id,
-        name: userScenario.name,
-        description: userScenario.description || '',
-        params: {
-          initialAmount: userScenario.params.initialAmount,
-          monthlyContribution: userScenario.params.monthlyContribution,
-          annualReturn: userScenario.params.annualReturnRate,
-          timeHorizon: userScenario.params.timeHorizonYears,
-        },
-        tags: userScenario.tags,
-      }
-      isUserGenerated = true
-    }
-  }
-
-  if (!scenario) {
+  if (!scenarioData) {
     notFound()
   }
 
-  const t = await getTranslations('scenarios')
-  const tCommon = await getTranslations('common')
+  const { scenario, source, isUserGenerated } = scenarioData
+
+  // Get messages directly instead of using translation hooks
+  const messages = await getMessages({ locale: params.locale })
+  const scenarios = messages?.scenarios as any
+  const scenarioPage = scenarios?.scenarioPage || {}
+  const predefinedScenarios = scenarios?.predefinedScenarios || {}
+
+  console.log('Scenario data source:', source, {
+    locale: params.locale,
+    slug: params.slug,
+    scenarioName: scenario.name,
+    isUserGenerated,
+  })
+
+  // Get translated scenario name and description for predefined scenarios
+  const getScenarioTranslation = (scenario: any) => {
+    if (isUserGenerated || source === 'database') {
+      // For user-generated or database scenarios, use the scenario data directly
+      return {
+        name: scenario.name,
+        description: scenario.description || '',
+      }
+    }
+
+    // For static predefined scenarios, use direct message access
+    try {
+      const translatedName = predefinedScenarios?.[scenario.id]?.name
+      const translatedDescription =
+        predefinedScenarios?.[scenario.id]?.description
+
+      return {
+        name: translatedName || scenario.name,
+        description: translatedDescription || scenario.description,
+      }
+    } catch (error) {
+      console.log('Translation error:', error)
+      // Fallback to original if translation not found
+      return {
+        name: scenario.name,
+        description: scenario.description,
+      }
+    }
+  }
+
+  const translatedScenario = getScenarioTranslation(scenario)
 
   // Pre-calculate results for static generation
   const investmentParams: InvestmentParameters = {
@@ -137,15 +241,28 @@ export default async function ScenarioPage({ params }: Props) {
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-100 to-cyan-100 px-4 py-2 rounded-full text-indigo-700 text-sm font-medium mb-6">
               <span>📊</span>
-              <span>Predefined Scenario</span>
+              <span>
+                {source === 'database' && !isUserGenerated
+                  ? scenarioPage?.databaseScenario || 'Database Scenario'
+                  : isUserGenerated
+                    ? scenarioPage?.userScenario || 'User Scenario'
+                    : scenarioPage?.predefinedScenario || 'Scenario'}
+              </span>
+              <span className="bg-green-500 text-white text-xs px-2 py-1 rounded-full">
+                {source === 'database'
+                  ? 'DB'
+                  : source === 'api'
+                    ? 'API'
+                    : 'SYS'}
+              </span>
             </div>
 
             <h1 className="text-4xl lg:text-6xl font-bold font-playfair bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent mb-6">
-              {scenario.name}
+              {translatedScenario.name}
             </h1>
 
             <p className="text-xl text-slate-600 mb-8 max-w-2xl mx-auto">
-              {scenario.description}
+              {translatedScenario.description}
             </p>
 
             {/* Scenario Stats */}
@@ -154,7 +271,9 @@ export default async function ScenarioPage({ params }: Props) {
                 <div className="text-2xl font-bold text-indigo-600">
                   ${scenario.params.initialAmount.toLocaleString()}
                 </div>
-                <div className="text-sm text-slate-600">Initial Investment</div>
+                <div className="text-sm text-slate-600">
+                  {scenarioPage?.initialInvestment || 'Initial Investment'}
+                </div>
               </div>
 
               <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50">
@@ -162,7 +281,7 @@ export default async function ScenarioPage({ params }: Props) {
                   ${scenario.params.monthlyContribution.toLocaleString()}
                 </div>
                 <div className="text-sm text-slate-600">
-                  Monthly Contribution
+                  {scenarioPage?.monthlyContribution || 'Monthly Contribution'}
                 </div>
               </div>
 
@@ -170,25 +289,32 @@ export default async function ScenarioPage({ params }: Props) {
                 <div className="text-2xl font-bold text-purple-600">
                   {scenario.params.annualReturn}%
                 </div>
-                <div className="text-sm text-slate-600">Annual Return</div>
+                <div className="text-sm text-slate-600">
+                  {scenarioPage?.annualReturn || 'Annual Return'}
+                </div>
               </div>
 
               <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50">
                 <div className="text-2xl font-bold text-cyan-600">
-                  {scenario.params.timeHorizon} years
+                  {scenario.params.timeHorizon} {scenarioPage?.years || 'years'}
                 </div>
-                <div className="text-sm text-slate-600">Time Horizon</div>
+                <div className="text-sm text-slate-600">
+                  {scenarioPage?.timeHorizon || 'Time Horizon'}
+                </div>
               </div>
             </div>
 
             {/* Result Preview */}
             <div className="bg-gradient-to-r from-emerald-500 to-cyan-500 text-white rounded-3xl p-8 mb-12">
-              <h2 className="text-2xl font-bold mb-4">Projected Result</h2>
+              <h2 className="text-2xl font-bold mb-4">
+                {scenarioPage?.projectedResult || 'Projected Result'}
+              </h2>
               <div className="text-5xl font-bold mb-2">
                 ${result.futureValue.toLocaleString()}
               </div>
               <div className="text-emerald-100">
-                Total Growth: ${result.totalGrowth.toLocaleString()} (
+                {scenarioPage?.totalGrowth || 'Total Growth'}: $
+                {result.totalGrowth.toLocaleString()} (
                 {(
                   (result.totalGrowth / result.totalContributions) *
                   100

@@ -228,6 +228,46 @@
       "years": "Years",
       "projectedResult": "Projected Result"
     },
+    "scenarioPage": {
+      "predefinedScenario": "Predefined Scenario",
+      "userScenario": "User Created Scenario",
+      "initialInvestment": "Initial Investment",
+      "monthlyContribution": "Monthly Contribution",
+      "annualReturn": "Annual Return",
+      "timeHorizon": "Time Horizon",
+      "projectedResult": "Projected Result",
+      "totalGrowth": "Total Growth",
+      "years": "years",
+      "backToScenarios": "← Back to Scenarios",
+      "shareScenario": "Share This Scenario",
+      "tryThisScenario": "Try This Scenario"
+    },
+    "predefinedScenarios": {
+      "starter-10k-500-7-10": {
+        "name": "Beginner Investor",
+        "description": "Conservative start with moderate monthly contributions"
+      },
+      "retirement-50k-2k-6-30": {
+        "name": "Retirement Planning",
+        "description": "Long-term retirement strategy with steady contributions"
+      },
+      "aggressive-25k-1k-12-20": {
+        "name": "Growth Investor",
+        "description": "Higher risk, higher reward investment strategy"
+      },
+      "house-5k-1500-5-7": {
+        "name": "House Down Payment",
+        "description": "Saving for a home with conservative returns"
+      },
+      "wealth-100k-5k-10-25": {
+        "name": "Wealth Building",
+        "description": "High-value aggressive wealth accumulation strategy"
+      },
+      "emergency-1k-200-4-5": {
+        "name": "Emergency Fund",
+        "description": "Building a safety net with conservative returns"
+      }
+    },
     "cta": {
       "title": "Ready to Create Your Own Scenario?",
       "description": "Use our free investment calculator to model your financial future and share your strategy with others.",

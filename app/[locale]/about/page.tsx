@@ -1,4 +1,5 @@
 import { getTranslations } from 'next-intl/server'
+import { getPageBySlug } from '@/lib/db/queries'
 import {
   Calculator,
   TrendingUp,
@@ -19,7 +20,35 @@ interface AboutPageProps {
 
 export default async function AboutPage({ params }: AboutPageProps) {
   const { locale } = params
+
+  // Try to get page content from database first
+  let dbPage = null
+  try {
+    dbPage = await getPageBySlug('about', locale)
+  } catch (error) {
+    console.error('Error fetching about page from database:', error)
+  }
+
+  // Fallback to static translations
   const t = await getTranslations({ locale, namespace: 'about' })
+
+  // Use database content if available, otherwise use static translations
+  const getContent = (key: string, fallback: string) => {
+    if (dbPage) {
+      // For database content, we could parse sections or use a content mapping
+      // For now, we'll use the main content and title from database
+      if (key === 'hero.title') return dbPage.title
+      if (key === 'hero.description' && dbPage.metaDescription)
+        return dbPage.metaDescription
+    }
+    return fallback
+  }
+
+  console.log('About page data source:', dbPage ? 'database' : 'static', {
+    locale,
+    hasDbPage: !!dbPage,
+    dbTitle: dbPage?.title,
+  })
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-emerald-50/20">
@@ -31,11 +60,19 @@ export default async function AboutPage({ params }: AboutPageProps) {
               <TrendingUp className="h-10 w-10 text-white" />
             </div>
             <h1 className="mb-6 text-4xl font-bold tracking-tight text-gray-900 md:text-5xl">
-              {t('hero.title')}
+              {getContent('hero.title', t('hero.title'))}
             </h1>
             <p className="mx-auto max-w-3xl text-xl text-gray-600 leading-relaxed">
-              {t('hero.description')}
+              {getContent('hero.description', t('hero.description'))}
             </p>
+            {dbPage && (
+              <div className="mt-4">
+                <span className="inline-flex items-center space-x-2 bg-green-100 text-green-700 text-sm px-3 py-1 rounded-full">
+                  <span>📄</span>
+                  <span>Database Content</span>
+                </span>
+              </div>
+            )}
           </div>
         </div>
       </section>

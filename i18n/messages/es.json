@@ -228,6 +228,46 @@
       "years": "Años",
       "projectedResult": "Resultado Proyectado"
     },
+    "scenarioPage": {
+      "predefinedScenario": "Escenario Predefinido",
+      "userScenario": "Escenario Creado por Usuario",
+      "initialInvestment": "Inversión Inicial",
+      "monthlyContribution": "Contribución Mensual",
+      "annualReturn": "Retorno Anual",
+      "timeHorizon": "Horizonte Temporal",
+      "projectedResult": "Resultado Proyectado",
+      "totalGrowth": "Crecimiento Total",
+      "years": "años",
+      "backToScenarios": "← Volver a Escenarios",
+      "shareScenario": "Compartir Este Escenario",
+      "tryThisScenario": "Probar Este Escenario"
+    },
+    "predefinedScenarios": {
+      "starter-10k-500-7-10": {
+        "name": "Inversor Principiante",
+        "description": "Comienzo conservador con contribuciones mensuales moderadas"
+      },
+      "retirement-50k-2k-6-30": {
+        "name": "Planificación de Jubilación",
+        "description": "Estrategia de jubilación a largo plazo con contribuciones constantes"
+      },
+      "aggressive-25k-1k-12-20": {
+        "name": "Inversor de Crecimiento",
+        "description": "Estrategia de inversión de alto riesgo y alta recompensa"
+      },
+      "house-5k-1500-5-7": {
+        "name": "Enganche para Casa",
+        "description": "Ahorro para una vivienda con retornos conservadores"
+      },
+      "wealth-100k-5k-10-25": {
+        "name": "Construcción de Riqueza",
+        "description": "Estrategia agresiva de acumulación de riqueza de alto valor"
+      },
+      "emergency-1k-200-4-5": {
+        "name": "Fondo de Emergencia",
+        "description": "Construyendo una red de seguridad con retornos conservadores"
+      }
+    },
     "cta": {
       "title": "¿Listo para Crear Tu Propio Escenario?",
       "description": "Usa nuestra calculadora gratuita de inversiones para modelar tu futuro financiero y compartir tu estrategia con otros.",

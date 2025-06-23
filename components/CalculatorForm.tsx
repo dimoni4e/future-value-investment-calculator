@@ -7,8 +7,9 @@ import ScenarioSlider from './ScenarioSlider'
 import ShareButtons from './ShareButtons'
 import ExportButton from './ExportButton'
 import CurrencySelector from './CurrencySelector'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, Save } from 'lucide-react'
 import { useTranslations } from 'next-intl'
+import { useRouter, usePathname } from 'next/navigation'
 import {
   calculateFutureValue as calculateInvestmentFV,
   type InvestmentParameters,
@@ -56,6 +57,15 @@ const CalculatorForm = () => {
   ) // USD default
   const t = useTranslations('calculator')
   const tChart = useTranslations('chart')
+  const router = useRouter()
+  const pathname = usePathname()
+
+  // State for saving scenarios
+  const [isSavingScenario, setIsSavingScenario] = useState(false)
+  const [showSaveDialog, setShowSaveDialog] = useState(false)
+  const [scenarioName, setScenarioName] = useState('')
+  const [scenarioDescription, setScenarioDescription] = useState('')
+
   const { rates, loading: ratesLoading } = useExchangeRates()
 
   // Currency conversion helper
@@ -132,6 +142,65 @@ const CalculatorForm = () => {
 
   const formatCurrency = (amount: number) => {
     return formatDisplayCurrency(amount)
+  }
+
+  // Function to save current calculation as a scenario
+  const saveAsScenario = async () => {
+    if (!scenarioName.trim()) {
+      alert('Please enter a scenario name')
+      return
+    }
+
+    setIsSavingScenario(true)
+    try {
+      const response = await fetch('/api/scenarios', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: scenarioName.trim(),
+          description: scenarioDescription.trim() || undefined,
+          params: {
+            initialAmount: inputs.initialAmount,
+            monthlyContribution: inputs.monthlyContribution,
+            annualReturn: inputs.annualReturn,
+            timeHorizon: inputs.timeHorizon,
+          },
+        }),
+      })
+
+      if (response.ok) {
+        const data = await response.json()
+        const locale = pathname.split('/')[1] || 'en'
+        const scenarioUrl = `/${locale}/scenario/${data.scenario.slug}`
+
+        // Show success message and redirect
+        alert(
+          `Scenario saved successfully! Redirecting to your scenario page...`
+        )
+        router.push(scenarioUrl)
+      } else {
+        const error = await response.json()
+        alert(`Error saving scenario: ${error.error}`)
+      }
+    } catch (error) {
+      console.error('Error saving scenario:', error)
+      alert('Error saving scenario. Please try again.')
+    } finally {
+      setIsSavingScenario(false)
+      setShowSaveDialog(false)
+      setScenarioName('')
+      setScenarioDescription('')
+    }
+  }
+
+  const handleSaveScenario = () => {
+    if (!results) {
+      alert('Please calculate results first before saving as scenario')
+      return
+    }
+    setShowSaveDialog(true)
   }
 
   return (
@@ -341,6 +410,14 @@ const CalculatorForm = () => {
             calculatorParams={inputs}
             currency={selectedCurrency.code}
           />
+          {/* Save as Scenario Button */}
+          <button
+            onClick={handleSaveScenario}
+            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl text-sm font-medium"
+          >
+            <Save className="w-4 h-4" />
+            Save as Scenario
+          </button>
           {/* Sentry Test Button - Development only */}
           {process.env.NODE_ENV === 'development' && (
             <button
@@ -357,6 +434,82 @@ const CalculatorForm = () => {
               Test Sentry
             </button>
           )}
+        </div>
+      )}
+
+      {/* Save Scenario Dialog */}
+      {showSaveDialog && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4">
+            <h3 className="text-lg font-semibold mb-4">Save as Scenario</h3>
+
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Scenario Name *
+                </label>
+                <input
+                  type="text"
+                  value={scenarioName}
+                  onChange={(e) => setScenarioName(e.target.value)}
+                  placeholder="e.g., My Retirement Plan"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  maxLength={50}
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Description (optional)
+                </label>
+                <textarea
+                  value={scenarioDescription}
+                  onChange={(e) => setScenarioDescription(e.target.value)}
+                  placeholder="Brief description of this investment scenario..."
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  rows={3}
+                  maxLength={200}
+                />
+              </div>
+
+              <div className="bg-gray-50 p-3 rounded-md text-sm">
+                <h4 className="font-medium mb-2">Current Parameters:</h4>
+                <ul className="space-y-1 text-gray-600">
+                  <li>
+                    Initial Amount: {formatCurrency(inputs.initialAmount)}
+                  </li>
+                  <li>
+                    Monthly Contribution:{' '}
+                    {formatCurrency(inputs.monthlyContribution)}
+                  </li>
+                  <li>Annual Return: {inputs.annualReturn}%</li>
+                  <li>Time Horizon: {inputs.timeHorizon} years</li>
+                  <li>Future Value: {formatCurrency(results!.futureValue)}</li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="flex gap-3 mt-6">
+              <button
+                onClick={() => {
+                  setShowSaveDialog(false)
+                  setScenarioName('')
+                  setScenarioDescription('')
+                }}
+                className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors"
+                disabled={isSavingScenario}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={saveAsScenario}
+                disabled={isSavingScenario || !scenarioName.trim()}
+                className="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSavingScenario ? 'Saving...' : 'Save Scenario'}
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>

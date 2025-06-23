@@ -232,6 +232,46 @@
       "years": "Lata",
       "projectedResult": "Przewidywany Wynik"
     },
+    "scenarioPage": {
+      "predefinedScenario": "Predefiniowany Scenariusz",
+      "userScenario": "Scenariusz Stworzony przez Użytkownika",
+      "initialInvestment": "Inwestycja Początkowa",
+      "monthlyContribution": "Miesięczny Wkład",
+      "annualReturn": "Roczny Zwrot",
+      "timeHorizon": "Horyzont Czasowy",
+      "projectedResult": "Przewidywany Wynik",
+      "totalGrowth": "Całkowity Wzrost",
+      "years": "lata",
+      "backToScenarios": "← Powrót do Scenariuszy",
+      "shareScenario": "Udostępnij Ten Scenariusz",
+      "tryThisScenario": "Wypróbuj Ten Scenariusz"
+    },
+    "predefinedScenarios": {
+      "starter-10k-500-7-10": {
+        "name": "Inwestor Początkujący",
+        "description": "Konserwatywny start z umiarkowanymi miesięcznymi wpłatami"
+      },
+      "retirement-50k-2k-6-30": {
+        "name": "Planowanie Emerytury",
+        "description": "Długoterminowa strategia emerytalna ze stałymi wpłatami"
+      },
+      "aggressive-25k-1k-12-20": {
+        "name": "Inwestor Wzrostowy",
+        "description": "Strategia inwestycyjna wysokiego ryzyka i wysokiej nagrody"
+      },
+      "house-5k-1500-5-7": {
+        "name": "Wkład Własny na Dom",
+        "description": "Oszczędzanie na dom z konserwatywnym zwrotem"
+      },
+      "wealth-100k-5k-10-25": {
+        "name": "Budowanie Bogactwa",
+        "description": "Agresywna strategia akumulacji majątku wysokiej wartości"
+      },
+      "emergency-1k-200-4-5": {
+        "name": "Fundusz Awaryjny",
+        "description": "Budowanie siatki bezpieczeństwa z konserwatywnym zwrotem"
+      }
+    },
     "cta": {
       "title": "Gotowy na Stworzenie Własnego Scenariusza?",
       "description": "Użyj naszej bezpłatnej kalkulatora inwestycji, aby zamodelować swoją przyszłość finansową i podzielić się strategią z innymi.",
