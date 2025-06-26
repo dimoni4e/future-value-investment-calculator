@@ -150,7 +150,7 @@ export default async function ScenariosPage({ params }: Props) {
                 {t('categories.conservative.description')}
               </p>
               <Link
-                href={`/${params.locale}/scenarios/conservative`}
+                href={`/${params.locale}/scenario`}
                 className="text-indigo-600 hover:text-indigo-700 font-semibold"
               >
                 {t('categories.conservative.link')} →
@@ -168,7 +168,7 @@ export default async function ScenariosPage({ params }: Props) {
                 {t('categories.moderate.description')}
               </p>
               <Link
-                href={`/${params.locale}/scenarios/moderate`}
+                href={`/${params.locale}/scenario`}
                 className="text-indigo-600 hover:text-indigo-700 font-semibold"
               >
                 {t('categories.moderate.link')} →
@@ -186,7 +186,7 @@ export default async function ScenariosPage({ params }: Props) {
                 {t('categories.aggressive.description')}
               </p>
               <Link
-                href={`/${params.locale}/scenarios/aggressive`}
+                href={`/${params.locale}/scenario`}
                 className="text-indigo-600 hover:text-indigo-700 font-semibold"
               >
                 {t('categories.aggressive.link')} →
@@ -205,7 +205,7 @@ export default async function ScenariosPage({ params }: Props) {
                 {t('categories.shortTerm.description')}
               </p>
               <Link
-                href={`/${params.locale}/scenarios/short-term`}
+                href={`/${params.locale}/scenario`}
                 className="text-indigo-600 hover:text-indigo-700 font-semibold"
               >
                 {t('categories.shortTerm.link')} →
@@ -223,7 +223,7 @@ export default async function ScenariosPage({ params }: Props) {
                 {t('categories.retirement.description')}
               </p>
               <Link
-                href={`/${params.locale}/scenarios/retirement`}
+                href={`/${params.locale}/scenario`}
                 className="text-indigo-600 hover:text-indigo-700 font-semibold"
               >
                 {t('categories.retirement.link')} →
@@ -241,7 +241,7 @@ export default async function ScenariosPage({ params }: Props) {
                 {t('categories.all.description')}
               </p>
               <Link
-                href={`/${params.locale}/scenarios/all`}
+                href={`/${params.locale}/scenario`}
                 className="text-indigo-600 hover:text-indigo-700 font-semibold"
               >
                 {t('categories.all.link')} →

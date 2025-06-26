@@ -30,17 +30,17 @@ AFTER:  Unlimited dynamic pages with full SEO optimization
 3. **Category Landing Pages** (SEO Powerhouses)
 
    ```
-   /en/scenarios/conservative/
-   /en/scenarios/retirement/
-   /en/scenarios/aggressive/
-   /en/scenarios/short-term/
+   /en/scenario/conservative/
+   /en/scenario/retirement/
+   /en/scenario/aggressive/
+   /en/scenario/short-term/
    ```
 
 4. **Discovery Pages**
    ```
-   /en/scenarios/              (Main discovery)
-   /en/scenarios/trending/      (Popular scenarios)
-   /en/scenarios/recent/        (Latest additions)
+   /en/scenario/              (Main discovery)
+   /en/scenario/trending/      (Popular scenarios)
+   /en/scenario/recent/        (Latest additions)
    ```
 
 ### **🔍 SEO Optimization Features**
@@ -89,7 +89,7 @@ AFTER:  Unlimited dynamic pages with full SEO optimization
 User-agent: *
 Allow: /
 Allow: /scenario/
-Allow: /scenarios/
+Allow: /scenario/
 Disallow: /api/
 
 Sitemap: https://yoursite.com/sitemap.xml
@@ -143,7 +143,7 @@ Sitemap: https://yoursite.com/sitemap.xml
    - Scenario creation and retrieval
    - ISR (Incremental Static Regeneration) triggers
 
-5. **Discovery Pages** (`/app/[locale]/scenarios/page.tsx`)
+5. **Discovery Pages** (`/app/[locale]/scenario/page.tsx`)
 
    - Category-based browsing
    - Featured scenarios showcase

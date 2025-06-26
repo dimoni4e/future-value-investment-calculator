@@ -21,8 +21,7 @@ export default function robots(): MetadataRoute.Robots {
           '/en/',
           '/es/',
           '/pl/',
-          '/scenario/', // Allow all scenario pages
-          '/scenarios/', // Allow scenario discovery
+          '/scenario/', // Allow all scenario pages and discovery
         ],
         crawlDelay: 1, // Be nice to Google
       },

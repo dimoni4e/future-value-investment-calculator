@@ -15,16 +15,16 @@ export const SEO_URL_PATTERNS = {
 
   // Category pages (programmatic landing pages)
   CATEGORIES: {
-    BY_RISK: '/[locale]/scenarios/[risk-level]/', // conservative, moderate, aggressive
-    BY_TIMELINE: '/[locale]/scenarios/[timeline]/', // short-term, medium-term, long-term
-    BY_AMOUNT: '/[locale]/scenarios/[amount-range]/', // starter, substantial, high-value
-    BY_PURPOSE: '/[locale]/scenarios/[purpose]/', // retirement, college, emergency
+    BY_RISK: '/[locale]/scenario/[risk-level]/', // conservative, moderate, aggressive
+    BY_TIMELINE: '/[locale]/scenario/[timeline]/', // short-term, medium-term, long-term
+    BY_AMOUNT: '/[locale]/scenario/[amount-range]/', // starter, substantial, high-value
+    BY_PURPOSE: '/[locale]/scenario/[purpose]/', // retirement, college, emergency
   },
 
   // Discovery pages
-  DISCOVERY: '/[locale]/scenarios/',
-  TRENDING: '/[locale]/scenarios/trending/',
-  RECENT: '/[locale]/scenarios/recent/',
+  DISCOVERY: '/[locale]/scenario/',
+  TRENDING: '/[locale]/scenario/trending/',
+  RECENT: '/[locale]/scenario/recent/',
 } as const
 
 // SEO Metadata Templates

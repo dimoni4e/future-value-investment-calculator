@@ -63,9 +63,9 @@ export const pages = pgTable(
   })
 )
 
-// Scenarios table for investment scenarios (predefined and user-created)
-export const scenarios = pgTable(
-  'scenarios',
+// Scenario table for investment scenarios (predefined and user-created)
+export const scenario = pgTable(
+  'scenario',
   {
     id: uuid('id')
       .primaryKey()
@@ -112,5 +112,5 @@ export type NewHomeContent = typeof homeContent.$inferInsert
 export type Page = typeof pages.$inferSelect
 export type NewPage = typeof pages.$inferInsert
 
-export type Scenario = typeof scenarios.$inferSelect
-export type NewScenario = typeof scenarios.$inferInsert
+export type Scenario = typeof scenario.$inferSelect
+export type NewScenario = typeof scenario.$inferInsert

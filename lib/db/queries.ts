@@ -1,6 +1,6 @@
 import { eq, and, sql } from 'drizzle-orm'
 import { db } from './index'
-import { homeContent, pages, scenarios } from './schema'
+import { homeContent, pages, scenario } from './schema'
 import type { HomeContent, Page, Scenario } from './schema'
 
 /**
@@ -94,15 +94,15 @@ export async function getPredefinedScenarios(
 ): Promise<Scenario[]> {
   return await db
     .select()
-    .from(scenarios)
+    .from(scenario)
     .where(
       and(
-        eq(scenarios.locale, locale as any),
-        eq(scenarios.isPredefined, true),
-        eq(scenarios.isPublic, true)
+        eq(scenario.locale, locale as any),
+        eq(scenario.isPredefined, true),
+        eq(scenario.isPublic, true)
       )
     )
-    .orderBy(scenarios.viewCount)
+    .orderBy(scenario.viewCount)
 }
 
 // Get a specific scenario by slug and locale
@@ -112,12 +112,12 @@ export async function getScenarioBySlug(
 ): Promise<Scenario | null> {
   const result = await db
     .select()
-    .from(scenarios)
+    .from(scenario)
     .where(
       and(
-        eq(scenarios.slug, slug),
-        eq(scenarios.locale, locale as any),
-        eq(scenarios.isPublic, true)
+        eq(scenario.slug, slug),
+        eq(scenario.locale, locale as any),
+        eq(scenario.isPublic, true)
       )
     )
     .limit(1)
@@ -132,11 +132,9 @@ export async function getPopularScenarios(
 ): Promise<Scenario[]> {
   return await db
     .select()
-    .from(scenarios)
-    .where(
-      and(eq(scenarios.locale, locale as any), eq(scenarios.isPublic, true))
-    )
-    .orderBy(scenarios.viewCount)
+    .from(scenario)
+    .where(and(eq(scenario.locale, locale as any), eq(scenario.isPublic, true)))
+    .orderBy(scenario.viewCount)
     .limit(limit)
 }
 
@@ -145,12 +143,12 @@ export async function incrementScenarioViews(
   scenarioId: string
 ): Promise<void> {
   await db
-    .update(scenarios)
+    .update(scenario)
     .set({
-      viewCount: sql`${scenarios.viewCount} + 1`,
+      viewCount: sql`${scenario.viewCount} + 1`,
       updatedAt: new Date(),
     })
-    .where(eq(scenarios.id, scenarioId))
+    .where(eq(scenario.id, scenarioId))
 }
 
 /**

@@ -169,7 +169,7 @@ export default function HelpPage({ params: { locale } }: HelpPageProps) {
                   : 'Visit our scenarios page to see practical examples of investment calculations.'}
             </p>
             <a
-              href={locale === 'en' ? '/scenarios' : `/${locale}/scenarios`}
+              href={locale === 'en' ? '/scenario' : `/${locale}/scenario`}
               className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-xl hover:bg-blue-700 transition-colors"
             >
               {locale === 'es'

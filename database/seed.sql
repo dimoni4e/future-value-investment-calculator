@@ -43,7 +43,7 @@ INSERT INTO home_content (locale, section, key, value) VALUES
 -- PREDEFINED SCENARIOS - ENGLISH
 -- ============================================================================
 
-INSERT INTO scenarios (slug, locale, name, description, initial_amount, monthly_contribution, annual_return, time_horizon, tags, is_predefined, is_public, created_by) VALUES
+INSERT INTO scenario (slug, locale, name, description, initial_amount, monthly_contribution, annual_return, time_horizon, tags, is_predefined, is_public, created_by) VALUES
 ('starter-10k-500-7-10', 'en', 'Beginner Investor', 'Conservative start with moderate monthly contributions', 10000.00, 500.00, 7.00, 10, ARRAY['beginner', 'conservative', 'starter'], true, true, 'system'),
 ('retirement-50k-2k-6-30', 'en', 'Retirement Planning', 'Long-term retirement strategy with steady contributions', 50000.00, 2000.00, 6.00, 30, ARRAY['retirement', 'long-term', 'conservative'], true, true, 'system'),
 ('aggressive-25k-1k-12-20', 'en', 'Growth Investor', 'Higher risk, higher reward investment strategy', 25000.00, 1000.00, 12.00, 20, ARRAY['aggressive', 'growth', 'high-risk'], true, true, 'system'),
@@ -56,7 +56,7 @@ INSERT INTO scenarios (slug, locale, name, description, initial_amount, monthly_
 -- PREDEFINED SCENARIOS - POLISH
 -- ============================================================================
 
-INSERT INTO scenarios (slug, locale, name, description, initial_amount, monthly_contribution, annual_return, time_horizon, tags, is_predefined, is_public, created_by) VALUES
+INSERT INTO scenario (slug, locale, name, description, initial_amount, monthly_contribution, annual_return, time_horizon, tags, is_predefined, is_public, created_by) VALUES
 ('starter-10k-500-7-10', 'pl', 'Inwestor Początkujący', 'Konserwatywny start z umiarkowanymi miesięcznymi wpłatami', 10000.00, 500.00, 7.00, 10, ARRAY['początkujący', 'konserwatywny', 'starter'], true, true, 'system'),
 ('retirement-50k-2k-6-30', 'pl', 'Planowanie Emerytury', 'Długoterminowa strategia emerytalna ze stałymi wpłatami', 50000.00, 2000.00, 6.00, 30, ARRAY['emerytura', 'długoterminowy', 'konserwatywny'], true, true, 'system'),
 ('aggressive-25k-1k-12-20', 'pl', 'Inwestor Wzrostowy', 'Strategia inwestycyjna wysokiego ryzyka i wysokiej nagrody', 25000.00, 1000.00, 12.00, 20, ARRAY['agresywny', 'wzrost', 'wysokie-ryzyko'], true, true, 'system'),
@@ -69,7 +69,7 @@ INSERT INTO scenarios (slug, locale, name, description, initial_amount, monthly_
 -- PREDEFINED SCENARIOS - SPANISH
 -- ============================================================================
 
-INSERT INTO scenarios (slug, locale, name, description, initial_amount, monthly_contribution, annual_return, time_horizon, tags, is_predefined, is_public, created_by) VALUES
+INSERT INTO scenario (slug, locale, name, description, initial_amount, monthly_contribution, annual_return, time_horizon, tags, is_predefined, is_public, created_by) VALUES
 ('starter-10k-500-7-10', 'es', 'Inversor Principiante', 'Comienzo conservador con contribuciones mensuales moderadas', 10000.00, 500.00, 7.00, 10, ARRAY['principiante', 'conservador', 'inicial'], true, true, 'system'),
 ('retirement-50k-2k-6-30', 'es', 'Planificación de Jubilación', 'Estrategia de jubilación a largo plazo con contribuciones constantes', 50000.00, 2000.00, 6.00, 30, ARRAY['jubilación', 'largo-plazo', 'conservador'], true, true, 'system'),
 ('aggressive-25k-1k-12-20', 'es', 'Inversor de Crecimiento', 'Estrategia de inversión de alto riesgo y alta recompensa', 25000.00, 1000.00, 12.00, 20, ARRAY['agresivo', 'crecimiento', 'alto-riesgo'], true, true, 'system'),

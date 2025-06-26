@@ -31,8 +31,8 @@ CREATE TABLE pages (
   CONSTRAINT unique_page_locale UNIQUE(slug, locale)
 );
 
--- 3. Scenarios table for investment scenarios (predefined and user-created)
-CREATE TABLE scenarios (
+-- 3. Scenario table for investment scenarios (predefined and user-created)
+CREATE TABLE scenario (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   slug VARCHAR(100) NOT NULL, -- 'emergency-1k-200-4-5' or user-generated
   locale VARCHAR(5) NOT NULL CHECK (locale IN ('en', 'pl', 'es')),

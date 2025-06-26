@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test'
 
 test.describe('Scenarios Page Translations', () => {
   test('should display Spanish translations correctly', async ({ page }) => {
-    await page.goto('/es/scenarios')
+    await page.goto('/es/scenario')
 
     // Check the main title is translated
     await expect(
@@ -40,7 +40,7 @@ test.describe('Scenarios Page Translations', () => {
   })
 
   test('should display Polish translations correctly', async ({ page }) => {
-    await page.goto('/pl/scenarios')
+    await page.goto('/pl/scenario')
 
     // Check the main title is translated
     await expect(
@@ -77,7 +77,7 @@ test.describe('Scenarios Page Translations', () => {
   })
 
   test('should display English translations correctly', async ({ page }) => {
-    await page.goto('/en/scenarios')
+    await page.goto('/en/scenario')
 
     // Check the main title is in English
     await expect(
@@ -109,7 +109,7 @@ test.describe('Scenarios Page Translations', () => {
 
   test('should have translated scenario card labels', async ({ page }) => {
     // Test Spanish scenario card labels
-    await page.goto('/es/scenarios')
+    await page.goto('/es/scenario')
     await expect(page.getByText('Inicial').first()).toBeVisible()
     await expect(page.getByText('Mensual').first()).toBeVisible()
     await expect(page.getByText('Retorno').first()).toBeVisible()
@@ -117,7 +117,7 @@ test.describe('Scenarios Page Translations', () => {
     await expect(page.getByText('Resultado Proyectado').first()).toBeVisible()
 
     // Test Polish scenario card labels
-    await page.goto('/pl/scenarios')
+    await page.goto('/pl/scenario')
     await expect(page.getByText('Początkowy').first()).toBeVisible()
     await expect(page.getByText('Miesięczny').first()).toBeVisible()
     await expect(page.getByText('Zwrot').first()).toBeVisible()

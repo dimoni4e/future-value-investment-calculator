@@ -6,45 +6,15 @@ import { locales } from './i18n/request'
 function handleRedirects(request: NextRequest): NextResponse | null {
   const { pathname } = request.nextUrl
 
-  // Redirect common invalid scenario URLs to the scenarios discovery page
-  const invalidScenarioPatterns = [
-    '/scenarios/retirement',
-    '/scenarios/all',
-    '/scenarios/aggressive',
-    '/scenarios/conservative',
-    '/scenarios/wealth',
-    '/scenarios/emergency',
-    '/scenarios/house',
-    '/scenarios/young',
-    '/scenarios/starter',
-    '/pl/scenarios/retirement',
-    '/pl/scenarios/all',
-    '/pl/scenarios/aggressive',
-    '/pl/scenarios/conservative',
-    '/pl/scenarios/wealth',
-    '/pl/scenarios/emergency',
-    '/pl/scenarios/house',
-    '/pl/scenarios/young',
-    '/pl/scenarios/starter',
-    '/es/scenarios/retirement',
-    '/es/scenarios/all',
-    '/es/scenarios/aggressive',
-    '/es/scenarios/conservative',
-    '/es/scenarios/wealth',
-    '/es/scenarios/emergency',
-    '/es/scenarios/house',
-    '/es/scenarios/young',
-    '/es/scenarios/starter',
-  ]
-
-  if (invalidScenarioPatterns.some((pattern) => pathname.startsWith(pattern))) {
+  // Redirect all /scenarios/* URLs to /scenario
+  if (pathname.includes('/scenarios')) {
     // Extract locale if present, otherwise default to English
     const locale = pathname.startsWith('/pl/')
       ? 'pl'
       : pathname.startsWith('/es/')
         ? 'es'
         : 'en'
-    const redirectUrl = locale === 'en' ? '/scenarios' : `/${locale}/scenarios`
+    const redirectUrl = locale === 'en' ? '/scenario' : `/${locale}/scenario`
 
     const url = request.nextUrl.clone()
     url.pathname = redirectUrl

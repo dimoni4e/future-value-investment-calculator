@@ -3,13 +3,13 @@ import Link from 'next/link'
 import { Search, Home, Calculator, HelpCircle } from 'lucide-react'
 
 interface Props {
-  params: {
+  params?: {
     locale: string
   }
 }
 
 export default async function NotFound({ params }: Props) {
-  const { locale } = params
+  const locale = params?.locale || 'en'
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center px-4">
@@ -56,7 +56,7 @@ export default async function NotFound({ params }: Props) {
           </Link>
 
           <Link
-            href={locale === 'en' ? '/scenarios' : `/${locale}/scenarios`}
+            href={locale === 'en' ? '/scenario' : `/${locale}/scenario`}
             className="flex flex-col items-center p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow group"
           >
             <Calculator className="h-8 w-8 text-green-600 mb-3 group-hover:scale-110 transition-transform" />
@@ -111,7 +111,7 @@ export default async function NotFound({ params }: Props) {
                 : 'We have predefined investment scenarios to help you get started with your financial planning.'}
           </p>
           <Link
-            href={locale === 'en' ? '/scenarios' : `/${locale}/scenarios`}
+            href={locale === 'en' ? '/scenario' : `/${locale}/scenario`}
             className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
           >
             {locale === 'es'

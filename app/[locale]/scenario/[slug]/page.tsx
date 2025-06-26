@@ -4,12 +4,13 @@ import { locales } from '@/i18n/request'
 import { calculateFutureValue, type InvestmentParameters } from '@/lib/finance'
 import type { Metadata } from 'next'
 import { getScenarioBySlug, getPredefinedScenarios } from '@/lib/db/queries'
+import { PREDEFINED_SCENARIOS } from '@/lib/scenarios'
 import type { Scenario as DBScenario } from '@/lib/db/schema'
 
 // Force dynamic rendering to test if SSG is causing translation issues
 export const dynamic = 'force-dynamic'
 
-// Get scenario data from database (primary) with fallback to legacy API
+// Get scenario data from database (primary) with fallback to predefined scenarios
 async function getScenarioData(slug: string, locale: string) {
   try {
     // Primary: Get from database
@@ -34,6 +35,22 @@ async function getScenarioData(slug: string, locale: string) {
     }
   } catch (error) {
     console.error('Error fetching scenario from database:', error)
+  }
+
+  // Fallback: Check predefined scenarios
+  const predefinedScenario = PREDEFINED_SCENARIOS.find((s) => s.id === slug)
+  if (predefinedScenario) {
+    return {
+      scenario: {
+        id: predefinedScenario.id,
+        name: predefinedScenario.name,
+        description: predefinedScenario.description,
+        params: predefinedScenario.params,
+        tags: predefinedScenario.tags,
+      },
+      source: 'predefined',
+      isUserGenerated: false,
+    }
   }
 
   // Fallback: Try legacy API for user-generated scenarios (if any exist)
@@ -80,11 +97,11 @@ interface Props {
   }
 }
 
-// Generate static paths for all database scenarios
+// Generate static paths for all predefined scenarios
 export async function generateStaticParams() {
   const paths: Array<{ locale: string; slug: string }> = []
 
-  // Get all scenarios from database for each locale
+  // Get all scenarios from database for each locale (if available)
   for (const locale of locales) {
     try {
       const scenarios = await getPredefinedScenarios(locale)
@@ -99,6 +116,14 @@ export async function generateStaticParams() {
         `Error generating static params for locale ${locale}:`,
         error
       )
+
+      // Fallback: Use predefined scenarios
+      PREDEFINED_SCENARIOS.forEach((scenario) => {
+        paths.push({
+          locale,
+          slug: scenario.id,
+        })
+      })
     }
   }
 

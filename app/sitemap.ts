@@ -110,8 +110,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     sitemapEntries.push({
       url:
         locale === 'en'
-          ? `${baseUrl}/scenarios`
-          : `${baseUrl}/${locale}/scenarios`,
+          ? `${baseUrl}/scenario`
+          : `${baseUrl}/${locale}/scenario`,
       lastModified: currentDate,
       changeFrequency: 'daily',
       priority: 0.8,

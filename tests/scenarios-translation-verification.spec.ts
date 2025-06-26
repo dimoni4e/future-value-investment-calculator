@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test'
 
 test.describe('Scenarios Page Translation Verification', () => {
   test('should display correct Spanish translations', async ({ page }) => {
-    await page.goto('/es/scenarios')
+    await page.goto('/es/scenario')
 
     // Check key translated elements
     await expect(
@@ -21,7 +21,7 @@ test.describe('Scenarios Page Translation Verification', () => {
   })
 
   test('should display correct Polish translations', async ({ page }) => {
-    await page.goto('/pl/scenarios')
+    await page.goto('/pl/scenario')
 
     // Check key translated elements
     await expect(
@@ -38,7 +38,7 @@ test.describe('Scenarios Page Translation Verification', () => {
   })
 
   test('should display correct English content', async ({ page }) => {
-    await page.goto('/en/scenarios')
+    await page.goto('/en/scenario')
 
     // Check key English elements
     await expect(page.getByText('Investment Scenarios Library')).toBeVisible()

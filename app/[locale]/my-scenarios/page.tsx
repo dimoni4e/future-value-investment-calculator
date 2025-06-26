@@ -73,7 +73,7 @@ export default async function MyScenariosPage({ params }: Props) {
               </Link>
 
               <Link
-                href={`/${params.locale}/scenarios`}
+                href={`/${params.locale}/scenario`}
                 className="inline-flex items-center px-6 py-3 border border-indigo-200 text-indigo-700 rounded-lg hover:bg-indigo-50 transition-all duration-300"
               >
                 Browse Expert Scenarios
@@ -214,7 +214,7 @@ export default async function MyScenariosPage({ params }: Props) {
 
                 <div className="text-center">
                   <Link
-                    href={`/${params.locale}/scenarios`}
+                    href={`/${params.locale}/scenario`}
                     className="text-indigo-600 hover:text-indigo-700 font-medium"
                   >
                     Or explore expert-curated scenarios →
