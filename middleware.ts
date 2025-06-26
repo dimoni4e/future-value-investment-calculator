@@ -5,6 +5,7 @@ export default createMiddleware({
   locales,
   defaultLocale: 'en',
   localePrefix: 'as-needed',
+  localeDetection: false, // Disable automatic locale detection
 })
 
 export const config = {

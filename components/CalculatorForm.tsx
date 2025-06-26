@@ -80,22 +80,22 @@ const CalculatorForm = () => {
     return formatCurrencyUtil(convertedAmount, selectedCurrency)
   }
 
-  // Initialize state from URL parameters on component mount
+  // Initialize state with default values (no URL parsing)
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const urlParams = decodeParamsFromUrl(window.location.search)
-      const validatedParams = validateParams(urlParams)
+      // Use default parameters only
+      const validatedParams = validateParams(DEFAULT_PARAMS)
       setInputs(validatedParams)
       setIsInitialized(true)
     }
   }, [])
 
-  // Update URL when inputs change (but not during initial load)
-  useEffect(() => {
-    if (isInitialized && typeof window !== 'undefined') {
-      updateUrl(inputs)
-    }
-  }, [inputs, isInitialized])
+  // Remove URL updating (clean URLs without parameters)
+  // useEffect(() => {
+  //   if (isInitialized && typeof window !== 'undefined') {
+  //     updateUrl(inputs)
+  //   }
+  // }, [inputs, isInitialized])
 
   useEffect(() => {
     const params: InvestmentParameters = {

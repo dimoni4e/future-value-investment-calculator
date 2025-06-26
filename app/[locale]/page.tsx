@@ -12,50 +12,14 @@ import { calculateFutureValue } from '@/lib/finance'
 
 type Props = {
   params: { locale: string }
-  searchParams: { [key: string]: string | string[] | undefined }
+  // Removed searchParams for clean URLs
 }
 
 export async function generateMetadata({
   params: { locale },
-  searchParams,
 }: Props): Promise<Metadata> {
-  // Convert searchParams to URLSearchParams format
-  const urlParams = new URLSearchParams()
-  Object.entries(searchParams).forEach(([key, value]) => {
-    if (typeof value === 'string') {
-      urlParams.set(key, value)
-    }
-  })
-
-  // Decode and validate parameters from URL
-  const decodedParams = decodeParamsFromUrl(urlParams.toString())
-  const validatedParams = validateParams(decodedParams)
-
-  // Calculate future value if we have parameters
-  let futureValue: number | undefined
-  if (
-    searchParams.initial ||
-    searchParams.monthly ||
-    searchParams.return ||
-    searchParams.years
-  ) {
-    const result = calculateFutureValue({
-      initialAmount: validatedParams.initialAmount,
-      monthlyContribution: validatedParams.monthlyContribution,
-      annualReturnRate: validatedParams.annualReturn / 100,
-      timeHorizonYears: validatedParams.timeHorizon,
-    })
-    futureValue = result.futureValue
-  }
-
-  // Generate dynamic SEO data
-  const seoData =
-    searchParams.initial ||
-    searchParams.monthly ||
-    searchParams.return ||
-    searchParams.years
-      ? generateSEO(validatedParams, undefined, futureValue, locale)
-      : getDefaultSEO(locale)
+  // Use default SEO data without URL parameters for clean URLs
+  const seoData = getDefaultSEO(locale)
 
   return {
     title: seoData.title,

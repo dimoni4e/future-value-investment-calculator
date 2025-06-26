@@ -28,12 +28,14 @@ const ShareButtons: React.FC<ShareButtonsProps> = ({
   const [copied, setCopied] = useState(false)
   const t = useTranslations('share')
 
-  // Generate URL with calculator state if parameters provided
+  // Generate clean URL without parameters
   const shareUrl = React.useMemo(() => {
     if (url) return url
-    if (calculatorParams) return generateShareableUrl(calculatorParams)
-    return typeof window !== 'undefined' ? window.location.href : ''
-  }, [calculatorParams, url])
+    // Always use current page URL without query parameters
+    return typeof window !== 'undefined'
+      ? window.location.origin + window.location.pathname
+      : ''
+  }, [url])
 
   const copyToClipboard = async () => {
     try {
