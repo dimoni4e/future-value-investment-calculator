@@ -1,4 +1,5 @@
 import CalculatorForm from '@/components/CalculatorForm'
+import ComprehensiveScenarios from '@/components/ComprehensiveScenarios'
 import {
   getHomeContentData,
   getContentWithFallback,
@@ -163,6 +164,9 @@ export default async function HomePage({ params: { locale } }: Props) {
           </div>
         </div>
       </section>
+
+      {/* Comprehensive Scenarios Section */}
+      <ComprehensiveScenarios locale={locale} />
     </div>
   )
 }
