@@ -17,7 +17,11 @@
     "compoundInterest": "Compound Interest",
     "interactiveCharts": "Interactive Charts",
     "scenarioPlanning": "Scenario Planning",
-    "exportResults": "Export Results"
+    "exportResults": "Export Results",
+    "freeNoSignup": "Free • No signup required",
+    "instantResults": "Instant results",
+    "privacyFocused": "Privacy focused",
+    "exportReady": "Export ready"
   },
   "features": {
     "title": "Your Complete Financial Planning Suite",
@@ -50,7 +54,17 @@
     "totalContributions": "Total Contributions",
     "totalGrowth": "Total Growth",
     "futureValue": "Future Value",
-    "projectionResults": "Your Investment Projection Results"
+    "projectionResults": "Your Investment Projection Results",
+    "investmentInsights": "Investment Insights",
+    "insightsSubtitle": "Key metrics and comparisons",
+    "timeValueImpact": "Time Value Impact",
+    "withoutInvesting": "Without investing",
+    "withInvesting": "With investing",
+    "extraWealth": "Extra wealth",
+    "growthStatistics": "Growth Statistics",
+    "monthlyGrowthAvg": "Monthly growth avg",
+    "annualGrowth": "Annual growth",
+    "totalROI": "Total ROI"
   },
   "share": {
     "title": "Share This Calculation",

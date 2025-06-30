@@ -17,7 +17,11 @@
     "compoundInterest": "Interés Compuesto",
     "interactiveCharts": "Gráficos Interactivos",
     "scenarioPlanning": "Planificación de Escenarios",
-    "exportResults": "Exportar Resultados"
+    "exportResults": "Exportar Resultados",
+    "freeNoSignup": "Gratis • Sin registro requerido",
+    "instantResults": "Resultados instantáneos",
+    "privacyFocused": "Enfoque en privacidad",
+    "exportReady": "Listo para exportar"
   },
   "features": {
     "title": "Tu Suite Completa de Planificación Financiera",
@@ -50,7 +54,17 @@
     "totalContributions": "Contribuciones Totales",
     "totalGrowth": "Crecimiento Total",
     "futureValue": "Valor Futuro",
-    "projectionResults": "Resultados de Proyección de Inversión"
+    "projectionResults": "Resultados de Proyección de Inversión",
+    "investmentInsights": "Perspectivas de Inversión",
+    "insightsSubtitle": "Métricas clave y comparaciones",
+    "timeValueImpact": "Impacto del Valor Temporal",
+    "withoutInvesting": "Sin invertir",
+    "withInvesting": "Con inversión",
+    "extraWealth": "Riqueza extra",
+    "growthStatistics": "Estadísticas de Crecimiento",
+    "monthlyGrowthAvg": "Crecimiento mensual promedio",
+    "annualGrowth": "Crecimiento anual",
+    "totalROI": "ROI Total"
   },
   "share": {
     "title": "Compartir Este Cálculo",

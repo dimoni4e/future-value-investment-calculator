@@ -21,7 +21,11 @@
     "compoundInterest": "Odsetki Składane",
     "interactiveCharts": "Interaktywne Wykresy",
     "scenarioPlanning": "Planowanie Scenariuszy",
-    "exportResults": "Eksport Wyników"
+    "exportResults": "Eksport Wyników",
+    "freeNoSignup": "Darmowe • Bez wymaganej rejestracji",
+    "instantResults": "Natychmiastowe wyniki",
+    "privacyFocused": "Skoncentrowane na prywatności",
+    "exportReady": "Gotowe do eksportu"
   },
   "features": {
     "title": "Kompletny Pakiet Planowania Finansowego",
@@ -54,7 +58,17 @@
     "totalContributions": "Łączne składki",
     "totalGrowth": "Łączny wzrost",
     "futureValue": "Wartość przyszła",
-    "projectionResults": "Wyniki Projekcji Inwestycji"
+    "projectionResults": "Wyniki Projekcji Inwestycji",
+    "investmentInsights": "Wgląd w Inwestycje",
+    "insightsSubtitle": "Kluczowe metryki i porównania",
+    "timeValueImpact": "Wpływ Wartości Czasowej",
+    "withoutInvesting": "Bez inwestowania",
+    "withInvesting": "Z inwestowaniem",
+    "extraWealth": "Dodatkowy majątek",
+    "growthStatistics": "Statystyki Wzrostu",
+    "monthlyGrowthAvg": "Średni wzrost miesięczny",
+    "annualGrowth": "Wzrost roczny",
+    "totalROI": "Całkowity ROI"
   },
   "share": {
     "title": "Udostępnij Te Obliczenia",

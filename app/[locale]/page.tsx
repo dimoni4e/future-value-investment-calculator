@@ -154,27 +154,29 @@ export default async function HomePage({ params: { locale } }: Props) {
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-indigo-400 to-purple-400 opacity-0 group-hover:opacity-20 transition-opacity blur-xl"></div>
                 <TrendingUp className="w-5 h-5 group-hover:scale-110 group-hover:rotate-12 transition-transform relative z-10" />
-                <span className="relative z-10">Start Calculating</span>
+                <span className="relative z-10">
+                  {tHero('startCalculating')}
+                </span>
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity animate-shimmer"></div>
               </a>
               <div className="flex flex-col items-center gap-2">
                 <div className="flex flex-col sm:flex-row items-center gap-2">
                   <span className="text-sm font-medium text-slate-600">
-                    Free • No signup required
+                    {tHero('freeNoSignup')}
                   </span>
                 </div>
                 <div className="flex items-center gap-3 text-xs text-slate-400">
                   <div className="flex items-center gap-1">
                     <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></div>
-                    <span>Instant results</span>
+                    <span>{tHero('instantResults')}</span>
                   </div>
                   <div className="flex items-center gap-1">
                     <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
-                    <span>Privacy focused</span>
+                    <span>{tHero('privacyFocused')}</span>
                   </div>
                   <div className="flex items-center gap-1">
                     <div className="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
-                    <span>Export ready</span>
+                    <span>{tHero('exportReady')}</span>
                   </div>
                 </div>
               </div>

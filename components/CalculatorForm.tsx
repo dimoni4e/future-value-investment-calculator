@@ -818,10 +818,10 @@ const CalculatorForm = () => {
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-slate-900 font-playfair">
-                  Investment Insights
+                  {t('investmentInsights')}
                 </h3>
                 <p className="text-sm text-slate-600">
-                  Key metrics and comparisons
+                  {t('insightsSubtitle')}
                 </p>
               </div>
             </div>
@@ -830,12 +830,12 @@ const CalculatorForm = () => {
               {/* Time Value Comparison */}
               <div className="space-y-4">
                 <h4 className="text-sm font-semibold text-slate-700 uppercase tracking-wide">
-                  Time Value Impact
+                  {t('timeValueImpact')}
                 </h4>
                 <div className="space-y-3">
                   <div className="flex justify-between items-center p-3 bg-white/60 rounded-lg">
                     <span className="text-sm text-slate-600">
-                      Without investing
+                      {t('withoutInvesting')}
                     </span>
                     <span className="font-semibold text-slate-700">
                       {formatCurrency(results.totalContributions)}
@@ -843,7 +843,7 @@ const CalculatorForm = () => {
                   </div>
                   <div className="flex justify-between items-center p-3 bg-emerald-100/60 rounded-lg">
                     <span className="text-sm text-slate-600">
-                      With investing
+                      {t('withInvesting')}
                     </span>
                     <span className="font-semibold text-emerald-700">
                       {formatCurrency(results.futureValue)}
@@ -851,7 +851,7 @@ const CalculatorForm = () => {
                   </div>
                   <div className="flex justify-between items-center p-3 bg-gradient-to-r from-blue-100 to-purple-100 rounded-lg">
                     <span className="text-sm font-semibold text-slate-700">
-                      Extra wealth
+                      {t('extraWealth')}
                     </span>
                     <span className="font-bold text-purple-700">
                       {formatCurrency(results.totalGrowth)}
@@ -860,51 +860,42 @@ const CalculatorForm = () => {
                 </div>
               </div>
 
-              {/* Compound Growth Milestones */}
+              {/* Growth Statistics */}
               <div className="space-y-4">
                 <h4 className="text-sm font-semibold text-slate-700 uppercase tracking-wide">
-                  Growth Milestones
+                  {t('growthStatistics')}
                 </h4>
                 <div className="space-y-3">
-                  {[
-                    {
-                      milestone: 'Doubles in',
-                      years:
-                        Math.log(2) / Math.log(1 + inputs.annualReturn / 100),
-                      icon: '2x',
-                    },
-                    {
-                      milestone: 'Triples in',
-                      years:
-                        Math.log(3) / Math.log(1 + inputs.annualReturn / 100),
-                      icon: '3x',
-                    },
-                    {
-                      milestone: '10x growth in',
-                      years:
-                        Math.log(10) / Math.log(1 + inputs.annualReturn / 100),
-                      icon: '10x',
-                    },
-                  ].map((item, index) => (
-                    <div
-                      key={index}
-                      className="flex justify-between items-center p-3 bg-white/60 rounded-lg"
-                    >
-                      <div className="flex items-center gap-2">
-                        <div className="px-2 py-1 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-xs font-bold rounded">
-                          {item.icon}
-                        </div>
-                        <span className="text-sm text-slate-600">
-                          {item.milestone}
-                        </span>
-                      </div>
-                      <span className="font-semibold text-slate-700">
-                        {item.years > inputs.timeHorizon
-                          ? `${item.years.toFixed(1)}y`
-                          : `${item.years.toFixed(1)}y ✓`}
-                      </span>
-                    </div>
-                  ))}
+                  <div className="flex justify-between items-center p-3 bg-white/60 rounded-lg">
+                    <span className="text-sm text-slate-600">
+                      {t('monthlyGrowthAvg')}
+                    </span>
+                    <span className="font-semibold text-slate-700">
+                      {formatCurrency(
+                        results.totalGrowth / (inputs.timeHorizon * 12)
+                      )}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center p-3 bg-white/60 rounded-lg">
+                    <span className="text-sm text-slate-600">
+                      {t('annualGrowth')}
+                    </span>
+                    <span className="font-semibold text-slate-700">
+                      {formatCurrency(results.totalGrowth / inputs.timeHorizon)}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center p-3 bg-gradient-to-r from-emerald-100 to-blue-100 rounded-lg">
+                    <span className="text-sm font-semibold text-slate-700">
+                      {t('totalROI')}
+                    </span>
+                    <span className="font-bold text-emerald-700">
+                      {(
+                        (results.futureValue / results.totalContributions - 1) *
+                        100
+                      ).toFixed(1)}
+                      %
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
