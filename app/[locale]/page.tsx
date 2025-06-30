@@ -52,17 +52,26 @@ export default async function HomePage({ params: { locale } }: Props) {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-indigo-50/50 via-white to-cyan-50/50 py-12 lg:py-16">
-        {/* Subtle Background Elements */}
-        <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.8))] opacity-20"></div>
-        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[600px] h-[300px] bg-gradient-to-br from-indigo-100/40 to-cyan-100/40 rounded-full blur-3xl"></div>
+      <section className="relative overflow-hidden bg-gradient-modern py-20 lg:py-32">
+        {/* Enhanced Background Elements */}
+        <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] opacity-20"></div>
+        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-br from-indigo-200/30 to-cyan-200/30 rounded-full blur-3xl animate-pulse-soft"></div>
+        <div className="absolute -top-4 -right-4 w-32 h-32 bg-blue-500/10 rounded-full blur-xl animate-float"></div>
+        <div
+          className="absolute top-1/3 -left-8 w-40 h-40 bg-purple-500/10 rounded-full blur-xl animate-float"
+          style={{ animationDelay: '2s' }}
+        ></div>
+        <div
+          className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-emerald-500/10 rounded-full blur-xl animate-pulse-soft"
+          style={{ animationDelay: '1s' }}
+        ></div>
 
         <div className="relative container mx-auto px-4 lg:px-8">
-          <div className="text-center max-w-4xl mx-auto">
-            {/* Compact Badge */}
-            <div className="inline-flex items-center gap-2 bg-indigo-50 text-indigo-700 px-4 py-2 rounded-full text-sm font-medium border border-indigo-100 mb-6">
+          <div className="text-center max-w-5xl mx-auto">
+            {/* Enhanced Badge */}
+            <div className="inline-flex items-center gap-3 bg-indigo-50/80 text-indigo-700 px-6 py-3 rounded-full text-sm font-medium border border-indigo-200/50 mb-8 shadow-soft hover:shadow-medium transition-all duration-300 glass animate-slide-in-up">
               <div className="w-2 h-2 bg-indigo-500 rounded-full animate-pulse"></div>
-              <TrendingUp className="w-3.5 h-3.5" />
+              <TrendingUp className="w-4 h-4" />
               <span>
                 {getContentWithFallback(
                   dbContent,
@@ -74,8 +83,11 @@ export default async function HomePage({ params: { locale } }: Props) {
               </span>
             </div>
 
-            {/* Focused Heading - More concise */}
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-playfair text-slate-900 leading-tight mb-4">
+            {/* Enhanced Heading */}
+            <h1
+              className="text-4xl sm:text-5xl lg:text-6xl font-bold font-playfair text-slate-900 leading-tight mb-6 animate-slide-in-up"
+              style={{ animationDelay: '0.1s' }}
+            >
               {getContentWithFallback(
                 dbContent,
                 'layout',
@@ -83,7 +95,7 @@ export default async function HomePage({ params: { locale } }: Props) {
                 tLayout('title'),
                 locale
               )}
-              <span className="block text-2xl sm:text-3xl lg:text-4xl bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent mt-2 font-semibold">
+              <span className="block text-3xl sm:text-4xl lg:text-5xl text-gradient mt-3 font-semibold">
                 {getContentWithFallback(
                   dbContent,
                   'layout',
@@ -94,8 +106,11 @@ export default async function HomePage({ params: { locale } }: Props) {
               </span>
             </h1>
 
-            {/* Concise description */}
-            <p className="text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto mb-8">
+            {/* Enhanced description */}
+            <p
+              className="text-lg sm:text-xl lg:text-2xl text-slate-600 leading-relaxed max-w-3xl mx-auto mb-10 animate-slide-in-up"
+              style={{ animationDelay: '0.2s' }}
+            >
               {getContentWithFallback(
                 dbContent,
                 'hero',
@@ -105,58 +120,93 @@ export default async function HomePage({ params: { locale } }: Props) {
               )}
             </p>
 
-            {/* Streamlined Feature Pills */}
-            <div className="flex flex-wrap justify-center gap-3 mb-8">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-full text-sm font-medium border border-emerald-100">
-                <div className="w-2 h-2 bg-emerald-500 rounded-full"></div>
+            {/* Enhanced Feature Pills */}
+            <div
+              className="flex flex-wrap justify-center gap-4 mb-12 animate-slide-in-up"
+              style={{ animationDelay: '0.3s' }}
+            >
+              <div className="group inline-flex items-center gap-3 px-6 py-3 bg-emerald-50/80 hover:bg-emerald-100/80 text-emerald-700 rounded-full text-sm font-medium border border-emerald-200/50 shadow-soft hover:shadow-medium transition-all duration-300 hover:scale-105 glass">
+                <div className="w-2.5 h-2.5 bg-emerald-500 rounded-full group-hover:scale-125 transition-transform"></div>
                 {tHero('compoundInterest')}
               </div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 rounded-full text-sm font-medium border border-blue-100">
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+              <div className="group inline-flex items-center gap-3 px-6 py-3 bg-blue-50/80 hover:bg-blue-100/80 text-blue-700 rounded-full text-sm font-medium border border-blue-200/50 shadow-soft hover:shadow-medium transition-all duration-300 hover:scale-105 glass">
+                <div className="w-2.5 h-2.5 bg-blue-500 rounded-full group-hover:scale-125 transition-transform"></div>
                 {tHero('interactiveCharts')}
               </div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-50 text-purple-700 rounded-full text-sm font-medium border border-purple-100">
-                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+              <div className="group inline-flex items-center gap-3 px-6 py-3 bg-purple-50/80 hover:bg-purple-100/80 text-purple-700 rounded-full text-sm font-medium border border-purple-200/50 shadow-soft hover:shadow-medium transition-all duration-300 hover:scale-105 glass">
+                <div className="w-2.5 h-2.5 bg-purple-500 rounded-full group-hover:scale-125 transition-transform"></div>
                 {tHero('scenarioPlanning')}
               </div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 text-orange-700 rounded-full text-sm font-medium border border-orange-100">
-                <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+              <div className="group inline-flex items-center gap-3 px-6 py-3 bg-orange-50/80 hover:bg-orange-100/80 text-orange-700 rounded-full text-sm font-medium border border-orange-200/50 shadow-soft hover:shadow-medium transition-all duration-300 hover:scale-105 glass">
+                <div className="w-2.5 h-2.5 bg-orange-500 rounded-full group-hover:scale-125 transition-transform"></div>
                 {tHero('exportResults')}
               </div>
             </div>
 
-            {/* Call to Action */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            {/* Enhanced Call to Action */}
+            <div
+              className="flex flex-col sm:flex-row gap-8 justify-center items-center animate-slide-in-up"
+              style={{ animationDelay: '0.4s' }}
+            >
               <a
                 href="#calculator"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105"
+                className="group relative inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-2xl transition-all duration-300 shadow-large hover:shadow-elegant hover:scale-105 transform-gpu overflow-hidden"
               >
-                <TrendingUp className="w-4 h-4" />
-                Start Calculating
+                <div className="absolute inset-0 bg-gradient-to-r from-indigo-400 to-purple-400 opacity-0 group-hover:opacity-20 transition-opacity blur-xl"></div>
+                <TrendingUp className="w-5 h-5 group-hover:scale-110 group-hover:rotate-12 transition-transform relative z-10" />
+                <span className="relative z-10">Start Calculating</span>
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity animate-shimmer"></div>
               </a>
-              <span className="text-sm text-slate-500">
-                Free • No signup required
-              </span>
+              <div className="flex flex-col items-center gap-2">
+                <div className="flex flex-col sm:flex-row items-center gap-2">
+                  <span className="text-sm font-medium text-slate-600">
+                    Free • No signup required
+                  </span>
+                </div>
+                <div className="flex items-center gap-3 text-xs text-slate-400">
+                  <div className="flex items-center gap-1">
+                    <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></div>
+                    <span>Instant results</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+                    <span>Privacy focused</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <div className="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                    <span>Export ready</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Calculator Section */}
-      <section className="py-16 lg:py-20 bg-white border-t border-slate-100">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl lg:text-3xl font-bold font-playfair text-slate-900 mb-4">
+      {/* Enhanced Calculator Section */}
+      <section className="py-20 lg:py-32 bg-white border-t border-slate-200/50 relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-50/50 via-transparent to-blue-50/30"></div>
+        <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-blue-100/20 to-transparent rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-purple-100/20 to-transparent rounded-full blur-3xl"></div>
+
+        <div className="container mx-auto px-4 lg:px-8 relative">
+          <div className="text-center mb-16 animate-slide-in-up">
+            <div className="inline-flex items-center gap-2 bg-blue-50/80 text-blue-700 px-4 py-2 rounded-full text-sm font-medium border border-blue-200/50 mb-6 shadow-soft">
+              <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+              Investment Calculator
+            </div>
+            <h2 className="text-3xl lg:text-4xl font-bold font-playfair text-slate-900 mb-6">
               {t('title')}
             </h2>
-            <p className="text-base lg:text-lg text-slate-600 max-w-xl mx-auto">
+            <p className="text-lg lg:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
               {t('subtitle')}
             </p>
           </div>
 
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <div
-              className="bg-white rounded-2xl p-6 lg:p-8 shadow-xl border border-slate-200/50 ring-1 ring-slate-900/5"
+              className="bg-white/90 rounded-3xl p-8 lg:p-12 shadow-elegant border border-slate-200/50 ring-1 ring-slate-900/5 backdrop-blur-sm hover:shadow-2xl transition-all duration-500 animate-scale-in"
               id="calculator"
             >
               <CalculatorForm />
