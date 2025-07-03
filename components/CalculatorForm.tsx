@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import * as Sentry from '@sentry/nextjs'
-import GrowthChart from './GrowthChart'
+import OptimizedGrowthChart from './OptimizedGrowthChart'
 import ScenarioSlider from './ScenarioSlider'
 import ShareButtons from './ShareButtons'
 import ExportButton from './ExportButton'
@@ -39,6 +39,7 @@ import {
   SUPPORTED_CURRENCIES,
   type Currency,
 } from '@/lib/currency'
+import { generateScenarioSlug } from '@/lib/scenarioUtils'
 
 interface CalculatorInputs {
   initialAmount: number
@@ -77,6 +78,7 @@ const CalculatorForm = () => {
   const [inputs, setInputs] = useState<CalculatorInputs>(DEFAULT_PARAMS)
   const [results, setResults] = useState<CalculatorResults | null>(null)
   const [isInitialized, setIsInitialized] = useState(false)
+  const [isRedirecting, setIsRedirecting] = useState(false)
   const [selectedCurrency, setSelectedCurrency] = useState<Currency>(
     SUPPORTED_CURRENCIES[0]
   ) // USD default
@@ -152,6 +154,8 @@ const CalculatorForm = () => {
   //   }
   // }, [inputs, isInitialized])
 
+  // Automatic calculation removed - calculations now redirect to scenario pages
+  /*
   useEffect(() => {
     const params: InvestmentParameters = {
       initialAmount: inputs.initialAmount,
@@ -182,10 +186,35 @@ const CalculatorForm = () => {
       chartData,
     })
   }, [inputs])
+  */
 
-  const calculateFutureValue = (e: React.FormEvent) => {
+  const calculateFutureValue = async (e: React.FormEvent) => {
     e.preventDefault()
-    // The calculation is already done in useEffect, so this just prevents form submission
+
+    // Validate all inputs before proceeding
+    const hasErrors = Object.values(validation).some(
+      (state) => state === 'error'
+    )
+    if (hasErrors) {
+      return // Don't submit if there are validation errors
+    }
+
+    try {
+      setIsRedirecting(true)
+
+      // Generate scenario slug from current inputs
+      const scenarioSlug = generateScenarioSlug(inputs)
+
+      // Get current locale from pathname
+      const locale = pathname.split('/')[1] || 'en'
+
+      // Redirect to scenario page
+      await router.push(`/${locale}/scenario/${scenarioSlug}`)
+    } catch (error) {
+      console.error('Error redirecting to scenario:', error)
+      Sentry.captureException(error)
+      setIsRedirecting(false)
+    }
   }
 
   const validateInput = (field: keyof CalculatorInputs, value: number) => {
@@ -531,14 +560,24 @@ const CalculatorForm = () => {
 
         <button
           type="submit"
-          className="group relative w-full bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700 text-white shadow-large hover:shadow-elegant transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-1 font-semibold py-6 px-8 rounded-2xl flex items-center justify-center text-xl gap-3 overflow-hidden"
+          disabled={isRedirecting}
+          className="group relative w-full bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700 text-white shadow-large hover:shadow-elegant transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-1 font-semibold py-6 px-8 rounded-2xl flex items-center justify-center text-xl gap-3 overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
         >
           {/* Shimmer effect */}
           <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity animate-shimmer"></div>
 
           {/* Button content */}
-          <Calculator className="w-6 h-6 group-hover:rotate-12 group-hover:scale-110 transition-transform duration-300 relative z-10" />
-          <span className="relative z-10">{t('calculate')}</span>
+          {isRedirecting ? (
+            <>
+              <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin relative z-10" />
+              <span className="relative z-10">{t('generatingScenario')}</span>
+            </>
+          ) : (
+            <>
+              <Calculator className="w-6 h-6 group-hover:rotate-12 group-hover:scale-110 transition-transform duration-300 relative z-10" />
+              <span className="relative z-10">{t('calculate')}</span>
+            </>
+          )}
 
           {/* Glow effect */}
           <div className="absolute inset-0 bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 opacity-0 group-hover:opacity-20 transition-opacity blur-xl"></div>
@@ -568,8 +607,12 @@ const CalculatorForm = () => {
         </div>
       </div>
 
-      {/* Enhanced Results */}
-      {results && (
+      {/* Results section removed - calculations now redirect to scenario pages */}
+      {/* 
+      Previous inline results display has been replaced with redirect functionality.
+      Users will be redirected to dedicated scenario pages with comprehensive content.
+      */}
+      {false && results && (
         <div className="mt-8 space-y-6">
           {/* Main Result Card */}
           <div className="relative overflow-hidden bg-gradient-to-br from-emerald-500 via-blue-600 to-purple-600 rounded-2xl p-6 sm:p-8 text-white shadow-2xl">
@@ -806,7 +849,7 @@ const CalculatorForm = () => {
               </div>
             </div>
             <div className="rounded-xl overflow-hidden border border-slate-100">
-              <GrowthChart data={results.chartData} />
+              <OptimizedGrowthChart data={results.chartData} />
             </div>
           </div>
 

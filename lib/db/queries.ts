@@ -85,27 +85,46 @@ export async function getPageBySlug(
 }
 
 /**
- * SCENARIOS QUERIES
+ * SCENARIO QUERIES
  */
 
-// Get all predefined scenarios for a locale
-export async function getPredefinedScenarios(
+// Create a new scenario
+export async function createScenario(scenarioData: {
+  slug: string
   locale: string
-): Promise<Scenario[]> {
-  return await db
-    .select()
-    .from(scenario)
-    .where(
-      and(
-        eq(scenario.locale, locale as any),
-        eq(scenario.isPredefined, true),
-        eq(scenario.isPublic, true)
-      )
-    )
-    .orderBy(scenario.viewCount)
+  name: string
+  description?: string
+  initialAmount: number
+  monthlyContribution: number
+  annualReturn: number
+  timeHorizon: number
+  tags?: string[]
+  isPredefined?: boolean
+  isPublic?: boolean
+  createdBy?: string
+}): Promise<Scenario> {
+  const [newScenario] = await db
+    .insert(scenario)
+    .values({
+      slug: scenarioData.slug,
+      locale: scenarioData.locale as any,
+      name: scenarioData.name,
+      description: scenarioData.description,
+      initialAmount: scenarioData.initialAmount.toString(),
+      monthlyContribution: scenarioData.monthlyContribution.toString(),
+      annualReturn: scenarioData.annualReturn.toString(),
+      timeHorizon: scenarioData.timeHorizon,
+      tags: scenarioData.tags || [],
+      isPredefined: scenarioData.isPredefined || false,
+      isPublic: scenarioData.isPublic || true,
+      createdBy: scenarioData.createdBy || 'system',
+    })
+    .returning()
+
+  return newScenario
 }
 
-// Get a specific scenario by slug and locale
+// Get scenario by slug and locale
 export async function getScenarioBySlug(
   slug: string,
   locale: string
@@ -113,34 +132,16 @@ export async function getScenarioBySlug(
   const result = await db
     .select()
     .from(scenario)
-    .where(
-      and(
-        eq(scenario.slug, slug),
-        eq(scenario.locale, locale as any),
-        eq(scenario.isPublic, true)
-      )
-    )
+    .where(and(eq(scenario.slug, slug), eq(scenario.locale, locale as any)))
     .limit(1)
 
   return result[0] || null
 }
 
-// Get popular public scenarios
-export async function getPopularScenarios(
-  locale: string,
-  limit: number = 10
-): Promise<Scenario[]> {
-  return await db
-    .select()
-    .from(scenario)
-    .where(and(eq(scenario.locale, locale as any), eq(scenario.isPublic, true)))
-    .orderBy(scenario.viewCount)
-    .limit(limit)
-}
-
-// Increment view count for a scenario
-export async function incrementScenarioViews(
-  scenarioId: string
+// Update scenario view count
+export async function updateScenarioViews(
+  slug: string,
+  locale: string
 ): Promise<void> {
   await db
     .update(scenario)
@@ -148,7 +149,7 @@ export async function incrementScenarioViews(
       viewCount: sql`${scenario.viewCount} + 1`,
       updatedAt: new Date(),
     })
-    .where(eq(scenario.id, scenarioId))
+    .where(and(eq(scenario.slug, slug), eq(scenario.locale, locale as any)))
 }
 
 /**

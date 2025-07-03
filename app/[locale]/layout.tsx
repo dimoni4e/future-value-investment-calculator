@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation'
 import { locales } from '@/i18n/request'
 import type { Metadata } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
+import ServiceWorkerRegistration from '@/components/ServiceWorkerRegistration'
 import '../globals.css'
 
 const inter = Inter({
@@ -84,6 +85,7 @@ export default async function LocaleLayout({
       className={`h-full ${inter.variable} ${playfair.variable}`}
     >
       <body className="h-full flex flex-col bg-gradient-to-br from-indigo-50 via-white to-cyan-50 font-sans antialiased">
+        <ServiceWorkerRegistration />
         <NextIntlClientProvider messages={messages} locale={locale}>
           <Header />
           <main className="flex-1">{children}</main>

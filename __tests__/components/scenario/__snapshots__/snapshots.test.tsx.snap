@@ -1,0 +1,5218 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Scenario Components Snapshots ComparativeAnalysis should match snapshot with baseline scenario 1`] = `
+<section
+  class="py-16 bg-white/70 backdrop-blur-sm"
+>
+  <div
+    class="container mx-auto px-4 lg:px-8"
+  >
+    <div
+      class="max-w-6xl mx-auto"
+    >
+      <div
+        class="text-center mb-12"
+      >
+        <div
+          class="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-100 to-pink-100 px-4 py-2 rounded-full text-purple-700 text-sm font-medium mb-6"
+        >
+          <svg
+            aria-hidden="true"
+            class="lucide lucide-chart-column w-4 h-4"
+            fill="none"
+            height="24"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3 3v16a2 2 0 0 0 2 2h16"
+            />
+            <path
+              d="M18 17V9"
+            />
+            <path
+              d="M13 17V5"
+            />
+            <path
+              d="M8 17v-3"
+            />
+          </svg>
+          <span>
+            Comparative Analysis
+          </span>
+        </div>
+        <h3
+          class="text-3xl font-bold mb-4"
+        >
+          How Different Choices Impact Your Results
+        </h3>
+        <p
+          class="text-lg text-slate-600 max-w-2xl mx-auto"
+        >
+          Explore how modifying key parameters could dramatically change your investment outcomes.
+        </p>
+      </div>
+      <div
+        class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-3xl p-8 mb-12 border border-indigo-200/50"
+      >
+        <div
+          class="text-center"
+        >
+          <h4
+            class="text-xl font-semibold mb-4 text-indigo-900"
+          >
+            Your Current Scenario
+          </h4>
+          <div
+            class="grid md:grid-cols-4 gap-6"
+          >
+            <div>
+              <div
+                class="text-2xl font-bold text-indigo-600"
+              >
+                $
+                10,000
+              </div>
+              <div
+                class="text-sm text-slate-600"
+              >
+                Initial
+              </div>
+            </div>
+            <div>
+              <div
+                class="text-2xl font-bold text-indigo-600"
+              >
+                $
+                500
+              </div>
+              <div
+                class="text-sm text-slate-600"
+              >
+                Monthly
+              </div>
+            </div>
+            <div>
+              <div
+                class="text-2xl font-bold text-indigo-600"
+              >
+                7
+                %
+              </div>
+              <div
+                class="text-sm text-slate-600"
+              >
+                Return
+              </div>
+            </div>
+            <div>
+              <div
+                class="text-2xl font-bold text-indigo-600"
+              >
+                10
+                 
+                years
+              </div>
+              <div
+                class="text-sm text-slate-600"
+              >
+                Timeframe
+              </div>
+            </div>
+          </div>
+          <div
+            class="mt-6 pt-6 border-t border-indigo-200"
+          >
+            <div
+              class="text-3xl font-bold text-indigo-800"
+            >
+              $
+              100,000
+            </div>
+            <div
+              class="text-sm text-indigo-600"
+            >
+              Projected Final Value
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="grid md:grid-cols-2 gap-8"
+      >
+        <div
+          class="bg-white rounded-3xl p-6 border border-slate-200/50 shadow-lg hover:shadow-xl transition-all duration-300"
+        >
+          <div
+            class="flex items-center space-x-3 mb-4"
+          >
+            <div
+              class="p-2 bg-blue-100 rounded-lg"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-trending-up w-5 h-5 text-blue-600"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 7h6v6"
+                />
+                <path
+                  d="m22 7-8.5 8.5-5-5L2 17"
+                />
+              </svg>
+            </div>
+            <div>
+              <h4
+                class="text-lg font-semibold"
+              >
+                Higher Monthly Contribution
+              </h4>
+              <p
+                class="text-sm text-slate-600"
+              >
+                Increase monthly contribution by 50%
+              </p>
+            </div>
+          </div>
+          <div
+            class="bg-slate-50 rounded-2xl p-4 mb-4"
+          >
+            <div
+              class="grid grid-cols-2 gap-4 text-sm"
+            >
+              <div>
+                <div
+                  class="text-slate-600"
+                >
+                  New Value
+                </div>
+                <div
+                  class="font-semibold"
+                >
+                  $
+                  149,910.219
+                </div>
+              </div>
+              <div>
+                <div
+                  class="text-slate-600"
+                >
+                  Improvement
+                </div>
+                <div
+                  class="font-semibold text-green-600"
+                >
+                  +
+                  49.9
+                  %
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="text-center p-4 bg-blue-50 rounded-2xl"
+          >
+            <div
+              class="text-2xl font-bold text-blue-600 mb-1"
+            >
+              +$
+              49,910.219
+            </div>
+            <div
+              class="text-xs text-slate-600"
+            >
+              Additional Growth
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white rounded-3xl p-6 border border-slate-200/50 shadow-lg hover:shadow-xl transition-all duration-300"
+        >
+          <div
+            class="flex items-center space-x-3 mb-4"
+          >
+            <div
+              class="p-2 bg-green-100 rounded-lg"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-trending-up w-5 h-5 text-green-600"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 7h6v6"
+                />
+                <path
+                  d="m22 7-8.5 8.5-5-5L2 17"
+                />
+              </svg>
+            </div>
+            <div>
+              <h4
+                class="text-lg font-semibold"
+              >
+                Extended Time Horizon
+              </h4>
+              <p
+                class="text-sm text-slate-600"
+              >
+                Add 5 more years to investment
+              </p>
+            </div>
+          </div>
+          <div
+            class="bg-slate-50 rounded-2xl p-4 mb-4"
+          >
+            <div
+              class="grid grid-cols-2 gap-4 text-sm"
+            >
+              <div>
+                <div
+                  class="text-slate-600"
+                >
+                  New Value
+                </div>
+                <div
+                  class="font-semibold"
+                >
+                  $
+                  186,970.616
+                </div>
+              </div>
+              <div>
+                <div
+                  class="text-slate-600"
+                >
+                  Improvement
+                </div>
+                <div
+                  class="font-semibold text-green-600"
+                >
+                  +
+                  87.0
+                  %
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="text-center p-4 bg-green-50 rounded-2xl"
+          >
+            <div
+              class="text-2xl font-bold text-green-600 mb-1"
+            >
+              +$
+              86,970.616
+            </div>
+            <div
+              class="text-xs text-slate-600"
+            >
+              Additional Growth
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white rounded-3xl p-6 border border-slate-200/50 shadow-lg hover:shadow-xl transition-all duration-300"
+        >
+          <div
+            class="flex items-center space-x-3 mb-4"
+          >
+            <div
+              class="p-2 bg-purple-100 rounded-lg"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-trending-up w-5 h-5 text-purple-600"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 7h6v6"
+                />
+                <path
+                  d="m22 7-8.5 8.5-5-5L2 17"
+                />
+              </svg>
+            </div>
+            <div>
+              <h4
+                class="text-lg font-semibold"
+              >
+                Higher Expected Return
+              </h4>
+              <p
+                class="text-sm text-slate-600"
+              >
+                Increase expected return by 2%
+              </p>
+            </div>
+          </div>
+          <div
+            class="bg-slate-50 rounded-2xl p-4 mb-4"
+          >
+            <div
+              class="grid grid-cols-2 gap-4 text-sm"
+            >
+              <div>
+                <div
+                  class="text-slate-600"
+                >
+                  New Value
+                </div>
+                <div
+                  class="font-semibold"
+                >
+                  $
+                  121,270.709
+                </div>
+              </div>
+              <div>
+                <div
+                  class="text-slate-600"
+                >
+                  Improvement
+                </div>
+                <div
+                  class="font-semibold text-green-600"
+                >
+                  +
+                  21.3
+                  %
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="text-center p-4 bg-purple-50 rounded-2xl"
+          >
+            <div
+              class="text-2xl font-bold text-purple-600 mb-1"
+            >
+              +$
+              21,270.709
+            </div>
+            <div
+              class="text-xs text-slate-600"
+            >
+              Additional Growth
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white rounded-3xl p-6 border border-slate-200/50 shadow-lg hover:shadow-xl transition-all duration-300"
+        >
+          <div
+            class="flex items-center space-x-3 mb-4"
+          >
+            <div
+              class="p-2 bg-orange-100 rounded-lg"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-trending-up w-5 h-5 text-orange-600"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 7h6v6"
+                />
+                <path
+                  d="m22 7-8.5 8.5-5-5L2 17"
+                />
+              </svg>
+            </div>
+            <div>
+              <h4
+                class="text-lg font-semibold"
+              >
+                Double Initial Investment
+              </h4>
+              <p
+                class="text-sm text-slate-600"
+              >
+                Start with twice the initial amount
+              </p>
+            </div>
+          </div>
+          <div
+            class="bg-slate-50 rounded-2xl p-4 mb-4"
+          >
+            <div
+              class="grid grid-cols-2 gap-4 text-sm"
+            >
+              <div>
+                <div
+                  class="text-slate-600"
+                >
+                  New Value
+                </div>
+                <div
+                  class="font-semibold"
+                >
+                  $
+                  126,735.631
+                </div>
+              </div>
+              <div>
+                <div
+                  class="text-slate-600"
+                >
+                  Improvement
+                </div>
+                <div
+                  class="font-semibold text-green-600"
+                >
+                  +
+                  26.7
+                  %
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="text-center p-4 bg-orange-50 rounded-2xl"
+          >
+            <div
+              class="text-2xl font-bold text-orange-600 mb-1"
+            >
+              +$
+              26,735.631
+            </div>
+            <div
+              class="text-xs text-slate-600"
+            >
+              Additional Growth
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-16 bg-gradient-to-r from-emerald-50 to-cyan-50 rounded-3xl p-8"
+      >
+        <div
+          class="text-center mb-8"
+        >
+          <div
+            class="inline-flex items-center space-x-2 bg-emerald-100 px-4 py-2 rounded-full text-emerald-700 text-sm font-medium mb-4"
+          >
+            <svg
+              aria-hidden="true"
+              class="lucide lucide-users w-4 h-4"
+              fill="none"
+              height="24"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
+              />
+              <path
+                d="M16 3.128a4 4 0 0 1 0 7.744"
+              />
+              <path
+                d="M22 21v-2a4 4 0 0 0-3-3.87"
+              />
+              <circle
+                cx="9"
+                cy="7"
+                r="4"
+              />
+            </svg>
+            <span>
+              Community Scenarios
+            </span>
+          </div>
+          <h4
+            class="text-2xl font-bold mb-4"
+          >
+            Similar Investors Choose
+          </h4>
+          <p
+            class="text-slate-600 max-w-2xl mx-auto"
+          >
+            See how other investors with similar profiles have structured their investment strategies.
+          </p>
+        </div>
+        <div
+          class="flex justify-center"
+        >
+          <a
+            class="inline-flex items-center space-x-2 bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-2xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+            href="/en#calculator"
+          >
+            <span>
+              Explore More Scenarios
+            </span>
+            <svg
+              aria-hidden="true"
+              class="lucide lucide-arrow-right w-5 h-5"
+              fill="none"
+              height="24"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M5 12h14"
+              />
+              <path
+                d="m12 5 7 7-7 7"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+`;
+
+exports[`Scenario Components Snapshots ComparativeAnalysis should match snapshot with long-term scenario 1`] = `
+<section
+  class="py-16 bg-white/70 backdrop-blur-sm"
+>
+  <div
+    class="container mx-auto px-4 lg:px-8"
+  >
+    <div
+      class="max-w-6xl mx-auto"
+    >
+      <div
+        class="text-center mb-12"
+      >
+        <div
+          class="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-100 to-pink-100 px-4 py-2 rounded-full text-purple-700 text-sm font-medium mb-6"
+        >
+          <svg
+            aria-hidden="true"
+            class="lucide lucide-chart-column w-4 h-4"
+            fill="none"
+            height="24"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3 3v16a2 2 0 0 0 2 2h16"
+            />
+            <path
+              d="M18 17V9"
+            />
+            <path
+              d="M13 17V5"
+            />
+            <path
+              d="M8 17v-3"
+            />
+          </svg>
+          <span>
+            Comparative Analysis
+          </span>
+        </div>
+        <h3
+          class="text-3xl font-bold mb-4"
+        >
+          How Different Choices Impact Your Results
+        </h3>
+        <p
+          class="text-lg text-slate-600 max-w-2xl mx-auto"
+        >
+          Explore how modifying key parameters could dramatically change your investment outcomes.
+        </p>
+      </div>
+      <div
+        class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-3xl p-8 mb-12 border border-indigo-200/50"
+      >
+        <div
+          class="text-center"
+        >
+          <h4
+            class="text-xl font-semibold mb-4 text-indigo-900"
+          >
+            Your Current Scenario
+          </h4>
+          <div
+            class="grid md:grid-cols-4 gap-6"
+          >
+            <div>
+              <div
+                class="text-2xl font-bold text-indigo-600"
+              >
+                $
+                10,000
+              </div>
+              <div
+                class="text-sm text-slate-600"
+              >
+                Initial
+              </div>
+            </div>
+            <div>
+              <div
+                class="text-2xl font-bold text-indigo-600"
+              >
+                $
+                500
+              </div>
+              <div
+                class="text-sm text-slate-600"
+              >
+                Monthly
+              </div>
+            </div>
+            <div>
+              <div
+                class="text-2xl font-bold text-indigo-600"
+              >
+                7
+                %
+              </div>
+              <div
+                class="text-sm text-slate-600"
+              >
+                Return
+              </div>
+            </div>
+            <div>
+              <div
+                class="text-2xl font-bold text-indigo-600"
+              >
+                30
+                 
+                years
+              </div>
+              <div
+                class="text-sm text-slate-600"
+              >
+                Timeframe
+              </div>
+            </div>
+          </div>
+          <div
+            class="mt-6 pt-6 border-t border-indigo-200"
+          >
+            <div
+              class="text-3xl font-bold text-indigo-800"
+            >
+              $
+              100,000
+            </div>
+            <div
+              class="text-sm text-indigo-600"
+            >
+              Projected Final Value
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="grid md:grid-cols-2 gap-8"
+      >
+        <div
+          class="bg-white rounded-3xl p-6 border border-slate-200/50 shadow-lg hover:shadow-xl transition-all duration-300"
+        >
+          <div
+            class="flex items-center space-x-3 mb-4"
+          >
+            <div
+              class="p-2 bg-blue-100 rounded-lg"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-trending-up w-5 h-5 text-blue-600"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 7h6v6"
+                />
+                <path
+                  d="m22 7-8.5 8.5-5-5L2 17"
+                />
+              </svg>
+            </div>
+            <div>
+              <h4
+                class="text-lg font-semibold"
+              >
+                Higher Monthly Contribution
+              </h4>
+              <p
+                class="text-sm text-slate-600"
+              >
+                Increase monthly contribution by 50%
+              </p>
+            </div>
+          </div>
+          <div
+            class="bg-slate-50 rounded-2xl p-4 mb-4"
+          >
+            <div
+              class="grid grid-cols-2 gap-4 text-sm"
+            >
+              <div>
+                <div
+                  class="text-slate-600"
+                >
+                  New Value
+                </div>
+                <div
+                  class="font-semibold"
+                >
+                  $
+                  996,143.222
+                </div>
+              </div>
+              <div>
+                <div
+                  class="text-slate-600"
+                >
+                  Improvement
+                </div>
+                <div
+                  class="font-semibold text-green-600"
+                >
+                  +
+                  896.1
+                  %
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="text-center p-4 bg-blue-50 rounded-2xl"
+          >
+            <div
+              class="text-2xl font-bold text-blue-600 mb-1"
+            >
+              +$
+              896,143.222
+            </div>
+            <div
+              class="text-xs text-slate-600"
+            >
+              Additional Growth
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white rounded-3xl p-6 border border-slate-200/50 shadow-lg hover:shadow-xl transition-all duration-300"
+        >
+          <div
+            class="flex items-center space-x-3 mb-4"
+          >
+            <div
+              class="p-2 bg-green-100 rounded-lg"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-trending-up w-5 h-5 text-green-600"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 7h6v6"
+                />
+                <path
+                  d="m22 7-8.5 8.5-5-5L2 17"
+                />
+              </svg>
+            </div>
+            <div>
+              <h4
+                class="text-lg font-semibold"
+              >
+                Extended Time Horizon
+              </h4>
+              <p
+                class="text-sm text-slate-600"
+              >
+                Add 5 more years to investment
+              </p>
+            </div>
+          </div>
+          <div
+            class="bg-slate-50 rounded-2xl p-4 mb-4"
+          >
+            <div
+              class="grid grid-cols-2 gap-4 text-sm"
+            >
+              <div>
+                <div
+                  class="text-slate-600"
+                >
+                  New Value
+                </div>
+                <div
+                  class="font-semibold"
+                >
+                  $
+                  1,015,588.819
+                </div>
+              </div>
+              <div>
+                <div
+                  class="text-slate-600"
+                >
+                  Improvement
+                </div>
+                <div
+                  class="font-semibold text-green-600"
+                >
+                  +
+                  915.6
+                  %
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="text-center p-4 bg-green-50 rounded-2xl"
+          >
+            <div
+              class="text-2xl font-bold text-green-600 mb-1"
+            >
+              +$
+              915,588.819
+            </div>
+            <div
+              class="text-xs text-slate-600"
+            >
+              Additional Growth
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white rounded-3xl p-6 border border-slate-200/50 shadow-lg hover:shadow-xl transition-all duration-300"
+        >
+          <div
+            class="flex items-center space-x-3 mb-4"
+          >
+            <div
+              class="p-2 bg-purple-100 rounded-lg"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-trending-up w-5 h-5 text-purple-600"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 7h6v6"
+                />
+                <path
+                  d="m22 7-8.5 8.5-5-5L2 17"
+                />
+              </svg>
+            </div>
+            <div>
+              <h4
+                class="text-lg font-semibold"
+              >
+                Higher Expected Return
+              </h4>
+              <p
+                class="text-sm text-slate-600"
+              >
+                Increase expected return by 2%
+              </p>
+            </div>
+          </div>
+          <div
+            class="bg-slate-50 rounded-2xl p-4 mb-4"
+          >
+            <div
+              class="grid grid-cols-2 gap-4 text-sm"
+            >
+              <div>
+                <div
+                  class="text-slate-600"
+                >
+                  New Value
+                </div>
+                <div
+                  class="font-semibold"
+                >
+                  $
+                  1,062,677.503
+                </div>
+              </div>
+              <div>
+                <div
+                  class="text-slate-600"
+                >
+                  Improvement
+                </div>
+                <div
+                  class="font-semibold text-green-600"
+                >
+                  +
+                  962.7
+                  %
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="text-center p-4 bg-purple-50 rounded-2xl"
+          >
+            <div
+              class="text-2xl font-bold text-purple-600 mb-1"
+            >
+              +$
+              962,677.503
+            </div>
+            <div
+              class="text-xs text-slate-600"
+            >
+              Additional Growth
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white rounded-3xl p-6 border border-slate-200/50 shadow-lg hover:shadow-xl transition-all duration-300"
+        >
+          <div
+            class="flex items-center space-x-3 mb-4"
+          >
+            <div
+              class="p-2 bg-orange-100 rounded-lg"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-trending-up w-5 h-5 text-orange-600"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 7h6v6"
+                />
+                <path
+                  d="m22 7-8.5 8.5-5-5L2 17"
+                />
+              </svg>
+            </div>
+            <div>
+              <h4
+                class="text-lg font-semibold"
+              >
+                Double Initial Investment
+              </h4>
+              <p
+                class="text-sm text-slate-600"
+              >
+                Start with twice the initial amount
+              </p>
+            </div>
+          </div>
+          <div
+            class="bg-slate-50 rounded-2xl p-4 mb-4"
+          >
+            <div
+              class="grid grid-cols-2 gap-4 text-sm"
+            >
+              <div>
+                <div
+                  class="text-slate-600"
+                >
+                  New Value
+                </div>
+                <div
+                  class="font-semibold"
+                >
+                  $
+                  772,315.447
+                </div>
+              </div>
+              <div>
+                <div
+                  class="text-slate-600"
+                >
+                  Improvement
+                </div>
+                <div
+                  class="font-semibold text-green-600"
+                >
+                  +
+                  672.3
+                  %
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="text-center p-4 bg-orange-50 rounded-2xl"
+          >
+            <div
+              class="text-2xl font-bold text-orange-600 mb-1"
+            >
+              +$
+              672,315.447
+            </div>
+            <div
+              class="text-xs text-slate-600"
+            >
+              Additional Growth
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-16 bg-gradient-to-r from-emerald-50 to-cyan-50 rounded-3xl p-8"
+      >
+        <div
+          class="text-center mb-8"
+        >
+          <div
+            class="inline-flex items-center space-x-2 bg-emerald-100 px-4 py-2 rounded-full text-emerald-700 text-sm font-medium mb-4"
+          >
+            <svg
+              aria-hidden="true"
+              class="lucide lucide-users w-4 h-4"
+              fill="none"
+              height="24"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
+              />
+              <path
+                d="M16 3.128a4 4 0 0 1 0 7.744"
+              />
+              <path
+                d="M22 21v-2a4 4 0 0 0-3-3.87"
+              />
+              <circle
+                cx="9"
+                cy="7"
+                r="4"
+              />
+            </svg>
+            <span>
+              Community Scenarios
+            </span>
+          </div>
+          <h4
+            class="text-2xl font-bold mb-4"
+          >
+            Similar Investors Choose
+          </h4>
+          <p
+            class="text-slate-600 max-w-2xl mx-auto"
+          >
+            See how other investors with similar profiles have structured their investment strategies.
+          </p>
+        </div>
+        <div
+          class="flex justify-center"
+        >
+          <a
+            class="inline-flex items-center space-x-2 bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-2xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+            href="/en#calculator"
+          >
+            <span>
+              Explore More Scenarios
+            </span>
+            <svg
+              aria-hidden="true"
+              class="lucide lucide-arrow-right w-5 h-5"
+              fill="none"
+              height="24"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M5 12h14"
+              />
+              <path
+                d="m12 5 7 7-7 7"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+`;
+
+exports[`Scenario Components Snapshots ComparativeAnalysis should match snapshot with short-term scenario 1`] = `
+<section
+  class="py-16 bg-white/70 backdrop-blur-sm"
+>
+  <div
+    class="container mx-auto px-4 lg:px-8"
+  >
+    <div
+      class="max-w-6xl mx-auto"
+    >
+      <div
+        class="text-center mb-12"
+      >
+        <div
+          class="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-100 to-pink-100 px-4 py-2 rounded-full text-purple-700 text-sm font-medium mb-6"
+        >
+          <svg
+            aria-hidden="true"
+            class="lucide lucide-chart-column w-4 h-4"
+            fill="none"
+            height="24"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3 3v16a2 2 0 0 0 2 2h16"
+            />
+            <path
+              d="M18 17V9"
+            />
+            <path
+              d="M13 17V5"
+            />
+            <path
+              d="M8 17v-3"
+            />
+          </svg>
+          <span>
+            Comparative Analysis
+          </span>
+        </div>
+        <h3
+          class="text-3xl font-bold mb-4"
+        >
+          How Different Choices Impact Your Results
+        </h3>
+        <p
+          class="text-lg text-slate-600 max-w-2xl mx-auto"
+        >
+          Explore how modifying key parameters could dramatically change your investment outcomes.
+        </p>
+      </div>
+      <div
+        class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-3xl p-8 mb-12 border border-indigo-200/50"
+      >
+        <div
+          class="text-center"
+        >
+          <h4
+            class="text-xl font-semibold mb-4 text-indigo-900"
+          >
+            Your Current Scenario
+          </h4>
+          <div
+            class="grid md:grid-cols-4 gap-6"
+          >
+            <div>
+              <div
+                class="text-2xl font-bold text-indigo-600"
+              >
+                $
+                10,000
+              </div>
+              <div
+                class="text-sm text-slate-600"
+              >
+                Initial
+              </div>
+            </div>
+            <div>
+              <div
+                class="text-2xl font-bold text-indigo-600"
+              >
+                $
+                500
+              </div>
+              <div
+                class="text-sm text-slate-600"
+              >
+                Monthly
+              </div>
+            </div>
+            <div>
+              <div
+                class="text-2xl font-bold text-indigo-600"
+              >
+                7
+                %
+              </div>
+              <div
+                class="text-sm text-slate-600"
+              >
+                Return
+              </div>
+            </div>
+            <div>
+              <div
+                class="text-2xl font-bold text-indigo-600"
+              >
+                5
+                 
+                years
+              </div>
+              <div
+                class="text-sm text-slate-600"
+              >
+                Timeframe
+              </div>
+            </div>
+          </div>
+          <div
+            class="mt-6 pt-6 border-t border-indigo-200"
+          >
+            <div
+              class="text-3xl font-bold text-indigo-800"
+            >
+              $
+              100,000
+            </div>
+            <div
+              class="text-sm text-indigo-600"
+            >
+              Projected Final Value
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="grid md:grid-cols-2 gap-8"
+      >
+        <div
+          class="bg-white rounded-3xl p-6 border border-slate-200/50 shadow-lg hover:shadow-xl transition-all duration-300"
+        >
+          <div
+            class="flex items-center space-x-3 mb-4"
+          >
+            <div
+              class="p-2 bg-blue-100 rounded-lg"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-trending-up w-5 h-5 text-blue-600"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 7h6v6"
+                />
+                <path
+                  d="m22 7-8.5 8.5-5-5L2 17"
+                />
+              </svg>
+            </div>
+            <div>
+              <h4
+                class="text-lg font-semibold"
+              >
+                Higher Monthly Contribution
+              </h4>
+              <p
+                class="text-sm text-slate-600"
+              >
+                Increase monthly contribution by 50%
+              </p>
+            </div>
+          </div>
+          <div
+            class="bg-slate-50 rounded-2xl p-4 mb-4"
+          >
+            <div
+              class="grid grid-cols-2 gap-4 text-sm"
+            >
+              <div>
+                <div
+                  class="text-slate-600"
+                >
+                  New Value
+                </div>
+                <div
+                  class="font-semibold"
+                >
+                  $
+                  67,870.929
+                </div>
+              </div>
+              <div>
+                <div
+                  class="text-slate-600"
+                >
+                  Improvement
+                </div>
+                <div
+                  class="font-semibold text-red-600"
+                >
+                  -32.1
+                  %
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="text-center p-4 bg-blue-50 rounded-2xl"
+          >
+            <div
+              class="text-2xl font-bold text-blue-600 mb-1"
+            >
+              +$
+              -32,129.071
+            </div>
+            <div
+              class="text-xs text-slate-600"
+            >
+              Additional Growth
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white rounded-3xl p-6 border border-slate-200/50 shadow-lg hover:shadow-xl transition-all duration-300"
+        >
+          <div
+            class="flex items-center space-x-3 mb-4"
+          >
+            <div
+              class="p-2 bg-green-100 rounded-lg"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-trending-up w-5 h-5 text-green-600"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 7h6v6"
+                />
+                <path
+                  d="m22 7-8.5 8.5-5-5L2 17"
+                />
+              </svg>
+            </div>
+            <div>
+              <h4
+                class="text-lg font-semibold"
+              >
+                Extended Time Horizon
+              </h4>
+              <p
+                class="text-sm text-slate-600"
+              >
+                Add 5 more years to investment
+              </p>
+            </div>
+          </div>
+          <div
+            class="bg-slate-50 rounded-2xl p-4 mb-4"
+          >
+            <div
+              class="grid grid-cols-2 gap-4 text-sm"
+            >
+              <div>
+                <div
+                  class="text-slate-600"
+                >
+                  New Value
+                </div>
+                <div
+                  class="font-semibold"
+                >
+                  $
+                  106,639.017
+                </div>
+              </div>
+              <div>
+                <div
+                  class="text-slate-600"
+                >
+                  Improvement
+                </div>
+                <div
+                  class="font-semibold text-green-600"
+                >
+                  +
+                  6.6
+                  %
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="text-center p-4 bg-green-50 rounded-2xl"
+          >
+            <div
+              class="text-2xl font-bold text-green-600 mb-1"
+            >
+              +$
+              6,639.017
+            </div>
+            <div
+              class="text-xs text-slate-600"
+            >
+              Additional Growth
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white rounded-3xl p-6 border border-slate-200/50 shadow-lg hover:shadow-xl transition-all duration-300"
+        >
+          <div
+            class="flex items-center space-x-3 mb-4"
+          >
+            <div
+              class="p-2 bg-purple-100 rounded-lg"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-trending-up w-5 h-5 text-purple-600"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 7h6v6"
+                />
+                <path
+                  d="m22 7-8.5 8.5-5-5L2 17"
+                />
+              </svg>
+            </div>
+            <div>
+              <h4
+                class="text-lg font-semibold"
+              >
+                Higher Expected Return
+              </h4>
+              <p
+                class="text-sm text-slate-600"
+              >
+                Increase expected return by 2%
+              </p>
+            </div>
+          </div>
+          <div
+            class="bg-slate-50 rounded-2xl p-4 mb-4"
+          >
+            <div
+              class="grid grid-cols-2 gap-4 text-sm"
+            >
+              <div>
+                <div
+                  class="text-slate-600"
+                >
+                  New Value
+                </div>
+                <div
+                  class="font-semibold"
+                >
+                  $
+                  53,368.879
+                </div>
+              </div>
+              <div>
+                <div
+                  class="text-slate-600"
+                >
+                  Improvement
+                </div>
+                <div
+                  class="font-semibold text-red-600"
+                >
+                  -46.6
+                  %
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="text-center p-4 bg-purple-50 rounded-2xl"
+          >
+            <div
+              class="text-2xl font-bold text-purple-600 mb-1"
+            >
+              +$
+              -46,631.121
+            </div>
+            <div
+              class="text-xs text-slate-600"
+            >
+              Additional Growth
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white rounded-3xl p-6 border border-slate-200/50 shadow-lg hover:shadow-xl transition-all duration-300"
+        >
+          <div
+            class="flex items-center space-x-3 mb-4"
+          >
+            <div
+              class="p-2 bg-orange-100 rounded-lg"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-trending-up w-5 h-5 text-orange-600"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 7h6v6"
+                />
+                <path
+                  d="m22 7-8.5 8.5-5-5L2 17"
+                />
+              </svg>
+            </div>
+            <div>
+              <h4
+                class="text-lg font-semibold"
+              >
+                Double Initial Investment
+              </h4>
+              <p
+                class="text-sm text-slate-600"
+              >
+                Start with twice the initial amount
+              </p>
+            </div>
+          </div>
+          <div
+            class="bg-slate-50 rounded-2xl p-4 mb-4"
+          >
+            <div
+              class="grid grid-cols-2 gap-4 text-sm"
+            >
+              <div>
+                <div
+                  class="text-slate-600"
+                >
+                  New Value
+                </div>
+                <div
+                  class="font-semibold"
+                >
+                  $
+                  64,148.956
+                </div>
+              </div>
+              <div>
+                <div
+                  class="text-slate-600"
+                >
+                  Improvement
+                </div>
+                <div
+                  class="font-semibold text-red-600"
+                >
+                  -35.9
+                  %
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="text-center p-4 bg-orange-50 rounded-2xl"
+          >
+            <div
+              class="text-2xl font-bold text-orange-600 mb-1"
+            >
+              +$
+              -35,851.044
+            </div>
+            <div
+              class="text-xs text-slate-600"
+            >
+              Additional Growth
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-16 bg-gradient-to-r from-emerald-50 to-cyan-50 rounded-3xl p-8"
+      >
+        <div
+          class="text-center mb-8"
+        >
+          <div
+            class="inline-flex items-center space-x-2 bg-emerald-100 px-4 py-2 rounded-full text-emerald-700 text-sm font-medium mb-4"
+          >
+            <svg
+              aria-hidden="true"
+              class="lucide lucide-users w-4 h-4"
+              fill="none"
+              height="24"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
+              />
+              <path
+                d="M16 3.128a4 4 0 0 1 0 7.744"
+              />
+              <path
+                d="M22 21v-2a4 4 0 0 0-3-3.87"
+              />
+              <circle
+                cx="9"
+                cy="7"
+                r="4"
+              />
+            </svg>
+            <span>
+              Community Scenarios
+            </span>
+          </div>
+          <h4
+            class="text-2xl font-bold mb-4"
+          >
+            Similar Investors Choose
+          </h4>
+          <p
+            class="text-slate-600 max-w-2xl mx-auto"
+          >
+            See how other investors with similar profiles have structured their investment strategies.
+          </p>
+        </div>
+        <div
+          class="flex justify-center"
+        >
+          <a
+            class="inline-flex items-center space-x-2 bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-2xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+            href="/en#calculator"
+          >
+            <span>
+              Explore More Scenarios
+            </span>
+            <svg
+              aria-hidden="true"
+              class="lucide lucide-arrow-right w-5 h-5"
+              fill="none"
+              height="24"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M5 12h14"
+              />
+              <path
+                d="m12 5 7 7-7 7"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+`;
+
+exports[`Scenario Components Snapshots OptimizationTips should match snapshot with different locales 1`] = `
+<section
+  class="py-16 bg-gradient-to-r from-indigo-600 to-purple-600 text-white"
+>
+  <div
+    class="container mx-auto px-4 lg:px-8"
+  >
+    <div
+      class="max-w-6xl mx-auto"
+    >
+      <div
+        class="text-center mb-12"
+      >
+        <div
+          class="inline-flex items-center space-x-2 bg-white/20 px-4 py-2 rounded-full text-white text-sm font-medium mb-6"
+        >
+          <svg
+            aria-hidden="true"
+            class="lucide lucide-lightbulb w-4 h-4"
+            fill="none"
+            height="24"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"
+            />
+            <path
+              d="M9 18h6"
+            />
+            <path
+              d="M10 22h4"
+            />
+          </svg>
+          <span>
+            Optimization Tips
+          </span>
+        </div>
+        <h3
+          class="text-3xl font-bold mb-4"
+        >
+          Maximize Your Investment Potential
+        </h3>
+        <p
+          class="text-lg text-indigo-100 max-w-2xl mx-auto"
+        >
+          Personalized strategies to help you achieve even better results with your investment plan.
+        </p>
+      </div>
+      <div
+        class="grid md:grid-cols-2 gap-8"
+      >
+        <div
+          class="bg-white/10 backdrop-blur-sm rounded-3xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300"
+        >
+          <div
+            class="flex items-start space-x-4"
+          >
+            <div
+              class="p-3 bg-white/20 rounded-xl"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-clock w-6 h-6 text-white"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                />
+                <polyline
+                  points="12 6 12 12 16 14"
+                />
+              </svg>
+            </div>
+            <div
+              class="flex-1"
+            >
+              <h4
+                class="text-xl font-semibold mb-3"
+              >
+                Extend Investment Timeframe
+              </h4>
+              <p
+                class="text-indigo-100 mb-4 leading-relaxed"
+              >
+                Adding even 5 more years can dramatically increase your returns due to compound interest.
+              </p>
+              <div
+                class="bg-white/10 rounded-2xl p-4"
+              >
+                <div
+                  class="text-sm text-indigo-200 mb-1"
+                >
+                  Potential Impact
+                </div>
+                <div
+                  class="text-lg font-bold text-white"
+                >
+                  +$40,000
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white/10 backdrop-blur-sm rounded-3xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300"
+        >
+          <div
+            class="flex items-start space-x-4"
+          >
+            <div
+              class="p-3 bg-white/20 rounded-xl"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-shield w-6 h-6 text-white"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
+                />
+              </svg>
+            </div>
+            <div
+              class="flex-1"
+            >
+              <h4
+                class="text-xl font-semibold mb-3"
+              >
+                Tax-Advantaged Accounts
+              </h4>
+              <p
+                class="text-indigo-100 mb-4 leading-relaxed"
+              >
+                Consider using 401(k), IRA, or other tax-advantaged accounts to maximize your after-tax returns.
+              </p>
+              <div
+                class="bg-white/10 rounded-2xl p-4"
+              >
+                <div
+                  class="text-sm text-indigo-200 mb-1"
+                >
+                  Potential Impact
+                </div>
+                <div
+                  class="text-lg font-bold text-white"
+                >
+                  Up to 30% more after-tax returns
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white/10 backdrop-blur-sm rounded-3xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300"
+        >
+          <div
+            class="flex items-start space-x-4"
+          >
+            <div
+              class="p-3 bg-white/20 rounded-xl"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-dollar-sign w-6 h-6 text-white"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <line
+                  x1="12"
+                  x2="12"
+                  y1="2"
+                  y2="22"
+                />
+                <path
+                  d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"
+                />
+              </svg>
+            </div>
+            <div
+              class="flex-1"
+            >
+              <h4
+                class="text-xl font-semibold mb-3"
+              >
+                Automate Your Investments
+              </h4>
+              <p
+                class="text-indigo-100 mb-4 leading-relaxed"
+              >
+                Set up automatic transfers to ensure consistent investing and take advantage of dollar-cost averaging.
+              </p>
+              <div
+                class="bg-white/10 rounded-2xl p-4"
+              >
+                <div
+                  class="text-sm text-indigo-200 mb-1"
+                >
+                  Potential Impact
+                </div>
+                <div
+                  class="text-lg font-bold text-white"
+                >
+                  More consistent growth
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white/10 backdrop-blur-sm rounded-3xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300"
+        >
+          <div
+            class="flex items-start space-x-4"
+          >
+            <div
+              class="p-3 bg-white/20 rounded-xl"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-trending-up w-6 h-6 text-white"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 7h6v6"
+                />
+                <path
+                  d="m22 7-8.5 8.5-5-5L2 17"
+                />
+              </svg>
+            </div>
+            <div
+              class="flex-1"
+            >
+              <h4
+                class="text-xl font-semibold mb-3"
+              >
+                Diversify for Higher Returns
+              </h4>
+              <p
+                class="text-indigo-100 mb-4 leading-relaxed"
+              >
+                Consider a mix of stocks, bonds, and other assets to potentially achieve higher returns.
+              </p>
+              <div
+                class="bg-white/10 rounded-2xl p-4"
+              >
+                <div
+                  class="text-sm text-indigo-200 mb-1"
+                >
+                  Potential Impact
+                </div>
+                <div
+                  class="text-lg font-bold text-white"
+                >
+                  +$30,000
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-16 text-center"
+      >
+        <div
+          class="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20"
+        >
+          <h4
+            class="text-2xl font-bold mb-4"
+          >
+            Ready to Optimize?
+          </h4>
+          <p
+            class="text-indigo-100 mb-6 max-w-2xl mx-auto"
+          >
+            Use our calculator to experiment with these optimizations and see how they could impact your results.
+          </p>
+          <a
+            class="inline-flex items-center space-x-2 bg-white text-indigo-600 px-8 py-4 rounded-2xl font-semibold hover:bg-indigo-50 transition-all duration-300 shadow-lg"
+            href="/es?initial=10000&monthly=500&return=7&years=10"
+          >
+            <span>
+              Try These Optimizations
+            </span>
+            <svg
+              aria-hidden="true"
+              class="lucide lucide-trending-up w-5 h-5"
+              fill="none"
+              height="24"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M16 7h6v6"
+              />
+              <path
+                d="m22 7-8.5 8.5-5-5L2 17"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+`;
+
+exports[`Scenario Components Snapshots OptimizationTips should match snapshot with mobile viewport 1`] = `
+<section
+  class="py-16 bg-gradient-to-r from-indigo-600 to-purple-600 text-white"
+>
+  <div
+    class="container mx-auto px-4 lg:px-8"
+  >
+    <div
+      class="max-w-6xl mx-auto"
+    >
+      <div
+        class="text-center mb-12"
+      >
+        <div
+          class="inline-flex items-center space-x-2 bg-white/20 px-4 py-2 rounded-full text-white text-sm font-medium mb-6"
+        >
+          <svg
+            aria-hidden="true"
+            class="lucide lucide-lightbulb w-4 h-4"
+            fill="none"
+            height="24"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"
+            />
+            <path
+              d="M9 18h6"
+            />
+            <path
+              d="M10 22h4"
+            />
+          </svg>
+          <span>
+            Optimization Tips
+          </span>
+        </div>
+        <h3
+          class="text-3xl font-bold mb-4"
+        >
+          Maximize Your Investment Potential
+        </h3>
+        <p
+          class="text-lg text-indigo-100 max-w-2xl mx-auto"
+        >
+          Personalized strategies to help you achieve even better results with your investment plan.
+        </p>
+      </div>
+      <div
+        class="grid md:grid-cols-2 gap-8"
+      >
+        <div
+          class="bg-white/10 backdrop-blur-sm rounded-3xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300"
+        >
+          <div
+            class="flex items-start space-x-4"
+          >
+            <div
+              class="p-3 bg-white/20 rounded-xl"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-clock w-6 h-6 text-white"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                />
+                <polyline
+                  points="12 6 12 12 16 14"
+                />
+              </svg>
+            </div>
+            <div
+              class="flex-1"
+            >
+              <h4
+                class="text-xl font-semibold mb-3"
+              >
+                Extend Investment Timeframe
+              </h4>
+              <p
+                class="text-indigo-100 mb-4 leading-relaxed"
+              >
+                Adding even 5 more years can dramatically increase your returns due to compound interest.
+              </p>
+              <div
+                class="bg-white/10 rounded-2xl p-4"
+              >
+                <div
+                  class="text-sm text-indigo-200 mb-1"
+                >
+                  Potential Impact
+                </div>
+                <div
+                  class="text-lg font-bold text-white"
+                >
+                  +$40,000
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white/10 backdrop-blur-sm rounded-3xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300"
+        >
+          <div
+            class="flex items-start space-x-4"
+          >
+            <div
+              class="p-3 bg-white/20 rounded-xl"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-shield w-6 h-6 text-white"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
+                />
+              </svg>
+            </div>
+            <div
+              class="flex-1"
+            >
+              <h4
+                class="text-xl font-semibold mb-3"
+              >
+                Tax-Advantaged Accounts
+              </h4>
+              <p
+                class="text-indigo-100 mb-4 leading-relaxed"
+              >
+                Consider using 401(k), IRA, or other tax-advantaged accounts to maximize your after-tax returns.
+              </p>
+              <div
+                class="bg-white/10 rounded-2xl p-4"
+              >
+                <div
+                  class="text-sm text-indigo-200 mb-1"
+                >
+                  Potential Impact
+                </div>
+                <div
+                  class="text-lg font-bold text-white"
+                >
+                  Up to 30% more after-tax returns
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white/10 backdrop-blur-sm rounded-3xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300"
+        >
+          <div
+            class="flex items-start space-x-4"
+          >
+            <div
+              class="p-3 bg-white/20 rounded-xl"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-dollar-sign w-6 h-6 text-white"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <line
+                  x1="12"
+                  x2="12"
+                  y1="2"
+                  y2="22"
+                />
+                <path
+                  d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"
+                />
+              </svg>
+            </div>
+            <div
+              class="flex-1"
+            >
+              <h4
+                class="text-xl font-semibold mb-3"
+              >
+                Automate Your Investments
+              </h4>
+              <p
+                class="text-indigo-100 mb-4 leading-relaxed"
+              >
+                Set up automatic transfers to ensure consistent investing and take advantage of dollar-cost averaging.
+              </p>
+              <div
+                class="bg-white/10 rounded-2xl p-4"
+              >
+                <div
+                  class="text-sm text-indigo-200 mb-1"
+                >
+                  Potential Impact
+                </div>
+                <div
+                  class="text-lg font-bold text-white"
+                >
+                  More consistent growth
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white/10 backdrop-blur-sm rounded-3xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300"
+        >
+          <div
+            class="flex items-start space-x-4"
+          >
+            <div
+              class="p-3 bg-white/20 rounded-xl"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-trending-up w-6 h-6 text-white"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 7h6v6"
+                />
+                <path
+                  d="m22 7-8.5 8.5-5-5L2 17"
+                />
+              </svg>
+            </div>
+            <div
+              class="flex-1"
+            >
+              <h4
+                class="text-xl font-semibold mb-3"
+              >
+                Diversify for Higher Returns
+              </h4>
+              <p
+                class="text-indigo-100 mb-4 leading-relaxed"
+              >
+                Consider a mix of stocks, bonds, and other assets to potentially achieve higher returns.
+              </p>
+              <div
+                class="bg-white/10 rounded-2xl p-4"
+              >
+                <div
+                  class="text-sm text-indigo-200 mb-1"
+                >
+                  Potential Impact
+                </div>
+                <div
+                  class="text-lg font-bold text-white"
+                >
+                  +$30,000
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-16 text-center"
+      >
+        <div
+          class="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20"
+        >
+          <h4
+            class="text-2xl font-bold mb-4"
+          >
+            Ready to Optimize?
+          </h4>
+          <p
+            class="text-indigo-100 mb-6 max-w-2xl mx-auto"
+          >
+            Use our calculator to experiment with these optimizations and see how they could impact your results.
+          </p>
+          <a
+            class="inline-flex items-center space-x-2 bg-white text-indigo-600 px-8 py-4 rounded-2xl font-semibold hover:bg-indigo-50 transition-all duration-300 shadow-lg"
+            href="/en?initial=10000&monthly=500&return=7&years=10"
+          >
+            <span>
+              Try These Optimizations
+            </span>
+            <svg
+              aria-hidden="true"
+              class="lucide lucide-trending-up w-5 h-5"
+              fill="none"
+              height="24"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M16 7h6v6"
+              />
+              <path
+                d="m22 7-8.5 8.5-5-5L2 17"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+`;
+
+exports[`Scenario Components Snapshots OptimizationTips should match snapshot with standard optimization 1`] = `
+<section
+  class="py-16 bg-gradient-to-r from-indigo-600 to-purple-600 text-white"
+>
+  <div
+    class="container mx-auto px-4 lg:px-8"
+  >
+    <div
+      class="max-w-6xl mx-auto"
+    >
+      <div
+        class="text-center mb-12"
+      >
+        <div
+          class="inline-flex items-center space-x-2 bg-white/20 px-4 py-2 rounded-full text-white text-sm font-medium mb-6"
+        >
+          <svg
+            aria-hidden="true"
+            class="lucide lucide-lightbulb w-4 h-4"
+            fill="none"
+            height="24"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"
+            />
+            <path
+              d="M9 18h6"
+            />
+            <path
+              d="M10 22h4"
+            />
+          </svg>
+          <span>
+            Optimization Tips
+          </span>
+        </div>
+        <h3
+          class="text-3xl font-bold mb-4"
+        >
+          Maximize Your Investment Potential
+        </h3>
+        <p
+          class="text-lg text-indigo-100 max-w-2xl mx-auto"
+        >
+          Personalized strategies to help you achieve even better results with your investment plan.
+        </p>
+      </div>
+      <div
+        class="grid md:grid-cols-2 gap-8"
+      >
+        <div
+          class="bg-white/10 backdrop-blur-sm rounded-3xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300"
+        >
+          <div
+            class="flex items-start space-x-4"
+          >
+            <div
+              class="p-3 bg-white/20 rounded-xl"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-clock w-6 h-6 text-white"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                />
+                <polyline
+                  points="12 6 12 12 16 14"
+                />
+              </svg>
+            </div>
+            <div
+              class="flex-1"
+            >
+              <h4
+                class="text-xl font-semibold mb-3"
+              >
+                Extend Investment Timeframe
+              </h4>
+              <p
+                class="text-indigo-100 mb-4 leading-relaxed"
+              >
+                Adding even 5 more years can dramatically increase your returns due to compound interest.
+              </p>
+              <div
+                class="bg-white/10 rounded-2xl p-4"
+              >
+                <div
+                  class="text-sm text-indigo-200 mb-1"
+                >
+                  Potential Impact
+                </div>
+                <div
+                  class="text-lg font-bold text-white"
+                >
+                  +$40,000
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white/10 backdrop-blur-sm rounded-3xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300"
+        >
+          <div
+            class="flex items-start space-x-4"
+          >
+            <div
+              class="p-3 bg-white/20 rounded-xl"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-shield w-6 h-6 text-white"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
+                />
+              </svg>
+            </div>
+            <div
+              class="flex-1"
+            >
+              <h4
+                class="text-xl font-semibold mb-3"
+              >
+                Tax-Advantaged Accounts
+              </h4>
+              <p
+                class="text-indigo-100 mb-4 leading-relaxed"
+              >
+                Consider using 401(k), IRA, or other tax-advantaged accounts to maximize your after-tax returns.
+              </p>
+              <div
+                class="bg-white/10 rounded-2xl p-4"
+              >
+                <div
+                  class="text-sm text-indigo-200 mb-1"
+                >
+                  Potential Impact
+                </div>
+                <div
+                  class="text-lg font-bold text-white"
+                >
+                  Up to 30% more after-tax returns
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white/10 backdrop-blur-sm rounded-3xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300"
+        >
+          <div
+            class="flex items-start space-x-4"
+          >
+            <div
+              class="p-3 bg-white/20 rounded-xl"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-dollar-sign w-6 h-6 text-white"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <line
+                  x1="12"
+                  x2="12"
+                  y1="2"
+                  y2="22"
+                />
+                <path
+                  d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"
+                />
+              </svg>
+            </div>
+            <div
+              class="flex-1"
+            >
+              <h4
+                class="text-xl font-semibold mb-3"
+              >
+                Automate Your Investments
+              </h4>
+              <p
+                class="text-indigo-100 mb-4 leading-relaxed"
+              >
+                Set up automatic transfers to ensure consistent investing and take advantage of dollar-cost averaging.
+              </p>
+              <div
+                class="bg-white/10 rounded-2xl p-4"
+              >
+                <div
+                  class="text-sm text-indigo-200 mb-1"
+                >
+                  Potential Impact
+                </div>
+                <div
+                  class="text-lg font-bold text-white"
+                >
+                  More consistent growth
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white/10 backdrop-blur-sm rounded-3xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300"
+        >
+          <div
+            class="flex items-start space-x-4"
+          >
+            <div
+              class="p-3 bg-white/20 rounded-xl"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-trending-up w-6 h-6 text-white"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 7h6v6"
+                />
+                <path
+                  d="m22 7-8.5 8.5-5-5L2 17"
+                />
+              </svg>
+            </div>
+            <div
+              class="flex-1"
+            >
+              <h4
+                class="text-xl font-semibold mb-3"
+              >
+                Diversify for Higher Returns
+              </h4>
+              <p
+                class="text-indigo-100 mb-4 leading-relaxed"
+              >
+                Consider a mix of stocks, bonds, and other assets to potentially achieve higher returns.
+              </p>
+              <div
+                class="bg-white/10 rounded-2xl p-4"
+              >
+                <div
+                  class="text-sm text-indigo-200 mb-1"
+                >
+                  Potential Impact
+                </div>
+                <div
+                  class="text-lg font-bold text-white"
+                >
+                  +$30,000
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-16 text-center"
+      >
+        <div
+          class="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20"
+        >
+          <h4
+            class="text-2xl font-bold mb-4"
+          >
+            Ready to Optimize?
+          </h4>
+          <p
+            class="text-indigo-100 mb-6 max-w-2xl mx-auto"
+          >
+            Use our calculator to experiment with these optimizations and see how they could impact your results.
+          </p>
+          <a
+            class="inline-flex items-center space-x-2 bg-white text-indigo-600 px-8 py-4 rounded-2xl font-semibold hover:bg-indigo-50 transition-all duration-300 shadow-lg"
+            href="/en?initial=10000&monthly=500&return=7&years=10"
+          >
+            <span>
+              Try These Optimizations
+            </span>
+            <svg
+              aria-hidden="true"
+              class="lucide lucide-trending-up w-5 h-5"
+              fill="none"
+              height="24"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M16 7h6v6"
+              />
+              <path
+                d="m22 7-8.5 8.5-5-5L2 17"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+`;
+
+exports[`Scenario Components Snapshots PersonalizedInsights should match snapshot with conservative parameters 1`] = `
+<section
+  class="py-16 bg-white/50 backdrop-blur-sm"
+>
+  <div
+    class="container mx-auto px-4 lg:px-8"
+  >
+    <div
+      class="max-w-6xl mx-auto"
+    >
+      <div
+        class="text-center mb-12"
+      >
+        <div
+          class="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-100 to-indigo-100 px-4 py-2 rounded-full text-blue-700 text-sm font-medium mb-6"
+        >
+          <svg
+            aria-hidden="true"
+            class="lucide lucide-chart-column w-4 h-4"
+            fill="none"
+            height="24"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3 3v16a2 2 0 0 0 2 2h16"
+            />
+            <path
+              d="M18 17V9"
+            />
+            <path
+              d="M13 17V5"
+            />
+            <path
+              d="M8 17v-3"
+            />
+          </svg>
+          <span>
+            Personalized Investment Metrics
+          </span>
+        </div>
+        <h3
+          class="text-3xl font-bold mb-4"
+        >
+          Your Investment Journey
+        </h3>
+        <p
+          class="text-lg text-slate-600 max-w-2xl mx-auto"
+        >
+          Detailed breakdown of your investment performance and key milestones.
+        </p>
+      </div>
+      <div
+        class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12"
+      >
+        <div
+          class="bg-white rounded-2xl p-6 border border-slate-200/50 shadow-lg"
+        >
+          <div
+            class="flex items-center space-x-3 mb-4"
+          >
+            <div
+              class="p-2 bg-green-100 rounded-lg"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-trending-up w-5 h-5 text-green-600"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 7h6v6"
+                />
+                <path
+                  d="m22 7-8.5 8.5-5-5L2 17"
+                />
+              </svg>
+            </div>
+            <div>
+              <div
+                class="text-2xl font-bold text-green-600"
+              >
+                7.1
+                %
+              </div>
+              <div
+                class="text-sm text-slate-600"
+              >
+                Total Growth Rate
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white rounded-2xl p-6 border border-slate-200/50 shadow-lg"
+        >
+          <div
+            class="flex items-center space-x-3 mb-4"
+          >
+            <div
+              class="p-2 bg-blue-100 rounded-lg"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-target w-5 h-5 text-blue-600"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="6"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="2"
+                />
+              </svg>
+            </div>
+            <div>
+              <div
+                class="text-2xl font-bold text-blue-600"
+              >
+                $
+                8.333
+              </div>
+              <div
+                class="text-sm text-slate-600"
+              >
+                Avg Monthly Growth
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white rounded-2xl p-6 border border-slate-200/50 shadow-lg"
+        >
+          <div
+            class="flex items-center space-x-3 mb-4"
+          >
+            <div
+              class="p-2 bg-purple-100 rounded-lg"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-clock w-5 h-5 text-purple-600"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                />
+                <polyline
+                  points="12 6 12 12 16 14"
+                />
+              </svg>
+            </div>
+            <div>
+              <div
+                class="text-2xl font-bold text-purple-600"
+              >
+                1.1
+                x
+              </div>
+              <div
+                class="text-sm text-slate-600"
+              >
+                Compound Multiplier
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white rounded-2xl p-6 border border-slate-200/50 shadow-lg"
+        >
+          <div
+            class="flex items-center space-x-3 mb-4"
+          >
+            <div
+              class="p-2 bg-yellow-100 rounded-lg"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-chart-column w-5 h-5 text-yellow-600"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3 3v16a2 2 0 0 0 2 2h16"
+                />
+                <path
+                  d="M18 17V9"
+                />
+                <path
+                  d="M13 17V5"
+                />
+                <path
+                  d="M8 17v-3"
+                />
+              </svg>
+            </div>
+            <div>
+              <div
+                class="text-2xl font-bold text-yellow-600"
+              >
+                $
+                125
+              </div>
+              <div
+                class="text-sm text-slate-600"
+              >
+                Avg Monthly Value
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-3xl p-8"
+      >
+        <h4
+          class="text-2xl font-bold mb-6 text-center"
+        >
+          Investment Milestones
+        </h4>
+        <div
+          class="grid md:grid-cols-3 gap-6"
+        >
+          <div
+            class="text-center"
+          >
+            <div
+              class="text-3xl font-bold text-indigo-600 mb-2"
+            >
+              2
+               
+              years
+            </div>
+            <div
+              class="text-lg font-semibold mb-2"
+            >
+              $
+              1,875
+            </div>
+            <div
+              class="text-sm text-slate-600"
+            >
+              First Quarter Milestone
+            </div>
+          </div>
+          <div
+            class="text-center"
+          >
+            <div
+              class="text-3xl font-bold text-purple-600 mb-2"
+            >
+              3
+               
+              years
+            </div>
+            <div
+              class="text-lg font-semibold mb-2"
+            >
+              $
+              3,750
+            </div>
+            <div
+              class="text-sm text-slate-600"
+            >
+              Halfway Milestone
+            </div>
+          </div>
+          <div
+            class="text-center"
+          >
+            <div
+              class="text-3xl font-bold text-green-600 mb-2"
+            >
+              5
+               
+              years
+            </div>
+            <div
+              class="text-lg font-semibold mb-2"
+            >
+              $
+              7,500
+            </div>
+            <div
+              class="text-sm text-slate-600"
+            >
+              Final Goal
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+`;
+
+exports[`Scenario Components Snapshots PersonalizedInsights should match snapshot with high-value parameters 1`] = `
+<section
+  class="py-16 bg-white/50 backdrop-blur-sm"
+>
+  <div
+    class="container mx-auto px-4 lg:px-8"
+  >
+    <div
+      class="max-w-6xl mx-auto"
+    >
+      <div
+        class="text-center mb-12"
+      >
+        <div
+          class="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-100 to-indigo-100 px-4 py-2 rounded-full text-blue-700 text-sm font-medium mb-6"
+        >
+          <svg
+            aria-hidden="true"
+            class="lucide lucide-chart-column w-4 h-4"
+            fill="none"
+            height="24"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3 3v16a2 2 0 0 0 2 2h16"
+            />
+            <path
+              d="M18 17V9"
+            />
+            <path
+              d="M13 17V5"
+            />
+            <path
+              d="M8 17v-3"
+            />
+          </svg>
+          <span>
+            Personalized Investment Metrics
+          </span>
+        </div>
+        <h3
+          class="text-3xl font-bold mb-4"
+        >
+          Your Investment Journey
+        </h3>
+        <p
+          class="text-lg text-slate-600 max-w-2xl mx-auto"
+        >
+          Detailed breakdown of your investment performance and key milestones.
+        </p>
+      </div>
+      <div
+        class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12"
+      >
+        <div
+          class="bg-white rounded-2xl p-6 border border-slate-200/50 shadow-lg"
+        >
+          <div
+            class="flex items-center space-x-3 mb-4"
+          >
+            <div
+              class="p-2 bg-green-100 rounded-lg"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-trending-up w-5 h-5 text-green-600"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 7h6v6"
+                />
+                <path
+                  d="m22 7-8.5 8.5-5-5L2 17"
+                />
+              </svg>
+            </div>
+            <div>
+              <div
+                class="text-2xl font-bold text-green-600"
+              >
+                56.3
+                %
+              </div>
+              <div
+                class="text-sm text-slate-600"
+              >
+                Total Growth Rate
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white rounded-2xl p-6 border border-slate-200/50 shadow-lg"
+        >
+          <div
+            class="flex items-center space-x-3 mb-4"
+          >
+            <div
+              class="p-2 bg-blue-100 rounded-lg"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-target w-5 h-5 text-blue-600"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="6"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="2"
+                />
+              </svg>
+            </div>
+            <div>
+              <div
+                class="text-2xl font-bold text-blue-600"
+              >
+                $
+                3,000
+              </div>
+              <div
+                class="text-sm text-slate-600"
+              >
+                Avg Monthly Growth
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white rounded-2xl p-6 border border-slate-200/50 shadow-lg"
+        >
+          <div
+            class="flex items-center space-x-3 mb-4"
+          >
+            <div
+              class="p-2 bg-purple-100 rounded-lg"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-clock w-5 h-5 text-purple-600"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                />
+                <polyline
+                  points="12 6 12 12 16 14"
+                />
+              </svg>
+            </div>
+            <div>
+              <div
+                class="text-2xl font-bold text-purple-600"
+              >
+                1.6
+                x
+              </div>
+              <div
+                class="text-sm text-slate-600"
+              >
+                Compound Multiplier
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white rounded-2xl p-6 border border-slate-200/50 shadow-lg"
+        >
+          <div
+            class="flex items-center space-x-3 mb-4"
+          >
+            <div
+              class="p-2 bg-yellow-100 rounded-lg"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-chart-column w-5 h-5 text-yellow-600"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3 3v16a2 2 0 0 0 2 2h16"
+                />
+                <path
+                  d="M18 17V9"
+                />
+                <path
+                  d="M13 17V5"
+                />
+                <path
+                  d="M8 17v-3"
+                />
+              </svg>
+            </div>
+            <div>
+              <div
+                class="text-2xl font-bold text-yellow-600"
+              >
+                $
+                8,333.333
+              </div>
+              <div
+                class="text-sm text-slate-600"
+              >
+                Avg Monthly Value
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-3xl p-8"
+      >
+        <h4
+          class="text-2xl font-bold mb-6 text-center"
+        >
+          Investment Milestones
+        </h4>
+        <div
+          class="grid md:grid-cols-3 gap-6"
+        >
+          <div
+            class="text-center"
+          >
+            <div
+              class="text-3xl font-bold text-indigo-600 mb-2"
+            >
+              8
+               
+              years
+            </div>
+            <div
+              class="text-lg font-semibold mb-2"
+            >
+              $
+              625,000
+            </div>
+            <div
+              class="text-sm text-slate-600"
+            >
+              First Quarter Milestone
+            </div>
+          </div>
+          <div
+            class="text-center"
+          >
+            <div
+              class="text-3xl font-bold text-purple-600 mb-2"
+            >
+              13
+               
+              years
+            </div>
+            <div
+              class="text-lg font-semibold mb-2"
+            >
+              $
+              1,250,000
+            </div>
+            <div
+              class="text-sm text-slate-600"
+            >
+              Halfway Milestone
+            </div>
+          </div>
+          <div
+            class="text-center"
+          >
+            <div
+              class="text-3xl font-bold text-green-600 mb-2"
+            >
+              25
+               
+              years
+            </div>
+            <div
+              class="text-lg font-semibold mb-2"
+            >
+              $
+              2,500,000
+            </div>
+            <div
+              class="text-sm text-slate-600"
+            >
+              Final Goal
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+`;
+
+exports[`Scenario Components Snapshots PersonalizedInsights should match snapshot with standard parameters 1`] = `
+<section
+  class="py-16 bg-white/50 backdrop-blur-sm"
+>
+  <div
+    class="container mx-auto px-4 lg:px-8"
+  >
+    <div
+      class="max-w-6xl mx-auto"
+    >
+      <div
+        class="text-center mb-12"
+      >
+        <div
+          class="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-100 to-indigo-100 px-4 py-2 rounded-full text-blue-700 text-sm font-medium mb-6"
+        >
+          <svg
+            aria-hidden="true"
+            class="lucide lucide-chart-column w-4 h-4"
+            fill="none"
+            height="24"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3 3v16a2 2 0 0 0 2 2h16"
+            />
+            <path
+              d="M18 17V9"
+            />
+            <path
+              d="M13 17V5"
+            />
+            <path
+              d="M8 17v-3"
+            />
+          </svg>
+          <span>
+            Personalized Investment Metrics
+          </span>
+        </div>
+        <h3
+          class="text-3xl font-bold mb-4"
+        >
+          Your Investment Journey
+        </h3>
+        <p
+          class="text-lg text-slate-600 max-w-2xl mx-auto"
+        >
+          Detailed breakdown of your investment performance and key milestones.
+        </p>
+      </div>
+      <div
+        class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12"
+      >
+        <div
+          class="bg-white rounded-2xl p-6 border border-slate-200/50 shadow-lg"
+        >
+          <div
+            class="flex items-center space-x-3 mb-4"
+          >
+            <div
+              class="p-2 bg-green-100 rounded-lg"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-trending-up w-5 h-5 text-green-600"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 7h6v6"
+                />
+                <path
+                  d="m22 7-8.5 8.5-5-5L2 17"
+                />
+              </svg>
+            </div>
+            <div>
+              <div
+                class="text-2xl font-bold text-green-600"
+              >
+                42.9
+                %
+              </div>
+              <div
+                class="text-sm text-slate-600"
+              >
+                Total Growth Rate
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white rounded-2xl p-6 border border-slate-200/50 shadow-lg"
+        >
+          <div
+            class="flex items-center space-x-3 mb-4"
+          >
+            <div
+              class="p-2 bg-blue-100 rounded-lg"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-target w-5 h-5 text-blue-600"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="6"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="2"
+                />
+              </svg>
+            </div>
+            <div>
+              <div
+                class="text-2xl font-bold text-blue-600"
+              >
+                $
+                250
+              </div>
+              <div
+                class="text-sm text-slate-600"
+              >
+                Avg Monthly Growth
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white rounded-2xl p-6 border border-slate-200/50 shadow-lg"
+        >
+          <div
+            class="flex items-center space-x-3 mb-4"
+          >
+            <div
+              class="p-2 bg-purple-100 rounded-lg"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-clock w-5 h-5 text-purple-600"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                />
+                <polyline
+                  points="12 6 12 12 16 14"
+                />
+              </svg>
+            </div>
+            <div>
+              <div
+                class="text-2xl font-bold text-purple-600"
+              >
+                1.4
+                x
+              </div>
+              <div
+                class="text-sm text-slate-600"
+              >
+                Compound Multiplier
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white rounded-2xl p-6 border border-slate-200/50 shadow-lg"
+        >
+          <div
+            class="flex items-center space-x-3 mb-4"
+          >
+            <div
+              class="p-2 bg-yellow-100 rounded-lg"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-chart-column w-5 h-5 text-yellow-600"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3 3v16a2 2 0 0 0 2 2h16"
+                />
+                <path
+                  d="M18 17V9"
+                />
+                <path
+                  d="M13 17V5"
+                />
+                <path
+                  d="M8 17v-3"
+                />
+              </svg>
+            </div>
+            <div>
+              <div
+                class="text-2xl font-bold text-yellow-600"
+              >
+                $
+                833.333
+              </div>
+              <div
+                class="text-sm text-slate-600"
+              >
+                Avg Monthly Value
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-3xl p-8"
+      >
+        <h4
+          class="text-2xl font-bold mb-6 text-center"
+        >
+          Investment Milestones
+        </h4>
+        <div
+          class="grid md:grid-cols-3 gap-6"
+        >
+          <div
+            class="text-center"
+          >
+            <div
+              class="text-3xl font-bold text-indigo-600 mb-2"
+            >
+              3
+               
+              years
+            </div>
+            <div
+              class="text-lg font-semibold mb-2"
+            >
+              $
+              25,000
+            </div>
+            <div
+              class="text-sm text-slate-600"
+            >
+              First Quarter Milestone
+            </div>
+          </div>
+          <div
+            class="text-center"
+          >
+            <div
+              class="text-3xl font-bold text-purple-600 mb-2"
+            >
+              5
+               
+              years
+            </div>
+            <div
+              class="text-lg font-semibold mb-2"
+            >
+              $
+              50,000
+            </div>
+            <div
+              class="text-sm text-slate-600"
+            >
+              Halfway Milestone
+            </div>
+          </div>
+          <div
+            class="text-center"
+          >
+            <div
+              class="text-3xl font-bold text-green-600 mb-2"
+            >
+              10
+               
+              years
+            </div>
+            <div
+              class="text-lg font-semibold mb-2"
+            >
+              $
+              100,000
+            </div>
+            <div
+              class="text-sm text-slate-600"
+            >
+              Final Goal
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+`;
+
+exports[`Scenario Components Snapshots Responsive Breakpoint Variations should match snapshot at desktop breakpoint (1200px) 1`] = `
+<section
+  class="py-16 bg-gradient-to-r from-indigo-600 to-purple-600 text-white"
+>
+  <div
+    class="container mx-auto px-4 lg:px-8"
+  >
+    <div
+      class="max-w-6xl mx-auto"
+    >
+      <div
+        class="text-center mb-12"
+      >
+        <div
+          class="inline-flex items-center space-x-2 bg-white/20 px-4 py-2 rounded-full text-white text-sm font-medium mb-6"
+        >
+          <svg
+            aria-hidden="true"
+            class="lucide lucide-lightbulb w-4 h-4"
+            fill="none"
+            height="24"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"
+            />
+            <path
+              d="M9 18h6"
+            />
+            <path
+              d="M10 22h4"
+            />
+          </svg>
+          <span>
+            Optimization Tips
+          </span>
+        </div>
+        <h3
+          class="text-3xl font-bold mb-4"
+        >
+          Maximize Your Investment Potential
+        </h3>
+        <p
+          class="text-lg text-indigo-100 max-w-2xl mx-auto"
+        >
+          Personalized strategies to help you achieve even better results with your investment plan.
+        </p>
+      </div>
+      <div
+        class="grid md:grid-cols-2 gap-8"
+      >
+        <div
+          class="bg-white/10 backdrop-blur-sm rounded-3xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300"
+        >
+          <div
+            class="flex items-start space-x-4"
+          >
+            <div
+              class="p-3 bg-white/20 rounded-xl"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-clock w-6 h-6 text-white"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                />
+                <polyline
+                  points="12 6 12 12 16 14"
+                />
+              </svg>
+            </div>
+            <div
+              class="flex-1"
+            >
+              <h4
+                class="text-xl font-semibold mb-3"
+              >
+                Extend Investment Timeframe
+              </h4>
+              <p
+                class="text-indigo-100 mb-4 leading-relaxed"
+              >
+                Adding even 5 more years can dramatically increase your returns due to compound interest.
+              </p>
+              <div
+                class="bg-white/10 rounded-2xl p-4"
+              >
+                <div
+                  class="text-sm text-indigo-200 mb-1"
+                >
+                  Potential Impact
+                </div>
+                <div
+                  class="text-lg font-bold text-white"
+                >
+                  +$40,000
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white/10 backdrop-blur-sm rounded-3xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300"
+        >
+          <div
+            class="flex items-start space-x-4"
+          >
+            <div
+              class="p-3 bg-white/20 rounded-xl"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-shield w-6 h-6 text-white"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
+                />
+              </svg>
+            </div>
+            <div
+              class="flex-1"
+            >
+              <h4
+                class="text-xl font-semibold mb-3"
+              >
+                Tax-Advantaged Accounts
+              </h4>
+              <p
+                class="text-indigo-100 mb-4 leading-relaxed"
+              >
+                Consider using 401(k), IRA, or other tax-advantaged accounts to maximize your after-tax returns.
+              </p>
+              <div
+                class="bg-white/10 rounded-2xl p-4"
+              >
+                <div
+                  class="text-sm text-indigo-200 mb-1"
+                >
+                  Potential Impact
+                </div>
+                <div
+                  class="text-lg font-bold text-white"
+                >
+                  Up to 30% more after-tax returns
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white/10 backdrop-blur-sm rounded-3xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300"
+        >
+          <div
+            class="flex items-start space-x-4"
+          >
+            <div
+              class="p-3 bg-white/20 rounded-xl"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-dollar-sign w-6 h-6 text-white"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <line
+                  x1="12"
+                  x2="12"
+                  y1="2"
+                  y2="22"
+                />
+                <path
+                  d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"
+                />
+              </svg>
+            </div>
+            <div
+              class="flex-1"
+            >
+              <h4
+                class="text-xl font-semibold mb-3"
+              >
+                Automate Your Investments
+              </h4>
+              <p
+                class="text-indigo-100 mb-4 leading-relaxed"
+              >
+                Set up automatic transfers to ensure consistent investing and take advantage of dollar-cost averaging.
+              </p>
+              <div
+                class="bg-white/10 rounded-2xl p-4"
+              >
+                <div
+                  class="text-sm text-indigo-200 mb-1"
+                >
+                  Potential Impact
+                </div>
+                <div
+                  class="text-lg font-bold text-white"
+                >
+                  More consistent growth
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white/10 backdrop-blur-sm rounded-3xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300"
+        >
+          <div
+            class="flex items-start space-x-4"
+          >
+            <div
+              class="p-3 bg-white/20 rounded-xl"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-trending-up w-6 h-6 text-white"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 7h6v6"
+                />
+                <path
+                  d="m22 7-8.5 8.5-5-5L2 17"
+                />
+              </svg>
+            </div>
+            <div
+              class="flex-1"
+            >
+              <h4
+                class="text-xl font-semibold mb-3"
+              >
+                Diversify for Higher Returns
+              </h4>
+              <p
+                class="text-indigo-100 mb-4 leading-relaxed"
+              >
+                Consider a mix of stocks, bonds, and other assets to potentially achieve higher returns.
+              </p>
+              <div
+                class="bg-white/10 rounded-2xl p-4"
+              >
+                <div
+                  class="text-sm text-indigo-200 mb-1"
+                >
+                  Potential Impact
+                </div>
+                <div
+                  class="text-lg font-bold text-white"
+                >
+                  +$30,000
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-16 text-center"
+      >
+        <div
+          class="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20"
+        >
+          <h4
+            class="text-2xl font-bold mb-4"
+          >
+            Ready to Optimize?
+          </h4>
+          <p
+            class="text-indigo-100 mb-6 max-w-2xl mx-auto"
+          >
+            Use our calculator to experiment with these optimizations and see how they could impact your results.
+          </p>
+          <a
+            class="inline-flex items-center space-x-2 bg-white text-indigo-600 px-8 py-4 rounded-2xl font-semibold hover:bg-indigo-50 transition-all duration-300 shadow-lg"
+            href="/en?initial=10000&monthly=500&return=7&years=10"
+          >
+            <span>
+              Try These Optimizations
+            </span>
+            <svg
+              aria-hidden="true"
+              class="lucide lucide-trending-up w-5 h-5"
+              fill="none"
+              height="24"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M16 7h6v6"
+              />
+              <path
+                d="m22 7-8.5 8.5-5-5L2 17"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+`;
+
+exports[`Scenario Components Snapshots Responsive Breakpoint Variations should match snapshot at mobile breakpoint (375px) 1`] = `
+<section
+  class="py-16 bg-white/50 backdrop-blur-sm"
+>
+  <div
+    class="container mx-auto px-4 lg:px-8"
+  >
+    <div
+      class="max-w-6xl mx-auto"
+    >
+      <div
+        class="text-center mb-12"
+      >
+        <div
+          class="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-100 to-indigo-100 px-4 py-2 rounded-full text-blue-700 text-sm font-medium mb-6"
+        >
+          <svg
+            aria-hidden="true"
+            class="lucide lucide-chart-column w-4 h-4"
+            fill="none"
+            height="24"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3 3v16a2 2 0 0 0 2 2h16"
+            />
+            <path
+              d="M18 17V9"
+            />
+            <path
+              d="M13 17V5"
+            />
+            <path
+              d="M8 17v-3"
+            />
+          </svg>
+          <span>
+            Personalized Investment Metrics
+          </span>
+        </div>
+        <h3
+          class="text-3xl font-bold mb-4"
+        >
+          Your Investment Journey
+        </h3>
+        <p
+          class="text-lg text-slate-600 max-w-2xl mx-auto"
+        >
+          Detailed breakdown of your investment performance and key milestones.
+        </p>
+      </div>
+      <div
+        class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12"
+      >
+        <div
+          class="bg-white rounded-2xl p-6 border border-slate-200/50 shadow-lg"
+        >
+          <div
+            class="flex items-center space-x-3 mb-4"
+          >
+            <div
+              class="p-2 bg-green-100 rounded-lg"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-trending-up w-5 h-5 text-green-600"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 7h6v6"
+                />
+                <path
+                  d="m22 7-8.5 8.5-5-5L2 17"
+                />
+              </svg>
+            </div>
+            <div>
+              <div
+                class="text-2xl font-bold text-green-600"
+              >
+                42.9
+                %
+              </div>
+              <div
+                class="text-sm text-slate-600"
+              >
+                Total Growth Rate
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white rounded-2xl p-6 border border-slate-200/50 shadow-lg"
+        >
+          <div
+            class="flex items-center space-x-3 mb-4"
+          >
+            <div
+              class="p-2 bg-blue-100 rounded-lg"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-target w-5 h-5 text-blue-600"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="6"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="2"
+                />
+              </svg>
+            </div>
+            <div>
+              <div
+                class="text-2xl font-bold text-blue-600"
+              >
+                $
+                250
+              </div>
+              <div
+                class="text-sm text-slate-600"
+              >
+                Avg Monthly Growth
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white rounded-2xl p-6 border border-slate-200/50 shadow-lg"
+        >
+          <div
+            class="flex items-center space-x-3 mb-4"
+          >
+            <div
+              class="p-2 bg-purple-100 rounded-lg"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-clock w-5 h-5 text-purple-600"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                />
+                <polyline
+                  points="12 6 12 12 16 14"
+                />
+              </svg>
+            </div>
+            <div>
+              <div
+                class="text-2xl font-bold text-purple-600"
+              >
+                1.4
+                x
+              </div>
+              <div
+                class="text-sm text-slate-600"
+              >
+                Compound Multiplier
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white rounded-2xl p-6 border border-slate-200/50 shadow-lg"
+        >
+          <div
+            class="flex items-center space-x-3 mb-4"
+          >
+            <div
+              class="p-2 bg-yellow-100 rounded-lg"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-chart-column w-5 h-5 text-yellow-600"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3 3v16a2 2 0 0 0 2 2h16"
+                />
+                <path
+                  d="M18 17V9"
+                />
+                <path
+                  d="M13 17V5"
+                />
+                <path
+                  d="M8 17v-3"
+                />
+              </svg>
+            </div>
+            <div>
+              <div
+                class="text-2xl font-bold text-yellow-600"
+              >
+                $
+                833.333
+              </div>
+              <div
+                class="text-sm text-slate-600"
+              >
+                Avg Monthly Value
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-3xl p-8"
+      >
+        <h4
+          class="text-2xl font-bold mb-6 text-center"
+        >
+          Investment Milestones
+        </h4>
+        <div
+          class="grid md:grid-cols-3 gap-6"
+        >
+          <div
+            class="text-center"
+          >
+            <div
+              class="text-3xl font-bold text-indigo-600 mb-2"
+            >
+              3
+               
+              years
+            </div>
+            <div
+              class="text-lg font-semibold mb-2"
+            >
+              $
+              25,000
+            </div>
+            <div
+              class="text-sm text-slate-600"
+            >
+              First Quarter Milestone
+            </div>
+          </div>
+          <div
+            class="text-center"
+          >
+            <div
+              class="text-3xl font-bold text-purple-600 mb-2"
+            >
+              5
+               
+              years
+            </div>
+            <div
+              class="text-lg font-semibold mb-2"
+            >
+              $
+              50,000
+            </div>
+            <div
+              class="text-sm text-slate-600"
+            >
+              Halfway Milestone
+            </div>
+          </div>
+          <div
+            class="text-center"
+          >
+            <div
+              class="text-3xl font-bold text-green-600 mb-2"
+            >
+              10
+               
+              years
+            </div>
+            <div
+              class="text-lg font-semibold mb-2"
+            >
+              $
+              100,000
+            </div>
+            <div
+              class="text-sm text-slate-600"
+            >
+              Final Goal
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+`;
+
+exports[`Scenario Components Snapshots Responsive Breakpoint Variations should match snapshot at tablet breakpoint (768px) 1`] = `
+<section
+  class="py-16 bg-white/70 backdrop-blur-sm"
+>
+  <div
+    class="container mx-auto px-4 lg:px-8"
+  >
+    <div
+      class="max-w-6xl mx-auto"
+    >
+      <div
+        class="text-center mb-12"
+      >
+        <div
+          class="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-100 to-pink-100 px-4 py-2 rounded-full text-purple-700 text-sm font-medium mb-6"
+        >
+          <svg
+            aria-hidden="true"
+            class="lucide lucide-chart-column w-4 h-4"
+            fill="none"
+            height="24"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3 3v16a2 2 0 0 0 2 2h16"
+            />
+            <path
+              d="M18 17V9"
+            />
+            <path
+              d="M13 17V5"
+            />
+            <path
+              d="M8 17v-3"
+            />
+          </svg>
+          <span>
+            Comparative Analysis
+          </span>
+        </div>
+        <h3
+          class="text-3xl font-bold mb-4"
+        >
+          How Different Choices Impact Your Results
+        </h3>
+        <p
+          class="text-lg text-slate-600 max-w-2xl mx-auto"
+        >
+          Explore how modifying key parameters could dramatically change your investment outcomes.
+        </p>
+      </div>
+      <div
+        class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-3xl p-8 mb-12 border border-indigo-200/50"
+      >
+        <div
+          class="text-center"
+        >
+          <h4
+            class="text-xl font-semibold mb-4 text-indigo-900"
+          >
+            Your Current Scenario
+          </h4>
+          <div
+            class="grid md:grid-cols-4 gap-6"
+          >
+            <div>
+              <div
+                class="text-2xl font-bold text-indigo-600"
+              >
+                $
+                10,000
+              </div>
+              <div
+                class="text-sm text-slate-600"
+              >
+                Initial
+              </div>
+            </div>
+            <div>
+              <div
+                class="text-2xl font-bold text-indigo-600"
+              >
+                $
+                500
+              </div>
+              <div
+                class="text-sm text-slate-600"
+              >
+                Monthly
+              </div>
+            </div>
+            <div>
+              <div
+                class="text-2xl font-bold text-indigo-600"
+              >
+                7
+                %
+              </div>
+              <div
+                class="text-sm text-slate-600"
+              >
+                Return
+              </div>
+            </div>
+            <div>
+              <div
+                class="text-2xl font-bold text-indigo-600"
+              >
+                10
+                 
+                years
+              </div>
+              <div
+                class="text-sm text-slate-600"
+              >
+                Timeframe
+              </div>
+            </div>
+          </div>
+          <div
+            class="mt-6 pt-6 border-t border-indigo-200"
+          >
+            <div
+              class="text-3xl font-bold text-indigo-800"
+            >
+              $
+              100,000
+            </div>
+            <div
+              class="text-sm text-indigo-600"
+            >
+              Projected Final Value
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="grid md:grid-cols-2 gap-8"
+      >
+        <div
+          class="bg-white rounded-3xl p-6 border border-slate-200/50 shadow-lg hover:shadow-xl transition-all duration-300"
+        >
+          <div
+            class="flex items-center space-x-3 mb-4"
+          >
+            <div
+              class="p-2 bg-blue-100 rounded-lg"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-trending-up w-5 h-5 text-blue-600"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 7h6v6"
+                />
+                <path
+                  d="m22 7-8.5 8.5-5-5L2 17"
+                />
+              </svg>
+            </div>
+            <div>
+              <h4
+                class="text-lg font-semibold"
+              >
+                Higher Monthly Contribution
+              </h4>
+              <p
+                class="text-sm text-slate-600"
+              >
+                Increase monthly contribution by 50%
+              </p>
+            </div>
+          </div>
+          <div
+            class="bg-slate-50 rounded-2xl p-4 mb-4"
+          >
+            <div
+              class="grid grid-cols-2 gap-4 text-sm"
+            >
+              <div>
+                <div
+                  class="text-slate-600"
+                >
+                  New Value
+                </div>
+                <div
+                  class="font-semibold"
+                >
+                  $
+                  149,910.219
+                </div>
+              </div>
+              <div>
+                <div
+                  class="text-slate-600"
+                >
+                  Improvement
+                </div>
+                <div
+                  class="font-semibold text-green-600"
+                >
+                  +
+                  49.9
+                  %
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="text-center p-4 bg-blue-50 rounded-2xl"
+          >
+            <div
+              class="text-2xl font-bold text-blue-600 mb-1"
+            >
+              +$
+              49,910.219
+            </div>
+            <div
+              class="text-xs text-slate-600"
+            >
+              Additional Growth
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white rounded-3xl p-6 border border-slate-200/50 shadow-lg hover:shadow-xl transition-all duration-300"
+        >
+          <div
+            class="flex items-center space-x-3 mb-4"
+          >
+            <div
+              class="p-2 bg-green-100 rounded-lg"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-trending-up w-5 h-5 text-green-600"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 7h6v6"
+                />
+                <path
+                  d="m22 7-8.5 8.5-5-5L2 17"
+                />
+              </svg>
+            </div>
+            <div>
+              <h4
+                class="text-lg font-semibold"
+              >
+                Extended Time Horizon
+              </h4>
+              <p
+                class="text-sm text-slate-600"
+              >
+                Add 5 more years to investment
+              </p>
+            </div>
+          </div>
+          <div
+            class="bg-slate-50 rounded-2xl p-4 mb-4"
+          >
+            <div
+              class="grid grid-cols-2 gap-4 text-sm"
+            >
+              <div>
+                <div
+                  class="text-slate-600"
+                >
+                  New Value
+                </div>
+                <div
+                  class="font-semibold"
+                >
+                  $
+                  186,970.616
+                </div>
+              </div>
+              <div>
+                <div
+                  class="text-slate-600"
+                >
+                  Improvement
+                </div>
+                <div
+                  class="font-semibold text-green-600"
+                >
+                  +
+                  87.0
+                  %
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="text-center p-4 bg-green-50 rounded-2xl"
+          >
+            <div
+              class="text-2xl font-bold text-green-600 mb-1"
+            >
+              +$
+              86,970.616
+            </div>
+            <div
+              class="text-xs text-slate-600"
+            >
+              Additional Growth
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white rounded-3xl p-6 border border-slate-200/50 shadow-lg hover:shadow-xl transition-all duration-300"
+        >
+          <div
+            class="flex items-center space-x-3 mb-4"
+          >
+            <div
+              class="p-2 bg-purple-100 rounded-lg"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-trending-up w-5 h-5 text-purple-600"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 7h6v6"
+                />
+                <path
+                  d="m22 7-8.5 8.5-5-5L2 17"
+                />
+              </svg>
+            </div>
+            <div>
+              <h4
+                class="text-lg font-semibold"
+              >
+                Higher Expected Return
+              </h4>
+              <p
+                class="text-sm text-slate-600"
+              >
+                Increase expected return by 2%
+              </p>
+            </div>
+          </div>
+          <div
+            class="bg-slate-50 rounded-2xl p-4 mb-4"
+          >
+            <div
+              class="grid grid-cols-2 gap-4 text-sm"
+            >
+              <div>
+                <div
+                  class="text-slate-600"
+                >
+                  New Value
+                </div>
+                <div
+                  class="font-semibold"
+                >
+                  $
+                  121,270.709
+                </div>
+              </div>
+              <div>
+                <div
+                  class="text-slate-600"
+                >
+                  Improvement
+                </div>
+                <div
+                  class="font-semibold text-green-600"
+                >
+                  +
+                  21.3
+                  %
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="text-center p-4 bg-purple-50 rounded-2xl"
+          >
+            <div
+              class="text-2xl font-bold text-purple-600 mb-1"
+            >
+              +$
+              21,270.709
+            </div>
+            <div
+              class="text-xs text-slate-600"
+            >
+              Additional Growth
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white rounded-3xl p-6 border border-slate-200/50 shadow-lg hover:shadow-xl transition-all duration-300"
+        >
+          <div
+            class="flex items-center space-x-3 mb-4"
+          >
+            <div
+              class="p-2 bg-orange-100 rounded-lg"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-trending-up w-5 h-5 text-orange-600"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 7h6v6"
+                />
+                <path
+                  d="m22 7-8.5 8.5-5-5L2 17"
+                />
+              </svg>
+            </div>
+            <div>
+              <h4
+                class="text-lg font-semibold"
+              >
+                Double Initial Investment
+              </h4>
+              <p
+                class="text-sm text-slate-600"
+              >
+                Start with twice the initial amount
+              </p>
+            </div>
+          </div>
+          <div
+            class="bg-slate-50 rounded-2xl p-4 mb-4"
+          >
+            <div
+              class="grid grid-cols-2 gap-4 text-sm"
+            >
+              <div>
+                <div
+                  class="text-slate-600"
+                >
+                  New Value
+                </div>
+                <div
+                  class="font-semibold"
+                >
+                  $
+                  126,735.631
+                </div>
+              </div>
+              <div>
+                <div
+                  class="text-slate-600"
+                >
+                  Improvement
+                </div>
+                <div
+                  class="font-semibold text-green-600"
+                >
+                  +
+                  26.7
+                  %
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="text-center p-4 bg-orange-50 rounded-2xl"
+          >
+            <div
+              class="text-2xl font-bold text-orange-600 mb-1"
+            >
+              +$
+              26,735.631
+            </div>
+            <div
+              class="text-xs text-slate-600"
+            >
+              Additional Growth
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-16 bg-gradient-to-r from-emerald-50 to-cyan-50 rounded-3xl p-8"
+      >
+        <div
+          class="text-center mb-8"
+        >
+          <div
+            class="inline-flex items-center space-x-2 bg-emerald-100 px-4 py-2 rounded-full text-emerald-700 text-sm font-medium mb-4"
+          >
+            <svg
+              aria-hidden="true"
+              class="lucide lucide-users w-4 h-4"
+              fill="none"
+              height="24"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
+              />
+              <path
+                d="M16 3.128a4 4 0 0 1 0 7.744"
+              />
+              <path
+                d="M22 21v-2a4 4 0 0 0-3-3.87"
+              />
+              <circle
+                cx="9"
+                cy="7"
+                r="4"
+              />
+            </svg>
+            <span>
+              Community Scenarios
+            </span>
+          </div>
+          <h4
+            class="text-2xl font-bold mb-4"
+          >
+            Similar Investors Choose
+          </h4>
+          <p
+            class="text-slate-600 max-w-2xl mx-auto"
+          >
+            See how other investors with similar profiles have structured their investment strategies.
+          </p>
+        </div>
+        <div
+          class="flex justify-center"
+        >
+          <a
+            class="inline-flex items-center space-x-2 bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-2xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+            href="/en#calculator"
+          >
+            <span>
+              Explore More Scenarios
+            </span>
+            <svg
+              aria-hidden="true"
+              class="lucide lucide-arrow-right w-5 h-5"
+              fill="none"
+              height="24"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M5 12h14"
+              />
+              <path
+                d="m12 5 7 7-7 7"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+`;

@@ -3,41 +3,22 @@ import { getTranslations, getMessages } from 'next-intl/server'
 import { locales } from '@/i18n/request'
 import { calculateFutureValue, type InvestmentParameters } from '@/lib/finance'
 import type { Metadata } from 'next'
-import { getScenarioBySlug, getPredefinedScenarios } from '@/lib/db/queries'
 import { PREDEFINED_SCENARIOS } from '@/lib/scenarios'
-import type { Scenario as DBScenario } from '@/lib/db/schema'
+import { parseSlugToScenario, detectInvestmentGoal } from '@/lib/scenarioUtils'
+import LazyContentSection from '@/components/scenario/LazyContentSection'
+import PersonalizedInsights from '@/components/scenario/PersonalizedInsights'
+import MarketContext from '@/components/scenario/MarketContext'
+import ComparativeAnalysis from '@/components/scenario/ComparativeAnalysis'
+import OptimizationTips from '@/components/scenario/OptimizationTips'
+import StructuredData from '@/components/scenario/StructuredData'
+import RelatedScenarios from '@/components/scenario/RelatedScenarios'
 
 // Force dynamic rendering to test if SSG is causing translation issues
 export const dynamic = 'force-dynamic'
 
-// Get scenario data from database (primary) with fallback to predefined scenarios
+// Get scenario data from predefined scenarios with fallback to slug parsing
 async function getScenarioData(slug: string, locale: string) {
-  try {
-    // Primary: Get from database
-    const dbScenario = await getScenarioBySlug(slug, locale)
-    if (dbScenario) {
-      return {
-        scenario: {
-          id: dbScenario.slug,
-          name: dbScenario.name,
-          description: dbScenario.description || '',
-          params: {
-            initialAmount: Number(dbScenario.initialAmount),
-            monthlyContribution: Number(dbScenario.monthlyContribution),
-            annualReturn: Number(dbScenario.annualReturn),
-            timeHorizon: dbScenario.timeHorizon,
-          },
-          tags: dbScenario.tags || [],
-        },
-        source: 'database',
-        isUserGenerated: !dbScenario.isPredefined,
-      }
-    }
-  } catch (error) {
-    console.error('Error fetching scenario from database:', error)
-  }
-
-  // Fallback: Check predefined scenarios
+  // Primary: Check predefined scenarios
   const predefinedScenario = PREDEFINED_SCENARIOS.find((s) => s.id === slug)
   if (predefinedScenario) {
     return {
@@ -73,8 +54,8 @@ async function getScenarioData(slug: string, locale: string) {
             params: {
               initialAmount: data.scenario.params.initialAmount,
               monthlyContribution: data.scenario.params.monthlyContribution,
-              annualReturn: data.scenario.params.annualReturnRate,
-              timeHorizon: data.scenario.params.timeHorizonYears,
+              annualReturn: data.scenario.params.annualReturn / 100, // Convert percentage to decimal
+              timeHorizon: data.scenario.params.timeHorizon,
             },
             tags: data.scenario.tags,
           },
@@ -85,6 +66,31 @@ async function getScenarioData(slug: string, locale: string) {
     }
   } catch (error) {
     console.error('Error fetching scenario from API:', error)
+  }
+
+  // Final fallback: Try to parse the slug directly
+  try {
+    const parsedScenario = parseSlugToScenario(slug)
+    if (parsedScenario) {
+      return {
+        scenario: {
+          id: slug,
+          name: `Investment Plan: $${parsedScenario.initialAmount.toLocaleString()} + $${parsedScenario.monthlyContribution}/month`,
+          description: `Calculate investing $${parsedScenario.initialAmount.toLocaleString()} initially with $${parsedScenario.monthlyContribution} monthly contributions at ${parsedScenario.annualReturn}% annual return over ${parsedScenario.timeHorizon} years.`,
+          params: {
+            initialAmount: parsedScenario.initialAmount,
+            monthlyContribution: parsedScenario.monthlyContribution,
+            annualReturn: parsedScenario.annualReturn / 100, // Convert percentage to decimal
+            timeHorizon: parsedScenario.timeHorizon,
+          },
+          tags: [parsedScenario.goal],
+        },
+        source: 'slug',
+        isUserGenerated: true,
+      }
+    }
+  } catch (error) {
+    console.error('Error parsing scenario from slug:', error)
   }
 
   return null
@@ -101,94 +107,94 @@ interface Props {
 export async function generateStaticParams() {
   const paths: Array<{ locale: string; slug: string }> = []
 
-  // Get all scenarios from database for each locale (if available)
+  // Use predefined scenarios for each locale
   for (const locale of locales) {
-    try {
-      const scenarios = await getPredefinedScenarios(locale)
-      scenarios.forEach((scenario) => {
-        paths.push({
-          locale,
-          slug: scenario.slug,
-        })
+    PREDEFINED_SCENARIOS.forEach((scenario) => {
+      paths.push({
+        locale,
+        slug: scenario.id,
       })
-    } catch (error) {
-      console.error(
-        `Error generating static params for locale ${locale}:`,
-        error
-      )
-
-      // Fallback: Use predefined scenarios
-      PREDEFINED_SCENARIOS.forEach((scenario) => {
-        paths.push({
-          locale,
-          slug: scenario.id,
-        })
-      })
-    }
+    })
   }
 
   return paths
 }
 
-// Generate metadata for SEO
+// Generate dynamic metadata for SEO optimization
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  // Get scenario from database, static data, or API
-  const scenarioData = await getScenarioData(params.slug, params.locale)
+  const { locale, slug } = params
 
-  if (!scenarioData) {
-    return {
-      title: 'Scenario Not Found',
+  // Try to get scenario data first
+  const scenarioData = await getScenarioData(slug, locale)
+
+  let title: string
+  let description: string
+  let keywords: string
+
+  if (scenarioData?.scenario) {
+    // Use scenario data if available
+    const { params: scenarioParams } = scenarioData.scenario
+    const goal = detectInvestmentGoal(scenarioParams)
+
+    const initial = scenarioParams.initialAmount
+    const monthly = scenarioParams.monthlyContribution
+    const rate = (scenarioParams.annualReturn * 100).toFixed(0)
+    const timeHorizon = scenarioParams.timeHorizon
+
+    title = `Invest $${initial.toLocaleString()} + $${monthly}/month at ${rate}% - ${timeHorizon} Year ${goal} Plan`
+    description = `Calculate investing $${initial.toLocaleString()} initially with $${monthly} monthly contributions at ${rate}% annual return over ${timeHorizon} years for your ${goal} goal. See detailed projections and optimization tips.`
+    keywords = `invest ${initial}, monthly ${monthly}, ${rate} percent return, ${timeHorizon} year investment, ${goal}, investment calculator, future value`
+  } else {
+    // Fallback: try parsing slug directly
+    const parsedScenario = parseSlugToScenario(slug)
+
+    if (parsedScenario) {
+      const {
+        initialAmount,
+        monthlyContribution,
+        annualReturn,
+        timeHorizon,
+        goal,
+      } = parsedScenario
+      const rate = (annualReturn * 100).toFixed(0)
+
+      title = `Invest $${initialAmount.toLocaleString()} + $${monthlyContribution}/month at ${rate}% - ${timeHorizon} Year ${goal} Plan`
+      description = `Calculate investing $${initialAmount.toLocaleString()} initially with $${monthlyContribution} monthly contributions at ${rate}% annual return over ${timeHorizon} years for your ${goal} goal. See detailed projections and optimization tips.`
+      keywords = `invest ${initialAmount}, monthly ${monthlyContribution}, ${rate} percent return, ${timeHorizon} year investment, ${goal}, investment calculator, future value`
+    } else {
+      // Generic fallback
+      title = 'Investment Scenario Calculator - Future Value Analysis'
+      description =
+        'Analyze your investment scenario with detailed projections, market insights, and optimization recommendations for long-term wealth building.'
+      keywords =
+        'investment calculator, future value, compound interest, financial planning, wealth building'
     }
   }
 
-  const { scenario, isUserGenerated } = scenarioData
-
-  // Get translations for metadata
-  const metadataMessages = await getMessages({ locale: params.locale })
-  const metadataPredefinedScenarios =
-    (metadataMessages?.scenarios as any)?.predefinedScenarios || {}
-
-  // Use translated content for predefined scenarios
-  let scenarioName = scenario.name
-  let scenarioDescription = scenario.description
-
-  if (!isUserGenerated) {
-    try {
-      const translatedName = metadataPredefinedScenarios?.[scenario.id]?.name
-      const translatedDescription =
-        metadataPredefinedScenarios?.[scenario.id]?.description
-
-      if (translatedName) scenarioName = translatedName
-      if (translatedDescription) scenarioDescription = translatedDescription
-    } catch (error) {
-      // Use original if translation fails
-    }
+  // Ensure title is under 60 characters for SEO
+  if (title.length > 60) {
+    title = title.substring(0, 57) + '...'
   }
 
-  const { params: calcParams } = scenario
-  const investmentParams: InvestmentParameters = {
-    initialAmount: calcParams.initialAmount,
-    monthlyContribution: calcParams.monthlyContribution,
-    annualReturnRate: calcParams.annualReturn,
-    timeHorizonYears: calcParams.timeHorizon,
+  // Ensure description is under 160 characters for SEO
+  if (description.length > 160) {
+    description = description.substring(0, 157) + '...'
   }
-  const result = calculateFutureValue(investmentParams)
 
   return {
-    title: `${scenarioName} - Financial Growth Calculator`,
-    description: `${scenarioDescription}. Starting with $${calcParams.initialAmount.toLocaleString()}, contributing $${calcParams.monthlyContribution.toLocaleString()}/month at ${calcParams.annualReturn}% return over ${calcParams.timeHorizon} years. Final value: $${result.futureValue.toLocaleString()}`,
-    keywords: [
-      'financial planning',
-      'investment calculator',
-      scenarioName.toLowerCase(),
-      ...scenario.tags,
-      `${calcParams.annualReturn}% return`,
-      `${calcParams.timeHorizon} year investment`,
-    ].join(', '),
+    title,
+    description,
+    keywords,
     openGraph: {
-      title: `${scenarioName} Investment Scenario`,
-      description: scenarioDescription,
+      title,
+      description,
       type: 'website',
+      locale: locale,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
     },
   }
 }
@@ -260,6 +266,26 @@ export default async function ScenarioPage({ params }: Props) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-cyan-50">
+      {/* Structured Data for SEO */}
+      <StructuredData
+        scenario={{
+          id: scenario.id,
+          name: translatedScenario.name,
+          description: translatedScenario.description,
+          params: {
+            initialAmount: scenario.params.initialAmount,
+            monthlyContribution: scenario.params.monthlyContribution,
+            annualReturnRate: scenario.params.annualReturn,
+            timeHorizonYears: scenario.params.timeHorizon,
+          },
+          tags: scenario.tags,
+        }}
+        result={result}
+        locale={params.locale}
+        source={source}
+        isUserGenerated={isUserGenerated}
+      />
+
       {/* Hero Section with Scenario Info */}
       <section className="relative py-16 lg:py-24">
         <div className="container mx-auto px-4 lg:px-8">
@@ -312,7 +338,7 @@ export default async function ScenarioPage({ params }: Props) {
 
               <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50">
                 <div className="text-2xl font-bold text-purple-600">
-                  {scenario.params.annualReturn}%
+                  {(scenario.params.annualReturn * 100).toFixed(1)}%
                 </div>
                 <div className="text-sm text-slate-600">
                   {scenarioPage?.annualReturn || 'Annual Return'}
@@ -365,7 +391,7 @@ export default async function ScenarioPage({ params }: Props) {
                 explore different scenarios.
               </p>
               <a
-                href={`/${params.locale}?initial=${scenario.params.initialAmount}&monthly=${scenario.params.monthlyContribution}&return=${scenario.params.annualReturn}&years=${scenario.params.timeHorizon}`}
+                href={`/${params.locale}?initial=${scenario.params.initialAmount}&monthly=${scenario.params.monthlyContribution}&return=${(scenario.params.annualReturn * 100).toFixed(1)}&years=${scenario.params.timeHorizon}`}
                 className="inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-700 hover:to-cyan-700 text-white px-8 py-4 rounded-2xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
               >
                 <span>Open Interactive Calculator</span>
@@ -374,6 +400,63 @@ export default async function ScenarioPage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      {/* Personalized Investment Metrics (moved from main page statistics) */}
+      <LazyContentSection rootMargin="50px" threshold={0.1}>
+        <PersonalizedInsights
+          params={investmentParams}
+          result={result}
+          locale={params.locale}
+          translations={scenarioPage}
+        />
+      </LazyContentSection>
+
+      {/* Market Context & Analysis (moved from main page context) */}
+      <LazyContentSection rootMargin="50px" threshold={0.1}>
+        <MarketContext
+          params={investmentParams}
+          locale={params.locale}
+          translations={scenarioPage}
+        />
+      </LazyContentSection>
+
+      {/* Comparative Analysis (moved from main page expert scenarios) */}
+      <LazyContentSection rootMargin="50px" threshold={0.1}>
+        <ComparativeAnalysis
+          params={investmentParams}
+          result={result}
+          locale={params.locale}
+          translations={scenarioPage}
+        />
+      </LazyContentSection>
+
+      {/* Optimization Tips (moved from main page CTA section) */}
+      <LazyContentSection rootMargin="50px" threshold={0.1}>
+        <OptimizationTips
+          params={investmentParams}
+          result={result}
+          locale={params.locale}
+          translations={scenarioPage}
+        />
+      </LazyContentSection>
+
+      {/* Related Scenarios - Internal Linking Strategy */}
+      <LazyContentSection rootMargin="50px" threshold={0.1}>
+        <RelatedScenarios
+          currentScenario={{
+            id: scenario.id,
+            name: translatedScenario.name,
+            params: {
+              initialAmount: scenario.params.initialAmount,
+              monthlyContribution: scenario.params.monthlyContribution,
+              annualReturnRate: scenario.params.annualReturn,
+              timeHorizonYears: scenario.params.timeHorizon,
+            },
+          }}
+          locale={params.locale}
+          maxResults={6}
+        />
+      </LazyContentSection>
     </div>
   )
 }

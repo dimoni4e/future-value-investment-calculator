@@ -48,6 +48,7 @@
     "timeHorizon": "Horizonte temporal (años)",
     "years": "Años",
     "calculate": "Calcular valor futuro",
+    "generatingScenario": "Generando tu escenario personalizado...",
     "adjustTimeHorizon": "Ajustar horizonte temporal",
     "sliderDescription": "Arrastra el deslizador para ver cómo diferentes horizontes temporales afectan el crecimiento de tu inversión",
     "result": "Valor futuro",
@@ -286,6 +287,65 @@
       "title": "¿Listo para Crear Tu Propio Escenario?",
       "description": "Usa nuestra calculadora gratuita de inversiones para modelar tu futuro financiero y compartir tu estrategia con otros.",
       "button": "Comenzar a Calcular"
+    }
+  },
+  "content": {
+    "templates": {
+      "investment_overview": "Con una inversión inicial de **{initialAmount}** y contribuciones mensuales de **{monthlyContribution}**, te estás preparando para una sólida estrategia de {goal}. Durante {timeHorizon} años con un rendimiento anual esperado del {annualReturn}%, tu inversión podría crecer a aproximadamente **{futureValue}**. Este enfoque de inversión se alinea con tus objetivos de {goal}, proporcionando un camino estructurado hacia el crecimiento financiero. Tus contribuciones totales durante el período de inversión serán de {totalContributions}, potencialmente generando {totalGains} en ganancias de inversión a través del poder del interés compuesto.",
+      "growth_projection": "<h2>Análisis Detallado de Proyección de Crecimiento</h2><p>Tu viaje de inversión comienza con {initialAmount} y crece a través de adiciones mensuales consistentes de {monthlyContribution}. Con un rendimiento anual del {annualReturn}%, así es como tu riqueza podría acumularse durante {timeHorizon} años:</p><p><strong>Año 1-5:</strong> Durante la fase inicial, tu inversión crece de {initialAmount} a aproximadamente {fiveYearValue}. Este período se enfoca en construir tu base de inversión, con las contribuciones mensuales jugando un papel crucial en el crecimiento del portafolio.</p><p><strong>Año 6-10:</strong> La fase intermedia ve un crecimiento acelerado a medida que el interés compuesto se vuelve más significativo. Tu portafolio podría alcanzar alrededor de {tenYearValue}, demostrando el poder de la inversión consistente combinada con los rendimientos del mercado.</p><p><strong>Año 11-{timeHorizon}:</strong> La fase final muestra un crecimiento exponencial, donde tus ganancias de inversión comienzan a generar rendimientos sustanciales por sí mismas. Tu portafolio se acerca a los {futureValue} proyectados, con el interés compuesto contribuyendo significativamente al crecimiento general.</p><p>El principio matemático detrás de este crecimiento es el interés compuesto, a menudo llamado la octava maravilla del mundo. Cada año, obtienes rendimientos no solo sobre tu inversión original y contribuciones, sino también sobre todas las ganancias de años anteriores. Esto crea un efecto bola de nieve que se vuelve más poderoso con el tiempo.</p><p>Tus contribuciones mensuales de {monthlyContribution} juegan un papel vital en esta historia de crecimiento. Durante {timeHorizon} años, tu inversión total (incluyendo tu {initialAmount} inicial) alcanza {totalContributions}, representando tu disciplina y compromiso con la construcción de riqueza a largo plazo y el crecimiento de inversión.</p><p>Esta proyección financiera demuestra cómo la inversión sistemática combinada con rendimientos compuestos puede acelerar la acumulación de riqueza. El poder del tiempo y la consistencia en tu enfoque de inversión no puede ser subestimado para el éxito financiero a largo plazo.</p>",
+      "investment_insights": "<h2>Perspectivas de Inversión para tu Cartera</h2><p>Con un rendimiento anual esperado del {annualReturn}% y un horizonte de inversión de {timeHorizon} años, tu cartera se encuentra en la categoría {riskCategory}. Esta expectativa de rendimiento sugiere un enfoque diversificado que equilibra el potencial de crecimiento con la gestión de riesgos.</p><p><strong>Evaluación de Riesgo:</strong> Tu perfil de inversión indica una tolerancia al riesgo {riskLevel}. Los datos históricos del mercado muestran que las carteras que apuntan a rendimientos del {annualReturn}% típicamente experimentan {volatilityRange} de volatilidad anual. Esto significa que debes esperar algunos años con rendimientos más altos y otros con rendimientos más bajos o negativos.</p><p><strong>Contexto Histórico:</strong> Durante los últimos 30 años, las carteras de inversión con perfiles de rendimiento similares han entregado resultados positivos en aproximadamente {positiveYears}% de todos los años. Durante las caídas del mercado, la disminución promedio fue de {averageDownturn}, mientras que los mercados alcistas promediaron ganancias de {averageBullReturn}.</p><p><strong>Expectativas de Volatilidad:</strong> Tu cronograma de inversión de {timeHorizon} años proporciona tiempo suficiente para capear los ciclos del mercado. Históricamente, los períodos de inversión más largos reducen el impacto de la volatilidad a corto plazo, con períodos móviles de {timeHorizon} años mostrando rendimientos positivos {successRate}% del tiempo.</p><p><strong>Beneficios del Promedio de Costo en Dólares:</strong> Tu estrategia de contribución mensual ayuda a mitigar el riesgo de timing. Al invertir {monthlyContribution} de manera consistente, comprarás más acciones cuando los precios estén bajos y menos cuando los precios estén altos, potencialmente mejorando tu base de costo promedio con el tiempo.</p><p>La clave del éxito con este enfoque de inversión es mantener disciplina durante la volatilidad del mercado. Tu cronograma para {goal} proporciona el lujo de superar las fluctuaciones del mercado a corto plazo mientras te enfocas en la acumulación de riqueza a largo plazo.</p>",
+      "strategy_analysis": "<h2>Análisis Estratégico para tu Objetivo de {goal}</h2><p>Tu objetivo de {goal} requiere una estrategia de inversión adaptada que equilibre el potencial de crecimiento con tu cronograma específico y tolerancia al riesgo. Con {timeHorizon} años para alcanzar tu objetivo, este análisis examina el enfoque óptimo para tu situación.</p><p><strong>Recomendaciones de Asignación de Activos:</strong> Para una estrategia de {goal} de {timeHorizon} años, considera una asignación de activos de {stockAllocation}% acciones, {bondAllocation}% bonos, y {alternativeAllocation}% inversiones alternativas. Esta asignación equilibra el potencial de crecimiento con la estabilidad a medida que te acercas a tu fecha objetivo.</p><p><strong>Ajustes Estratégicos Basados en Tiempo:</strong> Tu enfoque de inversión debe evolucionar con el tiempo. Los primeros años pueden enfatizar inversiones orientadas al crecimiento, cambiando gradualmente hacia asignaciones más conservadoras a medida que te acercas al plazo de tu {goal}. Este enfoque de senda de planeo ayuda a proteger las ganancias acumuladas mientras mantiene el potencial de crecimiento.</p><p><strong>Estrategia de Contribuciones:</strong> Tus contribuciones mensuales de {monthlyContribution} representan {contributionPercentage}% del valor total proyectado de tu portafolio. Este enfoque de financiación constante asegura un progreso estable hacia tu {goal} mientras aprovecha la diversificación de temporización del mercado.</p><p><strong>Consideraciones de Rebalanceo:</strong> Con un cronograma de {timeHorizon} años, considera rebalancear tu portafolio anualmente o cuando las asignaciones se desvíen más del 5% de los objetivos. Esta disciplina ayuda a mantener tu perfil de riesgo deseado mientras captura ganancias de las clases de activos que superan el rendimiento.</p><p><strong>Optimización Fiscal:</strong> Dependiendo del tipo de cuenta, considera estrategias fiscalmente eficientes como maximizar las cuentas con ventajas fiscales, cosechar pérdidas fiscales, y posicionar inversiones fiscalmente ineficientes en cuentas protegidas de impuestos.</p><p>La belleza de una estrategia de {goal} bien estructurada radica en su adaptabilidad. A medida que cambian las circunstancias de la vida, tu enfoque de inversión puede ajustarse mientras mantienes el enfoque en tu objetivo final.</p>",
+      "comparative_scenarios": "\n    <h2>Escenarios de Inversión Comparativos</h2>\n    <p>entender cómo diferentes variables afectan el resultado de tu inversión es crucial para tomar decisiones de inversión informadas. Aquí tienes un análisis integral comparando diferentes escenarios:</p>\n    \n    <h3>Análisis de Contribuciones</h3>\n    <p><strong>Escenario de mayor contribución:</strong> Aumentar tu inversión mensual a {higherContribution} podría resultar en {higherContributionValue}, representando un {contributionIncreasePercent}% de aumento en el valor final. Esto demuestra cómo niveles de contribución más altos producen un crecimiento significativamente mayor del portafolio.</p>\n    \n    <p><strong>Escenario de menor contribución:</strong> Reducir a {lowerContribution} produciría {lowerContributionValue}, mostrando la diferencia entre niveles de contribución y su impacto a largo plazo.</p>\n    \n    <h3>Impacto del Tiempo</h3>\n    <p><strong>Cronograma extendido:</strong> Con {extendedTimeline} años, tu portafolio podría crecer a {extendedValue}. Más tiempo en el mercado permite mayor crecimiento a través del interés compuesto.</p>\n    \n    <p><strong>Cronograma más corto:</strong> Alcanzar tu objetivo en menos años ({shorterTimeline} años) resultaría en {shorterValue}, demostrando cómo el tiempo impacta significativamente los resultados.</p>\n    \n    <h3>Enfoques Alternativos</h3>\n    <p>Diferentes escenarios de retorno basados en estrategias de inversión:</p>\n    <ul>\n      <li><strong>Enfoque Conservador ({conservativeReturn}%):</strong> Menor retorno produce {conservativeValue}</li>\n      <li><strong>Plan equilibrado actual ({annualReturn}%):</strong> Valor base {futureValue}</li>\n      <li><strong>Enfoque Agresivo ({aggressiveReturn}%):</strong> Mayor potencial de retorno {aggressiveValue}</li>\n    </ul>\n    \n    <h3>Comparación de Estrategias de Inversión</h3>\n    <p><strong>Inversión de suma global vs. promedio de costo en dólares:</strong> Invertir {totalContributions} como suma global hoy podría valer {lumpSumValue} en {timeHorizon} años, comparado con {futureValue} con contribuciones mensuales. Esta comparación ilustra compensaciones prácticas.</p>\n    \n    <h3>Perspectivas para la Toma de Decisiones</h3>\n    <p>Estos escenarios ayudan con la toma de decisiones práctica. La diferencia entre enfoques muestra qué factores tienen el mayor impacto en tus resultados. Las estrategias más efectivas involucran empezar temprano y mantener contribuciones asequibles y sostenibles.</p>\n  ",
+      "community_insights": "No estás solo en tu viaje de {goal}. Esto es lo que hemos aprendido de miles de inversores con perfiles y objetivos similares. Los inversores con parámetros similares típicamente alcanzan sus objetivos de {goal} {successRate}% del tiempo cuando mantienen contribuciones consistentes. Los inversores más exitosos automatizan sus contribuciones mensuales y rara vez revisan sus carteras durante la volatilidad del mercado.",
+      "optimization_tips": "Afinar tu estrategia de inversión puede impactar significativamente tus resultados a largo plazo. Aquí hay técnicas de optimización probadas para tu plan de {goal}. Considera hacer tu contribución mensual al principio de cada mes en lugar del final. Configura aumentos automáticos anuales a tu contribución mensual. Incluso un modesto aumento anual del {escalationPercent}% podría impulsar el valor final de tu cartera a {escalatedValue}.",
+      "market_context": "Entender el entorno de mercado de hoy y los patrones históricos proporciona contexto valioso para tu viaje de inversión de {timeHorizon} años para {goal}. El panorama de inversión de hoy presenta inflación del {currentInflation}%, tasas de interés del {currentInterestRates}%, y volatilidad de mercado {marketVolatility}. Tu rendimiento esperado del {annualReturn}% considera estas condiciones actuales mientras mantiene la perspectiva histórica a largo plazo."
+    },
+    "seo": {
+      "defaultTitle": "Calculadora de Valor Futuro de Inversión - Planifica tu Crecimiento Financiero",
+      "defaultDescription": "Calcula el valor futuro de tu inversión con nuestra calculadora avanzada de interés compuesto. Planifica escenarios, visualiza el crecimiento y toma decisiones financieras informadas.",
+      "keywords": "calculadora de inversión, valor futuro, interés compuesto, planificación financiera, calculadora de jubilación, crecimiento de inversión",
+      "scenarioTitle": "Escenario de Inversión: {scenarioName} - Calculadora de Valor Futuro",
+      "scenarioDescription": "Explora la estrategia de inversión {scenarioName}: inversión inicial de {initialAmount}, contribuciones mensuales de {monthlyContribution} durante {timeHorizon} años con objetivo de {annualReturn}% de rendimiento anual.",
+      "goalTitle": "Calculadora de Inversión para {goal} - Planifica tu Estrategia de {goal}",
+      "goalDescription": "Calcula y optimiza tu estrategia de inversión para {goal} con nuestra calculadora especializada. Obtén proyecciones personalizadas y perspectivas expertas.",
+      "shareTitle": "Mira esta proyección de inversión: {futureValue} de valor potencial",
+      "shareDescription": "Ve cómo una inversión inicial de {initialAmount} más contribuciones mensuales de {monthlyContribution} podrían crecer a {futureValue} durante {timeHorizon} años."
+    },
+    "goals": {
+      "retirement": "planificación de jubilación",
+      "house": "compra de vivienda",
+      "education": "financiamiento educativo",
+      "emergency": "fondo de emergencia",
+      "wealth": "construcción de riqueza",
+      "general": "inversión general",
+      "vacation": "ahorros para vacaciones",
+      "car": "compra de vehículo",
+      "business": "inversión empresarial",
+      "debt": "pago de deudas"
+    },
+    "riskCategories": {
+      "conservative": "conservadora",
+      "moderate": "moderada",
+      "aggressive": "agresiva",
+      "balanced": "equilibrada"
+    },
+    "riskLevels": {
+      "low": "baja",
+      "moderate": "moderada",
+      "high": "alta",
+      "very_high": "muy alta"
+    },
+    "timeFrames": {
+      "short": "corto plazo",
+      "medium": "mediano plazo",
+      "long": "largo plazo",
+      "very_long": "muy largo plazo"
+    },
+    "marketConditions": {
+      "bull": "alcista",
+      "bear": "bajista",
+      "neutral": "neutral",
+      "volatile": "volátil"
     }
   }
 }

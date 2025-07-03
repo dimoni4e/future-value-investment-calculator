@@ -52,6 +52,7 @@
     "timeHorizon": "Horyzont czasowy (lata)",
     "years": "Lata",
     "calculate": "Oblicz wartość przyszłą",
+    "generatingScenario": "Generowanie spersonalizowanego scenariusza...",
     "adjustTimeHorizon": "Dostosuj horyzont czasowy",
     "sliderDescription": "Przeciągnij suwak, aby zobaczyć, jak różne horyzonty czasowe wpływają na wzrost Twojej inwestycji",
     "result": "Wartość przyszła",
@@ -290,6 +291,65 @@
       "title": "Gotowy na Stworzenie Własnego Scenariusza?",
       "description": "Użyj naszej bezpłatnej kalkulatora inwestycji, aby zamodelować swoją przyszłość finansową i podzielić się strategią z innymi.",
       "button": "Zacznij Liczyć"
+    }
+  },
+  "content": {
+    "templates": {
+      "investment_overview": "Z początkową inwestycją **{initialAmount}** i miesięcznymi składkami **{monthlyContribution}**, przygotowujesz się na solidną strategię {goal}. Przez {timeHorizon} lat przy oczekiwanym rocznym zwrocie {annualReturn}%, Twoja inwestycja może wzrosnąć do około **{futureValue}**. To podejście inwestycyjne jest zgodne z Twoimi celami {goal}, zapewniając ustrukturyzowaną ścieżkę do wzrostu finansowego. Twoje całkowite składki w okresie inwestycyjnym wyniosą {totalContributions}, potencjalnie generując {totalGains} zysków z inwestycji dzięki sile procentu składanego.",
+      "growth_projection": "<h2>Szczegółowa Analiza Projekcji Wzrostu</h2><p>Twoja podróż inwestycyjna rozpoczyna się od {initialAmount} i rośnie dzięki konsekwentnym miesięcznym dodatkom {monthlyContribution}. Przy rocznym zwrocie {annualReturn}%, oto jak Twoje bogactwo może się akumulować przez {timeHorizon} lat:</p><p><strong>Rok 1-5:</strong> W fazie początkowej Twoja inwestycja rośnie z {initialAmount} do około {fiveYearValue}. Ten okres koncentruje się na budowaniu fundamentów inwestycyjnych, gdzie miesięczne składki odgrywają kluczową rolę we wzroście portfela.</p><p><strong>Rok 6-10:</strong> Faza średnia charakteryzuje się przyspieszonym wzrostem, gdy procent składany staje się bardziej znaczący. Twój portfel może osiągnąć około {tenYearValue}, demonstrując siłę konsekwentnego inwestowania połączonego ze zwrotami rynkowymi.</p><p><strong>Rok 11-{timeHorizon}:</strong> Faza końcowa pokazuje wzrost wykładniczy, gdzie Twoje zyski z inwestycji zaczynają generować znaczne zwroty same z siebie. Twój portfel zbliża się do prognozowanych {futureValue}, z procentem składanym przyczyniającym się znacząco do ogólnego wzrostu.</p><p>Zasada matematyczna za tym wzrostem to procent składany, często nazywany ósmym cudem świata. Każdego roku otrzymujesz zwroty nie tylko z pierwotnej inwestycji i składek, ale także ze wszystkich zysków z poprzednich lat. To tworzy efekt kuli śnieżnej, który staje się bardziej potężny z czasem.</p><p>Twoje miesięczne składki {monthlyContribution} odgrywają istotną rolę w tej historii wzrostu. Przez {timeHorizon} lat, Twoja całkowita inwestycja (włączając początkowe {initialAmount}) osiąga {totalContributions}, reprezentując Twoją dyscyplinę i zaangażowanie w długoterminowe budowanie bogactwa i wzrost inwestycji.</p><p>Ta projekcja finansowa pokazuje, jak systematyczne inwestowanie połączone ze zwrotami składanymi może przyspieszyć akumulację bogactwa. Siła czasu i konsekwencji w Twoim podejściu inwestycyjnym nie może być niedoceniona dla długoterminowego sukcesu finansowego.</p>",
+      "investment_insights": "<h2>Wgląd w Inwestycje dla Twojego Portfela</h2><p>Z oczekiwanym rocznym zwrotem {annualReturn}% i horyzontem inwestycyjnym {timeHorizon} lat, Twój portfel mieści się w kategorii {riskCategory}. To oczekiwanie zwrotu sugeruje zdywersyfikowane podejście, które równoważy potencjał wzrostu z zarządzaniem ryzykiem.</p><p><strong>Ocena Ryzyka:</strong> Twój profil inwestycyjny wskazuje tolerancję ryzyka {riskLevel}. Historyczne dane rynkowe pokazują, że portfele celujące w zwroty {annualReturn}% typowo doświadczają {volatilityRange} rocznej zmienności. To oznacza, że powinieneś oczekiwać niektórych lat z wyższymi zwrotami i innych z niższymi lub ujemnymi zwrotami.</p><p><strong>Kontekst Historyczny:</strong> W ciągu ostatnich 30 lat portfele inwestycyjne o podobnych profilach zwrotu przyniosły pozytywne wyniki w około {positiveYears}% wszystkich lat. Podczas spadków rynkowych średni spadek wynosił {averageDownturn}, podczas gdy hossy przeciętnie przynosiły zyski {averageBullReturn}.</p><p><strong>Oczekiwania co do Zmienności:</strong> Twój {timeHorizon}-letni horyzont inwestycyjny zapewnia wystarczający czas na przetrwanie cykli rynkowych. Historycznie, dłuższe okresy inwestycyjne zmniejszają wpływ krótkoterminowej zmienności, z {timeHorizon}-letnimi okresami kroczącymi pokazującymi pozytywne zwroty {successRate}% czasu.</p><p><strong>Korzyści z Uśredniania Kosztów w Dolarach:</strong> Twoja strategia miesięcznych składek pomaga zmniejszyć ryzyko timingu. Inwestując {monthlyContribution} konsekwentnie, kupisz więcej udziałów gdy ceny są niskie i mniej gdy ceny są wysokie, potencjalnie poprawiając średnią podstawę kosztową w czasie.</p><p>Kluczem do sukcesu z tym podejściem inwestycyjnym jest utrzymanie dyscypliny podczas zmienności rynkowej. Twój harmonogram {goal} zapewnia luksus przetrwania krótkoterminowych fluktuacji rynkowych, koncentrując się na długoterminowej akumulacji bogactwa.</p>",
+      "strategy_analysis": "<h2>Analiza Strategiczna dla Twojego Celu {goal}</h2><p>Twój cel {goal} wymaga dostosowanej strategii inwestycyjnej, która równoważy potencjał wzrostu z Twoim konkretnym harmonogramem i tolerancją ryzyka. Z {timeHorizon} latami na osiągnięcie celu, ta analiza bada optymalne podejście do Twojej sytuacji.</p><p><strong>Rekomendacje Alokacji Aktywów:</strong> Dla {timeHorizon}-letniej strategii {goal}, rozważ alokację aktywów {stockAllocation}% akcje, {bondAllocation}% obligacje i {alternativeAllocation}% inwestycje alternatywne. Ta alokacja równoważy potencjał wzrostu ze stabilnością w miarę zbliżania się do daty docelowej.</p><p><strong>Dostosowania Strategiczne Oparte na Czasie:</strong> Twoje podejście inwestycyjne powinno ewoluować z czasem. Pierwsze lata mogą kłaść nacisk na inwestycje nastawione na wzrost, stopniowo przesuwając się w kierunku bardziej konserwatywnych alokacji w miarę zbliżania się do terminu realizacji {goal}. To podejście ścieżki schodzenia pomaga chronić zgromadzone zyski przy zachowaniu potencjału wzrostu.</p><p><strong>Strategia Składek:</strong> Twoje miesięczne składki {monthlyContribution} stanowią {contributionPercentage}% całkowitej przewidywanej wartości portfela. To konsekwentne podejście do finansowania zapewnia stały postęp w kierunku {goal} przy jednoczesnym wykorzystaniu dywersyfikacji czasowej rynku.</p><p><strong>Rozważania dotyczące Przywracania Równowagi:</strong> Z {timeHorizon}-letnim harmonogramem rozważ przywracanie równowagi portfela rocznie lub gdy alokacje odbiegają więcej niż 5% od celów. Ta dyscyplina pomaga utrzymać zamierzony profil ryzyka przy jednoczesnym przechwytywaniu zysków z lepiej radzących sobie klas aktywów.</p><p><strong>Optymalizacja Podatkowa:</strong> W zależności od typu konta rozważ strategie efektywne podatkowo, takie jak maksymalizacja kont z ulgami podatkowymi, zbieranie strat podatkowych i umieszczanie nieefektywnych podatkowo inwestycji na kontach chronionych przed podatkami.</p><p>Piękno dobrze ustrukturyzowanej strategii {goal} leży w jej adaptacyjności. W miarę zmiany okoliczności życiowych, Twoje podejście inwestycyjne może być dostosowywane przy zachowaniu skupienia na ostatecznym celu.</p>",
+      "comparative_scenarios": "\n    <h2>Porównawcze Scenariusze Inwestycyjne</h2>\n    <p>zrozumienie jak różne zmienne wpływają na wynik Twojej inwestycji jest kluczowe dla podejmowania świadomych decyzji inwestycyjnych. Oto kompleksowa analiza porównująca różne scenariusze:</p>\n    \n    <h3>Analiza Składek</h3>\n    <p><strong>Scenariusz wyższych składek:</strong> Zwiększenie miesięcznej inwestycji do {higherContribution} może skutkować {higherContributionValue}, reprezentując {contributionIncreasePercent}% wzrost wartości końcowej. To pokazuje, jak wyższe poziomy składek produkują znacznie większy wzrost portfela.</p>\n    \n    <p><strong>Scenariusz niższych składek:</strong> Zmniejszenie do {lowerContribution} przyniosłoby {lowerContributionValue}, pokazując różnicę między poziomami składek i ich długoterminowym wpływem.</p>\n    \n    <h3>Wpływ Czasu</h3>\n    <p><strong>Przedłużony horyzont:</strong> Z {extendedTimeline} latami, Twój portfel mógłby wzrosnąć do {extendedValue}. Dłuższy czas na rynku pozwala na większy wzrost poprzez odsetki składane.</p>\n    \n    <p><strong>Krótszy horyzont:</strong> Osiągnięcie celu w mniejszej liczbie lat ({shorterTimeline} lat) skutkowałoby {shorterValue}, pokazując jak czas znacząco wpływa na wyniki.</p>\n    \n    <h3>Alternatywne Podejścia</h3>\n    <p>Różne scenariusze zwrotu oparte na strategiach inwestycyjnych:</p>\n    <ul>\n      <li><strong>Podejście Konserwatywne ({conservativeReturn}%):</strong> Niższy zwrot daje {conservativeValue}</li>\n      <li><strong>Obecny zrównoważony plan ({annualReturn}%):</strong> Wartość bazowa {futureValue}</li>\n      <li><strong>Podejście Agresywne ({aggressiveReturn}%):</strong> Wyższy potencjał zwrotu {aggressiveValue}</li>\n    </ul>\n    \n    <h3>Porównanie Strategii Inwestycyjnych</h3>\n    <p><strong>Jednorazowa inwestycja vs. uśrednianie kosztu:</strong> Zainwestowanie {totalContributions} jako jednorazowa wpłata dzisiaj może być warte {lumpSumValue} za {timeHorizon} lat, w porównaniu z {futureValue} przy miesięcznych składkach. To porównanie ilustruje praktyczne kompromisy.</p>\n    \n    <h3>Spostrzeżenia do Podejmowania Decyzji</h3>\n    <p>Te scenariusze pomagają w praktycznym podejmowaniu decyzji. Różnica między podejściami pokazuje, które czynniki mają największy wpływ na Twoje wyniki. Najskuteczniejsze strategie obejmują wczesne rozpoczęcie i utrzymanie przystępnych, zrównoważonych składek.</p>\n  ",
+      "community_insights": "Nie jesteś sam w swojej podróży {goal}. Oto czego nauczyliśmy się od tysięcy inwestorów o podobnych profilach i celach. Inwestorzy z podobnymi parametrami typowo osiągają swoje cele {goal} {successRate}% czasu gdy utrzymują konsekwentne składki. Najskuteczniejsi inwestorzy automatyzują swoje miesięczne składki i rzadko sprawdzają swoje portfele podczas zmienności rynku.",
+      "optimization_tips": "Dostrajanie strategii inwestycyjnej może znacząco wpłynąć na długoterminowe wyniki. Oto sprawdzone techniki optymalizacji dla Twojego planu {goal}. Rozważ dokonywanie miesięcznej składki na początku każdego miesiąca zamiast na końcu. Ustaw automatyczne roczne zwiększenia miesięcznej składki. Nawet skromne {escalationPercent}% roczne zwiększenie może podnieść końcową wartość portfela do {escalatedValue}.",
+      "market_context": "Zrozumienie dzisiejszego środowiska rynkowego i wzorców historycznych zapewnia cenny kontekst dla Twojej {timeHorizon}-letniej podróży inwestycyjnej {goal}. Dzisiejszy krajobraz inwestycyjny przedstawia inflację {currentInflation}%, stopy procentowe {currentInterestRates}% i zmienność rynku {marketVolatility}. Twój oczekiwany zwrot {annualReturn}% uwzględnia te obecne warunki przy jednoczesnym utrzymaniu długoterminowej perspektywy historycznej."
+    },
+    "seo": {
+      "defaultTitle": "Kalkulator Wartości Przyszłej Inwestycji - Zaplanuj Swój Wzrost Finansowy",
+      "defaultDescription": "Oblicz przyszłą wartość swojej inwestycji za pomocą naszego zaawansowanego kalkulatora odsetek składanych. Planuj scenariusze, wizualizuj wzrost i podejmuj świadome decyzje finansowe.",
+      "keywords": "kalkulator inwestycji, wartość przyszła, odsetki składane, planowanie finansowe, kalkulator emerytalny, wzrost inwestycji",
+      "scenarioTitle": "Scenariusz Inwestycyjny: {scenarioName} - Kalkulator Wartości Przyszłej",
+      "scenarioDescription": "Poznaj strategię inwestycyjną {scenarioName}: inwestycja początkowa {initialAmount}, miesięczne składki {monthlyContribution} przez {timeHorizon} lat z celem {annualReturn}% rocznego zwrotu.",
+      "goalTitle": "Kalkulator Inwestycji dla {goal} - Zaplanuj Swoją Strategię {goal}",
+      "goalDescription": "Oblicz i zoptymalizuj swoją strategię inwestycyjną dla {goal} za pomocą naszego specjalistycznego kalkulatora. Otrzymaj spersonalizowane prognozy i ekspercie spostrzeżenia.",
+      "shareTitle": "Sprawdź tę projekcję inwestycyjną: {futureValue} potencjalna wartość",
+      "shareDescription": "Zobacz jak inwestycja początkowa {initialAmount} plus miesięczne składki {monthlyContribution} może wzrosnąć do {futureValue} przez {timeHorizon} lat."
+    },
+    "goals": {
+      "retirement": "planowanie emerytury",
+      "house": "zakup domu",
+      "education": "finansowanie edukacji",
+      "emergency": "fundusz awaryjny",
+      "wealth": "budowanie bogactwa",
+      "general": "inwestycja ogólna",
+      "vacation": "oszczędności na wakacje",
+      "car": "zakup pojazdu",
+      "business": "inwestycja biznesowa",
+      "debt": "spłata długów"
+    },
+    "riskCategories": {
+      "conservative": "konserwatywna",
+      "moderate": "umiarkowana",
+      "aggressive": "agresywna",
+      "balanced": "zrównoważona"
+    },
+    "riskLevels": {
+      "low": "niskie",
+      "moderate": "umiarkowane",
+      "high": "wysokie",
+      "very_high": "bardzo wysokie"
+    },
+    "timeFrames": {
+      "short": "krótkoterminowe",
+      "medium": "średnioterminowe",
+      "long": "długoterminowe",
+      "very_long": "bardzo długoterminowe"
+    },
+    "marketConditions": {
+      "bull": "bycze",
+      "bear": "niedźwiedzie",
+      "neutral": "neutralne",
+      "volatile": "zmienne"
     }
   }
 }
