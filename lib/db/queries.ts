@@ -152,6 +152,52 @@ export async function updateScenarioViews(
     .where(and(eq(scenario.slug, slug), eq(scenario.locale, locale as any)))
 }
 
+// Update scenario
+export async function updateScenario(
+  slug: string,
+  locale: string,
+  updates: {
+    name?: string
+    description?: string
+    initialAmount?: number
+    monthlyContribution?: number
+    annualReturn?: number
+    timeHorizon?: number
+    tags?: string[]
+    isPublic?: boolean
+  }
+): Promise<Scenario> {
+  const [updatedScenario] = await db
+    .update(scenario)
+    .set({
+      name: updates.name,
+      description: updates.description,
+      initialAmount: updates.initialAmount?.toString(),
+      monthlyContribution: updates.monthlyContribution?.toString(),
+      annualReturn: updates.annualReturn?.toString(),
+      timeHorizon: updates.timeHorizon,
+      tags: updates.tags,
+      isPublic: updates.isPublic,
+      updatedAt: new Date(),
+    })
+    .where(and(eq(scenario.slug, slug), eq(scenario.locale, locale as any)))
+    .returning()
+
+  return updatedScenario
+}
+
+// Get predefined scenarios for a locale
+export async function getPredefinedScenarios(
+  locale: string
+): Promise<Scenario[]> {
+  return await db
+    .select()
+    .from(scenario)
+    .where(
+      and(eq(scenario.locale, locale as any), eq(scenario.isPredefined, true))
+    )
+}
+
 /**
  * UTILITY FUNCTIONS
  */
