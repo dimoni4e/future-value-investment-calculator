@@ -1,29 +1,9 @@
 import { MetadataRoute } from 'next'
 import { locales } from '@/i18n/request'
-import { getPredefinedScenarios } from '@/lib/db/queries'
-
-// This function fetches user-generated scenarios for the sitemap
-async function getUserGeneratedScenarios() {
-  try {
-    // In production, this would fetch from your database
-    // For now, we'll return an empty array since we're using in-memory storage
-    const response = await fetch(
-      `${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/api/scenarios`,
-      {
-        next: { revalidate: 3600 }, // Revalidate every hour
-      }
-    )
-
-    if (response.ok) {
-      const data = await response.json()
-      return data.scenarios || []
-    }
-  } catch (error) {
-    console.error('Error fetching user scenarios for sitemap:', error)
-  }
-
-  return []
-}
+import {
+  getPredefinedScenarios,
+  getUserGeneratedScenarios as getDbUserGeneratedScenarios,
+} from '@/lib/db/queries'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
@@ -86,19 +66,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // 4. User-generated scenarios - programmatic SEO gold mine
   try {
-    const userScenarios = await getUserGeneratedScenarios()
+    const userScenarios = await getDbUserGeneratedScenarios()
 
-    userScenarios.forEach((scenario: any) => {
-      locales.forEach((locale) => {
-        sitemapEntries.push({
-          url:
-            locale === 'en'
-              ? `${baseUrl}/scenario/${scenario.slug}`
-              : `${baseUrl}/${locale}/scenario/${scenario.slug}`,
-          lastModified: new Date(scenario.createdAt),
-          changeFrequency: 'monthly',
-          priority: 0.7, // Good priority for user scenarios
-        })
+    userScenarios.forEach((scenario) => {
+      sitemapEntries.push({
+        url:
+          scenario.locale === 'en'
+            ? `${baseUrl}/scenario/${scenario.slug}`
+            : `${baseUrl}/${scenario.locale}/scenario/${scenario.slug}`,
+        lastModified: scenario.updatedAt || scenario.createdAt || currentDate,
+        changeFrequency: 'monthly',
+        priority: 0.7, // Good priority for user scenarios
       })
     })
   } catch (error) {

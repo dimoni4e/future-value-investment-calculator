@@ -1,4 +1,4 @@
-import { eq, and, sql } from 'drizzle-orm'
+import { eq, and, sql, desc } from 'drizzle-orm'
 import { db } from './index'
 import { homeContent, pages, scenario } from './schema'
 import type { HomeContent, Page, Scenario } from './schema'
@@ -196,6 +196,28 @@ export async function getPredefinedScenarios(
     .where(
       and(eq(scenario.locale, locale as any), eq(scenario.isPredefined, true))
     )
+}
+
+// Get all user-generated (non-predefined) scenarios for sitemap
+export async function getUserGeneratedScenarios(): Promise<Scenario[]> {
+  return await db
+    .select()
+    .from(scenario)
+    .where(eq(scenario.isPredefined, false))
+    .orderBy(desc(scenario.createdAt))
+}
+
+// Get user-generated scenarios for a specific locale
+export async function getUserGeneratedScenariosByLocale(
+  locale: string
+): Promise<Scenario[]> {
+  return await db
+    .select()
+    .from(scenario)
+    .where(
+      and(eq(scenario.locale, locale as any), eq(scenario.isPredefined, false))
+    )
+    .orderBy(desc(scenario.createdAt))
 }
 
 /**
