@@ -107,7 +107,7 @@ export async function createScenario(scenarioData: {
     .insert(scenario)
     .values({
       slug: scenarioData.slug,
-      locale: scenarioData.locale as any,
+      locale: scenarioData.locale as 'en' | 'es' | 'pl',
       name: scenarioData.name,
       description: scenarioData.description,
       initialAmount: scenarioData.initialAmount.toString(),
@@ -118,6 +118,20 @@ export async function createScenario(scenarioData: {
       isPredefined: scenarioData.isPredefined || false,
       isPublic: scenarioData.isPublic || true,
       createdBy: scenarioData.createdBy || 'system',
+    })
+    .onConflictDoUpdate({
+      target: [scenario.slug, scenario.locale],
+      set: {
+        name: scenarioData.name,
+        description: scenarioData.description,
+        initialAmount: scenarioData.initialAmount.toString(),
+        monthlyContribution: scenarioData.monthlyContribution.toString(),
+        annualReturn: scenarioData.annualReturn.toString(),
+        timeHorizon: scenarioData.timeHorizon,
+        tags: scenarioData.tags || [],
+        isPublic: scenarioData.isPublic || true,
+        updatedAt: new Date(),
+      },
     })
     .returning()
 

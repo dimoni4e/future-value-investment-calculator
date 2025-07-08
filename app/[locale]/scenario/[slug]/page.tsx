@@ -5,6 +5,7 @@ import { calculateFutureValue, type InvestmentParameters } from '@/lib/finance'
 import type { Metadata } from 'next'
 import { PREDEFINED_SCENARIOS } from '@/lib/scenarios'
 import { parseSlugToScenario, detectInvestmentGoal } from '@/lib/scenarioUtils'
+import { createScenario, getScenarioBySlug } from '@/lib/db/queries'
 import LazyContentSection from '@/components/scenario/LazyContentSection'
 import PersonalizedInsights from '@/components/scenario/PersonalizedInsights'
 import MarketContext from '@/components/scenario/MarketContext'
@@ -18,7 +19,32 @@ export const dynamic = 'force-dynamic'
 
 // Get scenario data from predefined scenarios with fallback to slug parsing
 async function getScenarioData(slug: string, locale: string) {
-  // Primary: Check predefined scenarios
+  // First: Check database for user-generated scenarios
+  try {
+    const dbScenario = await getScenarioBySlug(slug, locale)
+    if (dbScenario) {
+      return {
+        scenario: {
+          id: dbScenario.slug,
+          name: dbScenario.name,
+          description: dbScenario.description || '',
+          params: {
+            initialAmount: parseInt(dbScenario.initialAmount),
+            monthlyContribution: parseInt(dbScenario.monthlyContribution),
+            annualReturn: parseFloat(dbScenario.annualReturn) / 100, // Convert percentage to decimal
+            timeHorizon: dbScenario.timeHorizon,
+          },
+          tags: dbScenario.tags,
+        },
+        source: 'database',
+        isUserGenerated: true,
+      }
+    }
+  } catch (error) {
+    console.error('Error checking database for scenario:', error)
+  }
+
+  // Second: Check predefined scenarios
   const predefinedScenario = PREDEFINED_SCENARIOS.find((s) => s.id === slug)
   if (predefinedScenario) {
     return {
@@ -34,7 +60,74 @@ async function getScenarioData(slug: string, locale: string) {
     }
   }
 
-  // Fallback: Try legacy API for user-generated scenarios (if any exist)
+  // Third: Try to parse the slug and save to database
+  try {
+    const parsedScenario = parseSlugToScenario(slug)
+    if (parsedScenario) {
+      const scenario = {
+        id: slug,
+        name: `Investment Plan: $${parsedScenario.initialAmount.toLocaleString()} + $${parsedScenario.monthlyContribution}/month`,
+        description: `Calculate investing $${parsedScenario.initialAmount.toLocaleString()} initially with $${parsedScenario.monthlyContribution} monthly contributions at ${parsedScenario.annualReturn}% annual return over ${parsedScenario.timeHorizon} years.`,
+        params: {
+          initialAmount: parsedScenario.initialAmount,
+          monthlyContribution: parsedScenario.monthlyContribution,
+          annualReturn: parsedScenario.annualReturn / 100, // Convert percentage to decimal
+          timeHorizon: parsedScenario.timeHorizon,
+        },
+        tags: [parsedScenario.goal],
+      }
+
+      // Save the parsed scenario to the database for future use
+      try {
+        console.log('🔄 Attempting to save scenario to database:', slug)
+        console.log('📝 Scenario data:', {
+          slug: slug,
+          name: scenario.name,
+          description: scenario.description,
+          initialAmount: scenario.params.initialAmount,
+          monthlyContribution: scenario.params.monthlyContribution,
+          annualReturn: scenario.params.annualReturn * 100,
+          timeHorizon: scenario.params.timeHorizon,
+          tags: scenario.tags,
+          locale: locale,
+        })
+
+        await createScenario({
+          slug: slug,
+          name: scenario.name,
+          description: scenario.description,
+          initialAmount: scenario.params.initialAmount,
+          monthlyContribution: scenario.params.monthlyContribution,
+          annualReturn: scenario.params.annualReturn * 100, // Convert back to percentage for storage
+          timeHorizon: scenario.params.timeHorizon,
+          tags: scenario.tags,
+          locale: locale,
+        })
+        console.log('✅ Saved parsed scenario to database:', slug)
+      } catch (dbError) {
+        console.error('❌ Error saving parsed scenario to database:', dbError)
+        console.error('❌ Error details:', {
+          name: dbError?.name || 'unknown',
+          message: dbError?.message || 'no message',
+          code: dbError?.code || 'no code',
+          detail: dbError?.detail || 'no detail',
+          constraint: dbError?.constraint || 'no constraint',
+          stack: dbError?.stack || 'no stack',
+        })
+        // Continue anyway, scenario will still work without being saved
+      }
+
+      return {
+        scenario,
+        source: 'slug',
+        isUserGenerated: true,
+      }
+    }
+  } catch (error) {
+    console.error('Error parsing scenario from slug:', error)
+  }
+
+  // Fourth: Fallback to legacy API for user-generated scenarios (if any exist)
   try {
     const response = await fetch(
       `${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/api/scenarios?slug=${slug}`,
@@ -66,31 +159,6 @@ async function getScenarioData(slug: string, locale: string) {
     }
   } catch (error) {
     console.error('Error fetching scenario from API:', error)
-  }
-
-  // Final fallback: Try to parse the slug directly
-  try {
-    const parsedScenario = parseSlugToScenario(slug)
-    if (parsedScenario) {
-      return {
-        scenario: {
-          id: slug,
-          name: `Investment Plan: $${parsedScenario.initialAmount.toLocaleString()} + $${parsedScenario.monthlyContribution}/month`,
-          description: `Calculate investing $${parsedScenario.initialAmount.toLocaleString()} initially with $${parsedScenario.monthlyContribution} monthly contributions at ${parsedScenario.annualReturn}% annual return over ${parsedScenario.timeHorizon} years.`,
-          params: {
-            initialAmount: parsedScenario.initialAmount,
-            monthlyContribution: parsedScenario.monthlyContribution,
-            annualReturn: parsedScenario.annualReturn / 100, // Convert percentage to decimal
-            timeHorizon: parsedScenario.timeHorizon,
-          },
-          tags: [parsedScenario.goal],
-        },
-        source: 'slug',
-        isUserGenerated: true,
-      }
-    }
-  } catch (error) {
-    console.error('Error parsing scenario from slug:', error)
   }
 
   return null
