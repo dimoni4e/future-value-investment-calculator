@@ -234,6 +234,25 @@ export async function getUserGeneratedScenariosByLocale(
     .orderBy(desc(scenario.createdAt))
 }
 
+// Get recent user-generated scenarios for homepage
+export async function getRecentScenarios(
+  locale: string,
+  limit: number = 6
+): Promise<Scenario[]> {
+  return await db
+    .select()
+    .from(scenario)
+    .where(
+      and(
+        eq(scenario.locale, locale as any),
+        eq(scenario.isPublic, true),
+        eq(scenario.isPredefined, false)
+      )
+    )
+    .orderBy(desc(scenario.createdAt))
+    .limit(limit)
+}
+
 /**
  * UTILITY FUNCTIONS
  */
