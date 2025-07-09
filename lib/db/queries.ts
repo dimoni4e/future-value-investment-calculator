@@ -212,12 +212,12 @@ export async function getPredefinedScenarios(
     )
 }
 
-// Get all user-generated (non-predefined) scenarios for sitemap
+// Get all user-generated (non-predefined) public scenarios for sitemap
 export async function getUserGeneratedScenarios(): Promise<Scenario[]> {
   return await db
     .select()
     .from(scenario)
-    .where(eq(scenario.isPredefined, false))
+    .where(and(eq(scenario.isPredefined, false), eq(scenario.isPublic, true)))
     .orderBy(desc(scenario.createdAt))
 }
 

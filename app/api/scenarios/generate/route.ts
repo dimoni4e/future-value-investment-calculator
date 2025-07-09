@@ -237,7 +237,11 @@ export async function POST(request: NextRequest) {
     const scenarioData = await generateScenarioContent(params, locale)
 
     // Trigger revalidation of the new page (Next.js ISR)
-    await revalidatePath(`/[locale]/scenario/${scenarioData.slug}`)
+    await revalidatePath(`/[locale]/scenario/${scenarioData.slug}`, 'page')
+    // Also revalidate the homepage to show the new scenario in "Latest Investment Scenarios"
+    await revalidatePath('/[locale]', 'page')
+    // Revalidate sitemap to include the new scenario
+    await revalidatePath('/sitemap.xml', 'page')
 
     return NextResponse.json({
       success: true,
