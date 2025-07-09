@@ -31,6 +31,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_BASE_URL || 'https://nature2pixel.com'
   ),
+  icons: {
+    icon: '/favicon.png',
+    apple: '/favicon.png',
+    shortcut: '/favicon.png',
+  },
   openGraph: {
     title: 'Financial Growth Planner - Plan Your Financial Future',
     description:

@@ -18,6 +18,9 @@ type Props = {
   // Removed searchParams for clean URLs
 }
 
+// Force revalidation on every request for the homepage to show the latest scenarios
+export const revalidate = 0
+
 export async function generateMetadata({
   params: { locale },
 }: Props): Promise<Metadata> {
@@ -55,7 +58,7 @@ export default async function HomePage({ params: { locale } }: Props) {
   // Get recent user-generated scenarios
   let recentScenarios = []
   try {
-    recentScenarios = await getRecentScenarios(locale, 6)
+    recentScenarios = await getRecentScenarios(locale, 36) // Increased from 6 to 36 to show more scenarios
   } catch (error) {
     console.error('Error fetching recent scenarios:', error)
   }

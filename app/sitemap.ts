@@ -5,6 +5,9 @@ import {
   getUserGeneratedScenarios as getDbUserGeneratedScenarios,
 } from '@/lib/db/queries'
 
+// Revalidate the sitemap on every request to ensure new scenarios are included
+export const revalidate = 0
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
   const currentDate = new Date()

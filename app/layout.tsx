@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: 'Future Value Investment Calculator',
   description:
     'Plan your financial future with our advanced compound interest calculator',
+  icons: {
+    icon: '/favicon.png',
+    apple: '/favicon.png',
+    shortcut: '/favicon.png',
+  },
 }
 
 export default function RootLayout({
