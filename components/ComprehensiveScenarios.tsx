@@ -169,7 +169,11 @@ export default async function ComprehensiveScenarios({
               return (
                 <Link
                   key={scenario.slug}
-                  href={`/${locale}/scenario/${scenario.slug}`}
+                  href={
+                    locale === 'en'
+                      ? `/scenario/${scenario.slug}`
+                      : `/${locale}/scenario/${scenario.slug}`
+                  }
                   className="bg-white/70 backdrop-blur-sm rounded-3xl p-6 border border-slate-200/50 shadow-xl hover:shadow-2xl transition-all duration-300 group"
                 >
                   <div className="flex items-center space-x-2 mb-4">

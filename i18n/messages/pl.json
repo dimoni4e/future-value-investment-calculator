@@ -202,6 +202,53 @@
     "description": "Odkryj sprawdzone scenariusze inwestycyjne od konserwatywnych planów emerytalnych po agresywne strategie wzrostu. Zainspiruj się i stwórz własną mapę drogową finansową.",
     "browseByCategory": "Przeglądaj według Kategorii",
     "expertCurated": "Scenariusze Wybrane przez Ekspertów",
+    "explorer": {
+      "title": "Eksplorator i Centrum Odkrywania Scenariuszy",
+      "subtitle": "Znajdź Idealną Strategię Inwestycyjną",
+      "description": "Szukaj, filtruj i odkrywaj scenariusze inwestycyjne dostosowane do Twoich celów i tolerancji ryzyka.",
+      "searchPlaceholder": "Szukaj scenariuszy po nazwie, opisie lub słowach kluczowych...",
+      "noResults": "Nie znaleziono scenariuszy spełniających Twoje kryteria.",
+      "resultsCount": "Znaleziono {count} scenariuszy",
+      "loadMore": "Załaduj Więcej Scenariuszy",
+      "filters": {
+        "title": "Filtry",
+        "clear": "Wyczyść Wszystkie",
+        "apply": "Zastosuj Filtry",
+        "categories": "Kategorie",
+        "scenarioType": "Typ Scenariusza",
+        "allTypes": "Wszystkie Typy",
+        "expertCurated": "Wybrane przez Ekspertów",
+        "userCreated": "Stworzone przez Użytkowników",
+        "investmentAmount": "Kwota Inwestycji",
+        "timeHorizon": "Horyzont Czasowy",
+        "expectedReturn": "Oczekiwany Zwrot",
+        "minAmount": "Min. Kwota",
+        "maxAmount": "Maks. Kwota",
+        "minYears": "Min. Lata",
+        "maxYears": "Maks. Lata",
+        "minReturn": "Min. Zwrot %",
+        "maxReturn": "Maks. Zwrot %"
+      },
+      "sorting": {
+        "title": "Sortuj według",
+        "newest": "Najnowsze",
+        "popular": "Najpopularniejsze",
+        "highestReturn": "Najwyższy Zwrot",
+        "highestAmount": "Najwyższa Kwota"
+      },
+      "trending": {
+        "title": "Trendy Tego Tygodnia",
+        "subtitle": "Najczęściej oglądane scenariusze w ciągu ostatnich 7 dni"
+      },
+      "quickFilters": {
+        "title": "Szybkie Filtry",
+        "retirement": "Emerytura",
+        "emergency": "Fundusz Awaryjny",
+        "house": "Oszczędności na Dom",
+        "education": "Edukacja",
+        "wealth": "Budowanie Majątku"
+      }
+    },
     "statistics": {
       "expertScenarios": "Scenariusze Ekspertów",
       "userCreated": "Stworzone przez Użytkowników",

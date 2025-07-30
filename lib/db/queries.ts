@@ -253,6 +253,175 @@ export async function getRecentScenarios(
     .limit(limit)
 }
 
+// Get scenarios with filtering and search capabilities
+export async function getScenariosWithFilters(
+  locale: string,
+  filters: {
+    search?: string
+    category?: string[]
+    minAmount?: number
+    maxAmount?: number
+    minTimeHorizon?: number
+    maxTimeHorizon?: number
+    minReturn?: number
+    maxReturn?: number
+    isPredefined?: boolean
+    sortBy?: 'newest' | 'popular' | 'return' | 'amount'
+    limit?: number
+    offset?: number
+  } = {}
+): Promise<{ scenarios: Scenario[]; total: number }> {
+  const conditions = [
+    eq(scenario.locale, locale as any),
+    eq(scenario.isPublic, true),
+  ]
+
+  // Filter by predefined status
+  if (filters.isPredefined !== undefined) {
+    conditions.push(eq(scenario.isPredefined, filters.isPredefined))
+  }
+
+  // Search in name and description
+  if (filters.search) {
+    const searchTerm = `%${filters.search.toLowerCase()}%`
+    conditions.push(
+      sql`(LOWER(${scenario.name}) LIKE ${searchTerm} OR LOWER(${scenario.description}) LIKE ${searchTerm})`
+    )
+  }
+
+  // Filter by category tags
+  if (filters.category && filters.category.length > 0) {
+    conditions.push(sql`${scenario.tags} && ${filters.category}`)
+  }
+
+  // Filter by initial amount range
+  if (filters.minAmount !== undefined) {
+    conditions.push(
+      sql`CAST(${scenario.initialAmount} AS DECIMAL) >= ${filters.minAmount}`
+    )
+  }
+  if (filters.maxAmount !== undefined) {
+    conditions.push(
+      sql`CAST(${scenario.initialAmount} AS DECIMAL) <= ${filters.maxAmount}`
+    )
+  }
+
+  // Filter by time horizon range
+  if (filters.minTimeHorizon !== undefined) {
+    conditions.push(sql`${scenario.timeHorizon} >= ${filters.minTimeHorizon}`)
+  }
+  if (filters.maxTimeHorizon !== undefined) {
+    conditions.push(sql`${scenario.timeHorizon} <= ${filters.maxTimeHorizon}`)
+  }
+
+  // Filter by return rate range
+  if (filters.minReturn !== undefined) {
+    conditions.push(
+      sql`CAST(${scenario.annualReturn} AS DECIMAL) >= ${filters.minReturn}`
+    )
+  }
+  if (filters.maxReturn !== undefined) {
+    conditions.push(
+      sql`CAST(${scenario.annualReturn} AS DECIMAL) <= ${filters.maxReturn}`
+    )
+  }
+
+  const whereClause = and(...conditions)
+
+  // Determine sort order
+  let orderBy
+  switch (filters.sortBy) {
+    case 'popular':
+      orderBy = desc(scenario.viewCount)
+      break
+    case 'return':
+      orderBy = desc(scenario.annualReturn)
+      break
+    case 'amount':
+      orderBy = desc(scenario.initialAmount)
+      break
+    case 'newest':
+    default:
+      orderBy = desc(scenario.createdAt)
+      break
+  }
+
+  // Build the scenarios query with all options at once
+  const scenariosQueryBuilder = db
+    .select()
+    .from(scenario)
+    .where(whereClause)
+    .orderBy(orderBy)
+
+  // Apply pagination if provided
+  const paginationOptions: any[] = []
+  if (filters.offset) paginationOptions.push(filters.offset)
+  if (filters.limit) paginationOptions.push(filters.limit)
+
+  const scenariosQuery =
+    paginationOptions.length === 2
+      ? scenariosQueryBuilder
+          .offset(paginationOptions[0])
+          .limit(paginationOptions[1])
+      : paginationOptions.length === 1 && filters.limit
+        ? scenariosQueryBuilder.limit(paginationOptions[0])
+        : scenariosQueryBuilder
+
+  const countQuery = db
+    .select({ count: sql`count(*)`.as('count') })
+    .from(scenario)
+    .where(whereClause)
+
+  const [scenarios, totalCount] = await Promise.all([
+    scenariosQuery,
+    countQuery,
+  ])
+
+  return {
+    scenarios,
+    total: Number(totalCount[0]?.count || 0),
+  }
+}
+
+// Get trending scenarios (most viewed recently)
+export async function getTrendingScenarios(
+  locale: string,
+  limit: number = 6
+): Promise<Scenario[]> {
+  return await db
+    .select()
+    .from(scenario)
+    .where(
+      and(
+        eq(scenario.locale, locale as any),
+        eq(scenario.isPublic, true),
+        sql`${scenario.updatedAt} > NOW() - INTERVAL '7 days'`
+      )
+    )
+    .orderBy(desc(scenario.viewCount))
+    .limit(limit)
+}
+
+// Get scenario categories/tags statistics
+export async function getScenarioCategories(
+  locale: string
+): Promise<Array<{ category: string; count: number }>> {
+  const result = await db
+    .select({
+      category: sql`unnest(${scenario.tags})`.as('category'),
+      count: sql`count(*)`.as('count'),
+    })
+    .from(scenario)
+    .where(and(eq(scenario.locale, locale as any), eq(scenario.isPublic, true)))
+    .groupBy(sql`unnest(${scenario.tags})`)
+    .orderBy(sql`count(*) DESC`)
+
+  return result.map((row) => ({
+    category: row.category as string,
+    count: Number(row.count),
+  }))
+}
+
 /**
  * UTILITY FUNCTIONS
  */

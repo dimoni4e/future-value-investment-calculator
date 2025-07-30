@@ -198,6 +198,53 @@
     "description": "Descubre escenarios de inversión probados desde planes conservadores de jubilación hasta estrategias agresivas de crecimiento. Inspírate y crea tu propia hoja de ruta financiera.",
     "browseByCategory": "Navegar por Categoría",
     "expertCurated": "Escenarios Seleccionados por Expertos",
+    "explorer": {
+      "title": "Explorador y Centro de Descubrimiento de Escenarios",
+      "subtitle": "Encuentra la Estrategia de Inversión Perfecta",
+      "description": "Busca, filtra y descubre escenarios de inversión adaptados a tus objetivos y tolerancia al riesgo.",
+      "searchPlaceholder": "Buscar escenarios por nombre, descripción o palabras clave...",
+      "noResults": "No se encontraron escenarios que coincidan con tus criterios.",
+      "resultsCount": "{count} escenarios encontrados",
+      "loadMore": "Cargar Más Escenarios",
+      "filters": {
+        "title": "Filtros",
+        "clear": "Limpiar Todo",
+        "apply": "Aplicar Filtros",
+        "categories": "Categorías",
+        "scenarioType": "Tipo de Escenario",
+        "allTypes": "Todos los Tipos",
+        "expertCurated": "Seleccionados por Expertos",
+        "userCreated": "Creados por Usuarios",
+        "investmentAmount": "Cantidad de Inversión",
+        "timeHorizon": "Horizonte Temporal",
+        "expectedReturn": "Retorno Esperado",
+        "minAmount": "Cantidad Mín.",
+        "maxAmount": "Cantidad Máx.",
+        "minYears": "Años Mín.",
+        "maxYears": "Años Máx.",
+        "minReturn": "Retorno Mín. %",
+        "maxReturn": "Retorno Máx. %"
+      },
+      "sorting": {
+        "title": "Ordenar por",
+        "newest": "Más Recientes",
+        "popular": "Más Populares",
+        "highestReturn": "Mayor Retorno",
+        "highestAmount": "Mayor Cantidad"
+      },
+      "trending": {
+        "title": "Tendencias de Esta Semana",
+        "subtitle": "Escenarios más vistos en los últimos 7 días"
+      },
+      "quickFilters": {
+        "title": "Filtros Rápidos",
+        "retirement": "Jubilación",
+        "emergency": "Fondo de Emergencia",
+        "house": "Ahorros para Casa",
+        "education": "Educación",
+        "wealth": "Construcción de Riqueza"
+      }
+    },
     "statistics": {
       "expertScenarios": "Escenarios de Expertos",
       "userCreated": "Creados por Usuarios",

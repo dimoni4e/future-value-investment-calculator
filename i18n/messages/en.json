@@ -198,6 +198,53 @@
     "description": "Discover proven investment scenarios from conservative retirement plans to aggressive growth strategies. Get inspired and create your own financial roadmap.",
     "browseByCategory": "Browse by Category",
     "expertCurated": "Expert-Curated Scenarios",
+    "explorer": {
+      "title": "Scenario Explorer & Discovery Hub",
+      "subtitle": "Find the Perfect Investment Strategy",
+      "description": "Search, filter, and discover investment scenarios tailored to your goals and risk tolerance.",
+      "searchPlaceholder": "Search scenarios by name, description, or keywords...",
+      "noResults": "No scenarios found matching your criteria.",
+      "resultsCount": "{count} scenarios found",
+      "loadMore": "Load More Scenarios",
+      "filters": {
+        "title": "Filters",
+        "clear": "Clear All",
+        "apply": "Apply Filters",
+        "categories": "Categories",
+        "scenarioType": "Scenario Type",
+        "allTypes": "All Types",
+        "expertCurated": "Expert Curated",
+        "userCreated": "User Created",
+        "investmentAmount": "Investment Amount",
+        "timeHorizon": "Time Horizon",
+        "expectedReturn": "Expected Return",
+        "minAmount": "Min Amount",
+        "maxAmount": "Max Amount",
+        "minYears": "Min Years",
+        "maxYears": "Max Years",
+        "minReturn": "Min Return %",
+        "maxReturn": "Max Return %"
+      },
+      "sorting": {
+        "title": "Sort by",
+        "newest": "Newest First",
+        "popular": "Most Popular",
+        "highestReturn": "Highest Return",
+        "highestAmount": "Highest Amount"
+      },
+      "trending": {
+        "title": "Trending This Week",
+        "subtitle": "Most viewed scenarios in the last 7 days"
+      },
+      "quickFilters": {
+        "title": "Quick Filters",
+        "retirement": "Retirement",
+        "emergency": "Emergency Fund",
+        "house": "House Savings",
+        "education": "Education",
+        "wealth": "Wealth Building"
+      }
+    },
     "statistics": {
       "expertScenarios": "Expert Scenarios",
       "userCreated": "User Created",

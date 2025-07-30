@@ -1,6 +1,11 @@
 import { getTranslations } from 'next-intl/server'
 import type { Metadata } from 'next'
-import { redirect } from 'next/navigation'
+import ScenarioExplorer from '@/components/ScenarioExplorer'
+import {
+  getScenariosWithFilters,
+  getTrendingScenarios,
+  getScenarioCategories,
+} from '@/lib/db/queries'
 
 interface Props {
   params: {
@@ -9,17 +14,33 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const t = await getTranslations('scenarios')
+  const t = await getTranslations('scenarios.explorer')
 
   return {
     title: t('title'),
     description: t('description'),
     keywords:
-      'investment scenarios, financial planning, retirement planning, wealth building, investment calculator',
+      'investment scenarios, financial planning, retirement planning, wealth building, investment calculator, scenario explorer',
   }
 }
 
 export default async function ScenariosPage({ params }: Props) {
-  // Redirect to the homepage which now contains the scenario explorer
-  redirect(`/${params.locale}`)
+  const { locale } = params
+
+  // Fetch initial data
+  const [initialScenarios, trendingScenarios, categories] = await Promise.all([
+    getScenariosWithFilters(locale, { limit: 12, sortBy: 'newest' }),
+    getTrendingScenarios(locale, 6),
+    getScenarioCategories(locale),
+  ])
+
+  return (
+    <ScenarioExplorer
+      locale={locale}
+      initialScenarios={initialScenarios.scenarios}
+      initialTotal={initialScenarios.total}
+      categories={categories}
+      trendingScenarios={trendingScenarios}
+    />
+  )
 }

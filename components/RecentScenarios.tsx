@@ -82,7 +82,7 @@ export function RecentScenarios({ locale, limit = 3 }: RecentScenariosProps) {
           Recent User Scenarios
         </h3>
         <Link
-          href={`/${locale}/my-scenarios`}
+          href={locale === 'en' ? '/my-scenarios' : `/${locale}/my-scenarios`}
           className="text-indigo-600 hover:text-indigo-700 text-sm font-medium"
         >
           View all →
@@ -102,7 +102,11 @@ export function RecentScenarios({ locale, limit = 3 }: RecentScenariosProps) {
         return (
           <Link
             key={scenario.id}
-            href={`/${locale}/scenario/${scenario.slug}`}
+            href={
+              locale === 'en'
+                ? `/scenario/${scenario.slug}`
+                : `/${locale}/scenario/${scenario.slug}`
+            }
             className="block bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
           >
             <div className="flex items-start justify-between">

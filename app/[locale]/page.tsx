@@ -311,7 +311,7 @@ export default async function HomePage({ params: { locale } }: Props) {
 
             <div className="text-center mt-12">
               <Link
-                href={`/${locale}/scenario`}
+                href={locale === 'en' ? '/scenario' : `/${locale}/scenario`}
                 className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-2xl transition-all duration-300 shadow-large hover:shadow-elegant hover:scale-105"
               >
                 <span>View All Scenarios</span>
@@ -344,7 +344,11 @@ export default async function HomePage({ params: { locale } }: Props) {
                 {recentScenarios.map((scenario) => (
                   <Link
                     key={scenario.id}
-                    href={`/${locale}/scenario/${scenario.slug}`}
+                    href={
+                      locale === 'en'
+                        ? `/scenario/${scenario.slug}`
+                        : `/${locale}/scenario/${scenario.slug}`
+                    }
                     className="group block"
                   >
                     <div className="bg-white rounded-3xl p-8 border border-slate-200/50 shadow-lg hover:shadow-xl transition-all duration-300 group-hover:scale-105">
