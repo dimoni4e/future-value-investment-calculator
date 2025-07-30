@@ -37,14 +37,14 @@ export async function InvestmentEducationSection({
             {/* Content */}
             <div className="space-y-6">
               <h3 className="text-2xl font-bold text-slate-900">
-                The Power of Compound Interest: Your Money's Best Friend
+                The Power of Compound Interest: Your Money&apos;s Best Friend
               </h3>
               <p className="text-slate-600 leading-relaxed">
-                Compound interest is often called the "eighth wonder of the
-                world" for good reason. Unlike simple interest, which only
-                calculates returns on your initial investment, compound interest
-                calculates returns on both your principal AND the interest
-                you've already earned.
+                Compound interest is often called the &ldquo;eighth wonder of
+                the world&rdquo; for good reason. Unlike simple interest, which
+                only calculates returns on your initial investment, compound
+                interest calculates returns on both your principal AND the
+                interest you&apos;ve already earned.
               </p>
               <p className="text-slate-600 leading-relaxed">
                 This creates a snowball effect where your money grows
