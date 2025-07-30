@@ -10,7 +10,14 @@ import { generateSEO, getDefaultSEO } from '@/lib/seo'
 import { decodeParamsFromUrl, validateParams } from '@/lib/urlState'
 import { calculateFutureValue } from '@/lib/finance'
 import { PREDEFINED_SCENARIOS } from '@/lib/scenarios'
-import { getRecentScenarios } from '@/lib/db/queries'
+import { getRecentScenarios, getHomeContent } from '@/lib/db/queries'
+import { SEOBenefitsSection } from '@/components/SEOBenefitsSection'
+import { HowItWorksSection } from '@/components/HowItWorksSection'
+import { InvestmentStrategiesSection } from '@/components/InvestmentStrategiesSection'
+import { AdvancedFeaturesSection } from '@/components/AdvancedFeaturesSection'
+import { FAQSection } from '@/components/FAQSection'
+import { InvestmentEducationSection } from '@/components/InvestmentEducationSection'
+import { ComparisonSection } from '@/components/ComparisonSection'
 import Link from 'next/link'
 
 type Props = {
@@ -24,25 +31,115 @@ export const revalidate = 0
 export async function generateMetadata({
   params: { locale },
 }: Props): Promise<Metadata> {
-  // Use default SEO data without URL parameters for clean URLs
-  const seoData = getDefaultSEO(locale)
+  try {
+    // Get enhanced SEO content from database
+    const homeContentData = await getHomeContent(locale as 'en' | 'pl' | 'es')
+    const seoContent: { [key: string]: string } = {}
+    homeContentData.forEach((item) => {
+      const key = `${item.section}_${item.key}`
+      seoContent[key] = item.value
+    })
 
-  return {
-    title: seoData.title,
-    description: seoData.description,
-    keywords: seoData.keywords.join(', '),
-    openGraph: {
-      title: seoData.openGraph.title,
-      description: seoData.openGraph.description,
-      type: 'website',
-      locale: locale,
-      siteName: 'Nature2Pixel Financial Tools',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: seoData.twitter.title,
-      description: seoData.twitter.description,
-    },
+    // Use database content with fallbacks
+    const seoData = getDefaultSEO(locale)
+
+    // Enhanced metadata with more comprehensive SEO
+    const baseUrl = 'https://nature2pixel.com'
+    const canonicalUrl = locale === 'en' ? baseUrl : `${baseUrl}/${locale}`
+
+    return {
+      title: seoContent.seo_meta_title || seoData.title,
+      description: seoContent.seo_meta_description || seoData.description,
+      keywords: seoContent.seo_keywords || seoData.keywords.join(', '),
+      authors: [{ name: 'Nature2Pixel Financial Tools' }],
+      creator: 'Nature2Pixel',
+      publisher: 'Nature2Pixel',
+      formatDetection: {
+        email: false,
+        address: false,
+        telephone: false,
+      },
+      category: 'Finance',
+      classification: 'Financial Tools',
+      robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+          index: true,
+          follow: true,
+          'max-video-preview': -1,
+          'max-image-preview': 'large',
+          'max-snippet': -1,
+        },
+      },
+      alternates: {
+        canonical: canonicalUrl,
+        languages: {
+          en: baseUrl,
+          es: `${baseUrl}/es`,
+          pl: `${baseUrl}/pl`,
+        },
+      },
+      openGraph: {
+        title: seoContent.seo_meta_title || seoData.openGraph.title,
+        description:
+          seoContent.seo_meta_description || seoData.openGraph.description,
+        type: 'website',
+        locale: locale,
+        siteName: 'Nature2Pixel Financial Tools',
+        url: canonicalUrl,
+        images: [
+          {
+            url: '/og-image.png',
+            width: 1200,
+            height: 630,
+            alt: 'Investment Calculator - Future Value & Compound Interest Calculator',
+          },
+        ],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        site: '@nature2pixel',
+        creator: '@nature2pixel',
+        title: seoContent.seo_meta_title || seoData.twitter.title,
+        description:
+          seoContent.seo_meta_description || seoData.twitter.description,
+        images: ['/og-image.png'],
+      },
+      other: {
+        'application-name': 'Investment Calculator',
+        'apple-mobile-web-app-title': 'Investment Calculator',
+        'theme-color': '#3B82F6',
+        'color-scheme': 'light',
+      },
+    }
+  } catch (error) {
+    console.error('Error generating metadata:', error)
+    // Fallback to default SEO if database fails
+    const seoData = getDefaultSEO(locale)
+    const baseUrl = 'https://nature2pixel.com'
+    const canonicalUrl = locale === 'en' ? baseUrl : `${baseUrl}/${locale}`
+
+    return {
+      title: seoData.title,
+      description: seoData.description,
+      keywords: seoData.keywords.join(', '),
+      alternates: {
+        canonical: canonicalUrl,
+      },
+      openGraph: {
+        title: seoData.openGraph.title,
+        description: seoData.openGraph.description,
+        type: 'website',
+        locale: locale,
+        siteName: 'Nature2Pixel Financial Tools',
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: seoData.twitter.title,
+        description: seoData.twitter.description,
+      },
+    }
   }
 }
 
@@ -423,6 +520,27 @@ export default async function HomePage({ params: { locale } }: Props) {
           </div>
         </section>
       )}
+
+      {/* How It Works Section */}
+      <HowItWorksSection locale={locale} />
+
+      {/* Investment Education Section */}
+      <InvestmentEducationSection locale={locale} />
+
+      {/* Comparison Section */}
+      <ComparisonSection locale={locale} />
+
+      {/* SEO Benefits Section */}
+      <SEOBenefitsSection locale={locale} />
+
+      {/* Investment Strategies Section */}
+      <InvestmentStrategiesSection locale={locale} />
+
+      {/* Advanced Features Section */}
+      <AdvancedFeaturesSection locale={locale} />
+
+      {/* FAQ Section */}
+      <FAQSection locale={locale} />
     </div>
   )
 }
