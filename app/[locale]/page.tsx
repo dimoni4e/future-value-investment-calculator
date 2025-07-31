@@ -11,13 +11,7 @@ import { decodeParamsFromUrl, validateParams } from '@/lib/urlState'
 import { calculateFutureValue } from '@/lib/finance'
 import { PREDEFINED_SCENARIOS } from '@/lib/scenarios'
 import { getRecentScenarios, getHomeContent } from '@/lib/db/queries'
-import { SEOBenefitsSection } from '@/components/SEOBenefitsSection'
-import { HowItWorksSection } from '@/components/HowItWorksSection'
-import { InvestmentStrategiesSection } from '@/components/InvestmentStrategiesSection'
-import { AdvancedFeaturesSection } from '@/components/AdvancedFeaturesSection'
-import { FAQSection } from '@/components/FAQSection'
-import { InvestmentEducationSection } from '@/components/InvestmentEducationSection'
-import { ComparisonSection } from '@/components/ComparisonSection'
+import { SEOContentSection } from '@/components/SEOContentSection'
 import Link from 'next/link'
 
 type Props = {
@@ -521,26 +515,8 @@ export default async function HomePage({ params: { locale } }: Props) {
         </section>
       )}
 
-      {/* How It Works Section */}
-      <HowItWorksSection locale={locale} />
-
-      {/* Investment Education Section */}
-      <InvestmentEducationSection locale={locale} />
-
-      {/* Comparison Section */}
-      <ComparisonSection locale={locale} />
-
-      {/* SEO Benefits Section */}
-      <SEOBenefitsSection locale={locale} />
-
-      {/* Investment Strategies Section */}
-      <InvestmentStrategiesSection locale={locale} />
-
-      {/* Advanced Features Section */}
-      <AdvancedFeaturesSection locale={locale} />
-
-      {/* FAQ Section */}
-      <FAQSection locale={locale} />
+      {/* Optimized SEO Content Sections */}
+      <SEOContentSection locale={locale} />
     </div>
   )
 }
