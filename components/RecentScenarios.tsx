@@ -79,13 +79,13 @@ export function RecentScenarios({ locale, limit = 3 }: RecentScenariosProps) {
     <div className="space-y-4">
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-lg font-semibold text-gray-900">
-          Recent User Scenarios
+          Popular Investment Scenarios
         </h3>
         <Link
-          href={locale === 'en' ? '/my-scenarios' : `/${locale}/my-scenarios`}
+          href={locale === 'en' ? '/scenario' : `/${locale}/scenario`}
           className="text-indigo-600 hover:text-indigo-700 text-sm font-medium"
         >
-          View all →
+          Explore all scenarios →
         </Link>
       </div>
 
