@@ -83,7 +83,7 @@ export async function SEOContentSection({ locale }: SEOContentSectionProps) {
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-2 bg-blue-50/80 text-blue-700 px-4 py-2 rounded-full text-sm font-medium border border-blue-200/50 mb-6 shadow-soft">
                 <span>📋</span>
-                <span>Simple Process</span>
+                <span>{content.badges_simple_process || 'Simple Process'}</span>
               </div>
               <h2 className="text-3xl lg:text-4xl font-bold font-playfair text-slate-900 mb-6">
                 {content.how_it_works_title}
@@ -150,7 +150,9 @@ export async function SEOContentSection({ locale }: SEOContentSectionProps) {
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-2 bg-emerald-50/80 text-emerald-700 px-4 py-2 rounded-full text-sm font-medium border border-emerald-200/50 mb-6 shadow-soft">
                 <span>💡</span>
-                <span>Expert Guidance</span>
+                <span>
+                  {content.badges_expert_guidance || 'Expert Guidance'}
+                </span>
               </div>
               <h2 className="text-3xl lg:text-4xl font-bold font-playfair text-slate-900 mb-6">
                 {content.strategies_title}
@@ -217,7 +219,9 @@ export async function SEOContentSection({ locale }: SEOContentSectionProps) {
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-2 bg-indigo-50/80 text-indigo-700 px-4 py-2 rounded-full text-sm font-medium border border-indigo-200/50 mb-6 shadow-soft">
                 <span>⚡</span>
-                <span>Powerful Features</span>
+                <span>
+                  {content.badges_powerful_features || 'Powerful Features'}
+                </span>
               </div>
               <h2 className="text-3xl lg:text-4xl font-bold font-playfair text-slate-900 mb-6">
                 {content.features_title}
@@ -299,7 +303,7 @@ export async function SEOContentSection({ locale }: SEOContentSectionProps) {
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-2 bg-slate-50/80 text-slate-700 px-4 py-2 rounded-full text-sm font-medium border border-slate-200/50 mb-6 shadow-soft">
                 <span>❓</span>
-                <span>Help Center</span>
+                <span>{content.badges_help_center || 'Help Center'}</span>
               </div>
               <h2 className="text-3xl lg:text-4xl font-bold font-playfair text-slate-900 mb-6">
                 {content.faq_title}
@@ -356,14 +360,17 @@ export async function SEOContentSection({ locale }: SEOContentSectionProps) {
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 bg-emerald-50/80 text-emerald-700 px-4 py-2 rounded-full text-sm font-medium border border-emerald-200/50 mb-6 shadow-soft">
               <span>🎓</span>
-              <span>Investment Education</span>
+              <span>
+                {content.badges_investment_education || 'Investment Education'}
+              </span>
             </div>
             <h2 className="text-3xl lg:text-4xl font-bold font-playfair text-slate-900 mb-6">
-              Understanding Investment Growth
+              {content.education_section_title ||
+                'Understanding Investment Growth'}
             </h2>
             <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-              Learn how compound interest and smart investing can transform your
-              financial future
+              {content.education_section_subtitle ||
+                'Learn how compound interest and smart investing can transform your financial future'}
             </p>
           </div>
 
@@ -372,43 +379,51 @@ export async function SEOContentSection({ locale }: SEOContentSectionProps) {
               {/* Content */}
               <div className="space-y-6">
                 <h3 className="text-2xl font-bold text-slate-900">
-                  The Power of Compound Interest: Your Money&apos;s Best Friend
+                  {content.education_compound_interest_title ||
+                    "The Power of Compound Interest: Your Money's Best Friend"}
                 </h3>
                 <p className="text-slate-600 leading-relaxed">
-                  Compound interest is often called the &ldquo;eighth wonder of
-                  the world&rdquo; for good reason. Unlike simple interest,
-                  which only calculates returns on your initial investment,
-                  compound interest calculates returns on both your principal
-                  AND the interest you&apos;ve already earned.
+                  {content.education_compound_description_1 ||
+                    'Compound interest is often called the "eighth wonder of the world" for good reason. Unlike simple interest, which only calculates returns on your initial investment, compound interest calculates returns on both your principal AND the interest you\'ve already earned.'}
                 </p>
                 <p className="text-slate-600 leading-relaxed">
-                  This creates a snowball effect where your money grows
-                  exponentially over time. The earlier you start investing and
-                  the longer you stay invested, the more dramatic this effect
-                  becomes. Even small, consistent contributions can grow into
-                  substantial wealth over decades.
+                  {content.education_compound_description_2 ||
+                    'This creates a snowball effect where your money grows exponentially over time. The earlier you start investing and the longer you stay invested, the more dramatic this effect becomes. Even small, consistent contributions can grow into substantial wealth over decades.'}
                 </p>
 
                 <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 border border-blue-200/50">
                   <h4 className="text-lg font-semibold text-blue-900 mb-3">
-                    Key Formula: A = P(1 + r/n)^(nt)
+                    {content.education_formula_title ||
+                      'Key Formula: A = P(1 + r/n)^(nt)'}
                   </h4>
                   <ul className="space-y-2 text-blue-800">
                     <li>
-                      <strong>A</strong> = Final amount
+                      <strong>
+                        {content.education_formula_a || 'A = Final amount'}
+                      </strong>
                     </li>
                     <li>
-                      <strong>P</strong> = Principal (initial investment)
+                      <strong>
+                        {content.education_formula_p ||
+                          'P = Principal (initial investment)'}
+                      </strong>
                     </li>
                     <li>
-                      <strong>r</strong> = Annual interest rate
+                      <strong>
+                        {content.education_formula_r ||
+                          'r = Annual interest rate'}
+                      </strong>
                     </li>
                     <li>
-                      <strong>n</strong> = Number of times interest compounds
-                      per year
+                      <strong>
+                        {content.education_formula_n ||
+                          'n = Number of times interest compounds per year'}
+                      </strong>
                     </li>
                     <li>
-                      <strong>t</strong> = Time in years
+                      <strong>
+                        {content.education_formula_t || 't = Time in years'}
+                      </strong>
                     </li>
                   </ul>
                 </div>
@@ -418,7 +433,8 @@ export async function SEOContentSection({ locale }: SEOContentSectionProps) {
               <div className="bg-white/70 backdrop-blur-sm rounded-3xl p-8 border border-slate-200/50 shadow-xl">
                 <div className="text-center">
                   <h4 className="text-xl font-semibold text-slate-900 mb-6">
-                    Real Example: $50K Starting Investment
+                    {content.education_example_title ||
+                      'Real Example: $50K Starting Investment'}
                   </h4>
 
                   <div className="grid grid-cols-2 gap-6">
@@ -427,7 +443,8 @@ export async function SEOContentSection({ locale }: SEOContentSectionProps) {
                         $50,000
                       </div>
                       <div className="text-sm text-slate-500">
-                        Initial Investment
+                        {content.education_example_initial_label ||
+                          'Initial Investment'}
                       </div>
                     </div>
                     <div className="text-center">
@@ -435,7 +452,8 @@ export async function SEOContentSection({ locale }: SEOContentSectionProps) {
                         $2,000
                       </div>
                       <div className="text-sm text-slate-500">
-                        Monthly Addition
+                        {content.education_example_monthly_label ||
+                          'Monthly Addition'}
                       </div>
                     </div>
                     <div className="text-center">
@@ -443,14 +461,17 @@ export async function SEOContentSection({ locale }: SEOContentSectionProps) {
                         7%
                       </div>
                       <div className="text-sm text-slate-500">
-                        Annual Return
+                        {content.education_example_return_label ||
+                          'Annual Return'}
                       </div>
                     </div>
                     <div className="text-center">
                       <div className="text-3xl font-bold text-orange-600 mb-2">
                         25
                       </div>
-                      <div className="text-sm text-slate-500">Time Horizon</div>
+                      <div className="text-sm text-slate-500">
+                        {content.education_example_time_label || 'Time Horizon'}
+                      </div>
                     </div>
                   </div>
 
@@ -458,7 +479,9 @@ export async function SEOContentSection({ locale }: SEOContentSectionProps) {
                     <div className="text-4xl font-bold text-green-600 mb-2">
                       $2,127,000
                     </div>
-                    <div className="text-sm text-slate-500">Final Value</div>
+                    <div className="text-sm text-slate-500">
+                      {content.education_example_result_label || 'Final Value'}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -471,12 +494,11 @@ export async function SEOContentSection({ locale }: SEOContentSectionProps) {
                   <span className="text-2xl">🌱</span>
                 </div>
                 <h4 className="text-lg font-semibold text-slate-900 mb-3">
-                  Start Early
+                  {content.education_tip_1_title || 'Start Early'}
                 </h4>
                 <p className="text-slate-600 text-sm leading-relaxed">
-                  Time is your greatest asset in investing. Starting even a few
-                  years earlier can mean hundreds of thousands more in your
-                  final portfolio due to compound growth.
+                  {content.education_tip_1_text ||
+                    'Time is your greatest asset in investing. Starting even a few years earlier can mean hundreds of thousands more in your final portfolio due to compound growth.'}
                 </p>
               </div>
 
@@ -485,12 +507,11 @@ export async function SEOContentSection({ locale }: SEOContentSectionProps) {
                   <span className="text-2xl">🎯</span>
                 </div>
                 <h4 className="text-lg font-semibold text-slate-900 mb-3">
-                  Be Consistent
+                  {content.education_tip_2_title || 'Be Consistent'}
                 </h4>
                 <p className="text-slate-600 text-sm leading-relaxed">
-                  Regular monthly contributions, even small ones, can lead to
-                  significant wealth accumulation. Consistency beats trying to
-                  time the market.
+                  {content.education_tip_2_text ||
+                    'Regular monthly contributions, even small ones, can lead to significant wealth accumulation. Consistency beats trying to time the market.'}
                 </p>
               </div>
 
@@ -499,12 +520,11 @@ export async function SEOContentSection({ locale }: SEOContentSectionProps) {
                   <span className="text-2xl">⏰</span>
                 </div>
                 <h4 className="text-lg font-semibold text-slate-900 mb-3">
-                  Think Long-Term
+                  {content.education_tip_3_title || 'Think Long-Term'}
                 </h4>
                 <p className="text-slate-600 text-sm leading-relaxed">
-                  The magic of compound interest truly shines over long periods.
-                  Stay invested through market ups and downs for maximum growth
-                  potential.
+                  {content.education_tip_3_text ||
+                    'The magic of compound interest truly shines over long periods. Stay invested through market ups and downs for maximum growth potential.'}
                 </p>
               </div>
             </div>
@@ -514,18 +534,20 @@ export async function SEOContentSection({ locale }: SEOContentSectionProps) {
           <div className="text-center mt-16">
             <div className="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-3xl p-8 text-white">
               <h3 className="text-2xl font-bold mb-4">
-                Ready to Calculate Your Investment Growth?
+                {content.education_cta_title ||
+                  'Ready to Calculate Your Investment Growth?'}
               </h3>
               <p className="text-indigo-100 mb-6 max-w-2xl mx-auto">
-                Use our advanced investment calculator to see how compound
-                interest can work for your specific financial situation. Input
-                your numbers and watch your wealth grow over time.
+                {content.education_cta_subtitle ||
+                  'Use our advanced investment calculator to see how compound interest can work for your specific financial situation. Input your numbers and watch your wealth grow over time.'}
               </p>
               <a
                 href="#calculator"
                 className="inline-flex items-center gap-2 bg-white text-indigo-600 font-semibold px-8 py-4 rounded-2xl hover:bg-indigo-50 transition-all duration-300 hover:scale-105 shadow-lg"
               >
-                <span>Start Calculating Now</span>
+                <span>
+                  {content.education_cta_button || 'Start Calculating Now'}
+                </span>
                 <svg
                   className="w-5 h-5"
                   fill="none"
@@ -551,14 +573,17 @@ export async function SEOContentSection({ locale }: SEOContentSectionProps) {
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 bg-blue-50/80 text-blue-700 px-4 py-2 rounded-full text-sm font-medium border border-blue-200/50 mb-6 shadow-soft">
               <span>⚖️</span>
-              <span>Smart Comparisons</span>
+              <span>
+                {content.badges_smart_comparisons || 'Smart Comparisons'}
+              </span>
             </div>
             <h2 className="text-3xl lg:text-4xl font-bold font-playfair text-slate-900 mb-6">
-              Investment Strategy Comparison
+              {content.comparison_section_title ||
+                'Investment Strategy Comparison'}
             </h2>
             <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-              See how different investment approaches can dramatically impact
-              your long-term wealth
+              {content.comparison_section_subtitle ||
+                'See how different investment approaches can dramatically impact your long-term wealth'}
             </p>
           </div>
 
@@ -572,20 +597,30 @@ export async function SEOContentSection({ locale }: SEOContentSectionProps) {
                     <span className="text-2xl">🛡️</span>
                   </div>
                   <h4 className="text-xl font-semibold text-slate-900 mb-4">
-                    Conservative
+                    {content.comparison_conservative_title || 'Conservative'}
                   </h4>
                   <div className="space-y-3 text-slate-600">
                     <div>
-                      <span className="font-medium">Return:</span> 4-5% annually
+                      <span className="font-medium">
+                        {content.comparison_return_label || 'Return:'}
+                      </span>{' '}
+                      {content.comparison_conservative_return ||
+                        '4-5% annually'}
                     </div>
                     <div>
-                      <span className="font-medium">Risk:</span> Low
+                      <span className="font-medium">
+                        {content.comparison_risk_label || 'Risk:'}
+                      </span>{' '}
+                      {content.comparison_conservative_risk || 'Low'}
                     </div>
                     <div>
-                      <span className="font-medium">$100K in 25 years:</span>
+                      <span className="font-medium">
+                        {content.comparison_result_label ||
+                          '$100K in 25 years:'}
+                      </span>
                     </div>
                     <div className="text-2xl font-bold text-blue-600">
-                      $266K
+                      {content.comparison_conservative_result || '$266K'}
                     </div>
                   </div>
                 </div>
@@ -596,20 +631,29 @@ export async function SEOContentSection({ locale }: SEOContentSectionProps) {
                     <span className="text-2xl">⚖️</span>
                   </div>
                   <h4 className="text-xl font-semibold text-slate-900 mb-4">
-                    Balanced
+                    {content.comparison_balanced_title || 'Balanced'}
                   </h4>
                   <div className="space-y-3 text-slate-600">
                     <div>
-                      <span className="font-medium">Return:</span> 6-7% annually
+                      <span className="font-medium">
+                        {content.comparison_return_label || 'Return:'}
+                      </span>{' '}
+                      {content.comparison_balanced_return || '6-7% annually'}
                     </div>
                     <div>
-                      <span className="font-medium">Risk:</span> Moderate
+                      <span className="font-medium">
+                        {content.comparison_risk_label || 'Risk:'}
+                      </span>{' '}
+                      {content.comparison_balanced_risk || 'Moderate'}
                     </div>
                     <div>
-                      <span className="font-medium">$100K in 25 years:</span>
+                      <span className="font-medium">
+                        {content.comparison_result_label ||
+                          '$100K in 25 years:'}
+                      </span>
                     </div>
                     <div className="text-2xl font-bold text-emerald-600">
-                      $429K
+                      {content.comparison_balanced_result || '$429K'}
                     </div>
                   </div>
                 </div>
@@ -620,21 +664,29 @@ export async function SEOContentSection({ locale }: SEOContentSectionProps) {
                     <span className="text-2xl">🚀</span>
                   </div>
                   <h4 className="text-xl font-semibold text-slate-900 mb-4">
-                    Aggressive
+                    {content.comparison_aggressive_title || 'Aggressive'}
                   </h4>
                   <div className="space-y-3 text-slate-600">
                     <div>
-                      <span className="font-medium">Return:</span> 8-10%
-                      annually
+                      <span className="font-medium">
+                        {content.comparison_return_label || 'Return:'}
+                      </span>{' '}
+                      {content.comparison_aggressive_return || '8-10% annually'}
                     </div>
                     <div>
-                      <span className="font-medium">Risk:</span> High
+                      <span className="font-medium">
+                        {content.comparison_risk_label || 'Risk:'}
+                      </span>{' '}
+                      {content.comparison_aggressive_risk || 'High'}
                     </div>
                     <div>
-                      <span className="font-medium">$100K in 25 years:</span>
+                      <span className="font-medium">
+                        {content.comparison_result_label ||
+                          '$100K in 25 years:'}
+                      </span>
                     </div>
                     <div className="text-2xl font-bold text-purple-600">
-                      $685K
+                      {content.comparison_aggressive_result || '$685K'}
                     </div>
                   </div>
                 </div>
@@ -645,32 +697,34 @@ export async function SEOContentSection({ locale }: SEOContentSectionProps) {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg">
                 <h4 className="text-lg font-semibold text-slate-900 mb-3">
-                  📊 Risk vs. Reward
+                  {content.comparison_risk_reward_title || '📊 Risk vs. Reward'}
                 </h4>
                 <p className="text-slate-600 text-sm leading-relaxed">
-                  Higher potential returns come with increased volatility. Your
-                  risk tolerance should match your investment timeline and
-                  financial goals.
+                  {content.comparison_risk_reward_text ||
+                    'Higher potential returns come with increased volatility. Your risk tolerance should match your investment timeline and financial goals.'}
                 </p>
               </div>
 
               <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg">
                 <h4 className="text-lg font-semibold text-slate-900 mb-3">
-                  ⏰ Time Horizon Matters
+                  {'⏰ '}
+                  {content.comparison_time_horizon_title ||
+                    'Time Horizon Matters'}
                 </h4>
                 <p className="text-slate-600 text-sm leading-relaxed">
-                  Longer investment periods allow for more aggressive
-                  strategies, as you have time to recover from market downturns.
+                  {content.comparison_time_horizon_text ||
+                    'Longer investment periods allow for more aggressive strategies, as you have time to recover from market downturns.'}
                 </p>
               </div>
 
               <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg">
                 <h4 className="text-lg font-semibold text-slate-900 mb-3">
-                  🎯 Diversification Benefits
+                  {content.comparison_diversification_title ||
+                    '🎯 Diversification Benefits'}
                 </h4>
                 <p className="text-slate-600 text-sm leading-relaxed">
-                  A balanced portfolio can help optimize the risk-return ratio,
-                  potentially offering better risk-adjusted returns.
+                  {content.comparison_diversification_text ||
+                    'A balanced portfolio can help optimize the risk-return ratio, potentially offering better risk-adjusted returns.'}
                 </p>
               </div>
             </div>

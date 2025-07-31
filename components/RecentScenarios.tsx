@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { Bookmark, TrendingUp, Eye, Calendar } from 'lucide-react'
 import { calculateFutureValue, type InvestmentParameters } from '@/lib/finance'
+import { getHomeContent } from '@/lib/db/queries'
 
 interface UserScenario {
   id: string
@@ -28,6 +29,22 @@ interface RecentScenariosProps {
 export function RecentScenarios({ locale, limit = 3 }: RecentScenariosProps) {
   const [scenarios, setScenarios] = useState<UserScenario[]>([])
   const [loading, setLoading] = useState(true)
+  const [content, setContent] = useState<{ [key: string]: string }>({})
+
+  // Fetch content from database
+  const fetchContent = useCallback(async () => {
+    try {
+      const homeContentData = await getHomeContent(locale as 'en' | 'pl' | 'es')
+      const contentMap: { [key: string]: string } = {}
+      homeContentData.forEach((item) => {
+        const key = `${item.section}_${item.key}`
+        contentMap[key] = item.value
+      })
+      setContent(contentMap)
+    } catch (error) {
+      console.error('Error fetching content:', error)
+    }
+  }, [locale])
 
   const fetchRecentScenarios = useCallback(async () => {
     try {
@@ -44,8 +61,9 @@ export function RecentScenarios({ locale, limit = 3 }: RecentScenariosProps) {
   }, [limit])
 
   useEffect(() => {
+    fetchContent()
     fetchRecentScenarios()
-  }, [limit, fetchRecentScenarios])
+  }, [limit, fetchRecentScenarios, fetchContent])
 
   if (loading) {
     return (
@@ -63,13 +81,15 @@ export function RecentScenarios({ locale, limit = 3 }: RecentScenariosProps) {
     return (
       <div className="text-center py-8">
         <Bookmark className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-        <p className="text-gray-600 mb-4">No user scenarios yet</p>
+        <p className="text-gray-600 mb-4">
+          {content.scenarios_no_scenarios || 'No user scenarios yet'}
+        </p>
         <Link
           href={`/${locale}`}
           className="inline-flex items-center text-indigo-600 hover:text-indigo-700 font-medium"
         >
           <TrendingUp className="w-4 h-4 mr-2" />
-          Create the first scenario
+          {content.scenarios_create_first || 'Create the first scenario'}
         </Link>
       </div>
     )
@@ -79,13 +99,13 @@ export function RecentScenarios({ locale, limit = 3 }: RecentScenariosProps) {
     <div className="space-y-4">
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-lg font-semibold text-gray-900">
-          Popular Investment Scenarios
+          {content.scenarios_popular_title || 'Popular Investment Scenarios'}
         </h3>
         <Link
           href={locale === 'en' ? '/scenario' : `/${locale}/scenario`}
           className="text-indigo-600 hover:text-indigo-700 text-sm font-medium"
         >
-          Explore all scenarios →
+          {content.scenarios_explore_all || 'Explore all scenarios →'}
         </Link>
       </div>
 
@@ -113,11 +133,11 @@ export function RecentScenarios({ locale, limit = 3 }: RecentScenariosProps) {
               <div className="flex-1">
                 <div className="flex items-center space-x-2 mb-2">
                   <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
-                    User Created
+                    {content.scenarios_user_created || 'User Created'}
                   </span>
                   <div className="flex items-center text-xs text-gray-500">
                     <Eye className="w-3 h-3 mr-1" />
-                    {scenario.views} views
+                    {scenario.views} {content.scenarios_views || 'views'}
                   </div>
                 </div>
 
@@ -133,14 +153,21 @@ export function RecentScenarios({ locale, limit = 3 }: RecentScenariosProps) {
 
                 <div className="flex items-center space-x-4 text-sm text-gray-500">
                   <span>
-                    ${scenario.params.initialAmount.toLocaleString()} initial
+                    ${scenario.params.initialAmount.toLocaleString()}{' '}
+                    {content.scenarios_initial || 'initial'}
                   </span>
                   <span>
-                    ${scenario.params.monthlyContribution.toLocaleString()}
-                    /month
+                    ${scenario.params.monthlyContribution.toLocaleString()}/
+                    {content.scenarios_monthly || 'month'}
                   </span>
-                  <span>{scenario.params.annualReturnRate}% return</span>
-                  <span>{scenario.params.timeHorizonYears} years</span>
+                  <span>
+                    {scenario.params.annualReturnRate}%{' '}
+                    {content.scenarios_return || 'return'}
+                  </span>
+                  <span>
+                    {scenario.params.timeHorizonYears}{' '}
+                    {content.scenarios_timeline || 'years'}
+                  </span>
                 </div>
               </div>
 

@@ -48,6 +48,10 @@ interface CalculatorInputs {
   timeHorizon: number
 }
 
+interface CalculatorFormProps {
+  content?: { [key: string]: string }
+}
+
 interface ValidationState {
   initialAmount: 'valid' | 'warning' | 'error' | 'neutral'
   monthlyContribution: 'valid' | 'warning' | 'error' | 'neutral'
@@ -74,7 +78,7 @@ interface CalculatorResults {
   }>
 }
 
-const CalculatorForm = () => {
+const CalculatorForm = ({ content = {} }: CalculatorFormProps) => {
   const [inputs, setInputs] = useState<CalculatorInputs>(DEFAULT_PARAMS)
   const [results, setResults] = useState<CalculatorResults | null>(null)
   const [isInitialized, setIsInitialized] = useState(false)
@@ -231,7 +235,8 @@ const CalculatorForm = () => {
           helperText = 'Consider adding an initial investment to see growth'
         } else if (value >= 100) {
           validationState = 'valid'
-          helperText = 'Good starting amount!'
+          helperText =
+            content.calculator_good_starting_amount || 'Good starting amount!'
         } else {
           validationState = 'neutral'
           helperText = 'Enter your initial investment amount'
@@ -247,7 +252,9 @@ const CalculatorForm = () => {
           helperText = 'Regular contributions accelerate growth'
         } else if (value >= 50) {
           validationState = 'valid'
-          helperText = 'Excellent! Regular investing builds wealth'
+          helperText =
+            content.calculator_excellent_regular_investing ||
+            'Excellent! Regular investing builds wealth'
         } else {
           validationState = 'neutral'
           helperText = 'Enter your monthly contribution'
@@ -263,7 +270,9 @@ const CalculatorForm = () => {
           helperText = 'Very high return rates are risky'
         } else if (value >= 5 && value <= 15) {
           validationState = 'valid'
-          helperText = 'Realistic return rate for long-term investing'
+          helperText =
+            content.calculator_realistic_return_rate ||
+            'Realistic return rate for long-term investing'
         } else {
           validationState = 'neutral'
           helperText = 'Expected annual return percentage'
@@ -279,10 +288,14 @@ const CalculatorForm = () => {
           helperText = 'Longer time horizons benefit from compound growth'
         } else if (value >= 10) {
           validationState = 'valid'
-          helperText = 'Great! Time is your best friend in investing'
+          helperText =
+            content.calculator_time_best_friend ||
+            'Great! Time is your best friend in investing'
         } else {
           validationState = 'neutral'
-          helperText = 'Investment time horizon in years'
+          helperText =
+            content.calculator_time_horizon_label ||
+            'Investment time horizon in years'
         }
         break
     }
@@ -551,7 +564,7 @@ const CalculatorForm = () => {
             onChange={(value) => handleInputChange('timeHorizon', value)}
             min={1}
             max={50}
-            suffix="years"
+            suffix={content.calculator_years_suffix || 'years'}
             icon={Target}
             field="timeHorizon"
             placeholder="20"
@@ -798,13 +811,17 @@ const CalculatorForm = () => {
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-slate-600">Years to goal</span>
+                  <span className="text-sm text-slate-600">
+                    {content.calculator_years_to_goal || 'Years to goal'}
+                  </span>
                   <span className="text-sm font-semibold text-slate-700">
                     {inputs.timeHorizon}
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-slate-600">Monthly growth</span>
+                  <span className="text-sm text-slate-600">
+                    {content.calculator_monthly_growth || 'Monthly growth'}
+                  </span>
                   <span className="text-sm font-semibold text-slate-700">
                     {formatCurrency(
                       results.totalGrowth / (inputs.timeHorizon * 12)
@@ -838,13 +855,17 @@ const CalculatorForm = () => {
                   <div className="text-sm font-semibold text-blue-600">
                     {inputs.annualReturn}%
                   </div>
-                  <div className="text-xs text-slate-500">Annual Return</div>
+                  <div className="text-xs text-slate-500">
+                    {content.calculator_annual_return || 'Annual Return'}
+                  </div>
                 </div>
                 <div>
                   <div className="text-sm font-semibold text-emerald-600">
                     {inputs.timeHorizon}y
                   </div>
-                  <div className="text-xs text-slate-500">Time Horizon</div>
+                  <div className="text-xs text-slate-500">
+                    {content.calculator_time_horizon || 'Time Horizon'}
+                  </div>
                 </div>
               </div>
             </div>
@@ -1035,32 +1056,43 @@ const CalculatorForm = () => {
                 </h4>
                 <div className="grid grid-cols-2 gap-3 text-sm">
                   <div className="bg-white/60 p-3 rounded-lg">
-                    <div className="text-slate-600">Initial Amount</div>
+                    <div className="text-slate-600">
+                      {content.calculator_initial_amount || 'Initial Amount'}
+                    </div>
                     <div className="font-semibold text-slate-900">
                       {formatCurrency(inputs.initialAmount)}
                     </div>
                   </div>
                   <div className="bg-white/60 p-3 rounded-lg">
-                    <div className="text-slate-600">Monthly</div>
+                    <div className="text-slate-600">
+                      {content.calculator_monthly || 'Monthly'}
+                    </div>
                     <div className="font-semibold text-slate-900">
                       {formatCurrency(inputs.monthlyContribution)}
                     </div>
                   </div>
                   <div className="bg-white/60 p-3 rounded-lg">
-                    <div className="text-slate-600">Annual Return</div>
+                    <div className="text-slate-600">
+                      {content.calculator_annual_return || 'Annual Return'}
+                    </div>
                     <div className="font-semibold text-slate-900">
                       {inputs.annualReturn}%
                     </div>
                   </div>
                   <div className="bg-white/60 p-3 rounded-lg">
-                    <div className="text-slate-600">Time Horizon</div>
+                    <div className="text-slate-600">
+                      {content.calculator_time_horizon || 'Time Horizon'}
+                    </div>
                     <div className="font-semibold text-slate-900">
-                      {inputs.timeHorizon} years
+                      {inputs.timeHorizon}{' '}
+                      {content.calculator_years_suffix || 'years'}
                     </div>
                   </div>
                 </div>
                 <div className="mt-4 p-3 bg-gradient-to-r from-emerald-100 to-blue-100 rounded-lg">
-                  <div className="text-sm text-slate-600">Future Value</div>
+                  <div className="text-sm text-slate-600">
+                    {content.calculator_future_value || 'Future Value'}
+                  </div>
                   <div className="text-lg font-bold text-slate-900">
                     {formatCurrency(results!.futureValue)}
                   </div>

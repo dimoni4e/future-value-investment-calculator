@@ -146,6 +146,14 @@ export default async function HomePage({ params: { locale } }: Props) {
   // Get content from database with fallback to static translations
   const dbContent = await getHomeContentData(locale)
 
+  // Get SEO content for badges
+  const homeContentData = await getHomeContent(locale as 'en' | 'pl' | 'es')
+  const seoContent: { [key: string]: string } = {}
+  homeContentData.forEach((item) => {
+    const key = `${item.section}_${item.key}`
+    seoContent[key] = item.value
+  })
+
   // Get recent user-generated scenarios
   let recentScenarios = []
   try {
@@ -301,7 +309,8 @@ export default async function HomePage({ params: { locale } }: Props) {
           <div className="text-center mb-16 animate-slide-in-up">
             <div className="inline-flex items-center gap-2 bg-blue-50/80 text-blue-700 px-4 py-2 rounded-full text-sm font-medium border border-blue-200/50 mb-6 shadow-soft">
               <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-              Investment Calculator
+              {seoContent.badges_investment_calculator ||
+                'Investment Calculator'}
             </div>
             <h2 className="text-3xl lg:text-4xl font-bold font-playfair text-slate-900 mb-6">
               {t('title')}
@@ -316,7 +325,7 @@ export default async function HomePage({ params: { locale } }: Props) {
               className="bg-white/90 rounded-3xl p-8 lg:p-12 shadow-elegant border border-slate-200/50 ring-1 ring-slate-900/5 backdrop-blur-sm hover:shadow-2xl transition-all duration-500 animate-scale-in"
               id="calculator"
             >
-              <CalculatorForm />
+              <CalculatorForm content={seoContent} />
             </div>
           </div>
         </div>
@@ -331,11 +340,22 @@ export default async function HomePage({ params: { locale } }: Props) {
               <span>Investment Scenarios</span>
             </div>
             <h2 className="text-3xl lg:text-4xl font-bold font-playfair text-slate-900 mb-6">
-              Expert-Curated Investment Plans
+              {getContentWithFallback(
+                dbContent,
+                'scenarios',
+                'expert_title',
+                'Expert-Curated Investment Plans',
+                locale
+              )}
             </h2>
             <p className="text-lg lg:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
-              Explore proven investment strategies tailored for different
-              financial goals and time horizons
+              {getContentWithFallback(
+                dbContent,
+                'scenarios',
+                'expert_subtitle',
+                'Explore proven investment strategies tailored for different financial goals and time horizons',
+                locale
+              )}
             </p>
           </div>
 
@@ -362,26 +382,58 @@ export default async function HomePage({ params: { locale } }: Props) {
                         <div className="text-2xl font-bold text-indigo-600">
                           ${scenario.params.initialAmount.toLocaleString()}
                         </div>
-                        <div className="text-xs text-slate-500">Initial</div>
+                        <div className="text-xs text-slate-500">
+                          {getContentWithFallback(
+                            dbContent,
+                            'scenarios',
+                            'initial_label',
+                            'Initial',
+                            locale
+                          )}
+                        </div>
                       </div>
                       <div>
                         <div className="text-2xl font-bold text-emerald-600">
                           $
                           {scenario.params.monthlyContribution.toLocaleString()}
                         </div>
-                        <div className="text-xs text-slate-500">Monthly</div>
+                        <div className="text-xs text-slate-500">
+                          {getContentWithFallback(
+                            dbContent,
+                            'scenarios',
+                            'monthly_label',
+                            'Monthly',
+                            locale
+                          )}
+                        </div>
                       </div>
                       <div>
                         <div className="text-2xl font-bold text-purple-600">
                           {scenario.params.annualReturn}%
                         </div>
-                        <div className="text-xs text-slate-500">Return</div>
+                        <div className="text-xs text-slate-500">
+                          {getContentWithFallback(
+                            dbContent,
+                            'scenarios',
+                            'return_label',
+                            'Return',
+                            locale
+                          )}
+                        </div>
                       </div>
                       <div>
                         <div className="text-2xl font-bold text-orange-600">
                           {scenario.params.timeHorizon}y
                         </div>
-                        <div className="text-xs text-slate-500">Timeline</div>
+                        <div className="text-xs text-slate-500">
+                          {getContentWithFallback(
+                            dbContent,
+                            'scenarios',
+                            'timeline_label',
+                            'Timeline',
+                            locale
+                          )}
+                        </div>
                       </div>
                     </div>
 
@@ -405,7 +457,15 @@ export default async function HomePage({ params: { locale } }: Props) {
                 href={locale === 'en' ? '/scenario' : `/${locale}/scenario`}
                 className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-2xl transition-all duration-300 shadow-large hover:shadow-elegant hover:scale-105"
               >
-                <span>View All Scenarios</span>
+                <span>
+                  {getContentWithFallback(
+                    dbContent,
+                    'scenarios',
+                    'view_all_scenarios',
+                    'View All Scenarios',
+                    locale
+                  )}
+                </span>
                 <TrendingUp className="w-5 h-5" />
               </Link>
             </div>
@@ -420,13 +480,27 @@ export default async function HomePage({ params: { locale } }: Props) {
             <div className="text-center mb-16 animate-slide-in-up">
               <div className="inline-flex items-center gap-2 bg-emerald-50/80 text-emerald-700 px-4 py-2 rounded-full text-sm font-medium border border-emerald-200/50 mb-6 shadow-soft">
                 <span>🌟</span>
-                <span>Recently Created</span>
+                <span>
+                  {seoContent.badges_recently_created || 'Recently Created'}
+                </span>
               </div>
               <h2 className="text-3xl lg:text-4xl font-bold font-playfair text-slate-900 mb-6">
-                Latest Investment Scenarios
+                {getContentWithFallback(
+                  dbContent,
+                  'scenarios',
+                  'latest_title',
+                  'Latest Investment Scenarios',
+                  locale
+                )}
               </h2>
               <p className="text-lg lg:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
-                Discover investment plans recently created by our community
+                {getContentWithFallback(
+                  dbContent,
+                  'scenarios',
+                  'latest_section_subtitle',
+                  'Discover investment plans recently created by our community',
+                  locale
+                )}
               </p>
             </div>
 
@@ -446,7 +520,13 @@ export default async function HomePage({ params: { locale } }: Props) {
                       <div className="mb-6">
                         <div className="flex items-center justify-between mb-3">
                           <span className="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-medium">
-                            User Created
+                            {getContentWithFallback(
+                              dbContent,
+                              'scenarios',
+                              'user_created_label',
+                              'User Created',
+                              locale
+                            )}
                           </span>
                           <span className="text-xs text-slate-400">
                             {new Date(scenario.createdAt).toLocaleDateString(
@@ -469,7 +549,15 @@ export default async function HomePage({ params: { locale } }: Props) {
                           <div className="text-2xl font-bold text-indigo-600">
                             ${parseInt(scenario.initialAmount).toLocaleString()}
                           </div>
-                          <div className="text-xs text-slate-500">Initial</div>
+                          <div className="text-xs text-slate-500">
+                            {getContentWithFallback(
+                              dbContent,
+                              'scenarios',
+                              'initial_label',
+                              'Initial',
+                              locale
+                            )}
+                          </div>
                         </div>
                         <div>
                           <div className="text-2xl font-bold text-emerald-600">
@@ -478,19 +566,43 @@ export default async function HomePage({ params: { locale } }: Props) {
                               scenario.monthlyContribution
                             ).toLocaleString()}
                           </div>
-                          <div className="text-xs text-slate-500">Monthly</div>
+                          <div className="text-xs text-slate-500">
+                            {getContentWithFallback(
+                              dbContent,
+                              'scenarios',
+                              'monthly_label',
+                              'Monthly',
+                              locale
+                            )}
+                          </div>
                         </div>
                         <div>
                           <div className="text-2xl font-bold text-purple-600">
                             {parseFloat(scenario.annualReturn)}%
                           </div>
-                          <div className="text-xs text-slate-500">Return</div>
+                          <div className="text-xs text-slate-500">
+                            {getContentWithFallback(
+                              dbContent,
+                              'scenarios',
+                              'return_label',
+                              'Return',
+                              locale
+                            )}
+                          </div>
                         </div>
                         <div>
                           <div className="text-2xl font-bold text-orange-600">
                             {scenario.timeHorizon}y
                           </div>
-                          <div className="text-xs text-slate-500">Timeline</div>
+                          <div className="text-xs text-slate-500">
+                            {getContentWithFallback(
+                              dbContent,
+                              'scenarios',
+                              'timeline_label',
+                              'Timeline',
+                              locale
+                            )}
+                          </div>
                         </div>
                       </div>
 
