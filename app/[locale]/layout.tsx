@@ -82,18 +82,13 @@ export default async function LocaleLayout({
   const messages = await getMessages({ locale })
 
   return (
-    <html
-      lang={locale}
-      className={`h-full ${inter.variable} ${playfair.variable}`}
-    >
-      <body className="h-full flex flex-col bg-gradient-to-br from-indigo-50 via-white to-cyan-50 font-sans antialiased">
-        <ServiceWorkerRegistration />
-        <NextIntlClientProvider messages={messages} locale={locale}>
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-indigo-50 via-white to-cyan-50 font-sans antialiased">
+      <ServiceWorkerRegistration />
+      <NextIntlClientProvider messages={messages} locale={locale}>
+        <Header />
+        <main className="flex-1">{children}</main>
+        <Footer />
+      </NextIntlClientProvider>
+    </div>
   )
 }

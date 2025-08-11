@@ -14,10 +14,8 @@ export default function GlobalError({
   }, [error])
 
   return (
-    <html>
-      <body>
-        <Error statusCode={undefined as any} />
-      </body>
-    </html>
+    <div>
+      <Error statusCode={undefined as any} />
+    </div>
   )
 }

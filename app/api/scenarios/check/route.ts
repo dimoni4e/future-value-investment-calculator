@@ -5,6 +5,10 @@ import {
   generateScenarioSlug,
 } from '@/lib/scenarioUtils'
 
+// Ensure this API route is always dynamic and uses Node.js runtime to avoid build-time bundling issues
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
+
 // In-memory storage (will be replaced with database later)
 const generatedScenarios = new Map<string, any>()
 const userScenarios = new Map<string, any>()

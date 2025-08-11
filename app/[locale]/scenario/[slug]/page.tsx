@@ -4,6 +4,7 @@ import { locales } from '@/i18n/request'
 import { calculateFutureValue, type InvestmentParameters } from '@/lib/finance'
 import type { Metadata } from 'next'
 import { PREDEFINED_SCENARIOS } from '@/lib/scenarios'
+import { generateSEO } from '@/lib/seo'
 import {
   parseSlugToScenario,
   detectInvestmentGoal,
@@ -18,6 +19,7 @@ import MarketContext from '@/components/scenario/MarketContext'
 import ComparativeAnalysis from '@/components/scenario/ComparativeAnalysis'
 import OptimizationTips from '@/components/scenario/OptimizationTips'
 import StructuredData from '@/components/scenario/StructuredData'
+import Link from 'next/link'
 import RelatedScenarios from '@/components/scenario/RelatedScenarios'
 
 // Force dynamic rendering to test if SSG is causing translation issues
@@ -224,9 +226,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   let title: string
   let description: string
-  let keywords: string =
-    seoMsgs.keywords ||
-    'investment calculator, future value, compound interest, financial planning, investment growth'
+  // Start with i18n-provided keywords (comma-separated) and normalize to an array
+  let keywordList: string[] = (
+    seoMsgs.keywords
+      ? String(seoMsgs.keywords)
+          .split(',')
+          .map((k: string) => k.trim())
+          .filter(Boolean)
+      : 'investment calculator, future value, compound interest, financial planning, investment growth'
+          .split(',')
+          .map((k) => k.trim())
+  ) as string[]
 
   if (scenarioData?.scenario) {
     // Prefer localized scenario name/description
@@ -253,6 +263,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       .replace('{monthlyContribution}', monthlyStr)
       .replace('{timeHorizon}', timeStr)
       .replace('{annualReturn}', annualPct)
+
+    // Enrich keywords programmatically based on scenario parameters
+    try {
+      const programmatic = generateSEO(
+        {
+          initialAmount: s.params.initialAmount,
+          monthlyContribution: s.params.monthlyContribution,
+          annualReturn: Number(annualPct), // percent
+          timeHorizon: s.params.timeHorizon,
+        },
+        undefined,
+        undefined,
+        locale
+      )
+      if (programmatic?.keywords?.length) {
+        keywordList = Array.from(
+          new Set([...keywordList, ...programmatic.keywords])
+        )
+      }
+    } catch (e) {
+      // noop – fall back to i18n keywords
+    }
   } else {
     // Fallback: parse slug to build localized meta
     const parsed = parseSlugToScenario(slug)
@@ -283,6 +315,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         .replace('{monthlyContribution}', monthlyStr)
         .replace('{timeHorizon}', timeStr)
         .replace('{annualReturn}', annualPct)
+
+      // Add programmatic keywords for parsed scenarios as well
+      try {
+        const programmatic = generateSEO(
+          {
+            initialAmount: parsed.initialAmount,
+            monthlyContribution: parsed.monthlyContribution,
+            annualReturn: Number(annualPct),
+            timeHorizon: parsed.timeHorizon,
+          },
+          undefined,
+          undefined,
+          locale
+        )
+        if (programmatic?.keywords?.length) {
+          keywordList = Array.from(
+            new Set([...keywordList, ...programmatic.keywords])
+          )
+        }
+      } catch (e) {
+        // noop
+      }
     } else {
       title =
         seoMsgs.defaultTitle ||
@@ -301,7 +355,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title,
     description,
-    keywords,
+    keywords: keywordList,
     alternates: {
       canonical:
         locale === 'en'
@@ -420,7 +474,7 @@ export default async function ScenarioPage({ params }: Props) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-cyan-50">
-      {/* Structured Data for SEO */}
+      {/* Structured Data for SEO (SSR) */}
       <StructuredData
         scenario={{
           id: scenario.id,
@@ -436,14 +490,47 @@ export default async function ScenarioPage({ params }: Props) {
         }}
         result={result}
         locale={params.locale}
-        source={source}
-        isUserGenerated={isUserGenerated}
       />
 
       {/* Hero Section with Scenario Info */}
-      <section className="relative py-16 lg:py-24">
+      <section className="relative py-12 lg:py-20">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
+            {/* Breadcrumbs */}
+            <nav
+              className="text-sm text-slate-500 mb-4"
+              aria-label="Breadcrumb"
+            >
+              <ol className="inline-flex items-center space-x-1">
+                <li>
+                  <Link
+                    href={params.locale === 'en' ? '/' : `/${params.locale}`}
+                    className="hover:text-slate-700"
+                  >
+                    {(messages as any)?.navigation?.home || 'Home'}
+                  </Link>
+                </li>
+                <li>
+                  <span className="px-1">/</span>
+                  <Link
+                    href={
+                      params.locale === 'en'
+                        ? '/scenario'
+                        : `/${params.locale}/scenario`
+                    }
+                    className="hover:text-slate-700"
+                  >
+                    {(messages as any)?.scenarios?.title || 'Scenarios'}
+                  </Link>
+                </li>
+                <li>
+                  <span className="px-1">/</span>
+                  <span className="text-slate-700">
+                    {translatedScenario.name}
+                  </span>
+                </li>
+              </ol>
+            </nav>
             <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-100 to-cyan-100 px-4 py-2 rounded-full text-indigo-700 text-sm font-medium mb-6">
               <span>📊</span>
               <span>
@@ -466,12 +553,13 @@ export default async function ScenarioPage({ params }: Props) {
               {translatedScenario.name}
             </h1>
 
-            <p className="text-xl text-slate-600 mb-8 max-w-2xl mx-auto">
+            <p className="text-lg lg:text-xl text-slate-600 mb-6 max-w-2xl mx-auto">
               {translatedScenario.description}
             </p>
 
             {/* Scenario Stats */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <h2 className="sr-only">Investment Metrics</h2>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
               <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50">
                 <div className="text-2xl font-bold text-indigo-600">
                   ${scenario.params.initialAmount.toLocaleString()}
@@ -510,7 +598,7 @@ export default async function ScenarioPage({ params }: Props) {
             </div>
 
             {/* Result Preview */}
-            <div className="bg-gradient-to-r from-emerald-500 to-cyan-500 text-white rounded-3xl p-8 mb-12">
+            <div className="bg-gradient-to-r from-emerald-500 to-cyan-500 text-white rounded-3xl p-8 mb-10">
               <h2 className="text-2xl font-bold mb-4">
                 {scenarioPage?.projectedResult || 'Projected Result'}
               </h2>
@@ -532,7 +620,7 @@ export default async function ScenarioPage({ params }: Props) {
       </section>
 
       {/* Interactive Calculator */}
-      <section className="py-16">
+      <section className="py-12">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-12">
@@ -540,7 +628,7 @@ export default async function ScenarioPage({ params }: Props) {
             </h2>
 
             <div className="text-center">
-              <p className="text-lg text-slate-600 mb-8">
+              <p className="text-lg text-slate-600 mb-6">
                 {scenarioPage?.customizeDescription ||
                   'Visit the main calculator to customize these parameters and explore different scenarios.'}
               </p>

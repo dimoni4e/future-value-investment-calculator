@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="h-full">
       <head>
         <script
           type="text/javascript"
@@ -40,6 +40,8 @@ export default function RootLayout({
             `,
           }}
         />
+      </head>
+      <body className="h-full antialiased">
         <noscript>
           <div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -50,8 +52,8 @@ export default function RootLayout({
             />
           </div>
         </noscript>
-      </head>
-      <body className="antialiased">{children}</body>
+        {children}
+      </body>
     </html>
   )
 }
