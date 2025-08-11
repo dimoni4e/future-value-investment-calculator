@@ -5,6 +5,7 @@ import { locales } from './i18n/request'
 // Custom middleware to handle redirects before intl middleware
 function handleRedirects(request: NextRequest): NextResponse | null {
   const { pathname } = request.nextUrl
+  const searchParams = request.nextUrl.searchParams
 
   // Redirect all /scenarios/* URLs to /scenario
   if (pathname.includes('/scenarios')) {
@@ -55,6 +56,24 @@ function handleRedirects(request: NextRequest): NextResponse | null {
     const url = request.nextUrl.clone()
     url.pathname = scenarioRedirects[pathname]
     return NextResponse.redirect(url, 301) // Permanent redirect
+  }
+
+  // Normalize calculator query params on home routes by stripping them
+  const isLocaleRoot =
+    pathname === '/' ||
+    pathname === '/pl' ||
+    pathname === '/es' ||
+    pathname === '/pl/' ||
+    pathname === '/es/'
+  if (isLocaleRoot) {
+    const hasCalcParams = ['initial', 'monthly', 'return', 'years'].some((k) =>
+      searchParams.has(k)
+    )
+    if (hasCalcParams) {
+      const url = request.nextUrl.clone()
+      url.search = ''
+      return NextResponse.redirect(url, 301)
+    }
   }
 
   return null // No redirect needed

@@ -253,6 +253,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title,
     description,
     keywords,
+    alternates: {
+      canonical:
+        locale === 'en'
+          ? `https://nature2pixel.com/scenario/${slug}`
+          : `https://nature2pixel.com/${locale}/scenario/${slug}`,
+      languages: {
+        en: `https://nature2pixel.com/scenario/${slug}`,
+        es: `https://nature2pixel.com/es/scenario/${slug}`,
+        pl: `https://nature2pixel.com/pl/scenario/${slug}`,
+      },
+    },
     openGraph: {
       title,
       description,
@@ -459,7 +470,7 @@ export default async function ScenarioPage({ params }: Props) {
                 explore different scenarios.
               </p>
               <a
-                href={`/${params.locale}?initial=${scenario.params.initialAmount}&monthly=${scenario.params.monthlyContribution}&return=${(scenario.params.annualReturn * 100).toFixed(1)}&years=${scenario.params.timeHorizon}`}
+                href={`${params.locale === 'en' ? '/' : `/${params.locale}`}#calculator`}
                 className="inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-700 hover:to-cyan-700 text-white px-8 py-4 rounded-2xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
               >
                 <span>Open Interactive Calculator</span>

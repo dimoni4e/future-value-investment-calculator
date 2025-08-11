@@ -15,12 +15,26 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const t = await getTranslations('scenarios.explorer')
+  const baseUrl = 'https://nature2pixel.com'
+  const canonical =
+    params.locale === 'en'
+      ? `${baseUrl}/scenario`
+      : `${baseUrl}/${params.locale}/scenario`
 
   return {
     title: t('title'),
     description: t('description'),
     keywords:
       'investment scenarios, financial planning, retirement planning, wealth building, investment calculator, scenario explorer',
+    alternates: {
+      canonical,
+      languages: {
+        'x-default': `${baseUrl}/scenario`,
+        en: `${baseUrl}/scenario`,
+        es: `${baseUrl}/es/scenario`,
+        pl: `${baseUrl}/pl/scenario`,
+      },
+    },
   }
 }
 

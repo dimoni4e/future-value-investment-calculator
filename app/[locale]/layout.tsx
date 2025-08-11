@@ -59,9 +59,6 @@ export const metadata: Metadata = {
       'Advanced financial growth planning platform with compound interest projections, scenario analysis, and interactive charts.',
     images: ['/api/og'],
   },
-  alternates: {
-    canonical: '/',
-  },
 }
 
 export const viewport = {

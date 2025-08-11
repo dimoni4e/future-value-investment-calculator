@@ -39,6 +39,7 @@ export async function generateMetadata({
 
     // Enhanced metadata with more comprehensive SEO
     const baseUrl = 'https://nature2pixel.com'
+
     const canonicalUrl = locale === 'en' ? baseUrl : `${baseUrl}/${locale}`
 
     return {
@@ -69,6 +70,7 @@ export async function generateMetadata({
       alternates: {
         canonical: canonicalUrl,
         languages: {
+          'x-default': baseUrl,
           en: baseUrl,
           es: `${baseUrl}/es`,
           pl: `${baseUrl}/pl`,
@@ -112,6 +114,7 @@ export async function generateMetadata({
     // Fallback to default SEO if database fails
     const seoData = getDefaultSEO(locale)
     const baseUrl = 'https://nature2pixel.com'
+
     const canonicalUrl = locale === 'en' ? baseUrl : `${baseUrl}/${locale}`
 
     return {
@@ -120,6 +123,12 @@ export async function generateMetadata({
       keywords: seoData.keywords.join(', '),
       alternates: {
         canonical: canonicalUrl,
+        languages: {
+          'x-default': baseUrl,
+          en: baseUrl,
+          es: `${baseUrl}/es`,
+          pl: `${baseUrl}/pl`,
+        },
       },
       openGraph: {
         title: seoData.openGraph.title,
