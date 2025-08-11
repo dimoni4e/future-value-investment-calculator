@@ -108,9 +108,16 @@ export default function LazyContentSection({
     rootMargin
   )
 
+  // Avoid hydration mismatch: render full content until the client hydrates,
+  // then apply lazy-loading behavior.
+  const [hydrated, setHydrated] = useState(false)
+  useEffect(() => {
+    setHydrated(true)
+  }, [])
+
   return (
     <div ref={ref} className={className}>
-      {hasBeenVisible || isVisible ? (
+      {!hydrated || hasBeenVisible || isVisible ? (
         <Suspense fallback={fallback}>{children}</Suspense>
       ) : (
         fallback
