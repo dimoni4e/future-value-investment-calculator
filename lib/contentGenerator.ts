@@ -470,7 +470,11 @@ function formatValue(key: string, value: any): string {
     key === 'realReturn' ||
     key === 'contributionPercentage'
   ) {
-    return `${value}%`
+    const num =
+      typeof value === 'number'
+        ? Math.round((value as number) * 10) / 10
+        : value
+    return `${num}%`
   }
 
   // Year formatting - but not for timeHorizon which is used in contexts like "{timeHorizon}-year"

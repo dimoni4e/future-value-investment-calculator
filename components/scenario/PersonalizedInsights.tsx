@@ -1,4 +1,5 @@
 import { type InvestmentParameters } from '@/lib/finance'
+import ScenarioSEOSection from '@/components/scenario/ScenarioSEOSection'
 import { TrendingUp, Target, Clock, BarChart3 } from 'lucide-react'
 
 interface PersonalizedInsightsProps {
@@ -26,6 +27,40 @@ export default function PersonalizedInsights({
     ((result.futureValue - totalInvested) / totalInvested) * 100
   const monthlyGrowth = result.totalGrowth / (params.timeHorizonYears * 12)
   const compoundEffect = result.futureValue / totalInvested
+
+  const headingMap: Record<
+    string,
+    {
+      overview: string
+      projection: string
+      strategy: string
+      insights: string
+      market: string
+    }
+  > = {
+    en: {
+      overview: 'Overview',
+      projection: 'Growth Projection',
+      strategy: 'Strategy Analysis',
+      insights: 'Investment Insights',
+      market: 'Market Context',
+    },
+    pl: {
+      overview: 'Przegląd',
+      projection: 'Prognoza wzrostu',
+      strategy: 'Analiza strategii',
+      insights: 'Wnioski inwestycyjne',
+      market: 'Kontekst rynkowy',
+    },
+    es: {
+      overview: 'Resumen',
+      projection: 'Proyección de crecimiento',
+      strategy: 'Análisis de estrategia',
+      insights: 'Ideas de inversión',
+      market: 'Contexto del mercado',
+    },
+  }
+  const headings = headingMap[locale] || headingMap.en
 
   return (
     <section className="py-16 bg-white/50 backdrop-blur-sm">
@@ -116,6 +151,34 @@ export default function PersonalizedInsights({
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Deeper analysis (Programmatic SEO content) */}
+          <div className="mt-16">
+            <div className="text-center mb-8">
+              <h4 className="text-2xl font-bold">
+                {translations?.deeperAnalysisTitle || 'Deeper Analysis'}
+              </h4>
+              <p className="text-slate-600">
+                {translations?.deeperAnalysisDescription ||
+                  'Personalized insights based on your inputs, including projections and strategy notes.'}
+              </p>
+            </div>
+
+            <ScenarioSEOSection
+              params={params}
+              // Round-related adjustments are handled inside ScenarioSEOSection
+              result={
+                {
+                  futureValue: result.futureValue,
+                  totalContributions: result.totalContributions,
+                  totalGrowth: result.totalGrowth,
+                  annualBreakdown: [],
+                } as any
+              }
+              locale={locale}
+              headings={headings}
+            />
           </div>
 
           {/* Investment Milestones */}

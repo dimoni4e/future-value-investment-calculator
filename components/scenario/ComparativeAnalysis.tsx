@@ -237,7 +237,7 @@ export default function ComparativeAnalysis({
 
             <div className="flex justify-center">
               <Link
-                href={`/${locale}#calculator`}
+                href={locale === 'en' ? '/scenario' : `/${locale}/scenario`}
                 className="inline-flex items-center space-x-2 bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-2xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
               >
                 <span>

@@ -19,6 +19,7 @@ import MarketContext from '@/components/scenario/MarketContext'
 import ComparativeAnalysis from '@/components/scenario/ComparativeAnalysis'
 import OptimizationTips from '@/components/scenario/OptimizationTips'
 import StructuredData from '@/components/scenario/StructuredData'
+import ScenarioSEOSection from '@/components/scenario/ScenarioSEOSection'
 import Link from 'next/link'
 import RelatedScenarios from '@/components/scenario/RelatedScenarios'
 
