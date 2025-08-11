@@ -4,8 +4,14 @@ import { locales } from '@/i18n/request'
 import { calculateFutureValue, type InvestmentParameters } from '@/lib/finance'
 import type { Metadata } from 'next'
 import { PREDEFINED_SCENARIOS } from '@/lib/scenarios'
-import { parseSlugToScenario, detectInvestmentGoal } from '@/lib/scenarioUtils'
+import {
+  parseSlugToScenario,
+  detectInvestmentGoal,
+  generateLocalizedScenarioName,
+  generateLocalizedScenarioDescription,
+} from '@/lib/scenarioUtils'
 import { createScenario, getScenarioBySlug } from '@/lib/db/queries'
+import { getSupportedLocales } from '@/lib/db/queries'
 import LazyContentSection from '@/components/scenario/LazyContentSection'
 import PersonalizedInsights from '@/components/scenario/PersonalizedInsights'
 import MarketContext from '@/components/scenario/MarketContext'
@@ -92,17 +98,34 @@ async function getScenarioData(slug: string, locale: string) {
           locale: locale,
         })
 
-        await createScenario({
-          slug: slug,
-          name: scenario.name,
-          description: scenario.description,
-          initialAmount: scenario.params.initialAmount,
-          monthlyContribution: scenario.params.monthlyContribution,
-          annualReturn: scenario.params.annualReturn * 100, // Convert back to percentage for storage
-          timeHorizon: scenario.params.timeHorizon,
-          tags: scenario.tags,
-          locale: locale,
-        })
+        // Insert for all supported locales so pages are available cross-locale immediately
+        const localesToCreate = getSupportedLocales()
+        for (const lc of localesToCreate) {
+          await createScenario({
+            slug,
+            name: generateLocalizedScenarioName(lc as 'en' | 'pl' | 'es', {
+              initialAmount: scenario.params.initialAmount,
+              monthlyContribution: scenario.params.monthlyContribution,
+              annualReturn: scenario.params.annualReturn * 100, // back to percent for name/desc generator
+              timeHorizon: scenario.params.timeHorizon,
+            }),
+            description: generateLocalizedScenarioDescription(
+              lc as 'en' | 'pl' | 'es',
+              {
+                initialAmount: scenario.params.initialAmount,
+                monthlyContribution: scenario.params.monthlyContribution,
+                annualReturn: scenario.params.annualReturn * 100, // percent
+                timeHorizon: scenario.params.timeHorizon,
+              }
+            ),
+            initialAmount: scenario.params.initialAmount,
+            monthlyContribution: scenario.params.monthlyContribution,
+            annualReturn: scenario.params.annualReturn * 100, // Convert back to percentage for storage
+            timeHorizon: scenario.params.timeHorizon,
+            tags: scenario.tags,
+            locale: lc,
+          })
+        }
         console.log('✅ Saved parsed scenario to database:', slug)
       } catch (dbError) {
         console.error('❌ Error saving parsed scenario to database:', dbError)
@@ -192,62 +215,88 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = params
 
-  // Try to get scenario data first
+  // Fetch localized messages and scenario data (DB-first)
+  const messages = (await getMessages({ locale })) as any
   const scenarioData = await getScenarioData(slug, locale)
+
+  // Pull SEO templates (fallback to English wording if missing)
+  const seoMsgs = messages?.content?.seo || {}
 
   let title: string
   let description: string
-  let keywords: string
+  let keywords: string =
+    seoMsgs.keywords ||
+    'investment calculator, future value, compound interest, financial planning, investment growth'
 
   if (scenarioData?.scenario) {
-    // Use scenario data if available
-    const { params: scenarioParams } = scenarioData.scenario
-    const goal = detectInvestmentGoal(scenarioParams)
+    // Prefer localized scenario name/description
+    const s = scenarioData.scenario
+    const annualPct = (s.params.annualReturn * 100).toFixed(0)
+    const initialStr = `$${s.params.initialAmount.toLocaleString()}`
+    const monthlyStr = `$${s.params.monthlyContribution}`
+    const timeStr = `${s.params.timeHorizon}`
 
-    const initial = scenarioParams.initialAmount
-    const monthly = scenarioParams.monthlyContribution
-    const rate = (scenarioParams.annualReturn * 100).toFixed(0)
-    const timeHorizon = scenarioParams.timeHorizon
+    // If predefined, try localized name/desc from messages; else use DB (already localized per-locale)
+    const predefined = messages?.scenarios?.predefinedScenarios?.[s.id]
+    const scenarioName = predefined?.name || s.name
 
-    title = `Invest $${initial.toLocaleString()} + $${monthly}/month at ${rate}% - ${timeHorizon} Year ${goal} Plan`
-    description = `Calculate investing $${initial.toLocaleString()} initially with $${monthly} monthly contributions at ${rate}% annual return over ${timeHorizon} years for your ${goal} goal. See detailed projections and optimization tips.`
-    keywords = `invest ${initial}, monthly ${monthly}, ${rate} percent return, ${timeHorizon} year investment, ${goal}, investment calculator, future value`
+    title = (
+      seoMsgs.scenarioTitle || 'Investment Scenario: {scenarioName}'
+    ).replace('{scenarioName}', scenarioName)
+
+    description = (
+      seoMsgs.scenarioDescription ||
+      'Explore the {scenarioName} investment strategy: {initialAmount} initial investment, {monthlyContribution} monthly contributions over {timeHorizon} years targeting {annualReturn}% annual return.'
+    )
+      .replace('{scenarioName}', scenarioName)
+      .replace('{initialAmount}', initialStr)
+      .replace('{monthlyContribution}', monthlyStr)
+      .replace('{timeHorizon}', timeStr)
+      .replace('{annualReturn}', annualPct)
   } else {
-    // Fallback: try parsing slug directly
-    const parsedScenario = parseSlugToScenario(slug)
+    // Fallback: parse slug to build localized meta
+    const parsed = parseSlugToScenario(slug)
+    if (parsed) {
+      const annualPct = parsed.annualReturn.toFixed(0)
+      const initialStr = `$${parsed.initialAmount.toLocaleString()}`
+      const monthlyStr = `$${parsed.monthlyContribution}`
+      const timeStr = `${parsed.timeHorizon}`
 
-    if (parsedScenario) {
-      const {
-        initialAmount,
-        monthlyContribution,
-        annualReturn,
-        timeHorizon,
-        goal,
-      } = parsedScenario
-      const rate = (annualReturn * 100).toFixed(0)
+      // Build a localized scenarioName using our helper
+      const scenarioName = generateLocalizedScenarioName(locale as any, {
+        initialAmount: parsed.initialAmount,
+        monthlyContribution: parsed.monthlyContribution,
+        annualReturn: parsed.annualReturn,
+        timeHorizon: parsed.timeHorizon,
+      })
 
-      title = `Invest $${initialAmount.toLocaleString()} + $${monthlyContribution}/month at ${rate}% - ${timeHorizon} Year ${goal} Plan`
-      description = `Calculate investing $${initialAmount.toLocaleString()} initially with $${monthlyContribution} monthly contributions at ${rate}% annual return over ${timeHorizon} years for your ${goal} goal. See detailed projections and optimization tips.`
-      keywords = `invest ${initialAmount}, monthly ${monthlyContribution}, ${rate} percent return, ${timeHorizon} year investment, ${goal}, investment calculator, future value`
+      title = (
+        seoMsgs.scenarioTitle || 'Investment Scenario: {scenarioName}'
+      ).replace('{scenarioName}', scenarioName)
+
+      description = (
+        seoMsgs.scenarioDescription ||
+        'Explore the {scenarioName} investment strategy: {initialAmount} initial investment, {monthlyContribution} monthly contributions over {timeHorizon} years targeting {annualReturn}% annual return.'
+      )
+        .replace('{scenarioName}', scenarioName)
+        .replace('{initialAmount}', initialStr)
+        .replace('{monthlyContribution}', monthlyStr)
+        .replace('{timeHorizon}', timeStr)
+        .replace('{annualReturn}', annualPct)
     } else {
-      // Generic fallback
-      title = 'Investment Scenario Calculator - Future Value Analysis'
+      title =
+        seoMsgs.defaultTitle ||
+        'Future Value Investment Calculator - Plan Your Financial Growth'
       description =
-        'Analyze your investment scenario with detailed projections, market insights, and optimization recommendations for long-term wealth building.'
-      keywords =
-        'investment calculator, future value, compound interest, financial planning, wealth building'
+        seoMsgs.defaultDescription ||
+        "Calculate your investment's future value with our advanced compound interest calculator."
     }
   }
 
-  // Ensure title is under 60 characters for SEO
-  if (title.length > 60) {
-    title = title.substring(0, 57) + '...'
-  }
-
-  // Ensure description is under 160 characters for SEO
-  if (description.length > 160) {
+  // Trim to SEO-friendly lengths
+  if (title.length > 60) title = title.substring(0, 57) + '...'
+  if (description.length > 160)
     description = description.substring(0, 157) + '...'
-  }
 
   return {
     title,
@@ -331,7 +380,33 @@ export default async function ScenarioPage({ params }: Props) {
     }
   }
 
-  const translatedScenario = getScenarioTranslation(scenario)
+  // Prefer localized name/description for user-generated or parsed scenarios
+  const translatedScenario = (() => {
+    if (isUserGenerated) {
+      // For DB-backed, use already-localized strings if present; otherwise generate on the fly
+      try {
+        const name = generateLocalizedScenarioName(params.locale as any, {
+          initialAmount: scenario.params.initialAmount,
+          monthlyContribution: scenario.params.monthlyContribution,
+          annualReturn: scenario.params.annualReturn * 100,
+          timeHorizon: scenario.params.timeHorizon,
+        })
+        const description = generateLocalizedScenarioDescription(
+          params.locale as any,
+          {
+            initialAmount: scenario.params.initialAmount,
+            monthlyContribution: scenario.params.monthlyContribution,
+            annualReturn: scenario.params.annualReturn * 100,
+            timeHorizon: scenario.params.timeHorizon,
+          }
+        )
+        return { name, description }
+      } catch {
+        return getScenarioTranslation(scenario)
+      }
+    }
+    return getScenarioTranslation(scenario)
+  })()
 
   // Pre-calculate results for static generation
   const investmentParams: InvestmentParameters = {
@@ -461,19 +536,22 @@ export default async function ScenarioPage({ params }: Props) {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-12">
-              Customize This Scenario
+              {scenarioPage?.customizeTitle || 'Customize This Scenario'}
             </h2>
 
             <div className="text-center">
               <p className="text-lg text-slate-600 mb-8">
-                Visit the main calculator to customize these parameters and
-                explore different scenarios.
+                {scenarioPage?.customizeDescription ||
+                  'Visit the main calculator to customize these parameters and explore different scenarios.'}
               </p>
               <a
                 href={`${params.locale === 'en' ? '/' : `/${params.locale}`}#calculator`}
                 className="inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-700 hover:to-cyan-700 text-white px-8 py-4 rounded-2xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
               >
-                <span>Open Interactive Calculator</span>
+                <span>
+                  {scenarioPage?.openCalculator ||
+                    'Open Interactive Calculator'}
+                </span>
               </a>
             </div>
           </div>

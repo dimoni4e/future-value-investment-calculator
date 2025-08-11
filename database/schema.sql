@@ -55,10 +55,10 @@ CREATE TABLE scenario (
 -- Create indexes for better performance
 CREATE INDEX idx_home_content_locale_section ON home_content(locale, section);
 CREATE INDEX idx_pages_locale_published ON pages(locale, published);
-CREATE INDEX idx_scenarios_locale_predefined ON scenarios(locale, is_predefined);
-CREATE INDEX idx_scenarios_public ON scenarios(is_public) WHERE is_public = true;
-CREATE INDEX idx_scenarios_tags ON scenarios USING GIN(tags);
-CREATE INDEX idx_scenarios_view_count ON scenarios(view_count DESC);
+CREATE INDEX idx_scenario_locale_predefined ON scenario(locale, is_predefined);
+CREATE INDEX idx_scenario_public ON scenario(is_public) WHERE is_public = true;
+CREATE INDEX idx_scenario_tags ON scenario USING GIN(tags);
+CREATE INDEX idx_scenario_view_count ON scenario(view_count DESC);
 
 -- Create updated_at trigger function
 CREATE OR REPLACE FUNCTION update_updated_at_column()
@@ -72,4 +72,4 @@ $$ language 'plpgsql';
 -- Create triggers for auto-updating updated_at
 CREATE TRIGGER update_home_content_updated_at BEFORE UPDATE ON home_content FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 CREATE TRIGGER update_pages_updated_at BEFORE UPDATE ON pages FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
-CREATE TRIGGER update_scenarios_updated_at BEFORE UPDATE ON scenarios FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+CREATE TRIGGER update_scenario_updated_at BEFORE UPDATE ON scenario FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();

@@ -10,6 +10,10 @@ const nextConfig = {
   images: {
     domains: ['nature2pixel.com'], // Production domain for image optimization
   },
+  experimental: {
+    // Disable instrumentationHook to avoid opentelemetry vendor chunk issues during local/dev
+    instrumentationHook: false,
+  },
   env: {
     // Define your environment variables here
     API_URL: process.env.API_URL,

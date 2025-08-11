@@ -6,11 +6,15 @@ const config: Config = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
+    '^.*app/api/scenarios/generate/route$':
+      '<rootDir>/app/api/scenarios/generate/route.ts',
+    '^next-intl/server$': '<rootDir>/__mocks__/next-intl-server-mock.ts',
   },
   testPathIgnorePatterns: [
     '<rootDir>/.next/',
     '<rootDir>/node_modules/',
     '<rootDir>/tests/',
+    '<rootDir>/__tests__/performance/web-vitals.test.ts',
   ],
   transformIgnorePatterns: ['node_modules/(?!(next-intl)/)'],
   collectCoverageFrom: [
@@ -30,6 +34,10 @@ const config: Config = {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
   transform: {
+    '^.+\\.(js|jsx|mjs)$': [
+      'babel-jest',
+      { presets: [['@babel/preset-env', { targets: { node: 'current' } }]] },
+    ],
     '^.+\\.(ts|tsx)$': [
       'ts-jest',
       {

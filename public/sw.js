@@ -13,7 +13,7 @@ const STATIC_ASSETS = [
   '/en',
   '/es',
   '/pl',
-  '/manifest.json',
+  '/manifest.webmanifest',
   '/favicon.ico',
   // Add critical CSS and JS files
   '/_next/static/css/',

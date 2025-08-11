@@ -203,6 +203,128 @@ export function generateScenarioName(params: CalculatorInputs): string {
 }
 
 /**
+ * Generates a locale-aware scenario name from parameters
+ * Example (en): Retirement Planning: $10,000 + $500/month
+ * Example (pl): Planowanie emerytalne: 10 000 $ + 500 $/mies.
+ * Example (es): Plan de jubilación: 10.000 US$ + 500 US$/mes
+ */
+export function generateLocalizedScenarioName(
+  locale: 'en' | 'pl' | 'es',
+  params: CalculatorInputs
+): string {
+  const goal = detectInvestmentGoal(params)
+
+  const goalNames: Record<
+    'en' | 'pl' | 'es',
+    Record<InvestmentGoal, string>
+  > = {
+    en: {
+      retirement: 'Retirement Planning',
+      emergency: 'Emergency Fund',
+      house: 'House Down Payment',
+      education: 'Education Fund',
+      wealth: 'Wealth Building',
+      vacation: 'Vacation Fund',
+      starter: 'Starter Investment',
+      investment: 'Investment Plan',
+    },
+    pl: {
+      retirement: 'Planowanie emerytalne',
+      emergency: 'Fundusz awaryjny',
+      house: 'Wkład własny na dom',
+      education: 'Fundusz edukacyjny',
+      wealth: 'Budowanie majątku',
+      vacation: 'Fundusz wakacyjny',
+      starter: 'Inwestycja startowa',
+      investment: 'Plan inwestycyjny',
+    },
+    es: {
+      retirement: 'Plan de jubilación',
+      emergency: 'Fondo de emergencia',
+      house: 'Entrada para vivienda',
+      education: 'Fondo educativo',
+      wealth: 'Construcción de patrimonio',
+      vacation: 'Fondo de vacaciones',
+      starter: 'Inversión inicial',
+      investment: 'Plan de inversión',
+    },
+  }
+
+  const nf = new Intl.NumberFormat(
+    locale === 'en' ? 'en-US' : locale === 'pl' ? 'pl-PL' : 'es-ES',
+    { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }
+  )
+
+  const perMonth: Record<'en' | 'pl' | 'es', string> = {
+    en: 'month',
+    pl: 'mies.',
+    es: 'mes',
+  }
+
+  return `${goalNames[locale][goal]}: ${nf.format(params.initialAmount)} + ${nf.format(params.monthlyContribution)}/${perMonth[locale]}`
+}
+
+/**
+ * Generates a localized short description suitable for DB and previews
+ */
+export function generateLocalizedScenarioDescription(
+  locale: 'en' | 'pl' | 'es',
+  params: CalculatorInputs
+): string {
+  const nf0 = new Intl.NumberFormat(
+    locale === 'en' ? 'en-US' : locale === 'pl' ? 'pl-PL' : 'es-ES',
+    { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }
+  )
+
+  const t = (key: string) => {
+    const dict: Record<'en' | 'pl' | 'es', Record<string, string>> = {
+      en: {
+        intro: 'Explore the investment strategy',
+        initial: 'initial investment',
+        monthly: 'monthly contributions',
+        over: 'over',
+        years: 'years',
+        targeting: 'targeting',
+        annual: 'annual return',
+      },
+      pl: {
+        intro: 'Poznaj strategię inwestycyjną',
+        initial: 'inwestycja początkowa',
+        monthly: 'miesięczne składki',
+        over: 'przez',
+        years: 'lat',
+        targeting: 'z celem',
+        annual: 'rocznego zwrotu',
+      },
+      es: {
+        intro: 'Explora la estrategia de inversión',
+        initial: 'inversión inicial',
+        monthly: 'contribuciones mensuales',
+        over: 'durante',
+        years: 'años',
+        targeting: 'con objetivo de',
+        annual: 'de rendimiento anual',
+      },
+    }
+    return dict[locale][key]
+  }
+
+  const initial = nf0.format(params.initialAmount)
+  const monthly = nf0.format(params.monthlyContribution)
+  const rate = params.annualReturn.toFixed(0)
+  const years = params.timeHorizon
+
+  if (locale === 'pl') {
+    return `${t('intro')}: ${t('initial')} ${initial}, ${t('monthly')} ${monthly} ${t('over')} ${years} ${t('years')} ${t('targeting')} ${rate}% ${t('annual')}.`
+  }
+  if (locale === 'es') {
+    return `${t('intro')}: ${t('initial')} de ${initial}, ${t('monthly')} de ${monthly} ${t('over')} ${years} ${t('years')} ${t('targeting')} ${rate}% ${t('annual')}.`
+  }
+  // en default
+  return `${t('intro')}: ${initial} ${t('initial')}, ${monthly} ${t('monthly')} ${t('over')} ${years} ${t('years')} ${t('targeting')} ${rate}% ${t('annual')}.`
+}
+
+/**
  * Generates SEO meta description from parameters
  */
 export function generateMetaDescription(params: CalculatorInputs): string {
