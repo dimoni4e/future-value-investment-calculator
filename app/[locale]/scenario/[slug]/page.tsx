@@ -471,7 +471,12 @@ export default async function ScenarioPage({ params }: Props) {
     timeHorizonYears: scenario.params.timeHorizon,
   }
 
-  const result = calculateFutureValue(investmentParams)
+  // calculateFutureValue expects annualReturnRate as a percentage (e.g., 7 for 7%),
+  // while our app-wide params use decimal (e.g., 0.07). Convert here for accuracy.
+  const result = calculateFutureValue({
+    ...investmentParams,
+    annualReturnRate: investmentParams.annualReturnRate * 100,
+  })
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-cyan-50">

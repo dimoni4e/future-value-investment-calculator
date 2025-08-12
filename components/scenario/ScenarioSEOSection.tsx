@@ -1,6 +1,12 @@
 import { generatePersonalizedContent } from '@/lib/contentGenerator'
 import { detectInvestmentGoal } from '@/lib/scenarioUtils'
-import { InvestmentParameters, InvestmentResult } from '@/lib/finance'
+import {
+  InvestmentParameters,
+  InvestmentResult,
+  calculateFutureValue,
+} from '@/lib/finance'
+import LazyContentSection from '@/components/scenario/LazyContentSection'
+import OptimizedGrowthChart from '@/components/OptimizedGrowthChart'
 
 interface ScenarioSEOSectionProps {
   params: InvestmentParameters
@@ -50,6 +56,25 @@ export default async function ScenarioSEOSection({
     locale
   )
 
+  // Build chart data from annual breakdown (compute if not provided)
+  const breakdown =
+    result &&
+    Array.isArray(result.annualBreakdown) &&
+    result.annualBreakdown.length > 0
+      ? result.annualBreakdown
+      : calculateFutureValue({
+          ...params,
+          // calculateFutureValue expects percentage; params use decimal
+          annualReturnRate: params.annualReturnRate * 100,
+        }).annualBreakdown
+
+  const chartData = breakdown.map((b) => ({
+    year: b.year,
+    totalValue: b.totalValue,
+    contributions: b.contributions,
+    growth: b.growth,
+  }))
+
   return (
     <section
       id="seo-content"
@@ -87,6 +112,25 @@ export default async function ScenarioSEOSection({
                   __html: sections.growth_projection,
                 }}
               />
+
+              {/* Growth chart (lazy-loaded for performance) */}
+              <div className="mt-6 not-prose">
+                <LazyContentSection
+                  // Use chart's own skeleton via a minimal placeholder box
+                  fallback={
+                    <div className="w-full h-80 bg-slate-100 rounded-xl animate-pulse" />
+                  }
+                  rootMargin="200px"
+                >
+                  <div className="bg-white border border-slate-200/60 rounded-xl p-4 shadow-sm w-full">
+                    <OptimizedGrowthChart
+                      data={chartData}
+                      height={320}
+                      enableAnimations
+                    />
+                  </div>
+                </LazyContentSection>
+              </div>
               <hr className="my-10 border-slate-200/60" />
             </div>
           )}

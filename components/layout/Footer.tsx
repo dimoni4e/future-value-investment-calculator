@@ -9,11 +9,15 @@ import {
   Linkedin,
   Heart,
 } from 'lucide-react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 
 export function Footer() {
   const tLayout = useTranslations('layout')
   const tFooter = useTranslations('footer')
+  const locale = useLocale()
+
+  const withLocale = (path: string) =>
+    locale === 'en' ? path : `/${locale}${path}`
 
   return (
     <footer className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-300">
@@ -36,6 +40,80 @@ export function Footer() {
             <p className="text-slate-400 text-sm max-w-md leading-relaxed mb-8">
               {tFooter('description')}
             </p>
+          </div>
+
+          {/* Navigation */}
+          <div>
+            <h3 className="text-slate-200 font-semibold mb-4">
+              {tFooter('navigation')}
+            </h3>
+            <ul className="space-y-3 text-sm">
+              <li>
+                <Link
+                  href={locale === 'en' ? '/' : `/${locale}`}
+                  className="text-slate-400 hover:text-white transition-colors"
+                >
+                  {tFooter('home') || 'Home'}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={withLocale('/about')}
+                  className="text-slate-400 hover:text-white transition-colors"
+                >
+                  {tFooter('aboutUs')}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={withLocale('/scenario')}
+                  className="text-slate-400 hover:text-white transition-colors"
+                >
+                  {tFooter('scenarioPlanning')}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={withLocale('/help')}
+                  className="text-slate-400 hover:text-white transition-colors"
+                >
+                  {tFooter('helpFaq')}
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Legal */}
+          <div>
+            <h3 className="text-slate-200 font-semibold mb-4">
+              {tFooter('legal')}
+            </h3>
+            <ul className="space-y-3 text-sm">
+              <li>
+                <Link
+                  href={withLocale('/legal/privacy')}
+                  className="text-slate-400 hover:text-white transition-colors"
+                >
+                  {tFooter('privacyPolicy')}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={withLocale('/legal/terms')}
+                  className="text-slate-400 hover:text-white transition-colors"
+                >
+                  {tFooter('termsOfService')}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={withLocale('/legal/cookies')}
+                  className="text-slate-400 hover:text-white transition-colors"
+                >
+                  {tFooter('cookiePolicy')}
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
 

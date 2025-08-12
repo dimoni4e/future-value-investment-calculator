@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { InvestmentParameters } from '@/lib/finance'
 import { PREDEFINED_SCENARIOS, ScenarioConfig } from '@/lib/scenarios'
 import { generateScenarioSlug, detectInvestmentGoal } from '@/lib/scenarioUtils'
+import { useTranslations } from 'next-intl'
 
 interface RelatedScenario {
   id: string
@@ -204,6 +205,7 @@ export default function RelatedScenarios({
   locale,
   maxResults = 6,
 }: RelatedScenariosProps) {
+  const t = useTranslations('scenarios.related')
   const [relatedScenarios, setRelatedScenarios] = useState<RelatedScenario[]>(
     []
   )
@@ -268,11 +270,10 @@ export default function RelatedScenarios({
           {/* Section Header */}
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold font-playfair bg-gradient-to-r from-indigo-600 to-cyan-600 bg-clip-text text-transparent mb-4">
-              People Also Calculated
+              {t('title')}
             </h2>
             <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-              Explore similar investment scenarios and see how different
-              parameters affect your potential returns
+              {t('subtitle')}
             </p>
           </div>
 
@@ -289,10 +290,26 @@ export default function RelatedScenarios({
                   <div className="mb-4">
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-xs font-medium text-indigo-600 bg-indigo-50 px-2 py-1 rounded-full">
-                        {scenario.reason}
+                        {(
+                          {
+                            'Similar initial amount': t(
+                              'reasons.similarInitial'
+                            ),
+                            'Different monthly contribution': t(
+                              'reasons.differentMonthly'
+                            ),
+                            'Different time horizon': t(
+                              'reasons.differentTime'
+                            ),
+                            'Different return rate': t(
+                              'reasons.differentReturn'
+                            ),
+                            'Same goal category': t('reasons.sameGoal'),
+                          } as Record<string, string>
+                        )[scenario.reason] || scenario.reason}
                       </span>
                       <span className="text-xs text-slate-500">
-                        {Math.round(scenario.similarity * 100)}% similar
+                        {Math.round(scenario.similarity * 100)}% {t('similar')}
                       </span>
                     </div>
                     <h3 className="text-lg font-semibold text-slate-900 group-hover:text-indigo-600 transition-colors">
@@ -306,27 +323,35 @@ export default function RelatedScenarios({
                   {/* Scenario Parameters */}
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
-                      <span className="text-slate-600">Initial:</span>
+                      <span className="text-slate-600">
+                        {t('labels.initial')}:
+                      </span>
                       <span className="font-medium text-slate-900">
                         ${scenario.params.initialAmount.toLocaleString()}
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-600">Monthly:</span>
+                      <span className="text-slate-600">
+                        {t('labels.monthly')}:
+                      </span>
                       <span className="font-medium text-slate-900">
                         ${scenario.params.monthlyContribution.toLocaleString()}
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-600">Return:</span>
+                      <span className="text-slate-600">
+                        {t('labels.return')}:
+                      </span>
                       <span className="font-medium text-slate-900">
                         {scenario.params.annualReturnRate}%
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-600">Timeline:</span>
+                      <span className="text-slate-600">
+                        {t('labels.timeline')}:
+                      </span>
                       <span className="font-medium text-slate-900">
-                        {scenario.params.timeHorizonYears} years
+                        {scenario.params.timeHorizonYears} {t('labels.years')}
                       </span>
                     </div>
                   </div>
@@ -334,7 +359,7 @@ export default function RelatedScenarios({
                   {/* Call to Action */}
                   <div className="mt-4 pt-4 border-t border-slate-100">
                     <span className="text-sm font-medium text-indigo-600 group-hover:text-indigo-700 transition-colors">
-                      View This Scenario →
+                      {t('viewScenario')} →
                     </span>
                   </div>
                 </div>
@@ -345,11 +370,11 @@ export default function RelatedScenarios({
           {/* View More Link */}
           <div className="text-center mt-12">
             <Link
-              href={`/${locale}`}
+              href={locale === 'en' ? '/' : `/${locale}`}
               className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-cyan-600 text-white px-8 py-3 rounded-xl font-medium hover:from-indigo-700 hover:to-cyan-700 transition-all duration-300"
             >
               <span>🧮</span>
-              Create Your Own Scenario
+              {t('createYourOwn')}
             </Link>
           </div>
         </div>

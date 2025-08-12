@@ -10,8 +10,7 @@
   "navigation": {
     "home": "Strona główna",
     "about": "O nas",
-    "contact": "Kontakt",
-    "getStarted": "Rozpocznij"
+    "contact": "Kontakt"
   },
   "hero": {
     "badge": "Profesjonalne Planowanie Inwestycji",
@@ -93,7 +92,16 @@
     "year": "Rok",
     "totalValue": "Łączna Wartość",
     "totalContributions": "Łączne Składki",
-    "investmentGrowth": "Wzrost Inwestycji"
+    "investmentGrowth": "Wzrost Inwestycji",
+    "contributions": "Składki",
+    "growth": "Wzrost",
+    "noData": "Brak dostępnych danych",
+    "types": {
+      "area": "Obszarowy",
+      "line": "Liniowy",
+      "bar": "Słupkowy",
+      "pie": "Kołowy"
+    }
   },
   "footer": {
     "rights": "Wszelkie prawa zastrzeżone",
@@ -203,8 +211,8 @@
     "browseByCategory": "Przeglądaj według Kategorii",
     "expertCurated": "Scenariusze Wybrane przez Ekspertów",
     "explorer": {
-      "title": "Eksplorator i Centrum Odkrywania Scenariuszy",
-      "subtitle": "Znajdź Idealną Strategię Inwestycyjną",
+      "title": "Eksplorator Scenariuszy Inwestycyjnych",
+      "subtitle": "Centrum odkrywania i analizy",
       "description": "Szukaj, filtruj i odkrywaj scenariusze inwestycyjne dostosowane do Twoich celów i tolerancji ryzyka.",
       "searchPlaceholder": "Szukaj scenariuszy po nazwie, opisie lub słowach kluczowych...",
       "noResults": "Nie znaleziono scenariuszy spełniających Twoje kryteria.",
@@ -380,7 +388,9 @@
       "tryOptimizations": "Wypróbuj te optymalizacje",
       "customizeTitle": "Dopasuj ten scenariusz",
       "customizeDescription": "Odwiedź główny kalkulator, aby dostosować parametry i eksplorować inne scenariusze.",
-      "openCalculator": "Otwórz interaktywny kalkulator"
+      "openCalculator": "Otwórz interaktywny kalkulator",
+      "deeperAnalysisTitle": "Dogłębna analiza",
+      "deeperAnalysisDescription": "Spersonalizowane spostrzeżenia oparte na Twoich danych wejściowych, w tym projekcje i uwagi strategiczne."
     },
     "predefinedScenarios": {
       "starter-10k-500-7-10": {
@@ -412,6 +422,27 @@
       "title": "Gotowy na Stworzenie Własnego Scenariusza?",
       "description": "Użyj naszej bezpłatnej kalkulatora inwestycji, aby zamodelować swoją przyszłość finansową i podzielić się strategią z innymi.",
       "button": "Zacznij Liczyć"
+    },
+    "related": {
+      "title": "Inni również obliczali",
+      "subtitle": "Odkryj podobne scenariusze inwestycyjne i zobacz, jak różne parametry wpływają na potencjalne wyniki",
+      "reasons": {
+        "similarInitial": "Podobna kwota początkowa",
+        "differentMonthly": "Inna miesięczna składka",
+        "differentTime": "Inny horyzont czasowy",
+        "differentReturn": "Inna stopa zwrotu",
+        "sameGoal": "Ta sama kategoria celu"
+      },
+      "similar": "podobne",
+      "labels": {
+        "initial": "Początkowy",
+        "monthly": "Miesięczny",
+        "return": "Zwrot",
+        "timeline": "Oś czasu",
+        "years": "lata"
+      },
+      "viewScenario": "Zobacz ten scenariusz",
+      "createYourOwn": "Stwórz własny scenariusz"
     }
   },
   "content": {

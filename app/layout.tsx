@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import { headers } from 'next/headers'
 
 export const metadata: Metadata = {
   title: 'Future Value Investment Calculator',
@@ -18,8 +19,10 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  // Align <html lang> with the active locale from next-intl middleware
+  const locale = headers().get('x-next-intl-locale') || 'en'
   return (
-    <html lang="en" className="h-full">
+    <html lang={locale} className="h-full">
       <head>
         <script
           type="text/javascript"

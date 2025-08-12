@@ -11,7 +11,6 @@ INSERT INTO home_content (locale, section, key, value) VALUES
 ('es', 'navigation', 'home', 'Inicio'),
 ('es', 'navigation', 'about', 'Acerca de'),
 ('es', 'navigation', 'contact', 'Contacto'),
-('es', 'navigation', 'getStarted', 'Comenzar'),
 
 -- Hero section
 ('es', 'hero', 'badge', 'Planificación de Inversiones Profesional'),
@@ -43,7 +42,6 @@ INSERT INTO home_content (locale, section, key, value) VALUES
 ('pl', 'navigation', 'home', 'Strona główna'),
 ('pl', 'navigation', 'about', 'O nas'),
 ('pl', 'navigation', 'contact', 'Kontakt'),
-('pl', 'navigation', 'getStarted', 'Rozpocznij'),
 
 -- Hero section
 ('pl', 'hero', 'badge', 'Profesjonalne Planowanie Inwestycji'),

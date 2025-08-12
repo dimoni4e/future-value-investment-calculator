@@ -3,13 +3,17 @@
 import Link from 'next/link'
 import { TrendingUp, Calculator, Menu, X, Sparkles } from 'lucide-react'
 import { useState } from 'react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const t = useTranslations('navigation')
   const tLayout = useTranslations('layout')
+  const locale = useLocale()
+
+  const withLocale = (path: string) =>
+    locale === 'en' ? path : `/${locale}${path}`
 
   return (
     <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-slate-200/50 shadow-sm">
@@ -17,7 +21,7 @@ export function Header() {
         <nav className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link
-            href="/"
+            href={locale === 'en' ? '/' : `/${locale}`}
             className="flex items-center space-x-3 text-slate-900 hover:text-indigo-600 transition-all duration-300 group"
           >
             <div className="relative">
@@ -40,28 +44,24 @@ export function Header() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1">
-            <Link href="/">
+            <Link href={locale === 'en' ? '/' : `/${locale}`}>
               <button className="flex items-center space-x-2 px-4 py-2.5 text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl transition-all duration-200 font-medium">
                 <Calculator className="w-4 h-4" />
                 <span>{t('home')}</span>
               </button>
             </Link>
-            <Link href="/about">
+            <Link href={withLocale('/about')}>
               <button className="px-4 py-2.5 text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl transition-all duration-200 font-medium">
                 {t('about')}
               </button>
             </Link>
-            <Link href="/help">
+            <Link href={withLocale('/help')}>
               <button className="px-4 py-2.5 text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl transition-all duration-200 font-medium">
                 {t('contact')}
               </button>
             </Link>
             <div className="w-px h-6 bg-slate-200 mx-3"></div>
             <LanguageSwitcher />
-            <div className="w-px h-6 bg-slate-200 mx-3"></div>
-            <button className="px-6 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-xl transition-all duration-200 shadow-lg shadow-indigo-200 hover:shadow-xl hover:shadow-indigo-300 hover:scale-105">
-              {t('getStarted')}
-            </button>
           </div>
 
           {/* Mobile menu button */}
@@ -82,29 +82,24 @@ export function Header() {
           <div className="md:hidden py-6 border-t border-slate-200/50 bg-white/90 backdrop-blur-lg">
             <div className="flex flex-col space-y-3">
               <Link
-                href="/"
+                href={locale === 'en' ? '/' : `/${locale}`}
                 className="flex items-center space-x-3 text-slate-600 hover:text-indigo-600 px-4 py-3 rounded-xl hover:bg-indigo-50 transition-all duration-200 font-medium"
               >
                 <Calculator className="w-5 h-5" />
                 <span>{t('home')}</span>
               </Link>
               <Link
-                href="/about"
+                href={withLocale('/about')}
                 className="text-slate-600 hover:text-indigo-600 px-4 py-3 rounded-xl hover:bg-indigo-50 transition-all duration-200 font-medium"
               >
                 {t('about')}
               </Link>
               <Link
-                href="/help"
+                href={withLocale('/help')}
                 className="text-slate-600 hover:text-indigo-600 px-4 py-3 rounded-xl hover:bg-indigo-50 transition-all duration-200 font-medium"
               >
                 {t('contact')}
               </Link>
-              <div className="pt-3">
-                <button className="w-full px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-xl transition-all duration-200 shadow-lg">
-                  {t('getStarted')}
-                </button>
-              </div>
               <div className="pt-2 px-4">
                 <LanguageSwitcher />
               </div>

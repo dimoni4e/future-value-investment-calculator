@@ -5,7 +5,14 @@
 
 'use client'
 
-import React, { memo, useMemo, useState, useCallback, Suspense } from 'react'
+import React, {
+  memo,
+  useMemo,
+  useState,
+  useCallback,
+  useEffect,
+  useRef,
+} from 'react'
 import { useTranslations } from 'next-intl'
 import {
   TrendingUp,
@@ -13,57 +20,24 @@ import {
   PieChart as PieChartIcon,
   Activity,
 } from 'lucide-react'
-
-// Lazy load chart library components to reduce initial bundle size
-const LazyAreaChart = React.lazy(() =>
-  import('recharts').then((module) => ({ default: module.AreaChart }))
-)
-const LazyLineChart = React.lazy(() =>
-  import('recharts').then((module) => ({ default: module.LineChart }))
-)
-const LazyBarChart = React.lazy(() =>
-  import('recharts').then((module) => ({ default: module.BarChart }))
-)
-const LazyPieChart = React.lazy(() =>
-  import('recharts').then((module) => ({ default: module.PieChart }))
-)
-
-// Lazy load individual chart components
-const LazyLine = React.lazy(() =>
-  import('recharts').then((module) => ({ default: module.Line }))
-)
-const LazyArea = React.lazy(() =>
-  import('recharts').then((module) => ({ default: module.Area }))
-)
-const LazyBar = React.lazy(() =>
-  import('recharts').then((module) => ({ default: module.Bar }))
-)
-const LazyPie = React.lazy(() =>
-  import('recharts').then((module) => ({ default: module.Pie }))
-)
-const LazyCell = React.lazy(() =>
-  import('recharts').then((module) => ({ default: module.Cell }))
-)
-
-// Lazy load chart utilities
-const LazyXAxis = React.lazy(() =>
-  import('recharts').then((module) => ({ default: module.XAxis }))
-)
-const LazyYAxis = React.lazy(() =>
-  import('recharts').then((module) => ({ default: module.YAxis }))
-)
-const LazyCartesianGrid = React.lazy(() =>
-  import('recharts').then((module) => ({ default: module.CartesianGrid }))
-)
-const LazyTooltip = React.lazy(() =>
-  import('recharts').then((module) => ({ default: module.Tooltip }))
-)
-const LazyLegend = React.lazy(() =>
-  import('recharts').then((module) => ({ default: module.Legend }))
-)
-const LazyResponsiveContainer = React.lazy(() =>
-  import('recharts').then((module) => ({ default: module.ResponsiveContainer }))
-)
+// Import Recharts components directly for reliability
+import {
+  AreaChart,
+  LineChart,
+  BarChart,
+  PieChart,
+  Line,
+  Area,
+  Bar,
+  Pie,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from 'recharts'
 
 interface OptimizedGrowthChartProps {
   data: Array<{
@@ -159,6 +133,26 @@ const OptimizedGrowthChart: React.FC<OptimizedGrowthChartProps> = memo(
     const t = useTranslations('chart')
     const [chartType, setChartType] = useState<ChartType>('area')
     const [isLoading, setIsLoading] = useState(false)
+    const containerRef = useRef<HTMLDivElement | null>(null)
+    const [containerWidth, setContainerWidth] = useState<number>(0)
+
+    // Observe container size to provide an explicit width to Recharts
+    useEffect(() => {
+      if (!containerRef.current) return
+      const el = containerRef.current
+      const ro = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          const cr = entry.contentRect
+          setContainerWidth(Math.max(0, Math.floor(cr.width)))
+        }
+      })
+      ro.observe(el)
+      // Initialize width immediately
+      setContainerWidth(
+        Math.max(0, Math.floor(el.getBoundingClientRect().width))
+      )
+      return () => ro.disconnect()
+    }, [])
 
     // Memoize processed chart data to avoid recalculations
     const processedData = useMemo(() => {
@@ -240,142 +234,141 @@ const OptimizedGrowthChart: React.FC<OptimizedGrowthChartProps> = memo(
 
     // Render chart based on type with lazy loading
     const renderChart = useCallback(() => {
+      // Avoid rendering the chart until we know container width,
+      // but keep the wrapper rendered so ResizeObserver can measure it.
+      if (containerWidth === 0) {
+        return <ChartSkeleton />
+      }
       const commonProps = {
         data: processedData,
         margin: { top: 5, right: 30, left: 20, bottom: 5 },
       }
 
+      const widthPx = containerWidth > 0 ? containerWidth : undefined
+
       switch (chartType) {
         case 'area':
           return (
-            <Suspense fallback={<ChartSkeleton />}>
-              <LazyResponsiveContainer width="100%" height={height}>
-                <LazyAreaChart {...commonProps}>
-                  <defs>
-                    <linearGradient
-                      id="colorGrowth"
-                      x1="0"
-                      y1="0"
-                      x2="0"
-                      y2="1"
-                    >
-                      <stop
-                        offset="5%"
-                        stopColor={colors.primary}
-                        stopOpacity={0.8}
-                      />
-                      <stop
-                        offset="95%"
-                        stopColor={colors.primary}
-                        stopOpacity={0.1}
-                      />
-                    </linearGradient>
-                  </defs>
-                  <LazyCartesianGrid strokeDasharray="3 3" />
-                  <LazyXAxis dataKey="year" />
-                  <LazyYAxis />
-                  <LazyTooltip content={<CustomTooltip />} />
-                  <LazyLegend />
-                  <LazyArea
-                    type="monotone"
-                    dataKey="contributions"
-                    stackId="1"
-                    stroke={colors.secondary}
-                    fill={colors.secondary}
-                    animationDuration={enableAnimations ? 1000 : 0}
-                  />
-                  <LazyArea
-                    type="monotone"
-                    dataKey="growth"
-                    stackId="1"
-                    stroke={colors.primary}
-                    fill="url(#colorGrowth)"
-                    animationDuration={enableAnimations ? 1200 : 0}
-                  />
-                </LazyAreaChart>
-              </LazyResponsiveContainer>
-            </Suspense>
+            <ResponsiveContainer width={widthPx || '100%'} height={height}>
+              <AreaChart {...commonProps}>
+                <defs>
+                  <linearGradient id="colorGrowth" x1="0" y1="0" x2="0" y2="1">
+                    <stop
+                      offset="5%"
+                      stopColor={colors.primary}
+                      stopOpacity={0.8}
+                    />
+                    <stop
+                      offset="95%"
+                      stopColor={colors.primary}
+                      stopOpacity={0.1}
+                    />
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="year" />
+                <YAxis />
+                <Tooltip content={<CustomTooltip />} />
+                <Legend />
+                <Area
+                  type="monotone"
+                  dataKey="contributions"
+                  stackId="1"
+                  stroke={colors.secondary}
+                  fill={colors.secondary}
+                  name={t('contributions') || 'Contributions'}
+                  animationDuration={enableAnimations ? 1000 : 0}
+                />
+                <Area
+                  type="monotone"
+                  dataKey="growth"
+                  stackId="1"
+                  stroke={colors.primary}
+                  fill="url(#colorGrowth)"
+                  name={t('growth') || 'Growth'}
+                  animationDuration={enableAnimations ? 1200 : 0}
+                />
+              </AreaChart>
+            </ResponsiveContainer>
           )
 
         case 'line':
           return (
-            <Suspense fallback={<ChartSkeleton />}>
-              <LazyResponsiveContainer width="100%" height={height}>
-                <LazyLineChart {...commonProps}>
-                  <LazyCartesianGrid strokeDasharray="3 3" />
-                  <LazyXAxis dataKey="year" />
-                  <LazyYAxis />
-                  <LazyTooltip content={<CustomTooltip />} />
-                  <LazyLegend />
-                  <LazyLine
-                    type="monotone"
-                    dataKey="totalValue"
-                    stroke={colors.primary}
-                    strokeWidth={3}
-                    dot={{ fill: colors.primary, strokeWidth: 2, r: 4 }}
-                    animationDuration={enableAnimations ? 1000 : 0}
-                  />
-                  <LazyLine
-                    type="monotone"
-                    dataKey="contributions"
-                    stroke={colors.secondary}
-                    strokeWidth={2}
-                    dot={{ fill: colors.secondary, strokeWidth: 2, r: 3 }}
-                    animationDuration={enableAnimations ? 1200 : 0}
-                  />
-                </LazyLineChart>
-              </LazyResponsiveContainer>
-            </Suspense>
+            <ResponsiveContainer width={widthPx || '100%'} height={height}>
+              <LineChart {...commonProps}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="year" />
+                <YAxis />
+                <Tooltip content={<CustomTooltip />} />
+                <Legend />
+                <Line
+                  type="monotone"
+                  dataKey="totalValue"
+                  stroke={colors.primary}
+                  strokeWidth={3}
+                  dot={{ fill: colors.primary, strokeWidth: 2, r: 4 }}
+                  name={t('totalValue') || 'Total Value'}
+                  animationDuration={enableAnimations ? 1000 : 0}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="contributions"
+                  stroke={colors.secondary}
+                  strokeWidth={2}
+                  dot={{ fill: colors.secondary, strokeWidth: 2, r: 3 }}
+                  name={t('contributions') || 'Contributions'}
+                  animationDuration={enableAnimations ? 1200 : 0}
+                />
+              </LineChart>
+            </ResponsiveContainer>
           )
 
         case 'bar':
           return (
-            <Suspense fallback={<ChartSkeleton />}>
-              <LazyResponsiveContainer width="100%" height={height}>
-                <LazyBarChart {...commonProps}>
-                  <LazyCartesianGrid strokeDasharray="3 3" />
-                  <LazyXAxis dataKey="year" />
-                  <LazyYAxis />
-                  <LazyTooltip content={<CustomTooltip />} />
-                  <LazyLegend />
-                  <LazyBar
-                    dataKey="contributions"
-                    fill={colors.secondary}
-                    animationDuration={enableAnimations ? 800 : 0}
-                  />
-                  <LazyBar
-                    dataKey="growth"
-                    fill={colors.primary}
-                    animationDuration={enableAnimations ? 1000 : 0}
-                  />
-                </LazyBarChart>
-              </LazyResponsiveContainer>
-            </Suspense>
+            <ResponsiveContainer width={widthPx || '100%'} height={height}>
+              <BarChart {...commonProps}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="year" />
+                <YAxis />
+                <Tooltip content={<CustomTooltip />} />
+                <Legend />
+                <Bar
+                  dataKey="contributions"
+                  fill={colors.secondary}
+                  name={t('contributions') || 'Contributions'}
+                  animationDuration={enableAnimations ? 800 : 0}
+                />
+                <Bar
+                  dataKey="growth"
+                  fill={colors.primary}
+                  name={t('growth') || 'Growth'}
+                  animationDuration={enableAnimations ? 1000 : 0}
+                />
+              </BarChart>
+            </ResponsiveContainer>
           )
 
         case 'pie':
           return (
-            <Suspense fallback={<ChartSkeleton />}>
-              <LazyResponsiveContainer width="100%" height={height}>
-                <LazyPieChart>
-                  <LazyPie
-                    data={pieData}
-                    cx="50%"
-                    cy="50%"
-                    outerRadius={Math.min(height * 0.35, 120)}
-                    fill="#8884d8"
-                    dataKey="value"
-                    animationDuration={enableAnimations ? 1000 : 0}
-                  >
-                    {pieData.map((entry, index) => (
-                      <LazyCell key={`cell-${index}`} fill={entry.color} />
-                    ))}
-                  </LazyPie>
-                  <LazyTooltip content={<CustomTooltip />} />
-                  <LazyLegend />
-                </LazyPieChart>
-              </LazyResponsiveContainer>
-            </Suspense>
+            <ResponsiveContainer width={widthPx || '100%'} height={height}>
+              <PieChart>
+                <Pie
+                  data={pieData}
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={Math.min(height * 0.35, 120)}
+                  fill="#8884d8"
+                  dataKey="value"
+                  animationDuration={enableAnimations ? 1000 : 0}
+                >
+                  {pieData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Tooltip content={<CustomTooltip />} />
+                <Legend />
+              </PieChart>
+            </ResponsiveContainer>
           )
 
         default:
@@ -389,6 +382,8 @@ const OptimizedGrowthChart: React.FC<OptimizedGrowthChartProps> = memo(
       colors,
       enableAnimations,
       CustomTooltip,
+      containerWidth,
+      t,
     ])
 
     if (!data || data.length === 0) {
@@ -400,7 +395,7 @@ const OptimizedGrowthChart: React.FC<OptimizedGrowthChartProps> = memo(
     }
 
     return (
-      <div className="w-full">
+      <div className="w-full" ref={containerRef}>
         <ChartTypeSelector
           currentType={chartType}
           onTypeChange={handleChartTypeChange}
@@ -413,6 +408,9 @@ const OptimizedGrowthChart: React.FC<OptimizedGrowthChartProps> = memo(
         >
           {renderChart()}
         </div>
+        {process.env.NODE_ENV !== 'production' && (
+          <div className="mt-2 text-xs text-slate-400">{`points: ${data.length}, width: ${containerWidth}px`}</div>
+        )}
       </div>
     )
   }

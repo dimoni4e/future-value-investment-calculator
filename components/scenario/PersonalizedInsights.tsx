@@ -173,6 +173,8 @@ export default function PersonalizedInsights({
                   futureValue: result.futureValue,
                   totalContributions: result.totalContributions,
                   totalGrowth: result.totalGrowth,
+                  // Let the section compute a fresh breakdown for the chart if missing
+                  // (we don't have it here in this context)
                   annualBreakdown: [],
                 } as any
               }

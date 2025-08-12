@@ -278,7 +278,9 @@ export default async function AboutPage({ params }: AboutPageProps) {
               {t('contact.email')}
             </a>
             <a
-              href="/legal/privacy"
+              href={
+                locale === 'en' ? '/legal/privacy' : `/${locale}/legal/privacy`
+              }
               className="inline-flex items-center justify-center rounded-lg border border-gray-300 px-6 py-3 text-gray-700 font-medium hover:bg-gray-50 transition-colors"
             >
               {t('contact.privacy')}

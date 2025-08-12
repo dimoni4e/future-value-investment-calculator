@@ -6,8 +6,7 @@
   "navigation": {
     "home": "Home",
     "about": "About",
-    "contact": "Contact",
-    "getStarted": "Get Started"
+    "contact": "Contact"
   },
   "hero": {
     "badge": "Professional Investment Planning",
@@ -89,7 +88,16 @@
     "year": "Year",
     "totalValue": "Total Value",
     "totalContributions": "Total Contributions",
-    "investmentGrowth": "Investment Growth"
+    "investmentGrowth": "Investment Growth",
+    "contributions": "Contributions",
+    "growth": "Growth",
+    "noData": "No data available",
+    "types": {
+      "area": "Area",
+      "line": "Line",
+      "bar": "Bar",
+      "pie": "Pie"
+    }
   },
   "footer": {
     "rights": "All rights reserved",
@@ -376,7 +384,9 @@
       "tryOptimizations": "Try These Optimizations",
       "customizeTitle": "Customize This Scenario",
       "customizeDescription": "Visit the main calculator to customize these parameters and explore different scenarios.",
-      "openCalculator": "Open Interactive Calculator"
+      "openCalculator": "Open Interactive Calculator",
+      "deeperAnalysisTitle": "Deeper Analysis",
+      "deeperAnalysisDescription": "Personalized insights based on your inputs, including projections and strategy notes."
     },
     "predefinedScenarios": {
       "starter-10k-500-7-10": {
@@ -408,6 +418,27 @@
       "title": "Ready to Create Your Own Scenario?",
       "description": "Use our free investment calculator to model your financial future and share your strategy with others.",
       "button": "Start Calculating"
+    },
+    "related": {
+      "title": "People Also Calculated",
+      "subtitle": "Explore similar investment scenarios and see how different parameters affect your potential returns",
+      "reasons": {
+        "similarInitial": "Similar initial amount",
+        "differentMonthly": "Different monthly contribution",
+        "differentTime": "Different time horizon",
+        "differentReturn": "Different return rate",
+        "sameGoal": "Same goal category"
+      },
+      "similar": "similar",
+      "labels": {
+        "initial": "Initial",
+        "monthly": "Monthly",
+        "return": "Return",
+        "timeline": "Timeline",
+        "years": "years"
+      },
+      "viewScenario": "View This Scenario",
+      "createYourOwn": "Create Your Own Scenario"
     }
   },
   "content": {

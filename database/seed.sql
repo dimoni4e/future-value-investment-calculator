@@ -14,8 +14,7 @@ INSERT INTO home_content (locale, section, key, value) VALUES
 INSERT INTO home_content (locale, section, key, value) VALUES
 ('en', 'navigation', 'home', 'Home'),
 ('en', 'navigation', 'about', 'About'),
-('en', 'navigation', 'contact', 'Contact'),
-('en', 'navigation', 'getStarted', 'Get Started');
+('en', 'navigation', 'contact', 'Contact');
 
 -- Hero section content
 INSERT INTO home_content (locale, section, key, value) VALUES

@@ -14,7 +14,11 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const t = await getTranslations('scenarios.explorer')
+  // Use explicit locale to avoid any fallback to default during metadata generation
+  const t = await getTranslations({
+    locale: params.locale,
+    namespace: 'scenarios.explorer',
+  })
   const baseUrl = 'https://nature2pixel.com'
   const canonical =
     params.locale === 'en'

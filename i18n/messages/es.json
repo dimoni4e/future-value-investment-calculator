@@ -6,8 +6,7 @@
   "navigation": {
     "home": "Inicio",
     "about": "Acerca de",
-    "contact": "Contacto",
-    "getStarted": "Comenzar"
+    "contact": "Contacto"
   },
   "hero": {
     "badge": "Planificación de Inversiones Profesional",
@@ -89,7 +88,16 @@
     "year": "Año",
     "totalValue": "Valor Total",
     "totalContributions": "Contribuciones Totales",
-    "investmentGrowth": "Crecimiento de Inversión"
+    "investmentGrowth": "Crecimiento de Inversión",
+    "contributions": "Contribuciones",
+    "growth": "Crecimiento",
+    "noData": "No hay datos disponibles",
+    "types": {
+      "area": "Área",
+      "line": "Línea",
+      "bar": "Barras",
+      "pie": "Torta"
+    }
   },
   "footer": {
     "rights": "Todos los derechos reservados",
@@ -199,8 +207,8 @@
     "browseByCategory": "Navegar por Categoría",
     "expertCurated": "Escenarios Seleccionados por Expertos",
     "explorer": {
-      "title": "Explorador y Centro de Descubrimiento de Escenarios",
-      "subtitle": "Encuentra la Estrategia de Inversión Perfecta",
+      "title": "Explorador de Escenarios de Inversión",
+      "subtitle": "Centro de descubrimiento y análisis",
       "description": "Busca, filtra y descubre escenarios de inversión adaptados a tus objetivos y tolerancia al riesgo.",
       "searchPlaceholder": "Buscar escenarios por nombre, descripción o palabras clave...",
       "noResults": "No se encontraron escenarios que coincidan con tus criterios.",
@@ -376,7 +384,9 @@
       "tryOptimizations": "Prueba estas optimizaciones",
       "customizeTitle": "Personaliza este escenario",
       "customizeDescription": "Visita la calculadora principal para personalizar estos parámetros y explorar diferentes escenarios.",
-      "openCalculator": "Abrir Calculadora Interactiva"
+      "openCalculator": "Abrir Calculadora Interactiva",
+      "deeperAnalysisTitle": "Análisis detallado",
+      "deeperAnalysisDescription": "Perspectivas personalizadas basadas en tus entradas, incluyendo proyecciones y notas de estrategia."
     },
     "predefinedScenarios": {
       "starter-10k-500-7-10": {
@@ -408,6 +418,27 @@
       "title": "¿Listo para Crear Tu Propio Escenario?",
       "description": "Usa nuestra calculadora gratuita de inversiones para modelar tu futuro financiero y compartir tu estrategia con otros.",
       "button": "Comenzar a Calcular"
+    },
+    "related": {
+      "title": "Otras personas también calcularon",
+      "subtitle": "Explora escenarios de inversión similares y observa cómo diferentes parámetros afectan tus posibles rendimientos",
+      "reasons": {
+        "similarInitial": "Monto inicial similar",
+        "differentMonthly": "Contribución mensual diferente",
+        "differentTime": "Horizonte temporal diferente",
+        "differentReturn": "Tasa de retorno diferente",
+        "sameGoal": "Misma categoría de objetivo"
+      },
+      "similar": "similares",
+      "labels": {
+        "initial": "Inicial",
+        "monthly": "Mensual",
+        "return": "Retorno",
+        "timeline": "Cronograma",
+        "years": "años"
+      },
+      "viewScenario": "Ver este escenario",
+      "createYourOwn": "Crea tu propio escenario"
     }
   },
   "content": {

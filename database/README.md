@@ -109,7 +109,7 @@ The database is pre-populated with:
 ### Home Content (3 languages)
 
 - Layout: title, description
-- Navigation: home, about, contact, getStarted
+- Navigation: home, about, contact
 - Hero: badge, subtitle, buttons, features
 - Features: titles, descriptions
 
