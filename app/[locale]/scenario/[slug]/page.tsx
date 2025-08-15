@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation'
+import { unstable_cache } from 'next/cache'
 import { getTranslations, getMessages } from 'next-intl/server'
 import { locales } from '@/i18n/request'
 import { calculateFutureValue, type InvestmentParameters } from '@/lib/finance'
@@ -23,171 +24,216 @@ import ScenarioSEOSection from '@/components/scenario/ScenarioSEOSection'
 import Link from 'next/link'
 import RelatedScenarios from '@/components/scenario/RelatedScenarios'
 
-// Force dynamic rendering to test if SSG is causing translation issues
-export const dynamic = 'force-dynamic'
+// Enable ISR to reduce DB hits and Neon compute; pages revalidate every 24h
+export const revalidate = 86400
 
 // Get scenario data from predefined scenarios with fallback to slug parsing
 async function getScenarioData(slug: string, locale: string) {
-  // First: Check database for user-generated scenarios
-  try {
-    const dbScenario = await getScenarioBySlug(slug, locale)
-    if (dbScenario) {
-      return {
-        scenario: {
-          id: dbScenario.slug,
-          name: dbScenario.name,
-          description: dbScenario.description || '',
-          params: {
-            initialAmount: parseInt(dbScenario.initialAmount),
-            monthlyContribution: parseInt(dbScenario.monthlyContribution),
-            annualReturn: parseFloat(dbScenario.annualReturn) / 100, // Convert percentage to decimal
-            timeHorizon: dbScenario.timeHorizon,
-          },
-          tags: dbScenario.tags,
-        },
-        source: 'database',
-        isUserGenerated: true,
-      }
-    }
-  } catch (error) {
-    console.error('Error checking database for scenario:', error)
-  }
-
-  // Second: Check predefined scenarios
-  const predefinedScenario = PREDEFINED_SCENARIOS.find((s) => s.id === slug)
-  if (predefinedScenario) {
-    return {
-      scenario: {
-        id: predefinedScenario.id,
-        name: predefinedScenario.name,
-        description: predefinedScenario.description,
-        params: predefinedScenario.params,
-        tags: predefinedScenario.tags,
-      },
-      source: 'predefined',
-      isUserGenerated: false,
-    }
-  }
-
-  // Third: Try to parse the slug and save to database
-  try {
-    const parsedScenario = parseSlugToScenario(slug)
-    if (parsedScenario) {
-      const scenario = {
-        id: slug,
-        name: `Investment Plan: $${parsedScenario.initialAmount.toLocaleString()} + $${parsedScenario.monthlyContribution}/month`,
-        description: `Calculate investing $${parsedScenario.initialAmount.toLocaleString()} initially with $${parsedScenario.monthlyContribution} monthly contributions at ${parsedScenario.annualReturn}% annual return over ${parsedScenario.timeHorizon} years.`,
-        params: {
-          initialAmount: parsedScenario.initialAmount,
-          monthlyContribution: parsedScenario.monthlyContribution,
-          annualReturn: parsedScenario.annualReturn / 100, // Convert percentage to decimal
-          timeHorizon: parsedScenario.timeHorizon,
-        },
-        tags: [parsedScenario.goal],
-      }
-
-      // Save the parsed scenario to the database for future use
+  const getCached = unstable_cache(
+    async () => {
+      // First: Check database for user-generated scenarios
       try {
-        console.log('🔄 Attempting to save scenario to database:', slug)
-        console.log('📝 Scenario data:', {
-          slug: slug,
-          name: scenario.name,
-          description: scenario.description,
-          initialAmount: scenario.params.initialAmount,
-          monthlyContribution: scenario.params.monthlyContribution,
-          annualReturn: scenario.params.annualReturn * 100,
-          timeHorizon: scenario.params.timeHorizon,
-          tags: scenario.tags,
-          locale: locale,
-        })
-
-        // Insert for all supported locales so pages are available cross-locale immediately
-        const localesToCreate = getSupportedLocales()
-        for (const lc of localesToCreate) {
-          await createScenario({
-            slug,
-            name: generateLocalizedScenarioName(lc as 'en' | 'pl' | 'es', {
-              initialAmount: scenario.params.initialAmount,
-              monthlyContribution: scenario.params.monthlyContribution,
-              annualReturn: scenario.params.annualReturn * 100, // back to percent for name/desc generator
-              timeHorizon: scenario.params.timeHorizon,
-            }),
-            description: generateLocalizedScenarioDescription(
-              lc as 'en' | 'pl' | 'es',
-              {
-                initialAmount: scenario.params.initialAmount,
-                monthlyContribution: scenario.params.monthlyContribution,
-                annualReturn: scenario.params.annualReturn * 100, // percent
-                timeHorizon: scenario.params.timeHorizon,
-              }
-            ),
-            initialAmount: scenario.params.initialAmount,
-            monthlyContribution: scenario.params.monthlyContribution,
-            annualReturn: scenario.params.annualReturn * 100, // Convert back to percentage for storage
-            timeHorizon: scenario.params.timeHorizon,
-            tags: scenario.tags,
-            locale: lc,
-          })
+        const dbScenario = await getScenarioBySlug(slug, locale)
+        if (dbScenario) {
+          return {
+            scenario: {
+              id: dbScenario.slug,
+              name: dbScenario.name,
+              description: dbScenario.description || '',
+              params: {
+                initialAmount: parseInt(dbScenario.initialAmount),
+                monthlyContribution: parseInt(dbScenario.monthlyContribution),
+                annualReturn: parseFloat(dbScenario.annualReturn) / 100, // Convert percentage to decimal
+                timeHorizon: dbScenario.timeHorizon,
+              },
+              tags: dbScenario.tags,
+            },
+            source: 'database' as const,
+            isUserGenerated: true,
+          }
         }
-        console.log('✅ Saved parsed scenario to database:', slug)
-      } catch (dbError) {
-        console.error('❌ Error saving parsed scenario to database:', dbError)
-        console.error('❌ Error details:', {
-          name: dbError?.name || 'unknown',
-          message: dbError?.message || 'no message',
-          code: dbError?.code || 'no code',
-          detail: dbError?.detail || 'no detail',
-          constraint: dbError?.constraint || 'no constraint',
-          stack: dbError?.stack || 'no stack',
-        })
-        // Continue anyway, scenario will still work without being saved
+      } catch (error) {
+        console.error('Error checking database for scenario:', error)
       }
 
-      return {
-        scenario,
-        source: 'slug',
-        isUserGenerated: true,
-      }
-    }
-  } catch (error) {
-    console.error('Error parsing scenario from slug:', error)
-  }
-
-  // Fourth: Fallback to legacy API for user-generated scenarios (if any exist)
-  try {
-    const response = await fetch(
-      `${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/api/scenarios?slug=${slug}`,
-      {
-        next: { revalidate: 3600 }, // Revalidate every hour
-      }
-    )
-
-    if (response.ok) {
-      const data = await response.json()
-      if (data.scenario) {
+      // Second: Check predefined scenarios
+      const predefinedScenario = PREDEFINED_SCENARIOS.find((s) => s.id === slug)
+      if (predefinedScenario) {
         return {
           scenario: {
-            id: data.scenario.id,
-            name: data.scenario.name,
-            description: data.scenario.description || '',
-            params: {
-              initialAmount: data.scenario.params.initialAmount,
-              monthlyContribution: data.scenario.params.monthlyContribution,
-              annualReturn: data.scenario.params.annualReturn / 100, // Convert percentage to decimal
-              timeHorizon: data.scenario.params.timeHorizon,
-            },
-            tags: data.scenario.tags,
+            id: predefinedScenario.id,
+            name: predefinedScenario.name,
+            description: predefinedScenario.description,
+            params: predefinedScenario.params,
+            tags: predefinedScenario.tags,
           },
-          source: 'api',
-          isUserGenerated: true,
+          source: 'predefined' as const,
+          isUserGenerated: false,
         }
       }
-    }
-  } catch (error) {
-    console.error('Error fetching scenario from API:', error)
-  }
 
-  return null
+      // Third: Try to parse the slug and save to database
+      try {
+        const parsedScenario = parseSlugToScenario(slug)
+        if (parsedScenario) {
+          const scenario = {
+            id: slug,
+            name: `Investment Plan: $${parsedScenario.initialAmount.toLocaleString()} + $${parsedScenario.monthlyContribution}/month`,
+            description: `Calculate investing $${parsedScenario.initialAmount.toLocaleString()} initially with $${parsedScenario.monthlyContribution} monthly contributions at ${parsedScenario.annualReturn}% annual return over ${parsedScenario.timeHorizon} years.`,
+            params: {
+              initialAmount: parsedScenario.initialAmount,
+              monthlyContribution: parsedScenario.monthlyContribution,
+              annualReturn: parsedScenario.annualReturn / 100, // Convert percentage to decimal
+              timeHorizon: parsedScenario.timeHorizon,
+            },
+            tags: [parsedScenario.goal],
+          }
+
+          // Save the parsed scenario to the database for future use (current locale by default)
+          try {
+            const persistAllLocales =
+              process.env.PERSIST_ALL_SCENARIO_LOCALES === 'true'
+            console.log('🔄 Attempting to save scenario to database:', slug)
+            console.log('📝 Scenario data:', {
+              slug: slug,
+              name: scenario.name,
+              description: scenario.description,
+              initialAmount: scenario.params.initialAmount,
+              monthlyContribution: scenario.params.monthlyContribution,
+              annualReturn: scenario.params.annualReturn * 100,
+              timeHorizon: scenario.params.timeHorizon,
+              tags: scenario.tags,
+              locale: locale,
+            })
+
+            if (persistAllLocales) {
+              const localesToCreate = getSupportedLocales()
+              for (const lc of localesToCreate) {
+                await createScenario({
+                  slug,
+                  name: generateLocalizedScenarioName(
+                    lc as 'en' | 'pl' | 'es',
+                    {
+                      initialAmount: scenario.params.initialAmount,
+                      monthlyContribution: scenario.params.monthlyContribution,
+                      annualReturn: scenario.params.annualReturn * 100, // back to percent for name/desc generator
+                      timeHorizon: scenario.params.timeHorizon,
+                    }
+                  ),
+                  description: generateLocalizedScenarioDescription(
+                    lc as 'en' | 'pl' | 'es',
+                    {
+                      initialAmount: scenario.params.initialAmount,
+                      monthlyContribution: scenario.params.monthlyContribution,
+                      annualReturn: scenario.params.annualReturn * 100, // percent
+                      timeHorizon: scenario.params.timeHorizon,
+                    }
+                  ),
+                  initialAmount: scenario.params.initialAmount,
+                  monthlyContribution: scenario.params.monthlyContribution,
+                  annualReturn: scenario.params.annualReturn * 100, // Convert back to percentage for storage
+                  timeHorizon: scenario.params.timeHorizon,
+                  tags: scenario.tags,
+                  locale: lc,
+                })
+              }
+            } else {
+              await createScenario({
+                slug,
+                name: generateLocalizedScenarioName(
+                  locale as 'en' | 'pl' | 'es',
+                  {
+                    initialAmount: scenario.params.initialAmount,
+                    monthlyContribution: scenario.params.monthlyContribution,
+                    annualReturn: scenario.params.annualReturn * 100,
+                    timeHorizon: scenario.params.timeHorizon,
+                  }
+                ),
+                description: generateLocalizedScenarioDescription(
+                  locale as 'en' | 'pl' | 'es',
+                  {
+                    initialAmount: scenario.params.initialAmount,
+                    monthlyContribution: scenario.params.monthlyContribution,
+                    annualReturn: scenario.params.annualReturn * 100,
+                    timeHorizon: scenario.params.timeHorizon,
+                  }
+                ),
+                initialAmount: scenario.params.initialAmount,
+                monthlyContribution: scenario.params.monthlyContribution,
+                annualReturn: scenario.params.annualReturn * 100,
+                timeHorizon: scenario.params.timeHorizon,
+                tags: scenario.tags,
+                locale,
+              })
+            }
+            console.log('✅ Saved parsed scenario to database:', slug)
+          } catch (dbError) {
+            console.error(
+              '❌ Error saving parsed scenario to database:',
+              dbError
+            )
+            console.error('❌ Error details:', {
+              name: (dbError as any)?.name || 'unknown',
+              message: (dbError as any)?.message || 'no message',
+              code: (dbError as any)?.code || 'no code',
+              detail: (dbError as any)?.detail || 'no detail',
+              constraint: (dbError as any)?.constraint || 'no constraint',
+              stack: (dbError as any)?.stack || 'no stack',
+            })
+            // Continue anyway, scenario will still work without being saved
+          }
+
+          return {
+            scenario,
+            source: 'slug' as const,
+            isUserGenerated: true,
+          }
+        }
+      } catch (error) {
+        console.error('Error parsing scenario from slug:', error)
+      }
+
+      // Fourth: Fallback to legacy API for user-generated scenarios (if any exist)
+      try {
+        const response = await fetch(
+          `${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/api/scenarios?slug=${slug}`,
+          {
+            next: { revalidate: 3600 }, // Revalidate every hour
+          }
+        )
+
+        if (response.ok) {
+          const data = await response.json()
+          if (data.scenario) {
+            return {
+              scenario: {
+                id: data.scenario.id,
+                name: data.scenario.name,
+                description: data.scenario.description || '',
+                params: {
+                  initialAmount: data.scenario.params.initialAmount,
+                  monthlyContribution: data.scenario.params.monthlyContribution,
+                  annualReturn: data.scenario.params.annualReturn / 100, // Convert percentage to decimal
+                  timeHorizon: data.scenario.params.timeHorizon,
+                },
+                tags: data.scenario.tags,
+              },
+              source: 'api' as const,
+              isUserGenerated: true,
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching scenario from API:', error)
+      }
+
+      return null
+    },
+    ['scenario-data', slug, locale],
+    { revalidate: 86400, tags: [`scenario:${slug}:${locale}`] }
+  )
+
+  return getCached()
 }
 
 interface Props {

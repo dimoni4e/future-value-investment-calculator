@@ -6,6 +6,7 @@ import {
   getTrendingScenarios,
   getScenarioCategories,
 } from '@/lib/db/queries'
+import { unstable_cache } from 'next/cache'
 
 interface Props {
   params: {
@@ -46,10 +47,28 @@ export default async function ScenariosPage({ params }: Props) {
   const { locale } = params
 
   // Fetch initial data
+  const getCachedInitial = unstable_cache(
+    () => getScenariosWithFilters(locale, { limit: 12, sortBy: 'newest' }),
+    ['scenarios:initial', locale],
+    { revalidate: 600, tags: [`scenarios:search:${locale}`] }
+  )
+
+  const getCachedTrending = unstable_cache(
+    () => getTrendingScenarios(locale, 6),
+    ['scenarios:trending', locale],
+    { revalidate: 600, tags: [`scenarios:trending:${locale}`] }
+  )
+
+  const getCachedCategories = unstable_cache(
+    () => getScenarioCategories(locale),
+    ['scenarios:categories', locale],
+    { revalidate: 3600, tags: [`scenarios:categories:${locale}`] }
+  )
+
   const [initialScenarios, trendingScenarios, categories] = await Promise.all([
-    getScenariosWithFilters(locale, { limit: 12, sortBy: 'newest' }),
-    getTrendingScenarios(locale, 6),
-    getScenarioCategories(locale),
+    getCachedInitial(),
+    getCachedTrending(),
+    getCachedCategories(),
   ])
 
   return (

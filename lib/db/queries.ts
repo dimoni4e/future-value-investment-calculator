@@ -2,6 +2,7 @@ import { eq, and, sql, desc } from 'drizzle-orm'
 import { db } from './index'
 import { homeContent, pages, scenario } from './schema'
 import type { HomeContent, Page, Scenario } from './schema'
+import { revalidateTag } from 'next/cache'
 
 /**
  * HOME CONTENT QUERIES
@@ -135,6 +136,13 @@ export async function createScenario(scenarioData: {
     })
     .returning()
 
+  // Revalidate caches for this scenario and related lists
+  try {
+    revalidateTag(`scenario:${scenarioData.slug}:${scenarioData.locale}`)
+    revalidateTag(`scenarios:search:${scenarioData.locale}`)
+    revalidateTag(`scenarios:trending:${scenarioData.locale}`)
+    revalidateTag(`scenarios:categories:${scenarioData.locale}`)
+  } catch {}
   return newScenario
 }
 
@@ -164,6 +172,8 @@ export async function updateScenarioViews(
       updatedAt: new Date(),
     })
     .where(and(eq(scenario.slug, slug), eq(scenario.locale, locale as any)))
+  // Revalidate trending caches for this locale
+  revalidateTag(`scenarios:trending:${locale}`)
 }
 
 // Update scenario
@@ -197,6 +207,13 @@ export async function updateScenario(
     .where(and(eq(scenario.slug, slug), eq(scenario.locale, locale as any)))
     .returning()
 
+  // Revalidate caches for this scenario and related lists
+  try {
+    revalidateTag(`scenario:${slug}:${locale}`)
+    revalidateTag(`scenarios:search:${locale}`)
+    revalidateTag(`scenarios:trending:${locale}`)
+    revalidateTag(`scenarios:categories:${locale}`)
+  } catch {}
   return updatedScenario
 }
 
@@ -296,14 +313,10 @@ export async function getScenariosWithFilters(
 
   // Filter by initial amount range
   if (filters.minAmount !== undefined) {
-    conditions.push(
-      sql`CAST(${scenario.initialAmount} AS DECIMAL) >= ${filters.minAmount}`
-    )
+    conditions.push(sql`${scenario.initialAmount} >= ${filters.minAmount}`)
   }
   if (filters.maxAmount !== undefined) {
-    conditions.push(
-      sql`CAST(${scenario.initialAmount} AS DECIMAL) <= ${filters.maxAmount}`
-    )
+    conditions.push(sql`${scenario.initialAmount} <= ${filters.maxAmount}`)
   }
 
   // Filter by time horizon range
@@ -316,14 +329,10 @@ export async function getScenariosWithFilters(
 
   // Filter by return rate range
   if (filters.minReturn !== undefined) {
-    conditions.push(
-      sql`CAST(${scenario.annualReturn} AS DECIMAL) >= ${filters.minReturn}`
-    )
+    conditions.push(sql`${scenario.annualReturn} >= ${filters.minReturn}`)
   }
   if (filters.maxReturn !== undefined) {
-    conditions.push(
-      sql`CAST(${scenario.annualReturn} AS DECIMAL) <= ${filters.maxReturn}`
-    )
+    conditions.push(sql`${scenario.annualReturn} <= ${filters.maxReturn}`)
   }
 
   const whereClause = and(...conditions)

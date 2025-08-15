@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { unstable_cache } from 'next/cache'
 import {
   getScenariosWithFilters,
   getTrendingScenarios,
@@ -48,15 +49,44 @@ export async function GET(request: NextRequest) {
       offset,
     }
 
-    // Get scenarios with filters
-    const result = await getScenariosWithFilters(locale, filters)
+    // Cache search results per (locale + filters) for 10 minutes
+    const cacheKey = [
+      'scenarios-search',
+      locale,
+      filters.search || '',
+      (filters.category || []).join(','),
+      String(filters.minAmount ?? ''),
+      String(filters.maxAmount ?? ''),
+      String(filters.minTimeHorizon ?? ''),
+      String(filters.maxTimeHorizon ?? ''),
+      String(filters.minReturn ?? ''),
+      String(filters.maxReturn ?? ''),
+      String(filters.isPredefined ?? ''),
+      String(filters.sortBy ?? ''),
+      String(page),
+      String(limit),
+    ]
 
-    return NextResponse.json({
+    const getCached = unstable_cache(
+      async () => getScenariosWithFilters(locale, filters),
+      cacheKey,
+      { revalidate: 600, tags: [`scenarios:search:${locale}`] }
+    )
+
+    const result = await getCached()
+
+    const res = NextResponse.json({
       scenarios: result.scenarios,
       total: result.total,
       page,
       totalPages: Math.ceil(result.total / limit),
     })
+    // Hint CDN to cache briefly; real freshness is controlled via revalidateTag
+    res.headers.set(
+      'Cache-Control',
+      'public, max-age=60, s-maxage=300, stale-while-revalidate=600'
+    )
+    return res
   } catch (error) {
     console.error('Scenario search error:', error)
     return NextResponse.json(

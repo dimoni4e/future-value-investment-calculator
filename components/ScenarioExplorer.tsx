@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useRef } from 'react'
 import { useTranslations } from 'next-intl'
 import {
   Search,
@@ -70,6 +70,8 @@ export default function ScenarioExplorer({
   const [loading, setLoading] = useState(false)
   const [showFilters, setShowFilters] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
+  const abortRef = useRef<AbortController | null>(null)
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   // Quick filter categories
   const quickFilters = [
@@ -84,6 +86,12 @@ export default function ScenarioExplorer({
   const fetchScenarios = async (newFilters: Filters, page: number = 1) => {
     setLoading(true)
     try {
+      // Cancel any in-flight request
+      if (abortRef.current) {
+        abortRef.current.abort()
+      }
+      const controller = new AbortController()
+      abortRef.current = controller
       const params = new URLSearchParams({
         locale,
         page: page.toString(),
@@ -108,7 +116,9 @@ export default function ScenarioExplorer({
         sortBy: newFilters.sortBy,
       })
 
-      const response = await fetch(`/api/scenarios/search?${params}`)
+      const response = await fetch(`/api/scenarios/search?${params}`, {
+        signal: controller.signal,
+      })
       const data = await response.json()
 
       if (page === 1) {
@@ -263,9 +273,15 @@ export default function ScenarioExplorer({
                   type="text"
                   placeholder={t('searchPlaceholder')}
                   value={filters.search}
-                  onChange={(e) =>
-                    setFilters((prev) => ({ ...prev, search: e.target.value }))
-                  }
+                  onChange={(e) => {
+                    const next = e.target.value
+                    setFilters((prev) => ({ ...prev, search: next }))
+                    // Debounce apply on typing to reduce API calls
+                    if (debounceRef.current) clearTimeout(debounceRef.current)
+                    debounceRef.current = setTimeout(() => {
+                      applyFilters({ ...filters, search: next })
+                    }, 400)
+                  }}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') {
                       applyFilters(filters)
