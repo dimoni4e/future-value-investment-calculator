@@ -15,6 +15,7 @@ const cache = new Map<string, CacheEntry<any>>()
 const now = () => Date.now()
 const DEFAULT_TTL = 1000 * 60 * 5 // 5 minutes
 const SHORT_TTL = 1000 * 30 // 30 seconds
+const COUNT_TTL = 1000 * 60 * 10 // 10 minutes for approximate counts
 
 function getCache<T>(key: string): T | undefined {
   const e = cache.get(key)
@@ -92,6 +93,41 @@ function scheduleFlush() {
     setTimeout(() => flushViews(), VIEW_FLUSH_INTERVAL).unref?.()
   }
   if (now() - lastFlush > VIEW_FLUSH_INTERVAL * 3) flushViews()
+}
+
+// Cached scenario counts (approximate to reduce COUNT(*) frequency)
+interface CountCacheEntry {
+  count: number
+  expires: number
+}
+const scenarioCountCache = new Map<string, CountCacheEntry>()
+function getScenarioCountCache(key: string): number | undefined {
+  const e = scenarioCountCache.get(key)
+  if (!e) return undefined
+  if (e.expires < now()) {
+    scenarioCountCache.delete(key)
+    return undefined
+  }
+  return e.count
+}
+function setScenarioCountCache(key: string, count: number) {
+  scenarioCountCache.set(key, { count, expires: now() + COUNT_TTL })
+}
+function buildScenarioCountKey(locale: string, filters: any): string {
+  const keyObj = {
+    locale,
+    search: filters.search || '',
+    category: (filters.category || []).slice().sort(),
+    minAmount: filters.minAmount ?? '',
+    maxAmount: filters.maxAmount ?? '',
+    minTimeHorizon: filters.minTimeHorizon ?? '',
+    maxTimeHorizon: filters.maxTimeHorizon ?? '',
+    minReturn: filters.minReturn ?? '',
+    maxReturn: filters.maxReturn ?? '',
+    isPredefined: filters.isPredefined ?? '',
+    // Exclude pagination + sort from key because they don't affect total count
+  }
+  return `scenario_count:${JSON.stringify(keyObj)}`
 }
 async function bufferViewIncrement(slug: string, locale: string) {
   const key = `${slug}::${locale}`
@@ -451,10 +487,13 @@ export async function getScenariosWithFilters(
 
   // Search in name and description
   if (filters.search) {
-    const searchTerm = `%${filters.search.toLowerCase()}%`
-    conditions.push(
-      sql`(LOWER(${scenario.name}) LIKE ${searchTerm} OR LOWER(${scenario.description}) LIKE ${searchTerm})`
-    )
+    // Full-text search using plainto_tsquery for safety (auto-escapes special chars)
+    const rawSearch = filters.search.trim()
+    if (rawSearch.length) {
+      conditions.push(
+        sql`search_vector @@ plainto_tsquery('simple', ${rawSearch})`
+      )
+    }
   }
 
   // Filter by category tags
@@ -527,20 +566,40 @@ export async function getScenariosWithFilters(
         ? scenariosQueryBuilder.limit(paginationOptions[0])
         : scenariosQueryBuilder
 
-  const countQuery = db
-    .select({ count: sql`count(*)`.as('count') })
-    .from(scenario)
-    .where(whereClause)
+  // Approximate / cached count logic
+  const isFirstPage = !filters.offset || filters.offset === 0
+  const countKey = buildScenarioCountKey(locale, filters)
+  let total: number | undefined = getScenarioCountCache(countKey)
 
-  const [scenarios, totalCount] = await Promise.all([
-    scenariosQuery,
-    countQuery,
-  ])
-
-  return {
-    scenarios,
-    total: Number(totalCount[0]?.count || 0),
+  // Only execute real COUNT(*) when (a) first page and (b) cache miss/expired
+  if (isFirstPage && total === undefined) {
+    const countResult = await db
+      .select({ count: sql`count(*)`.as('count') })
+      .from(scenario)
+      .where(whereClause)
+    total = Number(countResult[0]?.count || 0)
+    setScenarioCountCache(countKey, total)
   }
+
+  const scenarios = await scenariosQuery
+
+  // If we don't have a total (not first page) try using cached else approximate using current window
+  if (total === undefined) {
+    // Use cached if exists
+    const cached = getScenarioCountCache(countKey)
+    if (cached !== undefined) total = cached
+    else {
+      // Approximate: at least up to current offset + returned rows
+      const offset = filters.offset || 0
+      const limit = filters.limit || scenarios.length
+      total = offset + scenarios.length
+      // If page seems full assume there may be more
+      if (scenarios.length === limit) total += limit // pessimistic over-estimate to keep pagination working
+      setScenarioCountCache(countKey, total)
+    }
+  }
+
+  return { scenarios, total }
 }
 
 // Get trending scenarios (most viewed recently)
