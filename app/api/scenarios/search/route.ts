@@ -75,16 +75,20 @@ export async function GET(request: NextRequest) {
 
     const result = await getCached()
 
-    const res = NextResponse.json({
-      scenarios: result.scenarios,
-      total: result.total,
-      page,
-      totalPages: Math.ceil(result.total / limit),
-    })
-    // Hint CDN to cache briefly; real freshness is controlled via revalidateTag
-    res.headers.set(
-      'Cache-Control',
-      'public, max-age=60, s-maxage=300, stale-while-revalidate=600'
+    const res = NextResponse.json(
+      {
+        scenarios: result.scenarios,
+        total: result.total,
+        page,
+        totalPages: Math.ceil(result.total / limit),
+      },
+      {
+        headers: {
+          // Short edge cache; SWR allows serving slightly stale while revalidating.
+          'Cache-Control':
+            'public, max-age=30, s-maxage=300, stale-while-revalidate=600',
+        },
+      }
     )
     return res
   } catch (error) {

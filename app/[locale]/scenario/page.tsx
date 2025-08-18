@@ -14,6 +14,9 @@ interface Props {
   }
 }
 
+// Revalidate the static scenario explorer shell every 10 minutes; data inside uses its own tagged caches.
+export const revalidate = 600
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // Use explicit locale to avoid any fallback to default during metadata generation
   const t = await getTranslations({

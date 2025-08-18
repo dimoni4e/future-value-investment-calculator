@@ -9,6 +9,7 @@ import {
   timestamp,
   pgEnum,
   uniqueIndex,
+  index,
 } from 'drizzle-orm/pg-core'
 import { sql } from 'drizzle-orm'
 
@@ -101,6 +102,15 @@ export const scenario = pgTable(
     uniqueScenarioLocale: uniqueIndex('unique_scenario_locale').on(
       table.slug,
       table.locale
+    ),
+    // Covering indexes for common filter + sort patterns
+    scenarioLocaleViewCountIdx: index('idx_scenario_locale_viewcount').on(
+      table.locale,
+      table.viewCount
+    ),
+    scenarioLocaleCreatedAtIdx: index('idx_scenario_locale_createdat').on(
+      table.locale,
+      table.createdAt
     ),
   })
 )

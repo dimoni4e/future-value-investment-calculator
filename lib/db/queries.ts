@@ -5,15 +5,160 @@ import type { HomeContent, Page, Scenario } from './schema'
 import { revalidateTag } from 'next/cache'
 
 /**
+ * In-memory cache + batched view updates (per runtime instance)
+ */
+interface CacheEntry<T> {
+  value: T
+  expires: number
+}
+const cache = new Map<string, CacheEntry<any>>()
+const now = () => Date.now()
+const DEFAULT_TTL = 1000 * 60 * 5 // 5 minutes
+const SHORT_TTL = 1000 * 30 // 30 seconds
+
+function getCache<T>(key: string): T | undefined {
+  const e = cache.get(key)
+  if (!e) return undefined
+  if (e.expires < now()) {
+    cache.delete(key)
+    return undefined
+  }
+  return e.value as T
+}
+function setCache<T>(key: string, value: T, ttl: number = DEFAULT_TTL) {
+  cache.set(key, { value, expires: now() + ttl })
+}
+function invalidatePrefix(prefix: string) {
+  Array.from(cache.keys()).forEach((k) => {
+    if (k.startsWith(prefix)) cache.delete(k)
+  })
+}
+
+// Batched view counter
+interface PendingView {
+  slug: string
+  locale: string
+  count: number
+}
+const viewBuffer = new Map<string, PendingView>()
+let flushScheduled = false
+const VIEW_FLUSH_INTERVAL = 5000
+let lastFlush = now()
+async function flushViews() {
+  flushScheduled = false
+  if (!viewBuffer.size) return
+  const items = Array.from(viewBuffer.values())
+  viewBuffer.clear()
+  lastFlush = now()
+  try {
+    await db.transaction(async (tx) => {
+      for (const { slug, locale, count } of items) {
+        await tx
+          .update(scenario)
+          .set({
+            viewCount: sql`${scenario.viewCount} + ${count}`,
+            updatedAt: new Date(),
+          })
+          .where(
+            and(eq(scenario.slug, slug), eq(scenario.locale, locale as any))
+          )
+      }
+    })
+    const locs = new Set(items.map((i) => i.locale))
+    locs.forEach((l) => {
+      invalidatePrefix(`trending:${l}`)
+      invalidatePrefix(`recent:${l}`)
+    })
+  } catch {
+    // Best-effort fallback
+    for (const { slug, locale, count } of items) {
+      try {
+        await db
+          .update(scenario)
+          .set({
+            viewCount: sql`${scenario.viewCount} + ${count}`,
+            updatedAt: new Date(),
+          })
+          .where(
+            and(eq(scenario.slug, slug), eq(scenario.locale, locale as any))
+          )
+      } catch {}
+    }
+  }
+}
+function scheduleFlush() {
+  if (!flushScheduled) {
+    flushScheduled = true
+    setTimeout(() => flushViews(), VIEW_FLUSH_INTERVAL).unref?.()
+  }
+  if (now() - lastFlush > VIEW_FLUSH_INTERVAL * 3) flushViews()
+}
+async function bufferViewIncrement(slug: string, locale: string) {
+  const key = `${slug}::${locale}`
+  const existing = viewBuffer.get(key)
+  if (existing) existing.count += 1
+  else viewBuffer.set(key, { slug, locale, count: 1 })
+  scheduleFlush()
+}
+
+/**
  * HOME CONTENT QUERIES
  */
 
+// Explicit column selections (avoid SELECT *)
+const homeContentSelection = {
+  id: homeContent.id,
+  locale: homeContent.locale,
+  section: homeContent.section,
+  key: homeContent.key,
+  value: homeContent.value,
+  createdAt: homeContent.createdAt,
+  updatedAt: homeContent.updatedAt,
+}
+
+const pageSelection = {
+  id: pages.id,
+  slug: pages.slug,
+  locale: pages.locale,
+  title: pages.title,
+  content: pages.content,
+  metaDescription: pages.metaDescription,
+  metaKeywords: pages.metaKeywords,
+  published: pages.published,
+  createdAt: pages.createdAt,
+  updatedAt: pages.updatedAt,
+}
+
+const scenarioSelection = {
+  id: scenario.id,
+  slug: scenario.slug,
+  locale: scenario.locale,
+  name: scenario.name,
+  description: scenario.description,
+  initialAmount: scenario.initialAmount,
+  monthlyContribution: scenario.monthlyContribution,
+  annualReturn: scenario.annualReturn,
+  timeHorizon: scenario.timeHorizon,
+  tags: scenario.tags,
+  isPredefined: scenario.isPredefined,
+  isPublic: scenario.isPublic,
+  createdBy: scenario.createdBy,
+  viewCount: scenario.viewCount,
+  createdAt: scenario.createdAt,
+  updatedAt: scenario.updatedAt,
+}
+
 // Get all home content for a specific locale
 export async function getHomeContent(locale: string): Promise<HomeContent[]> {
-  return await db
-    .select()
+  const cacheKey = `home_content:${locale}`
+  const cached = getCache<HomeContent[]>(cacheKey)
+  if (cached) return cached
+  const rows = await db
+    .select(homeContentSelection)
     .from(homeContent)
     .where(eq(homeContent.locale, locale as any))
+  setCache(cacheKey, rows, DEFAULT_TTL)
+  return rows
 }
 
 // Get home content by locale and section
@@ -22,7 +167,7 @@ export async function getHomeContentBySection(
   section: string
 ): Promise<HomeContent[]> {
   return await db
-    .select()
+    .select(homeContentSelection)
     .from(homeContent)
     .where(
       and(
@@ -60,7 +205,7 @@ export async function getHomeContentValue(
 // Get all published pages for a locale
 export async function getPages(locale: string): Promise<Page[]> {
   return await db
-    .select()
+    .select(pageSelection)
     .from(pages)
     .where(and(eq(pages.locale, locale as any), eq(pages.published, true)))
 }
@@ -71,7 +216,7 @@ export async function getPageBySlug(
   locale: string
 ): Promise<Page | null> {
   const result = await db
-    .select()
+    .select(pageSelection)
     .from(pages)
     .where(
       and(
@@ -143,6 +288,11 @@ export async function createScenario(scenarioData: {
     revalidateTag(`scenarios:trending:${scenarioData.locale}`)
     revalidateTag(`scenarios:categories:${scenarioData.locale}`)
   } catch {}
+  // Invalidate in-memory caches
+  invalidatePrefix(`recent:${scenarioData.locale}`)
+  invalidatePrefix(`trending:${scenarioData.locale}`)
+  invalidatePrefix(`categories:${scenarioData.locale}`)
+  cache.delete(`scenario:${scenarioData.locale}:${scenarioData.slug}`)
   return newScenario
 }
 
@@ -152,7 +302,7 @@ export async function getScenarioBySlug(
   locale: string
 ): Promise<Scenario | null> {
   const result = await db
-    .select()
+    .select(scenarioSelection)
     .from(scenario)
     .where(and(eq(scenario.slug, slug), eq(scenario.locale, locale as any)))
     .limit(1)
@@ -165,14 +315,10 @@ export async function updateScenarioViews(
   slug: string,
   locale: string
 ): Promise<void> {
-  await db
-    .update(scenario)
-    .set({
-      viewCount: sql`${scenario.viewCount} + 1`,
-      updatedAt: new Date(),
-    })
-    .where(and(eq(scenario.slug, slug), eq(scenario.locale, locale as any)))
-  // Revalidate trending caches for this locale
+  // Buffer increment to reduce write frequency
+  await bufferViewIncrement(slug, locale)
+  // Invalidate per-scenario cache quickly so subsequent reads refetch
+  cache.delete(`scenario:${locale}:${slug}`)
   revalidateTag(`scenarios:trending:${locale}`)
 }
 
@@ -214,6 +360,11 @@ export async function updateScenario(
     revalidateTag(`scenarios:trending:${locale}`)
     revalidateTag(`scenarios:categories:${locale}`)
   } catch {}
+  // Invalidate in-memory caches
+  invalidatePrefix(`recent:${locale}`)
+  invalidatePrefix(`trending:${locale}`)
+  invalidatePrefix(`categories:${locale}`)
+  cache.delete(`scenario:${locale}:${slug}`)
   return updatedScenario
 }
 
@@ -222,7 +373,7 @@ export async function getPredefinedScenarios(
   locale: string
 ): Promise<Scenario[]> {
   return await db
-    .select()
+    .select(scenarioSelection)
     .from(scenario)
     .where(
       and(eq(scenario.locale, locale as any), eq(scenario.isPredefined, true))
@@ -232,7 +383,7 @@ export async function getPredefinedScenarios(
 // Get all user-generated (non-predefined) public scenarios for sitemap
 export async function getUserGeneratedScenarios(): Promise<Scenario[]> {
   return await db
-    .select()
+    .select(scenarioSelection)
     .from(scenario)
     .where(and(eq(scenario.isPredefined, false), eq(scenario.isPublic, true)))
     .orderBy(desc(scenario.createdAt))
@@ -243,7 +394,7 @@ export async function getUserGeneratedScenariosByLocale(
   locale: string
 ): Promise<Scenario[]> {
   return await db
-    .select()
+    .select(scenarioSelection)
     .from(scenario)
     .where(
       and(eq(scenario.locale, locale as any), eq(scenario.isPredefined, false))
@@ -257,7 +408,7 @@ export async function getRecentScenarios(
   limit: number = 6
 ): Promise<Scenario[]> {
   return await db
-    .select()
+    .select(scenarioSelection)
     .from(scenario)
     .where(
       and(
@@ -357,7 +508,7 @@ export async function getScenariosWithFilters(
 
   // Build the scenarios query with all options at once
   const scenariosQueryBuilder = db
-    .select()
+    .select(scenarioSelection)
     .from(scenario)
     .where(whereClause)
     .orderBy(orderBy)
@@ -398,7 +549,7 @@ export async function getTrendingScenarios(
   limit: number = 6
 ): Promise<Scenario[]> {
   return await db
-    .select()
+    .select(scenarioSelection)
     .from(scenario)
     .where(
       and(

@@ -243,15 +243,18 @@ export async function POST(request: NextRequest) {
     // Revalidate sitemap to include the new scenario
     await revalidatePath('/sitemap.xml', 'page')
 
-    return NextResponse.json({
-      success: true,
-      scenario: {
-        slug: scenarioData.slug,
-        url: `/scenario/${scenarioData.slug}`,
-        content: scenarioData.content,
-        metadata: scenarioData.metadata,
+    return NextResponse.json(
+      {
+        success: true,
+        scenario: {
+          slug: scenarioData.slug,
+          url: `/scenario/${scenarioData.slug}`,
+          content: scenarioData.content,
+          metadata: scenarioData.metadata,
+        },
       },
-    })
+      { headers: { 'Cache-Control': 'no-store' } }
+    )
   } catch (error) {
     console.error('Error generating scenario:', error)
     return NextResponse.json(
@@ -284,10 +287,10 @@ export async function GET(request: NextRequest) {
       existingScenario.metadata.lastAccessed = new Date().toISOString()
       existingScenario.metadata.views += 1
 
-      return NextResponse.json({
-        exists: true,
-        scenario: existingScenario,
-      })
+      return NextResponse.json(
+        { exists: true, scenario: existingScenario },
+        { headers: { 'Cache-Control': 'public, max-age=30, s-maxage=120' } }
+      )
     }
 
     // Try to parse slug and generate if valid
@@ -319,11 +322,10 @@ export async function GET(request: NextRequest) {
       // Generate scenario content
       const scenarioData = await generateScenarioContent(extendedParams, locale)
 
-      return NextResponse.json({
-        exists: false,
-        generated: true,
-        scenario: scenarioData,
-      })
+      return NextResponse.json(
+        { exists: false, generated: true, scenario: scenarioData },
+        { headers: { 'Cache-Control': 'public, max-age=30, s-maxage=120' } }
+      )
     }
 
     return NextResponse.json(
@@ -371,10 +373,10 @@ export async function PUT(request: NextRequest) {
       cached.data.metadata.views = scenario.metadata.views
     }
 
-    return NextResponse.json({
-      success: true,
-      views: scenario.metadata.views,
-    })
+    return NextResponse.json(
+      { success: true, views: scenario.metadata.views },
+      { headers: { 'Cache-Control': 'no-store' } }
+    )
   } catch (error) {
     console.error('Error updating scenario:', error)
     return NextResponse.json(
