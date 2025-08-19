@@ -1,7 +1,19 @@
 import { eq, and, sql, desc } from 'drizzle-orm'
 import { db } from './index'
-import { homeContent, pages, scenario } from './schema'
-import type { HomeContent, Page, Scenario } from './schema'
+import {
+  homeContent,
+  pages,
+  scenario,
+  scenarioTrendingSnapshot,
+  scenarioCategoryCounts,
+} from './schema'
+import type {
+  HomeContent,
+  Page,
+  Scenario,
+  ScenarioTrendingSnapshot,
+  ScenarioCategoryCount,
+} from './schema'
 import { revalidateTag } from 'next/cache'
 
 /**
@@ -607,7 +619,51 @@ export async function getTrendingScenarios(
   locale: string,
   limit: number = 6
 ): Promise<Scenario[]> {
-  return await db
+  // In-memory cache (snapshots refresh on schedule). Longer TTL acceptable.
+  const TRENDING_TTL_MS = 5 * 60 * 1000 // 5 minutes
+  ;(global as any).__trendingCache ||= new Map<
+    string,
+    { expires: number; data: Scenario[] }
+  >()
+  const trendingCache: Map<string, { expires: number; data: Scenario[] }> = (
+    global as any
+  ).__trendingCache
+  const cacheKey = `${locale}:${limit}`
+  const cached = trendingCache.get(cacheKey)
+  if (cached && cached.expires > Date.now()) return cached.data
+  // Try snapshot first
+  const snapshot = await db
+    .select({ slug: scenarioTrendingSnapshot.slug })
+    .from(scenarioTrendingSnapshot)
+    .where(eq(scenarioTrendingSnapshot.locale, locale as any))
+    .orderBy(scenarioTrendingSnapshot.rank)
+    .limit(limit)
+
+  if (snapshot.length) {
+    const slugs = snapshot.map((s) => s.slug)
+    // Fetch scenarios by slug preserving order
+    const rows = await db
+      .select(scenarioSelection)
+      .from(scenario)
+      .where(
+        and(
+          eq(scenario.locale, locale as any),
+          sql`${scenario.slug} = ANY(${slugs})`
+        )
+      )
+    // Preserve snapshot ordering
+    const orderMap = new Map(slugs.map((s, i) => [s, i]))
+    const ordered = rows
+      .filter((r) => orderMap.has(r.slug))
+      .sort((a, b) => orderMap.get(a.slug)! - orderMap.get(b.slug)!)
+    trendingCache.set(cacheKey, {
+      expires: Date.now() + TRENDING_TTL_MS,
+      data: ordered,
+    })
+    return ordered
+  }
+  // Fallback to live query if snapshot empty
+  const live = await db
     .select(scenarioSelection)
     .from(scenario)
     .where(
@@ -619,12 +675,48 @@ export async function getTrendingScenarios(
     )
     .orderBy(desc(scenario.viewCount))
     .limit(limit)
+  trendingCache.set(cacheKey, {
+    expires: Date.now() + TRENDING_TTL_MS,
+    data: live,
+  })
+  return live
 }
 
 // Get scenario categories/tags statistics
 export async function getScenarioCategories(
   locale: string
 ): Promise<Array<{ category: string; count: number }>> {
+  const CATEGORIES_TTL_MS = 30 * 60 * 1000 // 30 minutes (changes infrequently)
+  ;(global as any).__categoryCountsCache ||= new Map<
+    string,
+    { expires: number; data: Array<{ category: string; count: number }> }
+  >()
+  const categoryCache: Map<
+    string,
+    { expires: number; data: Array<{ category: string; count: number }> }
+  > = (global as any).__categoryCountsCache
+  const cached = categoryCache.get(locale)
+  if (cached && cached.expires > Date.now()) return cached.data
+  const snapshot = await db
+    .select({
+      category: scenarioCategoryCounts.category,
+      count: scenarioCategoryCounts.count,
+    })
+    .from(scenarioCategoryCounts)
+    .where(eq(scenarioCategoryCounts.locale, locale as any))
+    .orderBy(desc(scenarioCategoryCounts.count))
+  if (snapshot.length) {
+    const mapped = snapshot.map((r) => ({
+      category: r.category,
+      count: r.count,
+    }))
+    categoryCache.set(locale, {
+      expires: Date.now() + CATEGORIES_TTL_MS,
+      data: mapped,
+    })
+    return mapped
+  }
+  // Fallback
   const result = await db
     .select({
       category: sql`unnest(${scenario.tags})`.as('category'),
@@ -634,11 +726,15 @@ export async function getScenarioCategories(
     .where(and(eq(scenario.locale, locale as any), eq(scenario.isPublic, true)))
     .groupBy(sql`unnest(${scenario.tags})`)
     .orderBy(sql`count(*) DESC`)
-
-  return result.map((row) => ({
+  const mapped = result.map((row) => ({
     category: row.category as string,
     count: Number(row.count),
   }))
+  categoryCache.set(locale, {
+    expires: Date.now() + CATEGORIES_TTL_MS,
+    data: mapped,
+  })
+  return mapped
 }
 
 /**
