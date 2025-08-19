@@ -76,9 +76,7 @@ export function getContentWithFallback(
     }
   }
 
-  if (locale) {
-    console.log(`Using static fallback for ${locale}:${section}.${key}`)
-  }
+  // Quiet fallback (previously logged for debugging; removed to reduce noise)
 
   return staticFallback
 }

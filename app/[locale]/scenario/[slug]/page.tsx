@@ -466,12 +466,7 @@ export default async function ScenarioPage({ params }: Props) {
   const scenarioPage = scenarios?.scenarioPage || {}
   const predefinedScenarios = scenarios?.predefinedScenarios || {}
 
-  console.log('Scenario data source:', source, {
-    locale: params.locale,
-    slug: params.slug,
-    scenarioName: scenario.name,
-    isUserGenerated,
-  })
+  // (Removed verbose scenario source logging to reduce noise in production)
 
   // Get translated scenario name and description for predefined scenarios
   const getScenarioTranslation = (scenario: any) => {
@@ -494,8 +489,7 @@ export default async function ScenarioPage({ params }: Props) {
         description: translatedDescription || scenario.description,
       }
     } catch (error) {
-      console.log('Translation error:', error)
-      // Fallback to original if translation not found
+      // Silently fallback if translation missing
       return {
         name: scenario.name,
         description: scenario.description,
