@@ -57,6 +57,8 @@ const viewBuffer = new Map<string, PendingView>()
 let flushScheduled = false
 const VIEW_FLUSH_INTERVAL = 5000
 let lastFlush = now()
+// Track locales whose scenarios had view increments during the batch
+const touchedLocales = new Set<string>()
 async function flushViews() {
   flushScheduled = false
   if (!viewBuffer.size) return
@@ -75,13 +77,19 @@ async function flushViews() {
           .where(
             and(eq(scenario.slug, slug), eq(scenario.locale, locale as any))
           )
+        touchedLocales.add(locale)
       }
     })
-    const locs = new Set(items.map((i) => i.locale))
-    locs.forEach((l) => {
+    // After successful batch write, perform single revalidation per locale
+    touchedLocales.forEach((l) => {
       invalidatePrefix(`trending:${l}`)
       invalidatePrefix(`recent:${l}`)
+      try {
+        revalidateTag(`scenarios:trending:${l}`)
+        revalidateTag(`scenarios:search:${l}`)
+      } catch {}
     })
+    touchedLocales.clear()
   } catch {
     // Best-effort fallback
     for (const { slug, locale, count } of items) {
@@ -367,7 +375,6 @@ export async function updateScenarioViews(
   await bufferViewIncrement(slug, locale)
   // Invalidate per-scenario cache quickly so subsequent reads refetch
   cache.delete(`scenario:${locale}:${slug}`)
-  revalidateTag(`scenarios:trending:${locale}`)
 }
 
 // Update scenario
