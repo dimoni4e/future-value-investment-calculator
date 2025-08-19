@@ -2,8 +2,13 @@ name: Refresh Snapshots
 
 on:
   schedule:
-    - cron: '*/10 * * * *' # every 10 minutes
+    - cron: '*/10 * * * *' # every 10 minutes (consider reducing if not strictly needed)
   workflow_dispatch: {}
+
+# Prevent overlapping executions if a previous run is still in flight
+concurrency:
+  group: refresh-snapshots
+  cancel-in-progress: false
 
 jobs:
   refresh:
@@ -12,19 +17,41 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
+
       - name: Install dependencies
         run: npm ci
+
+      - name: Validate DATABASE_URL secret
+        run: |
+          if [ -z "${{ secrets.DATABASE_URL }}" ]; then
+            echo "DATABASE_URL secret is missing or empty." >&2
+            exit 1
+          fi
+          echo "DATABASE_URL secret is present (not printing value)."
+
       - name: Run migrations (ensure schema up to date)
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: npx drizzle-kit migrate
-      - name: Refresh snapshots
+
+      - name: Refresh snapshots (with retry)
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           NODE_ENV: production
-        run: npm run snapshots:refresh
+        run: |
+          set -e
+          for attempt in 1 2 3; do
+            echo "Attempt $attempt running snapshot refresh..."
+            if npm run snapshots:refresh; then
+              echo "Snapshot refresh succeeded on attempt $attempt"; exit 0; fi
+            echo "Snapshot refresh failed on attempt $attempt; sleeping before retry" >&2
+            sleep 5
+          done
+          echo "Snapshot refresh failed after 3 attempts" >&2
+          exit 1
