@@ -1,4 +1,9 @@
-CREATE TYPE "public"."locale" AS ENUM('en', 'pl', 'es');--> statement-breakpoint
+-- Guard enum creation to allow rerunning migrations if type already exists
+DO $$ BEGIN
+	IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'locale') THEN
+		CREATE TYPE "public"."locale" AS ENUM('en', 'pl', 'es');
+	END IF;
+END $$;--> statement-breakpoint
 CREATE TABLE "home_content" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"locale" "locale" NOT NULL,
