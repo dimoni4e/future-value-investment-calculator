@@ -10,6 +10,7 @@ import {
   pgEnum,
   uniqueIndex,
   index,
+  integer as pgInteger,
 } from 'drizzle-orm/pg-core'
 import { sql } from 'drizzle-orm'
 
@@ -115,6 +116,22 @@ export const scenario = pgTable(
   })
 )
 
+// Snapshot table: trending scenarios (periodically refreshed)
+export const scenarioTrendingSnapshot = pgTable('scenario_trending_snapshot', {
+  locale: localeEnum('locale').notNull(),
+  slug: varchar('slug', { length: 100 }).notNull(),
+  rank: pgInteger('rank').notNull(),
+  viewCount: pgInteger('view_count').notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+})
+
+// Snapshot table: category counts (tags flattened)
+export const scenarioCategoryCounts = pgTable('scenario_category_counts', {
+  locale: localeEnum('locale').notNull(),
+  category: varchar('category', { length: 100 }).notNull(),
+  count: pgInteger('count').notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+})
 // Type exports for use in the application
 export type HomeContent = typeof homeContent.$inferSelect
 export type NewHomeContent = typeof homeContent.$inferInsert
@@ -124,3 +141,8 @@ export type NewPage = typeof pages.$inferInsert
 
 export type Scenario = typeof scenario.$inferSelect
 export type NewScenario = typeof scenario.$inferInsert
+
+// Snapshot type exports
+export type ScenarioTrendingSnapshot =
+  typeof scenarioTrendingSnapshot.$inferSelect
+export type ScenarioCategoryCount = typeof scenarioCategoryCounts.$inferSelect
