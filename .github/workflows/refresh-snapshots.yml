@@ -35,10 +35,10 @@ jobs:
           fi
           echo "DATABASE_URL secret is present (not printing value)."
 
-      - name: Run migrations (ensure schema up to date)
+      - name: Apply schema (idempotent push)
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: npx drizzle-kit migrate
+        run: npx drizzle-kit push
 
       - name: Refresh snapshots (with retry)
         env:
