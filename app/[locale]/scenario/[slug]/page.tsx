@@ -4,7 +4,7 @@ import { getTranslations, getMessages } from 'next-intl/server'
 import { locales } from '@/i18n/request'
 import { calculateFutureValue, type InvestmentParameters } from '@/lib/finance'
 import type { Metadata } from 'next'
-import { PREDEFINED_SCENARIOS } from '@/lib/scenarios'
+import { PREDEFINED_SCENARIOS, PREDEFINED_SCENARIOS_MAP } from '@/lib/scenarios'
 import { generateSEO } from '@/lib/seo'
 import {
   parseSlugToScenario,
@@ -26,9 +26,28 @@ import RelatedScenarios from '@/components/scenario/RelatedScenarios'
 
 // Enable ISR to reduce DB hits and Neon compute; pages revalidate every 24h
 export const revalidate = 86400
+// For predefined scenarios we want to rely on static generation only
+export const dynamicParams = true
+// For common predefined scenarios we can force static rendering by returning them in generateStaticParams below
 
 // Get scenario data from predefined scenarios with fallback to slug parsing
 async function getScenarioData(slug: string, locale: string) {
+  // Fast path: predefined scenario – no DB / parsing needed
+  if (PREDEFINED_SCENARIOS_MAP[slug]) {
+    const ps = PREDEFINED_SCENARIOS_MAP[slug]
+    return {
+      scenario: {
+        id: ps.id,
+        name: ps.name,
+        description: ps.description,
+        params: ps.params,
+        tags: ps.tags,
+      },
+      source: 'predefined' as const,
+      isUserGenerated: false,
+    }
+  }
+
   const getCached = unstable_cache(
     async () => {
       // First: Check database for user-generated scenarios
@@ -259,6 +278,9 @@ export async function generateStaticParams() {
 
   return paths
 }
+
+// Prevent dynamic fallback for predefined slugs by allowing Next to serve 404 if build missed one.
+// (Dynamic user-generated slugs still handled at runtime.)
 
 // Generate dynamic metadata for SEO optimization
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

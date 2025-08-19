@@ -91,6 +91,10 @@ export const PREDEFINED_SCENARIOS: ScenarioConfig[] = [
   },
 ]
 
+// Map for O(1) lookup (used in static generation + runtime short-circuit)
+export const PREDEFINED_SCENARIOS_MAP: Record<string, ScenarioConfig> =
+  Object.fromEntries(PREDEFINED_SCENARIOS.map((s) => [s.id, s]))
+
 /**
  * Generate all possible locale-scenario combinations for static generation
  */
