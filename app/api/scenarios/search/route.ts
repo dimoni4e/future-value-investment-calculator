@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { unstable_cache } from 'next/cache'
+import crypto from 'node:crypto'
 import {
   getScenariosWithFilters,
   getTrendingScenarios,
@@ -75,22 +76,38 @@ export async function GET(request: NextRequest) {
 
     const result = await getCached()
 
-    const res = NextResponse.json(
-      {
-        scenarios: result.scenarios,
-        total: result.total,
-        page,
-        totalPages: Math.ceil(result.total / limit),
+    const payload = {
+      scenarios: result.scenarios,
+      total: result.total,
+      page,
+      totalPages: Math.ceil(result.total / limit),
+    }
+    const jsonString = JSON.stringify(payload)
+    const etag =
+      'W/"' +
+      crypto
+        .createHash('sha1')
+        .update(jsonString)
+        .digest('base64')
+        .slice(0, 27) +
+      '"'
+
+    const ifNoneMatch = request.headers.get('if-none-match')
+    const headers: Record<string, string> = {
+      'Cache-Control':
+        'public, max-age=30, s-maxage=300, stale-while-revalidate=600',
+      ETag: etag,
+    }
+    if (ifNoneMatch && ifNoneMatch === etag) {
+      return new Response(null, { status: 304, headers })
+    }
+    return new NextResponse(jsonString, {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        ...headers,
       },
-      {
-        headers: {
-          // Short edge cache; SWR allows serving slightly stale while revalidating.
-          'Cache-Control':
-            'public, max-age=30, s-maxage=300, stale-while-revalidate=600',
-        },
-      }
-    )
-    return res
+    })
   } catch (error) {
     console.error('Scenario search error:', error)
     return NextResponse.json(
