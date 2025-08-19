@@ -1,12 +1,10 @@
 import { eq, and, sql, desc } from 'drizzle-orm'
 import { db } from './index'
-import {
-  homeContent,
-  pages,
-  scenario,
-  scenarioTrendingSnapshot,
-  scenarioCategoryCounts,
-} from './schema'
+import * as schemaModule from './schema'
+const { homeContent, pages, scenario } = schemaModule
+// Access snapshot tables via schemaModule to avoid build issues if absent in older schema versions
+const scenarioTrendingSnapshot = (schemaModule as any).scenarioTrendingSnapshot
+const scenarioCategoryCounts = (schemaModule as any).scenarioCategoryCounts
 import type {
   HomeContent,
   Page,
