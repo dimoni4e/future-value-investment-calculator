@@ -525,20 +525,21 @@ export default async function ScenarioPage({ params }: Props) {
     return getScenarioTranslation(scenario)
   })()
 
-  // Pre-calculate results for static generation
+  // Normalize annual return so that downstream calculations always receive a percentage (e.g., 8 for 8%).
+  // Some sources (DB/slug parsing) may express return as decimal (0.08) while predefined scenarios already use 8.
+  const normalizedAnnualReturnPct =
+    scenario.params.annualReturn <= 1
+      ? scenario.params.annualReturn * 100
+      : scenario.params.annualReturn
+
   const investmentParams: InvestmentParameters = {
     initialAmount: scenario.params.initialAmount,
     monthlyContribution: scenario.params.monthlyContribution,
-    annualReturnRate: scenario.params.annualReturn,
+    annualReturnRate: normalizedAnnualReturnPct, // always a percentage for finance utils
     timeHorizonYears: scenario.params.timeHorizon,
   }
 
-  // calculateFutureValue expects annualReturnRate as a percentage (e.g., 7 for 7%),
-  // while our app-wide params use decimal (e.g., 0.07). Convert here for accuracy.
-  const result = calculateFutureValue({
-    ...investmentParams,
-    annualReturnRate: investmentParams.annualReturnRate * 100,
-  })
+  const result = calculateFutureValue(investmentParams)
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-cyan-50">
@@ -648,7 +649,7 @@ export default async function ScenarioPage({ params }: Props) {
 
               <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50">
                 <div className="text-2xl font-bold text-purple-600">
-                  {(scenario.params.annualReturn * 100).toFixed(1)}%
+                  {normalizedAnnualReturnPct.toFixed(1)}%
                 </div>
                 <div className="text-sm text-slate-600">
                   {scenarioPage?.annualReturn || 'Annual Return'}
