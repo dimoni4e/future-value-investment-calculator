@@ -35,10 +35,8 @@ jobs:
           fi
           echo "DATABASE_URL secret is present (not printing value)."
 
-      - name: Apply schema (idempotent push)
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: npx drizzle-kit push
+      # Intentionally skipping schema migrations here; frequent enum recreation attempts were failing.
+      # Schema should be managed by a separate manual/CI workflow (build/test pipeline) not this cron.
 
       - name: Refresh snapshots (with retry)
         env:

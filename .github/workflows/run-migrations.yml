@@ -1,0 +1,45 @@
+name: Run Migrations
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate DATABASE_URL secret
+        run: |
+          if [ -z "${{ secrets.DATABASE_URL }}" ]; then
+            echo "DATABASE_URL secret is missing or empty." >&2
+            exit 1
+          fi
+          echo "DATABASE_URL secret is present (not printing)."
+
+      - name: Apply pending migrations (drizzle-kit push)
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: npx drizzle-kit push
+
+      - name: Verification query
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          node - <<'EOF'
+          import { neon } from '@neondatabase/serverless';
+          const sql = neon(process.env.DATABASE_URL);
+          const rows = await sql`SELECT count(*) FROM scenario`;
+          console.log('Scenario rows:', rows[0].count);
+          EOF
