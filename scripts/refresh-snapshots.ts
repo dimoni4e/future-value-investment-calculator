@@ -40,7 +40,7 @@ async function refreshTrending(limitPerLocale = 50) {
       await db.execute(sql`
         INSERT INTO scenario_trending_snapshot(locale, slug, rank, view_count)
         SELECT locale, slug, rn, view_count FROM (
-          SELECT ${scenario.locale} as locale,
+          SELECT ${scenario.locale}::locale as locale,
                  ${scenario.slug} as slug,
                  ${scenario.viewCount} as view_count,
                  row_number() OVER (PARTITION BY ${scenario.locale} ORDER BY ${scenario.viewCount} DESC) AS rn
@@ -66,12 +66,12 @@ async function refreshCategories() {
       await db.execute(sql`
         INSERT INTO scenario_category_counts(locale, category, count)
         SELECT locale, category, count(*) FROM (
-          SELECT ${scenario.locale} as locale,
+          SELECT ${scenario.locale}::locale as locale,
                  unnest(coalesce(${scenario.tags}, ARRAY[]::text[])) as category
           FROM ${scenario}
           WHERE ${scenario.isPublic} = true
         ) t
-        WHERE locale = ${locale}
+        WHERE locale = ${locale}::locale
         GROUP BY locale, category;
       `)
     })
