@@ -2,7 +2,7 @@ name: Refresh Snapshots
 
 on:
   schedule:
-    - cron: '*/10 * * * *' # every 10 minutes (consider reducing if not strictly needed)
+    - cron: '15 2 * * *' # daily at 02:15 UTC
   workflow_dispatch: {}
 
 # Prevent overlapping executions if a previous run is still in flight
