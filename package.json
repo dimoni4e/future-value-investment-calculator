@@ -22,6 +22,7 @@
     "db:setup": "./database/setup.sh",
     "db:backfill-locales": "tsx scripts/backfill-scenarios-locales.ts",
     "db:backfill-locales:tsnode": "tsx scripts/backfill-scenarios-locales.ts",
+    "db:health": "tsx scripts/db-health-check.ts",
     "snapshots:refresh": "tsx scripts/refresh-snapshots.ts"
   },
   "dependencies": {
