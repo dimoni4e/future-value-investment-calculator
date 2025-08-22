@@ -1,9 +1,14 @@
-name: Refresh Snapshots
+name: Refresh Snapshots (Manual Only)
 
+# Scheduling disabled to reduce Neon compute usage / prevent auto wake & quota consumption.
+# Re-enable by adding a schedule block if needed.
 on:
-  schedule:
-    - cron: '15 2 * * *' # daily at 02:15 UTC
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      enable:
+        description: 'Set to true to actually perform snapshot refresh (otherwise noop)'
+        required: false
+        default: 'false'
 
 # Prevent overlapping executions if a previous run is still in flight
 concurrency:
@@ -38,12 +43,14 @@ jobs:
       # Intentionally skipping schema migrations here; frequent enum recreation attempts were failing.
       # Schema should be managed by a separate manual/CI workflow (build/test pipeline) not this cron.
 
-      - name: Refresh snapshots (with retry)
+      - name: Conditional snapshot refresh (manual)
+        if: ${{ github.event.inputs.enable == 'true' }}
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           NODE_ENV: production
         run: |
           set -e
+          echo "Manual snapshot refresh starting..."
           for attempt in 1 2 3; do
             echo "Attempt $attempt running snapshot refresh..."
             if npm run snapshots:refresh; then
@@ -53,3 +60,7 @@ jobs:
           done
           echo "Snapshot refresh failed after 3 attempts" >&2
           exit 1
+
+      - name: Skipped (disabled or enable flag not true)
+        if: ${{ github.event.inputs.enable != 'true' }}
+        run: echo "Snapshots disabled (no schedule and enable flag != true)."
