@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     locale: params.locale,
     namespace: 'scenarios.explorer',
   })
-  const baseUrl = 'https://nature2pixel.com'
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://fvinvestcalc.com'
   const canonical =
     params.locale === 'en'
       ? `${baseUrl}/scenario`

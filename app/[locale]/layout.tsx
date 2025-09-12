@@ -27,9 +27,9 @@ export const metadata: Metadata = {
     'Advanced financial growth planning platform with compound interest projections, scenario analysis, and interactive charts. Transform your investment strategy with data-driven insights.',
   keywords:
     'financial growth planner, investment projections, compound interest, financial planning, future value, investment returns, retirement planning, wealth building',
-  authors: [{ name: 'Nature2Pixel Financial Tools' }],
+  authors: [{ name: 'fvinvestcalc' }],
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_BASE_URL || 'https://nature2pixel.com'
+    process.env.NEXT_PUBLIC_BASE_URL || 'https://fvinvestcalc.com'
   ),
   icons: {
     icon: '/favicon.png',
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     description:
       'Advanced financial growth planning platform with compound interest projections, scenario analysis, and interactive charts.',
     type: 'website',
-    siteName: 'Nature2Pixel Financial Tools',
+    siteName: 'fvinvestcalc',
     url: '/',
     images: [
       {

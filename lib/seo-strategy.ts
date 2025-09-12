@@ -126,7 +126,7 @@ export const generateStructuredData = (scenario: any) => ({
   description: scenario.description,
   provider: {
     '@type': 'Organization',
-    name: 'Nature2Pixel Financial Tools',
+    name: 'fvinvestcalc',
     url: process.env.NEXT_PUBLIC_BASE_URL,
   },
   offers: {

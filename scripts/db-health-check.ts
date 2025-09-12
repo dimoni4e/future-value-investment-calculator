@@ -1,6 +1,9 @@
 // Simple Neon Postgres connectivity & schema sanity check.
 // Run with: `npm run db:health` (ensure DATABASE_URL is set in .env.local or shell)
-import 'dotenv/config'
+import * as dotenv from 'dotenv'
+// Load .env.local first (if present), then fallback to .env
+dotenv.config({ path: '.env.local' })
+dotenv.config()
 import { neon } from '@neondatabase/serverless'
 
 // Health check: verifies connectivity, basic schema presence, and simple latency.

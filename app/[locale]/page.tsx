@@ -38,7 +38,8 @@ export async function generateMetadata({
     const seoData = getDefaultSEO(locale)
 
     // Enhanced metadata with more comprehensive SEO
-    const baseUrl = 'https://nature2pixel.com'
+    const baseUrl =
+      process.env.NEXT_PUBLIC_BASE_URL || 'https://fvinvestcalc.com'
 
     const canonicalUrl = locale === 'en' ? baseUrl : `${baseUrl}/${locale}`
 
@@ -46,9 +47,9 @@ export async function generateMetadata({
       title: seoContent.seo_meta_title || seoData.title,
       description: seoContent.seo_meta_description || seoData.description,
       keywords: seoContent.seo_keywords || seoData.keywords.join(', '),
-      authors: [{ name: 'Nature2Pixel Financial Tools' }],
-      creator: 'Nature2Pixel',
-      publisher: 'Nature2Pixel',
+      authors: [{ name: 'fvinvestcalc' }],
+      creator: 'fvinvestcalc',
+      publisher: 'fvinvestcalc',
       formatDetection: {
         email: false,
         address: false,
@@ -82,7 +83,7 @@ export async function generateMetadata({
           seoContent.seo_meta_description || seoData.openGraph.description,
         type: 'website',
         locale: locale,
-        siteName: 'Nature2Pixel Financial Tools',
+        siteName: 'fvinvestcalc',
         url: canonicalUrl,
         images: [
           {
@@ -95,8 +96,8 @@ export async function generateMetadata({
       },
       twitter: {
         card: 'summary_large_image',
-        site: '@nature2pixel',
-        creator: '@nature2pixel',
+        site: '@fvinvestcalc',
+        creator: '@fvinvestcalc',
         title: seoContent.seo_meta_title || seoData.twitter.title,
         description:
           seoContent.seo_meta_description || seoData.twitter.description,
@@ -113,7 +114,8 @@ export async function generateMetadata({
     console.error('Error generating metadata:', error)
     // Fallback to default SEO if database fails
     const seoData = getDefaultSEO(locale)
-    const baseUrl = 'https://nature2pixel.com'
+    const baseUrl =
+      process.env.NEXT_PUBLIC_BASE_URL || 'https://fvinvestcalc.com'
 
     const canonicalUrl = locale === 'en' ? baseUrl : `${baseUrl}/${locale}`
 
@@ -135,7 +137,7 @@ export async function generateMetadata({
         description: seoData.openGraph.description,
         type: 'website',
         locale: locale,
-        siteName: 'Nature2Pixel Financial Tools',
+        siteName: 'fvinvestcalc',
       },
       twitter: {
         card: 'summary_large_image',

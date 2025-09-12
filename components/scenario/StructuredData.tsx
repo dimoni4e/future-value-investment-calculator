@@ -19,7 +19,7 @@ export default function StructuredData({
   result,
   locale,
 }: StructuredDataProps) {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://nature2pixel.com'
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://fvinvestcalc.com'
   const scenarioUrl =
     locale === 'en'
       ? `${baseUrl}/scenario/${scenario.id}`

@@ -5,7 +5,7 @@
   "installCommand": "npm install",
   "framework": "nextjs",
   "env": {
-    "NEXT_PUBLIC_BASE_URL": "https://nature2pixel.com",
+    "NEXT_PUBLIC_BASE_URL": "https://fvinvestcalc.com",
     "SENTRY_DSN": "https://placeholder@o123456.ingest.sentry.io/4507123456789012",
     "NEXT_PUBLIC_SENTRY_DSN": "https://placeholder@o123456.ingest.sentry.io/4507123456789012",
     "SENTRY_ORG": "future-value-calculator",

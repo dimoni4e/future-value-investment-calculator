@@ -25,7 +25,7 @@ async function time<T>(label: string, fn: () => Promise<T>): Promise<T> {
 
 /**
  * Refresh snapshot tables for trending scenarios and category counts.
- * Designed to be invoked by a cron (e.g., GitHub Action, Vercel cron, external scheduler).
+ * Designed to be invoked by a cron (e.g., GitHub Action or external scheduler).
  */
 async function refreshTrending(limitPerLocale = 50) {
   const locales = ['en', 'pl', 'es']

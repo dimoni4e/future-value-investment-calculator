@@ -55,15 +55,18 @@ The project is organized into several directories and files, each serving a spec
 
 ## Deployment
 
-This application is configured for deployment on Vercel with automatic preview deployments for pull requests.
+This application is deployed via Coolify. Configure your Coolify service with the repository, build/start commands, and environment variables below. CI builds still run on GitHub Actions.
 
-### Production Deployment
+### Production Deployment (Coolify)
 
-1. **Push to GitHub**: The project automatically deploys to production when changes are pushed to the `main` branch.
+1. **Push to GitHub**: Coolify tracks the `main` branch and deploys on new commits (depending on your Coolify settings).
 
-2. **Environment Variables**: Set up the following environment variables in Vercel:
+2. **Environment Variables** (set in Coolify):
+
    ```
-   NEXT_PUBLIC_BASE_URL=https://your-domain.com
+   NEXT_PUBLIC_BASE_URL=https://fvinvestcalc.com
+   DATABASE_URL=postgres://user:pass@host:port/db
+   DATABASE_SSL=true
    SENTRY_DSN=your-sentry-dsn
    NEXT_PUBLIC_SENTRY_DSN=your-public-sentry-dsn
    SENTRY_ORG=your-sentry-org
@@ -71,19 +74,19 @@ This application is configured for deployment on Vercel with automatic preview d
    SENTRY_AUTH_TOKEN=your-sentry-auth-token
    ```
 
-### Preview Deployments
+3. **Resources**: Ensure the app service has network access to your Postgres (Coolify internal network recommended).
 
-- **Automatic PR Previews**: Every pull request automatically generates a preview deployment
-- **Preview URLs**: Commented automatically on pull requests
-- **Testing**: All preview deployments run through the CI/CD pipeline
+### Preview/Testing
 
-### CI/CD Pipeline
+- Use GitHub Actions to build and run tests on PRs.
+- Optionally configure a separate Coolify service for preview branches.
+
+## CI/CD Pipeline
 
 The project includes GitHub Actions workflows that:
 
 - Run ESLint and TypeScript checks
-- Execute Playwright tests
-- Deploy preview builds for pull requests
+- Execute Jest and Playwright tests
 - Generate test reports and artifacts
 
 ## Contributing

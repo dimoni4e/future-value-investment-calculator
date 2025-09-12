@@ -307,7 +307,7 @@ export async function generateMetadata({
       title: t('meta.title'),
       description: t('meta.description'),
       type: 'website',
-      siteName: 'Nature2Pixel Financial Tools',
+      siteName: 'fvinvestcalc',
     },
     twitter: {
       card: 'summary_large_image',

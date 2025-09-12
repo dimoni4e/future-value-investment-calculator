@@ -428,12 +428,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     alternates: {
       canonical:
         locale === 'en'
-          ? `https://nature2pixel.com/scenario/${slug}`
-          : `https://nature2pixel.com/${locale}/scenario/${slug}`,
+          ? `${process.env.NEXT_PUBLIC_BASE_URL}/scenario/${slug}`
+          : `${process.env.NEXT_PUBLIC_BASE_URL}/${locale}/scenario/${slug}`,
       languages: {
-        en: `https://nature2pixel.com/scenario/${slug}`,
-        es: `https://nature2pixel.com/es/scenario/${slug}`,
-        pl: `https://nature2pixel.com/pl/scenario/${slug}`,
+        en: `${process.env.NEXT_PUBLIC_BASE_URL}/scenario/${slug}`,
+        es: `${process.env.NEXT_PUBLIC_BASE_URL}/es/scenario/${slug}`,
+        pl: `${process.env.NEXT_PUBLIC_BASE_URL}/pl/scenario/${slug}`,
       },
     },
     openGraph: {
@@ -552,7 +552,7 @@ export default async function ScenarioPage({ params }: Props) {
           params: {
             initialAmount: scenario.params.initialAmount,
             monthlyContribution: scenario.params.monthlyContribution,
-            annualReturnRate: scenario.params.annualReturn,
+            annualReturnRate: normalizedAnnualReturnPct,
             timeHorizonYears: scenario.params.timeHorizon,
           },
           tags: scenario.tags,
@@ -763,7 +763,7 @@ export default async function ScenarioPage({ params }: Props) {
             params: {
               initialAmount: scenario.params.initialAmount,
               monthlyContribution: scenario.params.monthlyContribution,
-              annualReturnRate: scenario.params.annualReturn,
+              annualReturnRate: normalizedAnnualReturnPct,
               timeHorizonYears: scenario.params.timeHorizon,
             },
           }}

@@ -34,7 +34,7 @@ export function Header() {
             </div>
             <div className="hidden sm:block">
               <div className="font-bold text-xl font-playfair bg-gradient-to-r from-indigo-600 to-cyan-600 bg-clip-text text-transparent">
-                Nature2Pixel
+                fvinvestcalc
               </div>
               <div className="text-xs text-slate-500 -mt-1 font-medium">
                 {tLayout('description')}

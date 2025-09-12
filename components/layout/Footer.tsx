@@ -30,7 +30,7 @@ export function Footer() {
               </div>
               <div>
                 <div className="font-bold text-xl font-playfair bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
-                  Nature2Pixel
+                  fvinvestcalc
                 </div>
                 <div className="text-sm text-indigo-400 -mt-1 font-medium">
                   {tLayout('description')}
@@ -119,9 +119,7 @@ export function Footer() {
 
         <div className="border-t border-slate-700/50 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between">
           <div className="flex items-center space-x-2 text-sm text-slate-400">
-            <span>
-              © {new Date().getFullYear()} Nature2Pixel Financial Tools.
-            </span>
+            <span>© {new Date().getFullYear()} fvinvestcalc.</span>
             <span>{tFooter('allRightsReserved')}</span>
           </div>
           <div className="flex items-center space-x-2 text-sm text-slate-400 mt-4 md:mt-0">

@@ -58,7 +58,7 @@ You provide accurate, factual, thoughtful answers, and are a genius at reasoning
 - API layer: Route handlers in `app/api/**` (e.g., `/api/scenarios/search`) call Drizzle queries. Client components fetch these endpoints.
 - UX/perf: Heavy UI is lazy-loaded (IntersectionObserver + React.Suspense) via `components/scenario/LazyContentSection.tsx`. Charts are lazily imported from Recharts (`components/OptimizedGrowthChart.tsx`).
 - SEO: Dynamic metadata and Open Graph via server pages; structured data component under `components/scenario/StructuredData.tsx`. OG image at `app/api/og/route.tsx`.
-- Analytics: Sentry for error monitoring and Yandex Metrika script in `app/layout.tsx`.
+- Analytics: Sentry for error monitoring.
 
 ## Conventions and gotchas
 
@@ -130,6 +130,6 @@ How to add a new content section safely:
 ## Environment and deployment
 
 - Required env for local dev: `DATABASE_URL`. Optional/used in CI/production: `NEXT_PUBLIC_BASE_URL`, Sentry vars (`SENTRY_DSN`, `NEXT_PUBLIC_SENTRY_DSN`, `SENTRY_ORG`, `SENTRY_PROJECT`, `SENTRY_AUTH_TOKEN`).
-- CI (`.github/workflows/ci.yml`): lint + build on PRs/`main`, PR comment with Vercel preview URL. Playwright job is present but commented.
+- Deployment: Coolify is used for production. Configure env vars and build/start commands in Coolify. CI (`.github/workflows/ci.yml`) runs lint + build on PRs/`main`. Playwright job is present but commented.
 
 Prefer edits that: (a) centralize logic in `lib/**`, (b) respect i18n and lazy-loading patterns, (c) reuse Drizzle queries and types, and (d) keep English routes unprefixed while supporting `pl`/`es` prefixes.

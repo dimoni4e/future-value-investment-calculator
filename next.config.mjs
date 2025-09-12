@@ -8,7 +8,7 @@ const withNextIntl = createNextIntlPlugin('./i18n/request.ts')
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['nature2pixel.com'], // Production domain for image optimization
+    domains: ['fvinvestcalc.com'], // Production domain for image optimization
   },
   experimental: {
     // Disable instrumentationHook to avoid opentelemetry vendor chunk issues during local/dev
@@ -62,10 +62,7 @@ export default withSentryConfig(
     // Automatically tree-shake Sentry logger statements to reduce bundle size
     disableLogger: true,
 
-    // Enables automatic instrumentation of Vercel Cron Monitors.
-    // See the following for more information:
-    // https://docs.sentry.io/product/crons/
-    // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
-    automaticVercelMonitors: true,
+    // Sentry options (Coolify deployment). Disable Vercel-specific monitors.
+    automaticVercelMonitors: false,
   }
 )

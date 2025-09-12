@@ -35,7 +35,7 @@
 | 29  | **Wire export button in UI**                 | route ready           | click downloads CSV                    | file exists                  |
 | 30  | **Integrate Sentry (browser + edge)**        | env var ready         | test error appears in Sentry           | throw error                  |
 | 31  | **Configure Vercel CI preview deploy**       | repo on GitHub        | PR deploy URL auto-comments            | open preview                 |
-| 32  | **Add Core Web Vitals report in Vercel**     | deploy ready          | dashboard shows metrics                | view Vercel analytics        |
+| 32  | **Add Core Web Vitals reporting**            | backlog               | decided monitoring approach            | n/a                          |
 | 33  | **Write Playwright e2e for happy path**      | app stable            | test passes on CI                      | `npm run test:e2e`           |
 | 34  | **Smoke-test all locales**                   | i18n done             | Playwright loop locales                | CI green                     |
 | 35  | **Final accessibility audit (axe)**          | UI frozen             | no critical issues                     | run axe-ci                   |

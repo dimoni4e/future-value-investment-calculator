@@ -132,7 +132,7 @@ export function generateStructuredData(
     '@type': 'WebApplication',
     name: 'Future Value Investment Calculator',
     description: seoData.description,
-    url: url || 'https://future-value-calculator.com',
+    url: url || process.env.NEXT_PUBLIC_BASE_URL || 'https://fvinvestcalc.com',
     applicationCategory: 'FinanceApplication',
     operatingSystem: 'Any',
     offers: {
