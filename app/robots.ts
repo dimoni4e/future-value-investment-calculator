@@ -8,11 +8,13 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: [
-          '/api/', // Block API endpoints
-          '/_next/', // Block Next.js internals
-          '/admin/', // Block admin if added later
-        ],
+        // Do not disallow /_next to ensure ad scripts and assets are discoverable.
+        disallow: ['/api/', '/admin/'],
+      },
+      // Explicitly allow AdSense crawler
+      {
+        userAgent: 'Mediapartners-Google',
+        allow: '/',
       },
       {
         userAgent: 'Googlebot',

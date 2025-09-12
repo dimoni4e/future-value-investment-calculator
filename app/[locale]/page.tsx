@@ -6,6 +6,7 @@ import {
 import { TrendingUp } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 import { type Metadata } from 'next'
+import { headers } from 'next/headers'
 import { generateSEO, getDefaultSEO } from '@/lib/seo'
 import { decodeParamsFromUrl, validateParams } from '@/lib/urlState'
 import { calculateFutureValue } from '@/lib/finance'
@@ -39,11 +40,30 @@ export async function generateMetadata({
     const seoData = getDefaultSEO(locale)
 
     // Enhanced metadata with more comprehensive SEO
-    const baseUrl =
+    // Derive base URL from incoming request headers when available; fallback to env/default
+    const headerValues = (() => {
+      try {
+        return headers()
+      } catch {
+        return null
+      }
+    })()
+    const proto = headerValues?.get('x-forwarded-proto') || 'https'
+    const hostFromHeaders =
+      headerValues?.get('x-forwarded-host') || headerValues?.get('host') || ''
+    const envBase =
       process.env.NEXT_PUBLIC_BASE_URL || 'https://fvinvestcalc.com'
-
+    const envOrigin = (() => {
+      try {
+        return new URL(envBase).origin
+      } catch {
+        return 'https://fvinvestcalc.com'
+      }
+    })()
+    const baseUrl = (
+      hostFromHeaders ? `${proto}://${hostFromHeaders}` : envOrigin
+    ).replace(/\/$/, '')
     const canonicalUrl = locale === 'en' ? baseUrl : `${baseUrl}/${locale}`
-
     return {
       title: seoContent.seo_meta_title || seoData.title,
       description: seoContent.seo_meta_description || seoData.description,
@@ -115,11 +135,16 @@ export async function generateMetadata({
     console.error('Error generating metadata:', error)
     // Fallback to default SEO if database fails
     const seoData = getDefaultSEO(locale)
-    const baseUrl =
+    const envBase =
       process.env.NEXT_PUBLIC_BASE_URL || 'https://fvinvestcalc.com'
-
+    const baseUrl = (() => {
+      try {
+        return new URL(envBase).origin.replace(/\/$/, '')
+      } catch {
+        return 'https://fvinvestcalc.com'
+      }
+    })()
     const canonicalUrl = locale === 'en' ? baseUrl : `${baseUrl}/${locale}`
-
     return {
       title: seoData.title,
       description: seoData.description,
