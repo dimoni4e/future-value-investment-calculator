@@ -13,6 +13,7 @@ import React, {
   useEffect,
   useRef,
 } from 'react'
+import { formatCurrencyUSD } from '@/lib/format'
 import { useTranslations } from 'next-intl'
 import {
   TrendingUp,
@@ -160,9 +161,9 @@ const OptimizedGrowthChart: React.FC<OptimizedGrowthChartProps> = memo(
 
       return data.map((item) => ({
         ...item,
-        formattedTotalValue: `$${item.totalValue.toLocaleString()}`,
-        formattedContributions: `$${item.contributions.toLocaleString()}`,
-        formattedGrowth: `$${item.growth.toLocaleString()}`,
+        formattedTotalValue: formatCurrencyUSD(item.totalValue),
+        formattedContributions: formatCurrencyUSD(item.contributions),
+        formattedGrowth: formatCurrencyUSD(item.growth),
       }))
     }, [data])
 
@@ -222,7 +223,10 @@ const OptimizedGrowthChart: React.FC<OptimizedGrowthChartProps> = memo(
             </p>
             {payload.map((entry: any, index: number) => (
               <p key={index} className="text-sm" style={{ color: entry.color }}>
-                {entry.name}: {entry.value?.toLocaleString?.() || entry.value}
+                {entry.name}:{' '}
+                {typeof entry.value === 'number'
+                  ? formatCurrencyUSD(entry.value)
+                  : entry.value}
               </p>
             ))}
           </div>

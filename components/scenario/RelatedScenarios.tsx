@@ -6,6 +6,7 @@ import { InvestmentParameters } from '@/lib/finance'
 import { PREDEFINED_SCENARIOS, ScenarioConfig } from '@/lib/scenarios'
 import { generateScenarioSlug, detectInvestmentGoal } from '@/lib/scenarioUtils'
 import { useTranslations } from 'next-intl'
+import { formatPercent, formatCurrencyUSD } from '@/lib/format'
 
 interface RelatedScenario {
   id: string
@@ -327,7 +328,7 @@ export default function RelatedScenarios({
                         {t('labels.initial')}:
                       </span>
                       <span className="font-medium text-slate-900">
-                        ${scenario.params.initialAmount.toLocaleString()}
+                        {formatCurrencyUSD(scenario.params.initialAmount)}
                       </span>
                     </div>
                     <div className="flex justify-between">
@@ -335,7 +336,7 @@ export default function RelatedScenarios({
                         {t('labels.monthly')}:
                       </span>
                       <span className="font-medium text-slate-900">
-                        ${scenario.params.monthlyContribution.toLocaleString()}
+                        {formatCurrencyUSD(scenario.params.monthlyContribution)}
                       </span>
                     </div>
                     <div className="flex justify-between">
@@ -343,7 +344,7 @@ export default function RelatedScenarios({
                         {t('labels.return')}:
                       </span>
                       <span className="font-medium text-slate-900">
-                        {scenario.params.annualReturnRate}%
+                        {formatPercent(scenario.params.annualReturnRate, 0)}
                       </span>
                     </div>
                     <div className="flex justify-between">

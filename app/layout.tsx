@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { headers } from 'next/headers'
+import Script from 'next/script'
+import { GoogleAnalytics } from '@/components/GoogleAnalytics'
 
 export const metadata: Metadata = {
   title: 'Future Value Investment Calculator',
@@ -26,7 +28,26 @@ export default function RootLayout({
       <head />
       <body className="h-full antialiased">
         {children}
-        {/* Analytics removed: using only Sentry for error monitoring */}
+        {/* Google Analytics 4 */}
+        {process.env.NODE_ENV === 'production' && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID ?? 'G-M3N50VMKMJ'}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga-init" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${process.env.NEXT_PUBLIC_GA_ID ?? 'G-M3N50VMKMJ'}');
+              `}
+            </Script>
+            <GoogleAnalytics
+              gaId={process.env.NEXT_PUBLIC_GA_ID ?? 'G-M3N50VMKMJ'}
+            />
+          </>
+        )}
       </body>
     </html>
   )

@@ -13,6 +13,7 @@ import { PREDEFINED_SCENARIOS } from '@/lib/scenarios'
 import { getRecentScenarios, getHomeContent } from '@/lib/db/queries'
 import { SEOContentSection } from '@/components/SEOContentSection'
 import Link from 'next/link'
+import { formatCurrencyUSD } from '@/lib/format'
 
 type Props = {
   params: { locale: string }
@@ -391,7 +392,7 @@ export default async function HomePage({ params: { locale } }: Props) {
                     <div className="grid grid-cols-2 gap-4 mb-6">
                       <div>
                         <div className="text-2xl font-bold text-indigo-600">
-                          ${scenario.params.initialAmount.toLocaleString()}
+                          {formatCurrencyUSD(scenario.params.initialAmount)}
                         </div>
                         <div className="text-xs text-slate-500">
                           {getContentWithFallback(
@@ -405,8 +406,9 @@ export default async function HomePage({ params: { locale } }: Props) {
                       </div>
                       <div>
                         <div className="text-2xl font-bold text-emerald-600">
-                          $
-                          {scenario.params.monthlyContribution.toLocaleString()}
+                          {formatCurrencyUSD(
+                            scenario.params.monthlyContribution
+                          )}
                         </div>
                         <div className="text-xs text-slate-500">
                           {getContentWithFallback(
@@ -558,7 +560,9 @@ export default async function HomePage({ params: { locale } }: Props) {
                       <div className="grid grid-cols-2 gap-4 mb-6">
                         <div>
                           <div className="text-2xl font-bold text-indigo-600">
-                            ${parseInt(scenario.initialAmount).toLocaleString()}
+                            {formatCurrencyUSD(
+                              parseInt(scenario.initialAmount)
+                            )}
                           </div>
                           <div className="text-xs text-slate-500">
                             {getContentWithFallback(
@@ -572,10 +576,9 @@ export default async function HomePage({ params: { locale } }: Props) {
                         </div>
                         <div>
                           <div className="text-2xl font-bold text-emerald-600">
-                            $
-                            {parseInt(
-                              scenario.monthlyContribution
-                            ).toLocaleString()}
+                            {formatCurrencyUSD(
+                              parseInt(scenario.monthlyContribution)
+                            )}
                           </div>
                           <div className="text-xs text-slate-500">
                             {getContentWithFallback(

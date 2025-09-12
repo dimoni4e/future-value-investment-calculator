@@ -1,6 +1,7 @@
 import { type InvestmentParameters, calculateFutureValue } from '@/lib/finance'
 import { TrendingUp, Users, BarChart3, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import { formatPercent, formatCurrencyUSD } from '@/lib/format'
 
 interface ComparativeAnalysisProps {
   params: InvestmentParameters
@@ -99,7 +100,7 @@ export default function ComparativeAnalysis({
               <div className="grid md:grid-cols-4 gap-6">
                 <div>
                   <div className="text-2xl font-bold text-indigo-600">
-                    ${params.initialAmount.toLocaleString()}
+                    {formatCurrencyUSD(params.initialAmount)}
                   </div>
                   <div className="text-sm text-slate-600">
                     {translations?.initial || 'Initial'}
@@ -107,7 +108,7 @@ export default function ComparativeAnalysis({
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-indigo-600">
-                    ${params.monthlyContribution.toLocaleString()}
+                    {formatCurrencyUSD(params.monthlyContribution)}
                   </div>
                   <div className="text-sm text-slate-600">
                     {translations?.monthly || 'Monthly'}
@@ -115,7 +116,7 @@ export default function ComparativeAnalysis({
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-indigo-600">
-                    {params.annualReturnRate}%
+                    {formatPercent(params.annualReturnRate, 0)}
                   </div>
                   <div className="text-sm text-slate-600">
                     {translations?.return || 'Return'}
@@ -132,7 +133,7 @@ export default function ComparativeAnalysis({
               </div>
               <div className="mt-6 pt-6 border-t border-indigo-200">
                 <div className="text-3xl font-bold text-indigo-800">
-                  ${result.futureValue.toLocaleString()}
+                  {formatCurrencyUSD(result.futureValue)}
                 </div>
                 <div className="text-sm text-indigo-600">
                   {translations?.projectedValue || 'Projected Final Value'}
@@ -178,7 +179,7 @@ export default function ComparativeAnalysis({
                           {translations?.newValue || 'New Value'}
                         </div>
                         <div className="font-semibold">
-                          ${scenarioResult.futureValue.toLocaleString()}
+                          {formatCurrencyUSD(scenarioResult.futureValue)}
                         </div>
                       </div>
                       <div>
@@ -203,10 +204,10 @@ export default function ComparativeAnalysis({
                     <div
                       className={`text-2xl font-bold text-${scenario.color}-600 mb-1`}
                     >
-                      +$
-                      {(
+                      +
+                      {formatCurrencyUSD(
                         scenarioResult.futureValue - result.futureValue
-                      ).toLocaleString()}
+                      )}
                     </div>
                     <div className="text-xs text-slate-600">
                       {translations?.additionalGrowth || 'Additional Growth'}

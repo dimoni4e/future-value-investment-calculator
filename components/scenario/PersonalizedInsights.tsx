@@ -1,6 +1,7 @@
 import { type InvestmentParameters } from '@/lib/finance'
 import ScenarioSEOSection from '@/components/scenario/ScenarioSEOSection'
 import { TrendingUp, Target, Clock, BarChart3 } from 'lucide-react'
+import { formatCurrencyUSD } from '@/lib/format'
 
 interface PersonalizedInsightsProps {
   params: InvestmentParameters
@@ -107,7 +108,7 @@ export default function PersonalizedInsights({
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-blue-600">
-                    ${monthlyGrowth.toLocaleString()}
+                    {formatCurrencyUSD(monthlyGrowth)}
                   </div>
                   <div className="text-sm text-slate-600">
                     {translations?.avgMonthlyGrowth || 'Avg Monthly Growth'}
@@ -139,11 +140,9 @@ export default function PersonalizedInsights({
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-yellow-600">
-                    $
-                    {(
-                      result.futureValue /
-                      (params.timeHorizonYears * 12)
-                    ).toLocaleString()}
+                    {formatCurrencyUSD(
+                      result.futureValue / (params.timeHorizonYears * 12)
+                    )}
                   </div>
                   <div className="text-sm text-slate-600">
                     {translations?.avgMonthlyValue || 'Avg Monthly Value'}
@@ -195,7 +194,7 @@ export default function PersonalizedInsights({
                   {translations?.years || 'years'}
                 </div>
                 <div className="text-lg font-semibold mb-2">
-                  ${Math.round(result.futureValue * 0.25).toLocaleString()}
+                  {formatCurrencyUSD(Math.round(result.futureValue * 0.25))}
                 </div>
                 <div className="text-sm text-slate-600">
                   {translations?.firstMilestone || 'First Quarter Milestone'}
@@ -208,7 +207,7 @@ export default function PersonalizedInsights({
                   {translations?.years || 'years'}
                 </div>
                 <div className="text-lg font-semibold mb-2">
-                  ${Math.round(result.futureValue * 0.5).toLocaleString()}
+                  {formatCurrencyUSD(Math.round(result.futureValue * 0.5))}
                 </div>
                 <div className="text-sm text-slate-600">
                   {translations?.midpointMilestone || 'Halfway Milestone'}
@@ -220,7 +219,7 @@ export default function PersonalizedInsights({
                   {params.timeHorizonYears} {translations?.years || 'years'}
                 </div>
                 <div className="text-lg font-semibold mb-2">
-                  ${result.futureValue.toLocaleString()}
+                  {formatCurrencyUSD(result.futureValue)}
                 </div>
                 <div className="text-sm text-slate-600">
                   {translations?.finalGoal || 'Final Goal'}

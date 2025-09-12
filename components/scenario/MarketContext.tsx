@@ -1,5 +1,6 @@
 import { type InvestmentParameters } from '@/lib/finance'
 import { generateMarketContext } from '@/lib/contentGenerator'
+import { formatPercent } from '@/lib/format'
 import { TrendingUp, AlertTriangle, Info, Globe } from 'lucide-react'
 
 interface MarketContextProps {
@@ -96,7 +97,7 @@ export default async function MarketContext({
                     </div>
                     <div className="text-sm text-slate-600">
                       {translations?.expectedReturn || 'Expected Return'}:{' '}
-                      {params.annualReturnRate}%
+                      {formatPercent(params.annualReturnRate, 0)}
                     </div>
                   </div>
 

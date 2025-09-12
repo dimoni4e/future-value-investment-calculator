@@ -30,15 +30,16 @@ export default async function ScenarioSEOSection({
   goalHint,
   headings,
 }: ScenarioSEOSectionProps) {
-  // Round annual percentage to avoid long decimals like 7.0000000001%
-  const annualPct = Math.round(params.annualReturnRate * 100 * 10) / 10
+  // params.annualReturnRate is already a PERCENT (e.g., 7 for 7%).
+  // Round to one decimal to avoid long floats like 7.000000000000001%.
+  const annualPct = Math.round(params.annualReturnRate * 10) / 10
 
   const goal =
     goalHint ||
     detectInvestmentGoal({
       initialAmount: params.initialAmount,
       monthlyContribution: params.monthlyContribution,
-      annualReturn: annualPct,
+      annualReturn: Number(annualPct.toFixed(1)),
       timeHorizon: params.timeHorizonYears,
     })
 
@@ -46,7 +47,7 @@ export default async function ScenarioSEOSection({
     {
       initialAmount: params.initialAmount,
       monthlyContribution: params.monthlyContribution,
-      annualReturn: annualPct,
+      annualReturn: Number(annualPct.toFixed(1)),
       timeHorizon: params.timeHorizonYears,
       goal: String(goal),
       futureValue: result?.futureValue,
@@ -64,8 +65,8 @@ export default async function ScenarioSEOSection({
       ? result.annualBreakdown
       : calculateFutureValue({
           ...params,
-          // calculateFutureValue expects percentage; params use decimal
-          annualReturnRate: params.annualReturnRate * 100,
+          // calculateFutureValue expects percentage and params is already percentage
+          annualReturnRate: params.annualReturnRate,
         }).annualBreakdown
 
   const chartData = breakdown.map((b) => ({

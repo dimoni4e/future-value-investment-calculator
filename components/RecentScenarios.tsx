@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Bookmark, TrendingUp, Eye, Calendar } from 'lucide-react'
 import { calculateFutureValue, type InvestmentParameters } from '@/lib/finance'
 import { getHomeContent } from '@/lib/db/queries'
+import { formatCurrencyUSD } from '@/lib/format'
 
 interface UserScenario {
   id: string
@@ -153,11 +154,11 @@ export function RecentScenarios({ locale, limit = 3 }: RecentScenariosProps) {
 
                 <div className="flex items-center space-x-4 text-sm text-gray-500">
                   <span>
-                    ${scenario.params.initialAmount.toLocaleString()}{' '}
+                    {formatCurrencyUSD(scenario.params.initialAmount)}{' '}
                     {content.scenarios_initial || 'initial'}
                   </span>
                   <span>
-                    ${scenario.params.monthlyContribution.toLocaleString()}/
+                    {formatCurrencyUSD(scenario.params.monthlyContribution)}/
                     {content.scenarios_monthly || 'month'}
                   </span>
                   <span>
@@ -173,7 +174,7 @@ export function RecentScenarios({ locale, limit = 3 }: RecentScenariosProps) {
 
               <div className="text-right ml-4">
                 <div className="text-lg font-bold text-emerald-600">
-                  ${result.futureValue.toLocaleString()}
+                  {formatCurrencyUSD(result.futureValue)}
                 </div>
                 <div className="flex items-center text-xs text-gray-500">
                   <Calendar className="w-3 h-3 mr-1" />

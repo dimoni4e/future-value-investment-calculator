@@ -23,6 +23,7 @@ import StructuredData from '@/components/scenario/StructuredData'
 import ScenarioSEOSection from '@/components/scenario/ScenarioSEOSection'
 import Link from 'next/link'
 import RelatedScenarios from '@/components/scenario/RelatedScenarios'
+import { formatPercent, formatCurrencyUSD } from '@/lib/format'
 
 // Enable ISR to reduce DB hits and Neon compute; pages revalidate every 24h
 export const revalidate = 86400
@@ -311,8 +312,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     // Prefer localized scenario name/description
     const s = scenarioData.scenario
     const annualPct = (s.params.annualReturn * 100).toFixed(0)
-    const initialStr = `$${s.params.initialAmount.toLocaleString()}`
-    const monthlyStr = `$${s.params.monthlyContribution}`
+    const initialStr = `${formatCurrencyUSD(s.params.initialAmount)}`
+    const monthlyStr = `${formatCurrencyUSD(s.params.monthlyContribution)}`
     const timeStr = `${s.params.timeHorizon}`
 
     // If predefined, try localized name/desc from messages; else use DB (already localized per-locale)
@@ -359,8 +360,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const parsed = parseSlugToScenario(slug)
     if (parsed) {
       const annualPct = parsed.annualReturn.toFixed(0)
-      const initialStr = `$${parsed.initialAmount.toLocaleString()}`
-      const monthlyStr = `$${parsed.monthlyContribution}`
+      const initialStr = `${formatCurrencyUSD(parsed.initialAmount)}`
+      const monthlyStr = `${formatCurrencyUSD(parsed.monthlyContribution)}`
       const timeStr = `${parsed.timeHorizon}`
 
       // Build a localized scenarioName using our helper
@@ -631,7 +632,7 @@ export default async function ScenarioPage({ params }: Props) {
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
               <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50">
                 <div className="text-2xl font-bold text-indigo-600">
-                  ${scenario.params.initialAmount.toLocaleString()}
+                  {formatCurrencyUSD(scenario.params.initialAmount)}
                 </div>
                 <div className="text-sm text-slate-600">
                   {scenarioPage?.initialInvestment || 'Initial Investment'}
@@ -640,7 +641,7 @@ export default async function ScenarioPage({ params }: Props) {
 
               <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50">
                 <div className="text-2xl font-bold text-emerald-600">
-                  ${scenario.params.monthlyContribution.toLocaleString()}
+                  {formatCurrencyUSD(scenario.params.monthlyContribution)}
                 </div>
                 <div className="text-sm text-slate-600">
                   {scenarioPage?.monthlyContribution || 'Monthly Contribution'}
@@ -649,7 +650,7 @@ export default async function ScenarioPage({ params }: Props) {
 
               <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50">
                 <div className="text-2xl font-bold text-purple-600">
-                  {normalizedAnnualReturnPct.toFixed(1)}%
+                  {formatPercent(normalizedAnnualReturnPct, 0)}
                 </div>
                 <div className="text-sm text-slate-600">
                   {scenarioPage?.annualReturn || 'Annual Return'}
@@ -672,11 +673,11 @@ export default async function ScenarioPage({ params }: Props) {
                 {scenarioPage?.projectedResult || 'Projected Result'}
               </h2>
               <div className="text-5xl font-bold mb-2">
-                ${result.futureValue.toLocaleString()}
+                {formatCurrencyUSD(result.futureValue)}
               </div>
               <div className="text-emerald-100">
-                {scenarioPage?.totalGrowth || 'Total Growth'}: $
-                {result.totalGrowth.toLocaleString()} (
+                {scenarioPage?.totalGrowth || 'Total Growth'}:{' '}
+                {formatCurrencyUSD(result.totalGrowth)} (
                 {(
                   (result.totalGrowth / result.totalContributions) *
                   100

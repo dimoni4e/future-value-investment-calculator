@@ -1,5 +1,6 @@
 import { type InvestmentParameters } from '@/lib/finance'
 import { Lightbulb, TrendingUp, Shield, Clock, DollarSign } from 'lucide-react'
+import { formatCurrencyUSD } from '@/lib/format'
 
 interface OptimizationTipsProps {
   params: InvestmentParameters
@@ -32,7 +33,12 @@ export default function OptimizationTips({
         description:
           translations?.increaseContributionsDesc ||
           'Consider increasing your monthly contributions by $100-200 to significantly boost your final result.',
-        impact: `+$${((params.monthlyContribution * 1.5 - params.monthlyContribution) * params.timeHorizonYears * 12 * 1.5).toLocaleString()}`,
+        impact: `+${formatCurrencyUSD(
+          (params.monthlyContribution * 1.5 - params.monthlyContribution) *
+            params.timeHorizonYears *
+            12 *
+            1.5
+        )}`,
         color: 'blue',
       })
     }
@@ -45,7 +51,7 @@ export default function OptimizationTips({
         description:
           translations?.extendTimeframeDesc ||
           'Adding even 5 more years can dramatically increase your returns due to compound interest.',
-        impact: `+$${(result.futureValue * 0.4).toLocaleString()}`,
+        impact: `+${formatCurrencyUSD(result.futureValue * 0.4)}`,
         color: 'green',
       })
     }
@@ -80,7 +86,7 @@ export default function OptimizationTips({
         description:
           translations?.diversifyDesc ||
           'Consider a mix of stocks, bonds, and other assets to potentially achieve higher returns.',
-        impact: `+$${(result.futureValue * 0.3).toLocaleString()}`,
+        impact: `+${formatCurrencyUSD(result.futureValue * 0.3)}`,
         color: 'orange',
       })
     }
