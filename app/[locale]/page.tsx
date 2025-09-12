@@ -235,7 +235,7 @@ export default async function HomePage({ params: { locale } }: Props) {
 
             {/* Enhanced Heading */}
             <h1
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold font-playfair text-slate-900 leading-tight mb-6 animate-slide-in-up"
+              className="text-4xl sm:text-5xl lg:text-6xl font-bold font-playfair text-slate-900 leading-tight mb-2 animate-slide-in-up"
               style={{ animationDelay: '0.1s' }}
             >
               {getContentWithFallback(
@@ -245,16 +245,19 @@ export default async function HomePage({ params: { locale } }: Props) {
                 tLayout('title'),
                 locale
               )}
-              <span className="block text-3xl sm:text-4xl lg:text-5xl text-gradient mt-3 font-semibold">
-                {getContentWithFallback(
-                  dbContent,
-                  'layout',
-                  'description',
-                  tLayout('description'),
-                  locale
-                )}
-              </span>
             </h1>
+            <div
+              className="text-3xl sm:text-4xl lg:text-5xl text-gradient mt-3 font-semibold mb-6 animate-slide-in-up"
+              style={{ animationDelay: '0.12s' }}
+            >
+              {getContentWithFallback(
+                dbContent,
+                'layout',
+                'description',
+                tLayout('description'),
+                locale
+              )}
+            </div>
 
             {/* Enhanced description */}
             <p
