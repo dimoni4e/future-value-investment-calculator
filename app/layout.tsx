@@ -25,7 +25,14 @@ export default function RootLayout({
   const locale = headers().get('x-next-intl-locale') || 'en'
   return (
     <html lang={locale} className="h-full">
-      <head />
+      <head>
+        {/* Google AdSense site verification/loader */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1427824399252755"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="h-full antialiased">
         {children}
         {/* Google Analytics 4 */}

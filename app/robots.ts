@@ -20,7 +20,6 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: 'Googlebot',
         allow: [
           '/',
-          '/en/',
           '/es/',
           '/pl/',
           '/scenario/', // Allow all scenario pages and discovery

@@ -7,6 +7,28 @@
       "command": "npm run build",
       "problemMatcher": ["$tsc"],
       "group": "build"
+    },
+    {
+      "label": "Build Next.js app",
+      "type": "shell",
+      "command": "npm run build",
+      "problemMatcher": ["$tsc"],
+      "group": "build"
+    },
+    {
+      "label": "Build Next.js app",
+      "type": "shell",
+      "command": "npm run build",
+      "problemMatcher": ["$tsc"],
+      "group": "build"
+    },
+    {
+      "label": "Dev server",
+      "type": "shell",
+      "command": "npm run dev",
+      "isBackground": true,
+      "problemMatcher": ["$tsc"],
+      "group": "build"
     }
   ]
 }
