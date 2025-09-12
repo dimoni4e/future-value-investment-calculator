@@ -26,13 +26,6 @@ export default function RootLayout({
   return (
     <html lang={locale} className="h-full">
       <head />
-      {/* Google AdSense (site-wide). Using beforeInteractive ensures it lands in <head> for crawlers. */}
-      <Script
-        id="adsense-loader"
-        strategy="beforeInteractive"
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1427824399252755"
-        crossOrigin="anonymous"
-      />
       <body className="h-full antialiased">
         {children}
         {/* Google Analytics 4 */}
