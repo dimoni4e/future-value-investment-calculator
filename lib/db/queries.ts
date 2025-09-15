@@ -636,36 +636,41 @@ export async function getTrendingScenarios(
   const cacheKey = `${locale}:${limit}`
   const cached = trendingCache.get(cacheKey)
   if (cached && cached.expires > Date.now()) return cached.data
-  // Try snapshot first
-  const snapshot = await db
-    .select({ slug: scenarioTrendingSnapshot.slug })
-    .from(scenarioTrendingSnapshot)
-    .where(eq(scenarioTrendingSnapshot.locale, locale as any))
-    .orderBy(scenarioTrendingSnapshot.rank)
-    .limit(limit)
-
-  if (snapshot.length) {
-    const slugs = snapshot.map((s) => s.slug)
-    // Fetch scenarios by slug preserving order
-    const rows = await db
-      .select(scenarioSelection)
-      .from(scenario)
-      .where(
-        and(
-          eq(scenario.locale, locale as any),
-          sql`${scenario.slug} = ANY(${slugs})`
-        )
-      )
-    // Preserve snapshot ordering
-    const orderMap = new Map(slugs.map((s, i) => [s, i]))
-    const ordered = rows
-      .filter((r) => orderMap.has(r.slug))
-      .sort((a, b) => orderMap.get(a.slug)! - orderMap.get(b.slug)!)
-    trendingCache.set(cacheKey, {
-      expires: Date.now() + TRENDING_TTL_MS,
-      data: ordered,
-    })
-    return ordered
+  // Try snapshot first (if table exists). If it errors (e.g., relation missing), fallback gracefully.
+  try {
+    if (scenarioTrendingSnapshot) {
+      const snapshot = await db
+        .select({ slug: (scenarioTrendingSnapshot as any).slug })
+        .from(scenarioTrendingSnapshot as any)
+        .where(eq((scenarioTrendingSnapshot as any).locale, locale as any))
+        .orderBy((scenarioTrendingSnapshot as any).rank)
+        .limit(limit)
+      if (snapshot.length) {
+        const slugs = snapshot.map((s: any) => s.slug)
+        // Fetch scenarios by slug preserving order
+        const rows = await db
+          .select(scenarioSelection)
+          .from(scenario)
+          .where(
+            and(
+              eq(scenario.locale, locale as any),
+              sql`${scenario.slug} = ANY(${slugs})`
+            )
+          )
+        // Preserve snapshot ordering
+        const orderMap = new Map(slugs.map((s: string, i: number) => [s, i]))
+        const ordered = rows
+          .filter((r) => orderMap.has(r.slug))
+          .sort((a, b) => orderMap.get(a.slug)! - orderMap.get(b.slug)!)
+        trendingCache.set(cacheKey, {
+          expires: Date.now() + TRENDING_TTL_MS,
+          data: ordered,
+        })
+        return ordered
+      }
+    }
+  } catch {
+    // ignore and fallback
   }
   // Fallback to live query if snapshot empty
   const live = await db
@@ -702,24 +707,30 @@ export async function getScenarioCategories(
   > = (global as any).__categoryCountsCache
   const cached = categoryCache.get(locale)
   if (cached && cached.expires > Date.now()) return cached.data
-  const snapshot = await db
-    .select({
-      category: scenarioCategoryCounts.category,
-      count: scenarioCategoryCounts.count,
-    })
-    .from(scenarioCategoryCounts)
-    .where(eq(scenarioCategoryCounts.locale, locale as any))
-    .orderBy(desc(scenarioCategoryCounts.count))
-  if (snapshot.length) {
-    const mapped = snapshot.map((r) => ({
-      category: r.category,
-      count: r.count,
-    }))
-    categoryCache.set(locale, {
-      expires: Date.now() + CATEGORIES_TTL_MS,
-      data: mapped,
-    })
-    return mapped
+  try {
+    if (scenarioCategoryCounts) {
+      const snapshot = await db
+        .select({
+          category: (scenarioCategoryCounts as any).category,
+          count: (scenarioCategoryCounts as any).count,
+        })
+        .from(scenarioCategoryCounts as any)
+        .where(eq((scenarioCategoryCounts as any).locale, locale as any))
+        .orderBy(desc((scenarioCategoryCounts as any).count))
+      if (snapshot.length) {
+        const mapped = snapshot.map((r: any) => ({
+          category: r.category,
+          count: r.count,
+        }))
+        categoryCache.set(locale, {
+          expires: Date.now() + CATEGORIES_TTL_MS,
+          data: mapped,
+        })
+        return mapped
+      }
+    }
+  } catch {
+    // ignore and fallback
   }
   // Fallback
   const result = await db
