@@ -16,6 +16,8 @@ interface HelpPageProps {
 export async function generateMetadata({
   params: { locale },
 }: HelpPageProps): Promise<Metadata> {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://fvinvestcalc.com'
+  const url = locale === 'en' ? `${baseUrl}/help` : `${baseUrl}/${locale}/help`
   return {
     title:
       locale === 'es'
@@ -29,6 +31,33 @@ export async function generateMetadata({
         : locale === 'pl'
           ? 'Uzyskaj pomoc w korzystaniu z kalkulatora wartości przyszłej inwestycji'
           : 'Get help using the Future Value Investment Calculator',
+    openGraph: {
+      title:
+        locale === 'es'
+          ? 'Ayuda - Calculadora de Valor Futuro'
+          : locale === 'pl'
+            ? 'Pomoc - Kalkulator Wartości Przyszłej'
+            : 'Help - Future Value Calculator',
+      description:
+        locale === 'es'
+          ? 'Obtén ayuda para usar la calculadora de valor futuro de inversiones'
+          : locale === 'pl'
+            ? 'Uzyskaj pomoc w korzystaniu z kalkulatora wartości przyszłej inwestycji'
+            : 'Get help using the Future Value Investment Calculator',
+      type: 'website',
+      siteName: 'fvinvestcalc',
+      url,
+      locale,
+      images: [
+        { url: '/api/og', width: 1200, height: 630, alt: 'Help Center' },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      images: ['/api/og'],
+      site: '@fvinvestcalc',
+      creator: '@fvinvestcalc',
+    },
   }
 }
 

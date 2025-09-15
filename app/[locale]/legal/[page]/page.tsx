@@ -113,5 +113,11 @@ export async function generateMetadata({ params }: LegalPageProps) {
   return {
     title: titles[page] || t('title'),
     description: t(`${page}.description`),
+    twitter: {
+      card: 'summary_large_image',
+      images: ['/api/og'],
+      site: '@fvinvestcalc',
+      creator: '@fvinvestcalc',
+    },
   }
 }

@@ -422,6 +422,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (description.length > 160)
     description = description.substring(0, 157) + '...'
 
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://fvinvestcalc.com'
+  const pageUrl =
+    locale === 'en'
+      ? `${baseUrl}/scenario/${slug}`
+      : `${baseUrl}/${locale}/scenario/${slug}`
+
   return {
     title,
     description,
@@ -442,11 +448,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description,
       type: 'website',
       locale: locale,
+      siteName: 'fvinvestcalc',
+      url: pageUrl,
+      images: [{ url: '/api/og', width: 1200, height: 630, alt: title }],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
+      images: ['/api/og'],
+      site: '@fvinvestcalc',
+      creator: '@fvinvestcalc',
     },
   }
 }

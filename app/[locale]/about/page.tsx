@@ -272,7 +272,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <a
-              href="mailto:hello@futurevaluecalculator.com"
+              href={locale === 'en' ? '/help' : `/${locale}/help`}
               className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-6 py-3 text-white font-medium hover:bg-blue-700 transition-colors"
             >
               {t('contact.email')}
@@ -299,6 +299,10 @@ export async function generateMetadata({
 }) {
   const t = await getTranslations({ locale, namespace: 'about' })
 
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://fvinvestcalc.com'
+  const url =
+    locale === 'en' ? `${baseUrl}/about` : `${baseUrl}/${locale}/about`
+
   return {
     title: t('meta.title'),
     description: t('meta.description'),
@@ -308,11 +312,24 @@ export async function generateMetadata({
       description: t('meta.description'),
       type: 'website',
       siteName: 'fvinvestcalc',
+      url,
+      locale,
+      images: [
+        {
+          url: '/api/og',
+          width: 1200,
+          height: 630,
+          alt: 'About - Future Value Investment Calculator',
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title: t('meta.title'),
       description: t('meta.description'),
+      images: ['/api/og'],
+      site: '@fvinvestcalc',
+      creator: '@fvinvestcalc',
     },
   }
 }

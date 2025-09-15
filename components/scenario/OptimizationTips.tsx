@@ -1,4 +1,8 @@
 import { type InvestmentParameters } from '@/lib/finance'
+import {
+  generateScenarioSlug,
+  type CalculatorInputs,
+} from '@/lib/scenarioUtils'
 import { Lightbulb, TrendingUp, Shield, Clock, DollarSign } from 'lucide-react'
 import { formatCurrencyUSD } from '@/lib/format'
 
@@ -156,15 +160,31 @@ export default function OptimizationTips({
                 {translations?.optimizeCta ||
                   'Use our calculator to experiment with these optimizations and see how they could impact your results.'}
               </p>
-              <a
-                href={`/${locale}?initial=${params.initialAmount}&monthly=${params.monthlyContribution}&return=${params.annualReturnRate}&years=${params.timeHorizonYears}`}
-                className="inline-flex items-center space-x-2 bg-white text-indigo-600 px-8 py-4 rounded-2xl font-semibold hover:bg-indigo-50 transition-all duration-300 shadow-lg"
-              >
-                <span>
-                  {translations?.tryOptimizations || 'Try These Optimizations'}
-                </span>
-                <TrendingUp className="w-5 h-5" />
-              </a>
+              {(() => {
+                const inputs: CalculatorInputs = {
+                  initialAmount: params.initialAmount,
+                  monthlyContribution: params.monthlyContribution,
+                  annualReturn: params.annualReturnRate,
+                  timeHorizon: params.timeHorizonYears,
+                }
+                const slug = generateScenarioSlug(inputs)
+                const href =
+                  locale === 'en'
+                    ? `/scenario/${slug}`
+                    : `/${locale}/scenario/${slug}`
+                return (
+                  <a
+                    href={href}
+                    className="inline-flex items-center space-x-2 bg-white text-indigo-600 px-8 py-4 rounded-2xl font-semibold hover:bg-indigo-50 transition-all duration-300 shadow-lg"
+                  >
+                    <span>
+                      {translations?.tryOptimizations ||
+                        'Try These Optimizations'}
+                    </span>
+                    <TrendingUp className="w-5 h-5" />
+                  </a>
+                )
+              })()}
             </div>
           </div>
         </div>

@@ -43,6 +43,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         pl: `${baseUrl}/pl/scenario`,
       },
     },
+    openGraph: {
+      title: t('title'),
+      description: t('description'),
+      type: 'website',
+      siteName: 'fvinvestcalc',
+      url: canonical,
+      locale: params.locale,
+      images: [{ url: '/api/og', width: 1200, height: 630, alt: t('title') }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('title'),
+      description: t('description'),
+      images: ['/api/og'],
+      site: '@fvinvestcalc',
+      creator: '@fvinvestcalc',
+    },
   }
 }
 

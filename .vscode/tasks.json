@@ -29,6 +29,24 @@
       "isBackground": true,
       "problemMatcher": ["$tsc"],
       "group": "build"
+    },
+    {
+      "label": "Build app to verify schema guards",
+      "type": "shell",
+      "command": "npm run build",
+      "args": [],
+      "isBackground": false,
+      "problemMatcher": ["$tsc"],
+      "group": "build"
+    },
+    {
+      "label": "Build app for Twitter meta updates",
+      "type": "shell",
+      "command": "npm run build",
+      "args": [],
+      "isBackground": false,
+      "problemMatcher": ["$tsc"],
+      "group": "build"
     }
   ]
 }
