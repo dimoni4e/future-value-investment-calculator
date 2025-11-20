@@ -136,7 +136,9 @@ export function generateScenarioSlug(params: CalculatorInputs): string {
   // Format numbers for URL (remove decimals, use whole numbers)
   const initial = Math.round(params.initialAmount)
   const monthly = Math.round(params.monthlyContribution)
-  const rate = Math.round(params.annualReturn * 10) / 10 // Keep one decimal
+  const rate = (Math.round(params.annualReturn * 10) / 10)
+    .toString()
+    .replace('.', '-') // Keep one decimal, replace dot with dash
   const years = Math.round(params.timeHorizon)
 
   // Create SEO-friendly slug with long-tail keywords
@@ -157,7 +159,10 @@ export function parseSlugToScenario(slug: string): ScenarioParams | null {
 
     const initial = parseInt(parts[1])
     const monthly = parseInt(parts[3])
-    const rateStr = parts[4].replace('percent', '').replace('point', '.')
+    const rateStr = parts[4]
+      .replace('percent', '')
+      .replace('point', '.')
+      .replace('-', '.')
     const rate = parseFloat(rateStr)
     const yearsStr = parts[5].replace('years', '')
     const years = parseInt(yearsStr)
