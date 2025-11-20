@@ -7,6 +7,7 @@ import {
 } from '@/lib/finance'
 import LazyContentSection from '@/components/scenario/LazyContentSection'
 import OptimizedGrowthChart from '@/components/OptimizedGrowthChart'
+import { TrendingUp, Activity, Percent } from 'lucide-react'
 
 interface ScenarioSEOSectionProps {
   params: InvestmentParameters
@@ -172,12 +173,54 @@ export default async function ScenarioSEOSection({
 
           {/* Market context */}
           {sections.market_context && (
-            <div className="mt-10 animate-fade-in">
-              {headings?.market ? (
-                <h3 className="mt-0 mb-3 text-xl text-slate-900">
-                  {headings.market}
+            <div className="mt-12 animate-fade-in bg-slate-50 rounded-2xl p-6 border border-slate-200">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-2 bg-blue-100 rounded-lg text-blue-600">
+                  <TrendingUp className="w-6 h-6" />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900 m-0">
+                  {headings?.market || 'Market Context & Analysis'}
                 </h3>
-              ) : null}
+              </div>
+
+              {sections.market_data && (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 not-prose">
+                  <div className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
+                    <div className="flex items-center gap-2 text-slate-500 mb-1">
+                      <Percent className="w-4 h-4" />
+                      <span className="text-sm font-medium">
+                        Inflation Rate
+                      </span>
+                    </div>
+                    <div className="text-2xl font-bold text-slate-900">
+                      {sections.market_data.inflation}%
+                    </div>
+                  </div>
+                  <div className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
+                    <div className="flex items-center gap-2 text-slate-500 mb-1">
+                      <Activity className="w-4 h-4" />
+                      <span className="text-sm font-medium">
+                        Interest Rates
+                      </span>
+                    </div>
+                    <div className="text-2xl font-bold text-slate-900">
+                      {sections.market_data.interestRate}%
+                    </div>
+                  </div>
+                  <div className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
+                    <div className="flex items-center gap-2 text-slate-500 mb-1">
+                      <TrendingUp className="w-4 h-4" />
+                      <span className="text-sm font-medium">
+                        Market Volatility
+                      </span>
+                    </div>
+                    <div className="text-2xl font-bold text-slate-900 capitalize">
+                      {sections.market_data.volatility}
+                    </div>
+                  </div>
+                </div>
+              )}
+
               <div
                 dangerouslySetInnerHTML={{
                   __html: sections.market_context,

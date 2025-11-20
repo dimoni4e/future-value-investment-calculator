@@ -28,6 +28,11 @@ export interface ContentSections {
   community_insights: string
   optimization_tips: string
   market_context: string
+  market_data?: {
+    inflation: number
+    interestRate: number
+    volatility: string
+  }
 }
 
 /**
@@ -170,7 +175,7 @@ function generateAdditionalParameters(
   )
 
   // Different return scenarios
-  const conservativeReturn = Math.max(params.annualReturn - 2, 4)
+  const conservativeReturn = Math.max(2, params.annualReturn - 2)
   const aggressiveReturn = params.annualReturn + 2
   const conservativeValue = calculateFutureValue(
     params.initialAmount,
@@ -204,11 +209,61 @@ function generateAdditionalParameters(
   )
   const escalationPercent = 3
   const escalatedValue = Math.round((params.futureValue || 0) * 1.2)
+  const escalationBenefit = escalatedValue - (params.futureValue || 0)
 
   // Historical market data
   const positiveYears = Math.min(70 + params.annualReturn * 2, 85)
   const averageDownturn = '15-20%'
   const averageBullReturn = '18-25%'
+
+  // Community insights
+  const averageIncrease = 15
+  const marketDownturnPercent = 42
+  const timingPercent = 68
+  const firstMilestone = Math.round(params.initialAmount * 2 + 10000)
+  const milestoneTimeframe = Math.max(3, Math.round(params.timeHorizon / 3))
+  const adaptationPercent = 35
+  const increasePercent = 72
+  const satisfactionRate = 94
+
+  // Optimization tips
+  const timingBenefit =
+    calculateFutureValue(
+      0,
+      params.monthlyContribution,
+      params.annualReturn,
+      params.timeHorizon
+    ) * 0.005 // Approx 0.5% benefit
+  const taxSavings = 25
+  const feeReduction = 0.5
+  const feeSavings =
+    calculateFutureValue(
+      params.initialAmount,
+      params.monthlyContribution,
+      params.annualReturn,
+      params.timeHorizon
+    ) -
+    calculateFutureValue(
+      params.initialAmount,
+      params.monthlyContribution,
+      params.annualReturn - 0.5,
+      params.timeHorizon
+    )
+  const rebalancingBonus = 0.8
+  const windfallAmount = 2000
+  const windfallValue =
+    calculateFutureValue(
+      params.initialAmount,
+      params.monthlyContribution,
+      params.annualReturn,
+      params.timeHorizon
+    ) +
+    calculateFutureValue(
+      0,
+      windfallAmount / 12,
+      params.annualReturn,
+      params.timeHorizon
+    )
 
   // Get translations for categories
   const riskCategories = messages?.content?.riskCategories || {}
@@ -257,6 +312,13 @@ function generateAdditionalParameters(
       ? Math.round((monthlyTotal / futureValue) * 100 * 10) / 10
       : 0
 
+  // Market context parameters
+  const currentInflation = 3.2
+  const realReturn = Math.max(0, params.annualReturn - currentInflation)
+  const expectedCycles = Math.max(1, Math.round(params.timeHorizon / 7))
+  const domesticAllocation = Math.round(stockAllocation * 0.6)
+  const internationalAllocation = Math.round(stockAllocation * 0.4)
+
   return {
     riskCategory: riskCategories[riskCategory] || riskCategory,
     riskLevel: riskLevels[riskLevel] || riskLevel,
@@ -264,6 +326,8 @@ function generateAdditionalParameters(
     stockAllocation,
     bondAllocation,
     alternativeAllocation,
+    domesticAllocation,
+    internationalAllocation,
     contributionPercentage,
     fiveYearValue: Math.round(fiveYearValue),
     tenYearValue: Math.round(tenYearValue),
@@ -290,10 +354,28 @@ function generateAdditionalParameters(
     successRate,
     escalationPercent,
     escalatedValue,
+    escalationBenefit,
     positiveYears,
     averageDownturn,
     averageBullReturn,
-    currentInflation: 3.2,
+    averageIncrease,
+    marketDownturnPercent,
+    timingPercent,
+    firstMilestone: Math.round(firstMilestone),
+    milestoneTimeframe,
+    adaptationPercent,
+    increasePercent,
+    satisfactionRate,
+    timingBenefit: Math.round(timingBenefit),
+    taxSavings,
+    feeReduction,
+    feeSavings: Math.round(feeSavings),
+    rebalancingBonus,
+    windfallAmount: Math.round(windfallAmount),
+    windfallValue: Math.round(windfallValue),
+    currentInflation,
+    realReturn,
+    expectedCycles,
     currentInterestRates: 5.25,
     marketVolatility: 'moderate',
   }
@@ -376,6 +458,11 @@ export function generatePersonalizedContent(
       templateParams
     ),
     market_context: populateTemplate(templates.market_context, templateParams),
+    market_data: {
+      inflation: additionalParams.currentInflation,
+      interestRate: additionalParams.currentInterestRates,
+      volatility: additionalParams.marketVolatility,
+    },
   }
 
   return sections
@@ -397,11 +484,11 @@ export function populateTemplate(template: string, params: any): string {
     const formattedValue = formatValue(key, value)
 
     populatedTemplate = populatedTemplate.replace(
-      singleBracePattern,
+      doubleBracePattern,
       formattedValue
     )
     populatedTemplate = populatedTemplate.replace(
-      doubleBracePattern,
+      singleBracePattern,
       formattedValue
     )
   })
@@ -566,10 +653,14 @@ export function generateMarketContext(
     marketVolatility: 'moderate',
   }
 
+  // Generate additional parameters to get derived values like realReturn, expectedCycles, etc.
+  const additionalParams = generateAdditionalParameters(params, locale)
+
   // Prepare parameters for template population
   const templateParams = {
     ...params,
     ...marketData,
+    ...additionalParams,
     goal: getGoalTranslation(params.goal, locale),
   }
 

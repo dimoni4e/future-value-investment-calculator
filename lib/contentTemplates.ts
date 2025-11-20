@@ -19,69 +19,65 @@ export interface ContentTemplate {
  */
 export const englishTemplates: ContentTemplate = {
   investment_overview: `
-    <h2>Your Investment Plan Overview</h2>
-    <p>With an initial investment of <strong>{{ initialAmount }}</strong> and monthly contributions of <strong>{{ monthlyContribution }}</strong>, you're setting yourself up for a solid {{goal}} strategy. Over {{timeHorizon}} years at an expected annual return of {{annualReturn}}%, your investment could grow to approximately <strong>{{ futureValue }}</strong>.</p>
+    <h2>Comprehensive Investment Plan Overview</h2>
+    <p>Embarking on a financial journey with an initial investment of <strong>{{ initialAmount }}</strong> and consistent monthly contributions of <strong>{{ monthlyContribution }}</strong> positions you for significant wealth accumulation. This strategy is specifically tailored for your {{goal}} objectives, leveraging the power of time and consistency. Over a {{timeHorizon}}-year period, assuming a prudent annual return of {{annualReturn}}, your portfolio is projected to grow to approximately <strong>{{ futureValue }}</strong>.</p>
     
-    <p>This investment approach aligns with your {{goal}} objectives, providing a structured path toward financial growth. Your total contributions over the investment period will be {{ totalContributions }}, potentially generating {{ totalGains }} in investment gains through the power of compound interest.</p>
+    <p>This disciplined investment approach is the cornerstone of successful financial planning. By adhering to this schedule, your total contributions will amount to {{ totalContributions }}, while the magic of compound interest could generate an impressive {{ totalGains }} in pure investment gains. This highlights the efficiency of making your money work for you.</p>
     
-    <p>The beauty of this investment strategy lies in its consistency and long-term focus. By committing to regular monthly contributions, you're taking advantage of dollar-cost averaging, which can help smooth out market volatility over time. This disciplined approach is particularly effective for {{goal}} planning, where steady growth and time horizon work in your favor.</p>
+    <p>The strategy employs <strong>dollar-cost averaging</strong>, a proven technique where regular monthly investments help mitigate the impact of market volatility. By buying more units when prices are low and fewer when they are high, you effectively smooth out the average cost per share over the long term. This is particularly advantageous for {{goal}} planning, where steady, long-term growth is prioritized over short-term speculation.</p>
     
-    <p>Your investment timeline of {{timeHorizon}} years provides ample opportunity for compound growth to work its magic. The earlier years focus on building your investment base, while the later years benefit from accelerated growth as your returns begin generating their own returns.</p>
+    <p>With a {{timeHorizon}}-year horizon, you are well-positioned to benefit from market cycles. The initial years establish your capital base, while the later years capitalize on exponential growth, as your returns begin to generate their own returns—a phenomenon known as compounding.</p>
   `,
 
   growth_projection: `
-    <h2>Detailed Growth Projection Analysis</h2>
-    <p>Your investment journey begins with {{ initialAmount }} and grows through consistent {{ monthlyContribution }} monthly additions. At a {{annualReturn}}% annual return, here's how your wealth could accumulate over {{timeHorizon}} years:</p>
+    <h2>Detailed Wealth Growth Projection</h2>
+    <p>Your path to financial success starts with {{ initialAmount }} and is fueled by your dedication to adding {{ monthlyContribution }} every month. With a projected annual return of {{annualReturn}}, here is a breakdown of how your wealth is expected to accumulate over the next {{timeHorizon}} years:</p>
     
-    <p><strong>Year 1-5:</strong> During the initial phase, your investment grows from {{ initialAmount }} to approximately {{ fiveYearValue }}. This period focuses on building your investment foundation, with monthly contributions playing a crucial role in portfolio growth.</p>
+    <p><strong>Years 1-5 (Foundation Phase):</strong> In these early years, your investment is projected to grow from {{ initialAmount }} to approximately {{ fiveYearValue }}. The primary driver of growth here is your savings rate. Establishing this habit is crucial for long-term success.</p>
     
-    <p><strong>Year 6-10:</strong> The middle phase sees accelerated growth as compound interest becomes more significant. Your portfolio could reach around {{ tenYearValue }}, demonstrating the power of consistent investing combined with market returns.</p>
+    <p><strong>Years 6-10 (Acceleration Phase):</strong> As your portfolio matures, compound interest begins to play a more significant role. Your balance could reach around {{ tenYearValue }}. You'll notice that investment returns start to contribute a larger share of the total growth compared to your contributions alone.</p>
     
-    <p><strong>Year 11-{{timeHorizon}}:</strong> The final phase showcases exponential growth, where your investment gains start generating substantial returns themselves. Your portfolio approaches the projected {{ futureValue }}, with compound interest contributing significantly to overall growth.</p>
+    <p><strong>Years 11-{{timeHorizon}} (Compounding Phase):</strong> This is where the "snowball effect" takes over. Your portfolio is projected to surge towards {{ futureValue }}. In this phase, annual investment gains may eventually exceed your annual contributions, demonstrating true financial momentum.</p>
     
-    <p>The mathematical principle behind this growth is compound interest, often called the eighth wonder of the world. Each year, you earn returns not just on your original investment and contributions, but also on all the previous years' gains. This creates a snowball effect that becomes more powerful over time.</p>
-    
-    <p>Your monthly contributions of {{ monthlyContribution }} play a vital role in this growth story. Over {{timeHorizon}} years, these consistent additions total {{ monthlyTotal }}, representing your discipline and commitment to long-term wealth building.</p>
+    <p>The mathematical engine driving this growth is <strong>compound interest</strong>—often cited as the most powerful force in finance. It allows you to earn returns on your principal, your contributions, and your accumulated interest. Over {{timeHorizon}} years, your total monthly contributions of {{ monthlyTotal }} are supercharged by this force.</p>
   `,
 
   investment_insights: `
-    <h2>Investment Insights for Your Portfolio</h2>
-    <p>With a {{annualReturn}}% expected annual return and a {{timeHorizon}}-year investment horizon, your portfolio falls into the {{riskCategory}} category. This return expectation suggests a diversified approach that balances growth potential with risk management.</p>
+    <h2>Strategic Investment Insights</h2>
+    <p>Targeting a {{annualReturn}} annual return over a {{timeHorizon}}-year horizon places your portfolio in the {{riskCategory}} category. This target strikes a balance between preserving capital and achieving real growth above inflation.</p>
     
-    <p><strong>Risk Assessment:</strong> Your investment profile indicates {{riskLevel}} risk tolerance. Historical market data shows that portfolios targeting {{annualReturn}}% returns typically experience {{volatilityRange}} annual volatility. This means you should expect some years with higher returns and others with lower or negative returns.</p>
+    <p><strong>Risk & Volatility Analysis:</strong> Your profile suggests a {{riskLevel}} risk tolerance. Historically, portfolios aiming for {{annualReturn}} returns have experienced annual volatility in the range of {{volatilityRange}}. It is normal to see fluctuations; however, your long time horizon is your greatest asset in smoothing out these bumps.</p>
     
-    <p><strong>Historical Context:</strong> Over the past 30 years, investment portfolios with similar return profiles have delivered positive results in approximately {{positiveYears}}% of all years. During market downturns, the average decline was {{averageDownturn}}%, while bull markets averaged {{averageBullReturn}}% gains.</p>
+    <p><strong>Historical Performance:</strong> Looking back at the last 30 years of market data, portfolios with similar allocations have yielded positive returns in approximately {{positiveYears}} of rolling periods. While past performance doesn't guarantee future results, it provides a strong statistical basis for your plan.</p>
     
-    <p><strong>Volatility Expectations:</strong> Your {{timeHorizon}}-year investment timeline provides sufficient time to weather market cycles. Historically, longer investment periods reduce the impact of short-term volatility, with {{timeHorizon}}-year rolling periods showing positive returns {{successRate}}% of the time.</p>
+    <p><strong>The Advantage of Time:</strong> A {{timeHorizon}}-year investment timeline significantly reduces the probability of loss. Historical data indicates that the longer you stay invested, the higher your likelihood of positive returns, with {{timeHorizon}}-year periods showing a success rate of {{successRate}}.</p>
     
-    <p><strong>Dollar-Cost Averaging Benefits:</strong> Your monthly contribution strategy helps mitigate timing risk. By investing {{ monthlyContribution }} consistently, you'll purchase more shares when prices are low and fewer when prices are high, potentially improving your average cost basis over time.</p>
+    <p><strong>Mitigating Market Timing Risk:</strong> Your strategy of investing {{ monthlyContribution }} monthly removes the stress of trying to "time the market." This consistent participation ensures you capture market upswings while buying at a discount during downturns.</p>
     
-    <p>The key to success with this investment approach is maintaining discipline during market volatility. Your {{goal}} timeline provides the luxury of riding out short-term market fluctuations while focusing on long-term wealth accumulation.</p>
+    <p>Success in this {{goal}} strategy relies less on picking the "perfect" stock and more on maintaining discipline. Your ability to stay the course during market volatility will be the key determinant of your financial outcome.</p>
   `,
 
   strategy_analysis: `
-    <h2>Strategic Analysis for Your {{goal}} Goal</h2>
-    <p>Your {{goal}} objective requires a tailored investment strategy that balances growth potential with your specific timeline and risk tolerance. With {{timeHorizon}} years to achieve your goal, this analysis examines the optimal approach for your situation.</p>
+    <h2>Tailored Strategy for Your {{goal}} Goal</h2>
+    <p>Achieving a {{goal}} requires more than just saving; it demands a strategic allocation of capital. With {{timeHorizon}} years until your target, we recommend a dynamic approach that evolves with your changing needs.</p>
     
-    <p><strong>Asset Allocation Recommendations:</strong> For a {{timeHorizon}}-year {{goal}} strategy, consider an asset allocation of {{stockAllocation}}% stocks, {{bondAllocation}}% bonds, and {{alternativeAllocation}}% alternative investments. This allocation balances growth potential with stability as you approach your target date.</p>
+    <p><strong>Recommended Asset Allocation:</strong> To support a {{timeHorizon}}-year {{goal}} plan, a diversified mix is essential. Consider an allocation of roughly {{stockAllocation}} in equities (stocks) for growth, {{bondAllocation}} in fixed income (bonds) for stability, and {{alternativeAllocation}} in alternatives (like real estate or commodities) for diversification.</p>
     
-    <p><strong>Time-Based Strategy Adjustments:</strong> Your investment approach should evolve over time. Early years can emphasize growth-oriented investments, gradually shifting toward more conservative allocations as you approach your {{goal}} deadline. This glide path approach helps protect accumulated gains while maintaining growth potential.</p>
+    <p><strong>Glide Path Strategy:</strong> As you get closer to your goal, your strategy should shift from "wealth accumulation" to "wealth preservation." We recommend gradually reducing exposure to volatile assets and increasing holdings in stable, income-generating assets as the {{timeHorizon}}-year mark approaches.</p>
     
-    <p><strong>Contribution Strategy:</strong> Your {{ monthlyContribution }} monthly contributions represent {{contributionPercentage}}% of your total projected portfolio value. This consistent funding approach ensures steady progress toward your {{goal}} while taking advantage of market timing diversification.</p>
+    <p><strong>Contribution Impact:</strong> Your {{ monthlyContribution }} monthly contribution is the fuel for this engine, representing {{contributionPercentage}} of the total projected value. This emphasizes that your savings discipline is just as important as market returns.</p>
     
-    <p><strong>Rebalancing Considerations:</strong> With a {{timeHorizon}}-year timeline, consider rebalancing your portfolio annually or when allocations drift more than 5% from targets. This discipline helps maintain your intended risk profile while capturing gains from outperforming asset classes.</p>
+    <p><strong>Portfolio Rebalancing:</strong> Markets drift over time. We suggest reviewing your portfolio annually to rebalance back to your target allocation. This disciplined "sell high, buy low" approach helps manage risk and can enhance long-term returns by approximately 0.5% to 1% annually.</p>
     
-    <p><strong>Tax Optimization:</strong> Depending on your account type, consider tax-efficient strategies such as maximizing tax-advantaged accounts, harvesting tax losses, and positioning tax-inefficient investments in tax-sheltered accounts.</p>
-    
-    <p>The beauty of a well-structured {{goal}} strategy lies in its adaptability. As life circumstances change, your investment approach can be adjusted while maintaining focus on your ultimate objective.</p>
+    <p><strong>Tax Efficiency:</strong> Don't overlook the impact of taxes. Utilizing tax-advantaged accounts (like IRAs or 401ks) for your {{goal}} savings can significantly boost your net returns. Consider holding tax-inefficient assets in these sheltered accounts.</p>
   `,
 
   comparative_scenarios: `
     <h2>Comparative Investment Scenarios</h2>
-    <p>understanding how different variables affect your investment outcome is crucial for optimizing your {{goal}} strategy. Here's a comprehensive analysis of how modifying key parameters could impact your financial future:</p>
+    <p>Understanding how different variables affect your investment outcome is crucial for optimizing your {{goal}} strategy. Here's a comprehensive analysis of how modifying key parameters could impact your financial future:</p>
     
     <h3>Higher Monthly Contributions</h3>
-    <p><strong>{{higherContribution}} Higher Contribution Strategy:</strong> Increasing your monthly investment to {{higherContribution}} could result in a portfolio value of {{higherContributionValue}}, representing an additional {{higherContributionGain}} compared to your current plan. This demonstrates how a {{contributionIncreasePercent}}% increase in contributions can lead to a significantly larger portfolio.</p>
+    <p><strong>{{higherContribution}} Higher Contribution Strategy:</strong> Increasing your monthly investment to {{higherContribution}} could result in a portfolio value of {{higherContributionValue}}, representing an additional {{higherContributionGain}} compared to your current plan. This demonstrates how a {{contributionIncreasePercent}} increase in contributions can lead to a significantly larger portfolio.</p>
     
     <h3>Lower Monthly Contributions</h3>
     <p><strong>{{lowerContribution}} Lower Contribution Scenario:</strong> If circumstances required reducing your monthly investment to {{lowerContribution}}, your portfolio would reach {{lowerContributionValue}}, which is {{lowerContributionLoss}} less than your current plan. This comparison highlights the importance of maintaining consistent contributions when possible.</p>
@@ -92,9 +88,9 @@ export const englishTemplates: ContentTemplate = {
     <p><strong>Shorter Timeline:</strong> Conversely, if you needed to reach your goal in fewer years ({{shorterTimeline}} years), your portfolio would be worth {{shorterValue}}. This scenario shows how reducing the investment timeline significantly impacts the final outcome.</p>
     
     <h3>Alternative Approaches</h3>
-    <p><strong>Conservative Approach ({{conservativeReturn}}%):</strong> With a more cautious investment strategy, your portfolio could reach {{conservativeValue}}. While this reduces risk, it also limits growth potential.</p>
+    <p><strong>Conservative Approach ({{conservativeReturn}}):</strong> With a more cautious investment strategy, your portfolio could reach {{conservativeValue}}. While this reduces risk, it also limits growth potential.</p>
     
-    <p><strong>Aggressive Approach ({{aggressiveReturn}}%):</strong> A higher return strategy could potentially yield {{aggressiveValue}}, but comes with increased volatility and risk.</p>
+    <p><strong>Aggressive Approach ({{aggressiveReturn}}):</strong> A higher return strategy could potentially yield {{aggressiveValue}}, but comes with increased volatility and risk.</p>
     
     <h3>Lump Sum Investment vs Dollar-Cost Averaging</h3>
     <p><strong>Lump Sum Investment:</strong> If you invested your total contribution amount ({{totalContributions}}) as a lump sum today, your portfolio could be worth {{lumpSumValue}} in {{timeHorizon}} years, compared to {{futureValue}} with monthly contributions. This demonstrates the trade-offs between immediate investment and dollar-cost averaging benefits.</p>
@@ -104,26 +100,26 @@ export const englishTemplates: ContentTemplate = {
     
     <p>Most effective strategies include starting early and staying invested longer. If you can delay accessing your funds, the additional years provide outsized benefits through compound growth with the greatest impact on your final portfolio value.</p>
     
-    <p>understanding these difference scenarios helps with making informed decision about trade-offs between security and growth potential. Your current {{annualReturn}}% assumption represents a {{riskLevel}} approach that balances growth potential with reasonable risk management.</p>
+    <p>Understanding these difference scenarios helps with making informed decision about trade-offs between security and growth potential. Your current {{annualReturn}} assumption represents a {{riskLevel}} approach that balances growth potential with reasonable risk management.</p>
     
-    <p>The key takeaway is that small changes in your investment variables can significantly impact long-term outcomes. A {{contributionIncreasePercent}}% increase in contribution leads to substantial final value improvement. Regular reviews and adjustments ensure your strategy remains aligned with your changing circumstances and {{goal}} objectives.</p>
+    <p>The key takeaway is that small changes in your investment variables can significantly impact long-term outcomes. A {{contributionIncreasePercent}} increase in contribution leads to substantial final value improvement. Regular reviews and adjustments ensure your strategy remains aligned with your changing circumstances and {{goal}} objectives.</p>
   `,
 
   community_insights: `
     <h2>Community Insights from Similar Investors</h2>
     <p>You're not alone in your {{goal}} journey. Here's what we've learned from thousands of investors with similar profiles and objectives:</p>
     
-    <p><strong>Investor Profile Matching:</strong> Investors with similar parameters ({{initialAmount}} initial investment, {{ monthlyContribution }} monthly contributions, {{timeHorizon}}-year timeline) typically achieve their {{goal}} objectives {{successRate}}% of the time when they maintain consistent contributions.</p>
+    <p><strong>Investor Profile Matching:</strong> Investors with similar parameters ({{initialAmount}} initial investment, {{ monthlyContribution }} monthly contributions, {{timeHorizon}}-year timeline) typically achieve their {{goal}} objectives {{successRate}} of the time when they maintain consistent contributions.</p>
     
-    <p><strong>Common Success Patterns:</strong> The most successful investors in your category share several characteristics: they automate their monthly contributions, rarely check their portfolios during market volatility, and increase contributions when income allows. On average, they increase their monthly contributions by {{averageIncrease}}% annually.</p>
+    <p><strong>Common Success Patterns:</strong> The most successful investors in your category share several characteristics: they automate their monthly contributions, rarely check their portfolios during market volatility, and increase contributions when income allows. On average, they increase their monthly contributions by {{averageIncrease}} annually.</p>
     
-    <p><strong>Challenge Navigation:</strong> Investors pursuing similar {{goal}} strategies face predictable challenges. The most common include staying committed during market downturns (affecting {{marketDownturnPercent}}% of investors) and resisting the urge to time the market (tempting {{timingPercent}}% of investors).</p>
+    <p><strong>Challenge Navigation:</strong> Investors pursuing similar {{goal}} strategies face predictable challenges. The most common include staying committed during market downturns (affecting {{marketDownturnPercent}} of investors) and resisting the urge to time the market (tempting {{timingPercent}} of investors).</p>
     
     <p><strong>Milestone Achievements:</strong> Based on community data, investors typically reach their first major milestone ({{firstMilestone}}) within {{milestoneTimeframe}} years. This early success often provides the motivation needed to continue the long-term journey.</p>
     
-    <p><strong>Adaptation Stories:</strong> Real investors have successfully modified their strategies when life circumstances changed. Common adaptations include temporarily reducing contributions during financial hardship ({{adaptationPercent}}% of investors) and increasing contributions after career advancement ({{increasePercent}}% of investors).</p>
+    <p><strong>Adaptation Stories:</strong> Real investors have successfully modified their strategies when life circumstances changed. Common adaptations include temporarily reducing contributions during financial hardship ({{adaptationPercent}} of investors) and increasing contributions after career advancement ({{increasePercent}} of investors).</p>
     
-    <p><strong>Long-term Outcomes:</strong> Investors who completed similar {{timeHorizon}}-year investment journeys reported high satisfaction with their outcomes, with {{satisfactionRate}}% saying they would follow the same strategy again.</p>
+    <p><strong>Long-term Outcomes:</strong> Investors who completed similar {{timeHorizon}}-year investment journeys reported high satisfaction with their outcomes, with {{satisfactionRate}} saying they would follow the same strategy again.</p>
     
     <p>The community's collective wisdom emphasizes consistency over perfection. Your commitment to regular investing, regardless of market conditions, positions you well for long-term success.</p>
   `,
@@ -134,13 +130,13 @@ export const englishTemplates: ContentTemplate = {
     
     <p><strong>Contribution Timing:</strong> Consider making your monthly contribution at the beginning of each month rather than the end. This simple change could add approximately {{ timingBenefit }} to your final portfolio value due to additional market exposure time.</p>
     
-    <p><strong>Automatic Escalation:</strong> Set up automatic annual increases to your monthly contribution. Even a modest {{escalationPercent}}% annual increase could boost your final portfolio value to {{ escalatedValue }}, adding {{ escalationBenefit }} to your wealth.</p>
+    <p><strong>Automatic Escalation:</strong> Set up automatic annual increases to your monthly contribution. Even a modest {{escalationPercent}} annual increase could boost your final portfolio value to {{ escalatedValue }}, adding {{ escalationBenefit }} to your wealth.</p>
     
-    <p><strong>Tax-Advantaged Accounts:</strong> Maximize contributions to tax-advantaged accounts like 401(k)s, IRAs, or Roth IRAs. The tax savings could increase your effective return by {{taxSavings}}%, significantly impacting long-term growth.</p>
+    <p><strong>Tax-Advantaged Accounts:</strong> Maximize contributions to tax-advantaged accounts like 401(k)s, IRAs, or Roth IRAs. The tax savings could increase your effective return by {{taxSavings}}, significantly impacting long-term growth.</p>
     
-    <p><strong>Fee Minimization:</strong> Reducing investment fees by just {{feeReduction}}% annually could add {{ feeSavings }} to your final portfolio value. Focus on low-cost index funds and ETFs for core portfolio holdings.</p>
+    <p><strong>Fee Minimization:</strong> Reducing investment fees by just {{feeReduction}} annually could add {{ feeSavings }} to your final portfolio value. Focus on low-cost index funds and ETFs for core portfolio holdings.</p>
     
-    <p><strong>Rebalancing Strategy:</strong> Implement a disciplined rebalancing approach. Annual rebalancing has historically added {{rebalancingBonus}}% to returns by systematically buying low and selling high.</p>
+    <p><strong>Rebalancing Strategy:</strong> Implement a disciplined rebalancing approach. Annual rebalancing has historically added {{rebalancingBonus}} to returns by systematically buying low and selling high.</p>
     
     <p><strong>Windfall Integration:</strong> Plan to invest windfalls like bonuses, tax refunds, or inheritance. Adding just {{ windfallAmount }} annually could increase your final value to {{ windfallValue }}.</p>
     
@@ -152,24 +148,18 @@ export const englishTemplates: ContentTemplate = {
   `,
 
   market_context: `
-    <h2>Current Market Context and Historical Perspective</h2>
-    <p>Understanding today's market environment and historical patterns provides valuable context for your {{timeHorizon}}-year {{goal}} investment journey.</p>
+    <h2>Current Market Context & Economic Outlook</h2>
+    <p>Successful investing requires understanding the broader economic landscape. Here is how current market conditions relate to your {{timeHorizon}}-year {{goal}} plan.</p>
     
-    <p><strong>Current Economic Environment:</strong> Today's investment landscape features {{currentInflation}}% inflation, {{currentInterestRates}}% interest rates, and {{marketVolatility}} market volatility. Your {{annualReturn}}% expected return accounts for these current conditions while maintaining long-term historical perspective.</p>
+    <p><strong>Economic Environment:</strong> We are currently navigating a period with {{currentInflation}} inflation and interest rates around {{currentInterestRates}}. While market volatility is currently {{marketVolatility}}, your {{annualReturn}} return assumption is realistic given historical averages for diversified portfolios.</p>
     
-    <p><strong>Historical Market Performance:</strong> Over the past {{historicalPeriod}} years, markets have delivered average annual returns of {{historicalReturn}}%. Your {{annualReturn}}% target return falls {{returnComparison}} this historical average, providing {{confidenceLevel}} confidence in achievability.</p>
+    <p><strong>Inflation & Purchasing Power:</strong> Inflation is the silent eroder of wealth. With inflation at {{currentInflation}}, your "real" return (what you actually keep in purchasing power) is approximately {{realReturn}}. Investing is one of the few reliable ways to outpace inflation and grow your standard of living over time.</p>
     
-    <p><strong>Inflation Impact Analysis:</strong> With current inflation at {{currentInflation}}%, your real (inflation-adjusted) return would be approximately {{realReturn}}%. This means your purchasing power grows by {{realReturn}}% annually, ensuring your {{goal}} maintains its value over time.</p>
+    <p><strong>Market Cycles:</strong> Over a {{timeHorizon}}-year period, you should expect to encounter approximately {{expectedCycles}} full market cycles (bull and bear markets). History shows that investors who stay the course through these cycles typically outperform those who try to jump in and out.</p>
     
-    <p><strong>Market Cycle Considerations:</strong> Your {{timeHorizon}}-year investment period likely encompasses {{expectedCycles}} complete market cycles. Historical data shows that longer investment periods smooth out cyclical volatility, with {{successProbability}}% probability of positive real returns over {{timeHorizon}} years.</p>
+    <p><strong>Diversification in Today's Market:</strong> Given current global dynamics, a mix of domestic ({{domesticAllocation}}) and international ({{internationalAllocation}}) assets is prudent. This reduces reliance on any single economy and captures growth wherever it occurs.</p>
     
-    <p><strong>Volatility Expectations:</strong> Markets typically experience corrections (10% declines) every {{correctionFrequency}} months and bear markets (20% declines) every {{bearMarketFrequency}} years. Your long-term timeline allows you to weather these temporary setbacks while focusing on overall growth trends.</p>
-    
-    <p><strong>Sector and Geographic Diversification:</strong> Current market conditions favor diversified exposure across sectors and geographies. Your investment strategy should include domestic and international markets, with {{domesticAllocation}}% domestic and {{internationalAllocation}}% international allocation.</p>
-    
-    <p><strong>Interest Rate Environment:</strong> Current interest rates of {{currentInterestRates}}% affect various asset classes differently. This environment {{rateImpact}} for your investment strategy, particularly regarding bond allocations and real estate exposure.</p>
-    
-    <p>The key takeaway is that while current market conditions matter for short-term performance, your {{timeHorizon}}-year timeline allows you to focus on fundamental economic growth rather than temporary market fluctuations.</p>
+    <p><strong>The Long View:</strong> While short-term news can be alarming, the long-term trend of the global economy has been upward. Your {{timeHorizon}}-year horizon allows you to look past daily headlines and focus on the fundamental growth of the companies you are invested in.</p>
   `,
 }
 
@@ -178,146 +168,147 @@ export const englishTemplates: ContentTemplate = {
  */
 export const spanishTemplates: ContentTemplate = {
   investment_overview: `
-    <h2>Resumen de Tu Plan de Inversión</h2>
-    <p>Con una inversión inicial de <strong>{{ initialAmount }}</strong> y contribuciones mensuales de <strong>{{ monthlyContribution }}</strong>, te estás preparando para una sólida estrategia de {{goal}}. Durante {{timeHorizon}} años con un rendimiento anual esperado del {{annualReturn}}%, tu inversión podría crecer a aproximadamente <strong>{{ futureValue }}</strong>.</p>
+    <h2>Resumen Integral de Tu Plan de Inversión</h2>
+    <p>Embarcarse en un viaje financiero con una inversión inicial de <strong>{{ initialAmount }}</strong> y contribuciones mensuales constantes de <strong>{{ monthlyContribution }}</strong> te posiciona para una acumulación significativa de riqueza. Esta estrategia está específicamente diseñada para tus objetivos de {{goal}}, aprovechando el poder del tiempo y la consistencia. Durante un período de {{timeHorizon}} años, asumiendo un rendimiento anual prudente del {{annualReturn}}%, se proyecta que tu cartera crezca a aproximadamente <strong>{{ futureValue }}</strong>.</p>
     
-    <p>Este enfoque de inversión se alinea con tus objetivos de {{goal}}, proporcionando un camino estructurado hacia el crecimiento financiero. Tus contribuciones totales durante el período de inversión serán de {{ totalContributions }}, potencialmente generando {{ totalGains }} en ganancias de inversión a través del poder del interés compuesto.</p>
+    <p>Este enfoque de inversión disciplinado es la piedra angular de una planificación financiera exitosa. Al adherirte a este cronograma, tus contribuciones totales ascenderán a {{ totalContributions }}, mientras que la magia del interés compuesto podría generar unos impresionantes {{ totalGains }} en ganancias puras de inversión. Esto destaca la eficiencia de hacer que tu dinero trabaje para ti.</p>
     
-    <p>La belleza de esta estrategia de inversión radica en su consistencia y enfoque a largo plazo. Al comprometerte con contribuciones mensuales regulares, aprovechas el promedio de costo en dólares, que puede ayudar a suavizar la volatilidad del mercado con el tiempo.</p>
+    <p>La estrategia emplea el <strong>promedio de costo en dólares</strong> (Dollar-Cost Averaging), una técnica probada donde las inversiones mensuales regulares ayudan a mitigar el impacto de la volatilidad del mercado. Al comprar más unidades cuando los precios son bajos y menos cuando son altos, suavizas efectivamente el costo promedio por acción a largo plazo. Esto es particularmente ventajoso para la planificación de {{goal}}, donde el crecimiento constante a largo plazo se prioriza sobre la especulación a corto plazo.</p>
     
-    <p>Tu cronograma de inversión de {{timeHorizon}} años proporciona una amplia oportunidad para que el crecimiento compuesto haga su magia. Los primeros años se enfocan en construir tu base de inversión, mientras que los años posteriores se benefician del crecimiento acelerado.</p>
+    <p>Con un horizonte de {{timeHorizon}} años, estás bien posicionado para beneficiarte de los ciclos del mercado. Los años iniciales establecen tu base de capital, mientras que los años posteriores capitalizan el crecimiento exponencial, ya que tus rendimientos comienzan a generar sus propios rendimientos, un fenómeno conocido como capitalización.</p>
   `,
 
   growth_projection: `
-    <h2>Análisis Detallado de Proyección de Crecimiento</h2>
-    <p>Tu viaje de inversión comienza con {{ initialAmount }} y crece a través de adiciones mensuales consistentes de {{ monthlyContribution }}. Con un rendimiento anual del {{annualReturn}}%, así es como tu riqueza podría acumularse durante {{timeHorizon}} años:</p>
+    <h2>Proyección Detallada del Crecimiento de la Riqueza</h2>
+    <p>Tu camino hacia el éxito financiero comienza con {{ initialAmount }} y se alimenta de tu dedicación para agregar {{ monthlyContribution }} cada mes. Con un rendimiento anual proyectado del {{annualReturn}}%, aquí hay un desglose de cómo se espera que tu riqueza se acumule durante los próximos {{timeHorizon}} años:</p>
     
-    <p><strong>Año 1-5:</strong> Durante la fase inicial, tu inversión crece de {{ initialAmount }} a aproximadamente {{ fiveYearValue }}. Este período se enfoca en construir tu base de inversión, con las contribuciones mensuales jugando un papel crucial.</p>
+    <p><strong>Años 1-5 (Fase de Fundación):</strong> En estos primeros años, se proyecta que tu inversión crezca de {{ initialAmount }} a aproximadamente {{ fiveYearValue }}. El principal impulsor del crecimiento aquí es tu tasa de ahorro. Establecer este hábito es crucial para el éxito a largo plazo.</p>
     
-    <p><strong>Año 6-10:</strong> La fase media ve un crecimiento acelerado a medida que el interés compuesto se vuelve más significativo. Tu cartera podría alcanzar alrededor de {{ tenYearValue }}.</p>
+    <p><strong>Años 6-10 (Fase de Aceleración):</strong> A medida que tu cartera madura, el interés compuesto comienza a jugar un papel más significativo. Tu saldo podría alcanzar alrededor de {{ tenYearValue }}. Notarás que los rendimientos de la inversión comienzan a contribuir con una mayor parte del crecimiento total en comparación con tus contribuciones solas.</p>
     
-    <p><strong>Año 11-{{timeHorizon}}:</strong> La fase final muestra un crecimiento exponencial, donde tus ganancias de inversión comienzan a generar rendimientos sustanciales por sí mismas.</p>
+    <p><strong>Años 11-{{timeHorizon}} (Fase de Capitalización):</strong> Aquí es donde el "efecto bola de nieve" toma el control. Se proyecta que tu cartera aumente hacia {{ futureValue }}. En esta fase, las ganancias anuales de inversión pueden eventualmente exceder tus contribuciones anuales, demostrando un verdadero impulso financiero.</p>
     
-    <p>El principio matemático detrás de este crecimiento es el interés compuesto, a menudo llamado la octava maravilla del mundo. Cada año, obtienes rendimientos no solo sobre tu inversión original y contribuciones, sino también sobre todas las ganancias de años anteriores.</p>
-    
-    <p>Tus contribuciones mensuales de {{ monthlyContribution }} juegan un papel vital en esta historia de crecimiento. Durante {{timeHorizon}} años, estas adiciones consistentes totalizan {{ monthlyTotal }}.</p>
+    <p>El motor matemático que impulsa este crecimiento es el <strong>interés compuesto</strong>, a menudo citado como la fuerza más poderosa en las finanzas. Te permite ganar rendimientos sobre tu capital, tus contribuciones y tus intereses acumulados. Durante {{timeHorizon}} años, tus contribuciones mensuales totales de {{ monthlyTotal }} son potenciadas por esta fuerza.</p>
   `,
 
   investment_insights: `
-    <h2>Perspectivas de Inversión para Tu Cartera</h2>
-    <p>Con un rendimiento anual esperado del {{annualReturn}}% y un horizonte de inversión de {{timeHorizon}} años, tu cartera se encuentra en la categoría {{riskCategory}}. Esta expectativa de rendimiento sugiere un enfoque diversificado que equilibra el potencial de crecimiento con la gestión de riesgos.</p>
+    <h2>Perspectivas Estratégicas de Inversión</h2>
+    <p>Apuntar a un rendimiento anual del {{annualReturn}}% durante un horizonte de {{timeHorizon}} años coloca tu cartera en la categoría {{riskCategory}}. Este objetivo logra un equilibrio entre preservar el capital y lograr un crecimiento real por encima de la inflación.</p>
     
-    <p><strong>Evaluación de Riesgo:</strong> Tu perfil de inversión indica una tolerancia al riesgo {{riskLevel}}. Los datos históricos del mercado muestran que las carteras que apuntan a rendimientos del {{annualReturn}}% típicamente experimentan {{volatilityRange}} de volatilidad anual.</p>
+    <p><strong>Análisis de Riesgo y Volatilidad:</strong> Tu perfil sugiere una tolerancia al riesgo {{riskLevel}}. Históricamente, las carteras que apuntan a rendimientos del {{annualReturn}}% han experimentado una volatilidad anual en el rango de {{volatilityRange}}. Es normal ver fluctuaciones; sin embargo, tu largo horizonte temporal es tu mayor activo para suavizar estos baches.</p>
     
-    <p><strong>Contexto Histórico:</strong> Durante los últimos 30 años, las carteras de inversión con perfiles de rendimiento similares han entregado resultados positivos en aproximadamente {{positiveYears}}% de todos los años.</p>
+    <p><strong>Rendimiento Histórico:</strong> Mirando hacia atrás en los últimos 30 años de datos de mercado, las carteras con asignaciones similares han arrojado resultados positivos en aproximadamente el {{positiveYears}}% de los períodos móviles. Si bien el rendimiento pasado no garantiza resultados futuros, proporciona una base estadística sólida para tu plan.</p>
     
-    <p><strong>Expectativas de Volatilidad:</strong> Tu cronograma de inversión de {{timeHorizon}} años proporciona tiempo suficiente para resistir los ciclos del mercado. Históricamente, los períodos de inversión más largos reducen el impacto de la volatilidad a corto plazo.</p>
+    <p><strong>La Ventaja del Tiempo:</strong> Un cronograma de inversión de {{timeHorizon}} años reduce significativamente la probabilidad de pérdida. Los datos históricos indican que cuanto más tiempo permanezcas invertido, mayor será tu probabilidad de rendimientos positivos, con períodos de {{timeHorizon}} años mostrando una tasa de éxito del {{successRate}}%.</p>
     
-    <p><strong>Beneficios del Promedio de Costo en Dólares:</strong> Tu estrategia de contribución mensual ayuda a mitigar el riesgo de timing. Al invertir {{ monthlyContribution }} de manera consistente, comprarás más acciones cuando los precios estén bajos y menos cuando estén altos.</p>
+    <p><strong>Mitigando el Riesgo de Timing del Mercado:</strong> Tu estrategia de invertir {{ monthlyContribution }} mensualmente elimina el estrés de tratar de "cronometrar el mercado". Esta participación constante asegura que captures las alzas del mercado mientras compras con descuento durante las recesiones.</p>
     
-    <p>La clave del éxito con este enfoque de inversión es mantener la disciplina durante la volatilidad del mercado. Tu cronograma de {{goal}} proporciona el lujo de superar las fluctuaciones del mercado a corto plazo.</p>
+    <p>El éxito en esta estrategia de {{goal}} depende menos de elegir la acción "perfecta" y más de mantener la disciplina. Tu capacidad para mantener el rumbo durante la volatilidad del mercado será el determinante clave de tu resultado financiero.</p>
   `,
 
   strategy_analysis: `
-    <h2>Análisis Estratégico para Tu Objetivo de {{goal}}</h2>
-    <p>Tu objetivo de {{goal}} requiere una estrategia de inversión adaptada que equilibre el potencial de crecimiento con tu cronograma específico y tolerancia al riesgo. Con {{timeHorizon}} años para alcanzar tu objetivo, este análisis examina el enfoque óptimo para tu situación.</p>
+    <h2>Estrategia Adaptada dla Twojego Celu {{goal}}</h2>
+    <p>Lograr un {{goal}} wymaga więcej niż tylko oszczędzania; wymaga strategicznej alokacji kapitału. Mając {{timeHorizon}} lat do celu, zalecamy dynamiczne podejście, które ewoluuje wraz ze zmieniającymi się potrzebami.</p>
     
-    <p><strong>Recomendaciones de Asignación de Activos:</strong> Para una estrategia de {{goal}} de {{timeHorizon}} años, considera una asignación de activos de {{stockAllocation}}% acciones, {{bondAllocation}}% bonos, y {{alternativeAllocation}}% inversiones alternativas.</p>
+    <p><strong>Zalecana Alokacja Aktywów:</strong> Aby wesprzeć plan {{goal}} na {{timeHorizon}} lat, niezbędny jest zdywersyfikowany miks. Rozważ alokację około {{stockAllocation}}% w akcje (dla wzrostu), {{bondAllocation}}% w instrumenty o stałym dochodzie (obligacje dla stabilności) i {{alternativeAllocation}}% w alternatywy (takie jak nieruchomości lub surowce) dla dywersyfikacji.</p>
     
-    <p><strong>Ajustes de Estrategia Basados en Tiempo:</strong> Tu enfoque de inversión debe evolucionar con el tiempo. Los primeros años pueden enfatizar inversiones orientadas al crecimiento, gradualmente cambiando hacia asignaciones más conservadoras.</p>
+    <p><strong>Strategia Ścieżki Schodzenia (Glide Path):</strong> W miarę zbliżania się do celu Twoja strategia powinna zmienić się z "gromadzenia majątku" na "ochronę majątku". Zalecamy stopniowe zmniejszanie ekspozycji na zmienne aktywa i zwiększanie udziału w stabilnych aktywach generujących dochód w miarę zbliżania się do granicy {{timeHorizon}} lat.</p>
     
-    <p><strong>Estrategia de Contribución:</strong> Tus contribuciones mensuales de {{ monthlyContribution }} representan {{contributionPercentage}}% del valor total proyectado de tu cartera.</p>
+    <p><strong>Wpływ Składek:</strong> Twoja miesięczna składka w wysokości {{ monthlyContribution }} jest paliwem dla tego silnika, stanowiąc {{contributionPercentage}}% całkowitej przewidywanej wartości. Podkreśla to, że Twoja dyscyplina oszczędzania jest równie ważna jak zwroty z rynku.</p>
     
-    <p><strong>Consideraciones de Rebalanceo:</strong> Con un cronograma de {{timeHorizon}} años, considera rebalancear tu cartera anualmente o cuando las asignaciones se desvíen más del 5% de los objetivos.</p>
+    <p><strong>Równoważenie Portfela:</strong> Rynki zmieniają się w czasie. Sugerujemy coroczny przegląd portfela w celu przywrócenia równowagi do docelowej alokacji. To zdyscyplinowane podejście "sprzedawaj drogo, kupuj tanio" pomaga zarządzać ryzykiem i może zwiększyć długoterminowe zwroty o około 0,5% do 1% rocznie.</p>
     
-    <p><strong>Optimización Fiscal:</strong> Dependiendo del tipo de cuenta, considera estrategias fiscalmente eficientes como maximizar las cuentas con ventajas fiscales, cosechar pérdidas fiscales, y posicionar inversiones fiscalmente ineficientes en cuentas protegidas de impuestos.</p>
-    
-    <p>La belleza de una estrategia de {{goal}} bien estructurada radica en su adaptabilidad. Mientras las circunstancias de la vida cambian, tu enfoque de inversión puede ajustarse manteniendo el enfoque en tu objetivo final.</p>
+    <p><strong>Efektywność Podatkowa:</strong> Nie lekceważ wpływu podatków. Wykorzystanie kont z ulgami podatkowymi (takich jak IKE lub IKZE) do oszczędzania na {{goal}} może znacznie zwiększyć Twoje zwroty netto. Rozważ trzymanie aktywów nieefektywnych podatkowo na tych chronionych kontach.</p>
   `,
 
   comparative_scenarios: `
-    <h2>Escenarios de Inversión Alternativos</h2>
-    <p>Entender cómo diferentes variables afectan el resultado de tu inversión ayuda a optimizar tu estrategia. Así es como modificar parámetros clave podría impactar tu plan de {{goal}}:</p>
+    <h2>Porównawcze Scenariusze Inwestycyjne</h2>
+    <p>Zrozumienie, jak różne zmienne wpływają na wynik inwestycji, jest kluczowe dla optymalizacji strategii {{goal}}. Oto kompleksowa analiza tego, jak modyfikacja kluczowych parametrów może wpłynąć na Twoją przyszłość finansową:</p>
     
-    <p><strong>Contribuciones Mensuales Más Altas:</strong> Aumentar tu inversión mensual a {{ higherContribution }} podría resultar en un valor de cartera de {{ higherContributionValue }}, representando {{ higherContributionGain }} adicionales comparado con tu plan actual.</p>
+    <h3>Wyższe Składki Miesięczne</h3>
+    <p><strong>Strategia Wyższych Składek ({{higherContribution}}):</strong> Zwiększenie miesięcznej inwestycji do {{higherContribution}} może skutkować wartością portfela {{higherContributionValue}}, co stanowi dodatkowe {{higherContributionGain}} w porównaniu z obecnym planem. To pokazuje, jak wzrost składek o {{contributionIncreasePercent}}% może prowadzić do znacznie większego portfela.</p>
     
-    <p><strong>Cronograma Extendido:</strong> Si pudieras extender tu período de inversión por 5 años a {{extendedTimeline}} años, tu cartera podría crecer a {{ extendedValue }}.</p>
+    <h3>Niższe Składki Miesięczne</h3>
+    <p><strong>Scenariusz Niższych Składek ({{lowerContribution}}):</strong> Jeśli okoliczności wymagałyby zmniejszenia miesięcznej inwestycji do {{lowerContribution}}, Twój portfel osiągnąłby {{lowerContributionValue}}, co jest o {{lowerContributionLoss}} mniej niż w obecnym planie. To porównanie podkreśla znaczenie utrzymania stałych składek, gdy jest to możliwe.</p>
     
-    <p><strong>Diferentes Escenarios de Rendimiento:</strong> Las condiciones del mercado varían, así que considera estos escenarios de rendimiento alternativos:</p>
-    <ul>
-      <li><strong>Conservador ({{conservativeReturn}}%):</strong> Valor de cartera de {{ conservativeValue }}</li>
-      <li><strong>Plan Actual ({{annualReturn}}%):</strong> Valor de cartera de {{ futureValue }}</li>
-      <li><strong>Agresivo ({{aggressiveReturn}}%):</strong> Valor de cartera de {{ aggressiveValue }}</li>
-    </ul>
+    <h3>Analiza Przedłużonego Harmonogramu</h3>
+    <p><strong>Przedłużony Harmonogram:</strong> Gdybyś mógł przedłużyć okres inwestycyjny do {{extendedTimeline}} lat, Twój portfel mógłby wzrosnąć do {{extendedValue}}. Te dodatkowe lata na rynku demonstrują potężny wpływ procentu składanego i wartości pieniądza w czasie.</p>
     
-    <p><strong>Suma Global vs. Promedio de Costo en Dólares:</strong> Si invirtieras tu cantidad total de contribución ({{ totalContributions }}) como una suma global hoy, tu cartera podría valer {{ lumpSumValue }} en {{timeHorizon}} años.</p>
+    <p><strong>Krótszy Harmonogram:</strong> Z drugiej strony, jeśli musiałbyś osiągnąć swój cel w mniejszą liczbę lat ({{shorterTimeline}} lat), Twój portfel byłby wart {{shorterValue}}. Ten scenariusz pokazuje, jak skrócenie harmonogramu inwestycyjnego znacząco wpływa na wynik końcowy.</p>
     
-    <p><strong>Impacto del Inicio Retrasado:</strong> Esperar solo un año para comenzar a invertir podría reducir el valor final de tu cartera en aproximadamente {{ delayedStartLoss }}.</p>
+    <h3>Alternatywne Podejścia</h3>
+    <p><strong>Podejście Konserwatywne ({{conservativeReturn}}%):</strong> Przy bardziej ostrożnej strategii inwestycyjnej Twój portfel mógłby osiągnąć {{conservativeValue}}. Chociaż zmniejsza to ryzyko, ogranicza również potencjał wzrostu.</p>
     
-    <p>Estos escenarios ilustran que pequeños cambios en las variables de tu inversión pueden impactar significativamente los resultados a largo plazo. La clave es encontrar el equilibrio correcto entre cantidad de contribución, cronograma y tolerancia al riesgo.</p>
+    <p><strong>Podejście Agresywne ({{aggressiveReturn}}%):</strong> Strategia o wyższym zwrocie mogłaby potencjalnie przynieść {{aggressiveValue}}, ale wiąże się ze zwiększoną zmiennością i ryzykiem.</p>
+    
+    <h3>Inwestycja Jednorazowa vs Uśrednianie Kosztów w Dolarach</h3>
+    <p><strong>Inwestycja Jednorazowa:</strong> Gdybyś zainwestował całkowitą kwotę składek ({{totalContributions}}) jako sumę jednorazową dzisiaj, Twój portfel mógłby być wart {{lumpSumValue}} za {{timeHorizon}} lat, w porównaniu do {{futureValue}} przy miesięcznych składkach. To demonstruje kompromisy między natychmiastową inwestycją a korzyściami z uśredniania kosztów.</p>
+    
+    <h3>Praktyczne Wnioski Decyzyjne</h3>
+    <p>Te scenariusze dostarczają praktycznych wskazówek dla Twojej strategii {{goal}}. Porównanie między wyższymi i niższymi składkami pokazuje, że nawet skromne wzrosty mogą mieć znaczący wpływ długoterminowy. Rozważ, czy zwiększenie składek o małe kwoty może być zrównoważone i opłacalne.</p>
+    
+    <p>Najskuteczniejsze strategie obejmują wczesne rozpoczęcie i dłuższe pozostawanie na rynku. Jeśli możesz opóźnić dostęp do swoich środków, dodatkowe lata zapewniają nieproporcjonalne korzyści dzięki wzrostowi składanemu z największym wpływem na końcową wartość portfela.</p>
+    
+    <p>Zrozumienie tych różnych scenariuszy pomaga w podejmowaniu świadomych decyzji dotyczących kompromisów między bezpieczeństwem a potencjałem wzrostu. Twoje obecne założenie {{annualReturn}}% reprezentuje podejście {{riskLevel}}, które równoważy potencjał wzrostu z rozsądnym zarządzaniem ryzykiem.</p>
+    
+    <p>Kluczowym wnioskiem jest to, że małe zmiany w zmiennych inwestycyjnych mogą znacząco wpłynąć na wyniki długoterminowe. Wzrost składki o {{contributionIncreasePercent}}% prowadzi do znacznej poprawy wartości końcowej. Regularne przeglądy i dostosowania zapewniają, że strategia pozostaje zgodna ze zmieniającymi się okolicznościami i celami {{goal}}.</p>
   `,
 
   community_insights: `
-    <h2>Perspectivas de la Comunidad de Inversores Similares</h2>
-    <p>No estás solo en tu viaje de {{goal}}. Esto es lo que hemos aprendido de miles de inversores con perfiles y objetivos similares:</p>
+    <h2>Spostrzeżenia Społeczności Podobnych Inwestorów</h2>
+    <p>Nie jesteś sam w swojej podróży {{goal}}. Oto czego nauczyliśmy się od tysięcy inwestorów o podobnych profilach i celach:</p>
     
-    <p><strong>Coincidencia de Perfil de Inversor:</strong> Los inversores con parámetros similares (inversión inicial de {{initialAmount}}, contribuciones mensuales de {{ monthlyContribution }}, cronograma de {{timeHorizon}} años) típicamente alcanzan sus objetivos de {{goal}} {{successRate}}% del tiempo cuando mantienen contribuciones consistentes.</p>
+    <p><strong>Dopasowanie Profilu Inwestora:</strong> Inwestorzy z podobnymi parametrami (początkowa inwestycja {{initialAmount}}, miesięczne składki {{ monthlyContribution }}, harmonogram {{timeHorizon}} lat) zazwyczaj osiągają swoje cele {{goal}} w {{successRate}}% przypadków, gdy utrzymują stałe składki.</p>
     
-    <p><strong>Patrones Comunes de Éxito:</strong> Los inversores más exitosos en tu categoría comparten varias características: automatizan sus contribuciones mensuales, rara vez revisan sus carteras durante la volatilidad del mercado, y aumentan las contribuciones cuando los ingresos lo permiten.</p>
+    <p><strong>Wspólne Wzorce Sukcesu:</strong> Najskuteczniejsi inwestorzy w Twojej kategorii dzielą kilka cech: automatyzują swoje miesięczne składki, rzadko sprawdzają swoje portfele podczas zmienności rynku i zwiększają składki, gdy dochody na to pozwalają. Średnio zwiększają swoje miesięczne składki o {{averageIncrease}}% rocznie.</p>
     
-    <p><strong>Navegación de Desafíos:</strong> Los inversores que persiguen estrategias de {{goal}} similares enfrentan desafíos predecibles. Los más comunes incluyen mantenerse comprometidos durante las caídas del mercado y resistir la tentación de cronometrar el mercado.</p>
+    <p><strong>Nawigacja przez Wyzwania:</strong> Inwestorzy realizujący podobne strategie {{goal}} napotykają przewidywalne wyzwania. Najczęstsze z nich to utrzymanie zaangażowania podczas spadków rynkowych (dotykające {{marketDownturnPercent}}% inwestorów) oraz opieranie się pokusie wyczucia rynku (kuszące {{timingPercent}}% inwestorów).</p>
     
-    <p><strong>Logros de Hitos:</strong> Basado en datos de la comunidad, los inversores típicamente alcanzan su primer hito importante ({{firstMilestone}}) dentro de {{milestoneTimeframe}} años.</p>
+    <p><strong>Osiąganie Kamieni Milowych:</strong> Na podstawie danych społeczności inwestorzy zazwyczaj osiągają swój pierwszy ważny kamień milowy ({{firstMilestone}}) w ciągu {{milestoneTimeframe}} lat. Ten wczesny sukces często zapewnia motywację potrzebną do kontynuowania długoterminowej podróży.</p>
     
-    <p><strong>Historias de Adaptación:</strong> Los inversores reales han modificado exitosamente sus estrategias cuando las circunstancias de la vida cambiaron. Las adaptaciones comunes incluyen reducir temporalmente las contribuciones durante dificultades financieras y aumentar las contribuciones después del avance profesional.</p>
+    <p><strong>Historie Adaptacji:</strong> Prawdziwi inwestorzy skutecznie modyfikowali swoje strategie, gdy zmieniały się okoliczności życiowe. Typowe adaptacje obejmują tymczasowe zmniejszenie składek podczas trudności finansowych ({{adaptationPercent}}% inwestorów) oraz zwiększenie składek po awansie zawodowym ({{increasePercent}}% inwestorów).</p>
     
-    <p><strong>Resultados a Largo Plazo:</strong> Los inversores que completaron viajes de inversión similares de {{timeHorizon}} años reportaron alta satisfacción con sus resultados, con {{satisfactionRate}}% diciendo que seguirían la misma estrategia otra vez.</p>
+    <p><strong>Wyniki Długoterminowe:</strong> Inwestorzy, którzy ukończyli podobne {{timeHorizon}}-letnie podróże inwestycyjne, zgłaszali wysokie zadowolenie ze swoich wyników, przy czym {{satisfactionRate}}% twierdziło, że zastosowałoby tę samą strategię ponownie.</p>
     
-    <p>La sabiduría colectiva de la comunidad enfatiza la consistencia sobre la perfección. Tu compromiso con la inversión regular, independientemente de las condiciones del mercado, te posiciona bien para el éxito a largo plazo.</p>
+    <p>Zbiorowa mądrość społeczności podkreśla konsekwencję nad perfekcją. Twoje zaangażowanie w regularne inwestowanie, niezależnie od warunków rynkowych, dobrze pozycjonuje Cię na długoterminowy sukces.</p>
   `,
 
   optimization_tips: `
-    <h2>Consejos de Optimización para Máximos Rendimientos</h2>
-    <p>Afinar tu estrategia de inversión puede impactar significativamente tus resultados a largo plazo. Aquí hay técnicas de optimización probadas para tu plan de {{goal}}:</p>
+    <h2>Wskazówki Optymalizacyjne dla Maksymalnych Zwrotów</h2>
+    <p>Dostrajanie strategii inwestycyjnej może znacząco wpłynąć na wyniki długoterminowe. Oto sprawdzone techniki optymalizacji dla Twojego planu {{goal}}:</p>
     
-    <p><strong>Timing de Contribución:</strong> Considera hacer tu contribución mensual al principio de cada mes en lugar del final. Este simple cambio podría agregar aproximadamente {{ timingBenefit }} al valor final de tu cartera debido al tiempo adicional de exposición al mercado.</p>
+    <p><strong>Czasowanie Składek:</strong> Rozważ dokonywanie miesięcznej składki na początku każdego miesiąca zamiast na końcu. Ta prosta zmiana może dodać około {{ timingBenefit }} do końcowej wartości portfela dzięki dodatkowemu czasowi ekspozycji na rynek.</p>
     
-    <p><strong>Escalación Automática:</strong> Configura aumentos automáticos anuales a tu contribución mensual. Incluso un modesto aumento anual del {{escalationPercent}}% podría impulsar el valor final de tu cartera a {{ escalatedValue }}.</p>
+    <p><strong>Automatyczna Eskalacja:</strong> Ustaw automatyczne roczne zwiększenia miesięcznej składki. Nawet skromny roczny wzrost o {{escalationPercent}}% może podnieść końcową wartość portfela do {{ escalatedValue }}, dodając {{ escalationBenefit }} do Twojego majątku.</p>
     
-    <p><strong>Cuentas con Ventajas Fiscales:</strong> Maximiza las contribuciones a cuentas con ventajas fiscales como 401(k)s, IRAs, o Roth IRAs. Los ahorros fiscales podrían aumentar tu rendimiento efectivo en {{taxSavings}}%.</p>
+    <p><strong>Konta z Ulgami Podatkowymi:</strong> Maksymalizuj składki na konta z ulgami podatkowymi, takie jak IKE, IKZE czy PPK. Oszczędności podatkowe mogą zwiększyć Twój efektywny zwrot o {{taxSavings}}%, znacząco wpływając na długoterminowy wzrost.</p>
     
-    <p><strong>Minimización de Comisiones:</strong> Reducir las comisiones de inversión en solo {{feeReduction}}% anualmente podría agregar {{ feeSavings }} al valor final de tu cartera.</p>
+    <p><strong>Minimalizacja Opłat:</strong> Zmniejszenie opłat inwestycyjnych o zaledwie {{feeReduction}}% rocznie może dodać {{ feeSavings }} do końcowej wartości portfela. Skup się na tanich funduszach indeksowych i ETF-ach dla głównych aktywów portfela.</p>
     
-    <p><strong>Estrategia de Rebalanceo:</strong> Implementa un enfoque de rebalanceo disciplinado. El rebalanceo anual históricamente ha agregado {{rebalancingBonus}}% a los rendimientos.</p>
+    <p><strong>Strategia Równoważenia:</strong> Wdróż zdyscyplinowane podejście do równoważenia portfela. Coroczne równoważenie historycznie dodawało {{rebalancingBonus}}% do zwrotów poprzez systematyczne kupowanie tanio i sprzedawanie drogo.</p>
     
-    <p><strong>Integración de Ganancias Inesperadas:</strong> Planifica invertir ganancias inesperadas como bonos, reembolsos de impuestos o herencias. Agregar solo {{ windfallAmount }} anualmente podría aumentar tu valor final a {{ windfallValue }}.</p>
+    <p><strong>Integracja Dodatkowych Środków:</strong> Zaplanuj inwestowanie dodatkowych środków, takich jak premie, zwroty podatków czy spadki. Dodanie zaledwie {{ windfallAmount }} rocznie może zwiększyć Twoją wartość końcową do {{ windfallValue }}.</p>
     
-    <p><strong>Optimización Conductual:</strong> Automatiza todo lo posible para eliminar la toma de decisiones emocional. La inversión automatizada, el rebalanceo y los aumentos de contribución ayudan a mantener la disciplina durante la turbulencia del mercado.</p>
+    <p><strong>Optymalizacja Behawioralna:</strong> Zautomatyzuj wszystko, co możliwe, aby wyeliminować emocjonalne podejmowanie decyzji. Automatyczne inwestowanie, równoważenie i zwiększanie składek pomagają utrzymać dyscyplinę podczas turbulencji rynkowych.</p>
     
-    <p><strong>Horario de Revisión Regular:</strong> Programa revisiones semestrales para evaluar el progreso y hacer los ajustes necesarios. Este enfoque disciplinado asegura que tu estrategia permanezca alineada con tus objetivos de {{goal}}.</p>
+    <p><strong>Regularny Harmonogram Przeglądów:</strong> Zaplanuj półroczne przeglądy, aby ocenić postępy i dokonać niezbędnych korekt. To zdyscyplinowane podejście zapewnia, że Twoja strategia pozostaje zgodna z celami {{goal}}.</p>
     
-    <p>Recuerda, la optimización se trata de mejora consistente a lo largo del tiempo, no de perfección. Las mejoras pequeñas y sistemáticas se componen durante tu viaje de inversión de {{timeHorizon}} años para crear riqueza adicional sustancial.</p>
+    <p>Pamiętaj, że optymalizacja polega na konsekwentnym doskonaleniu w czasie, a nie na perfekcji. Małe, systematyczne ulepszenia kumulują się podczas Twojej {{timeHorizon}}-letniej podróży inwestycyjnej, tworząc znaczny dodatkowy majątek.</p>
   `,
 
   market_context: `
-    <h2>Contexto de Mercado Actual y Perspectiva Histórica</h2>
-    <p>Entender el entorno de mercado de hoy y los patrones históricos proporciona contexto valioso para tu viaje de inversión de {{timeHorizon}} años para {{goal}}.</p>
+    <h2>Obecny Kontekst Rynkowy i Perspektywa Ekonomiczna</h2>
+    <p>Skuteczne inwestowanie wymaga zrozumienia szerszego krajobrazu gospodarczego. Oto jak obecne warunki rynkowe odnoszą się do Twojego {{timeHorizon}}-letniego planu {{goal}}.</p>
     
-    <p><strong>Entorno Económico Actual:</strong> El panorama de inversión de hoy presenta inflación del {{currentInflation}}%, tasas de interés del {{currentInterestRates}}%, y volatilidad de mercado {{marketVolatility}}. Tu rendimiento esperado del {{annualReturn}}% considera estas condiciones actuales.</p>
+    <p><strong>Środowisko Ekonomiczne:</strong> Obecnie poruszamy się w okresie z inflacją na poziomie {{currentInflation}}% i stopami procentowymi wokół {{currentInterestRates}}%. Chociaż zmienność rynku wynosi obecnie {{marketVolatility}}, Twoje założenie zwrotu {{annualReturn}}% jest realistyczne, biorąc pod uwagę historyczne średnie dla zdywersyfikowanych portfeli.</p>
     
-    <p><strong>Rendimiento Histórico del Mercado:</strong> Durante los últimos {{historicalPeriod}} años, los mercados han entregado rendimientos anuales promedio del {{historicalReturn}}%. Tu rendimiento objetivo del {{annualReturn}}% se encuentra {{returnComparison}} este promedio histórico.</p>
+    <p><strong>Inflacja i Siła Nabywcza:</strong> Inflacja jest cichym niszczycielem majątku. Przy inflacji na poziomie {{currentInflation}}%, Twój "realny" zwrot (to, co faktycznie zachowujesz w sile nabywczej) wynosi około {{realReturn}}%. Inwestowanie jest jednym z niewielu niezawodnych sposobów na wyprzedzenie inflacji i podniesienie standardu życia w czasie.</p>
     
-    <p><strong>Análisis de Impacto de la Inflación:</strong> Con la inflación actual en {{currentInflation}}%, tu rendimiento real (ajustado por inflación) sería aproximadamente {{realReturn}}%. Esto significa que tu poder adquisitivo crece {{realReturn}}% anualmente.</p>
+    <p><strong>Cykle Rynkowe:</strong> W okresie {{timeHorizon}} lat powinieneś spodziewać się napotkania około {{expectedCycles}} pełnych cykli rynkowych (hossy i bessy). Historia pokazuje, że inwestorzy, którzy utrzymują kurs przez te cykle, zazwyczaj osiągają lepsze wyniki niż ci, którzy próbują wchodzić i wychodzić z rynku.</p>
     
-    <p><strong>Consideraciones del Ciclo de Mercado:</strong> Tu período de inversión de {{timeHorizon}} años probablemente abarca {{expectedCycles}} ciclos de mercado completos. Los datos históricos muestran que los períodos de inversión más largos suavizan la volatilidad cíclica.</p>
+    <p><strong>Dywersyfikacja na Dzisiejszym Rynku:</strong> Biorąc pod uwagę obecną dynamikę globalną, mieszanka aktywów krajowych ({{domesticAllocation}}%) i międzynarodowych ({{internationalAllocation}}%) jest rozsądna. Zmniejsza to zależność od jakiejkolwiek pojedynczej gospodarki i wychwytuje wzrost, gdziekolwiek on występuje.</p>
     
-    <p><strong>Expectativas de Volatilidad:</strong> Los mercados típicamente experimentan correcciones (caídas del 10%) cada {{correctionFrequency}} meses y mercados bajistas (caídas del 20%) cada {{bearMarketFrequency}} años.</p>
-    
-    <p><strong>Diversificación Sectorial y Geográfica:</strong> Las condiciones actuales del mercado favorecen la exposición diversificada a través de sectores y geografías. Tu estrategia de inversión debe incluir mercados domésticos e internacionales.</p>
-    
-    <p><strong>Entorno de Tasas de Interés:</strong> Las tasas de interés actuales del {{currentInterestRates}}% afectan diferentes clases de activos de manera diferente. Este entorno {{rateImpact}} para tu estrategia de inversión.</p>
-    
-    <p>La conclusión clave es que mientras las condiciones actuales del mercado importan para el rendimiento a corto plazo, tu cronograma de {{timeHorizon}} años te permite enfocarte en el crecimiento económico fundamental en lugar de las fluctuaciones temporales del mercado.</p>
+    <p><strong>Długa Perspektywa:</strong> Chociaż krótkoterminowe wiadomości mogą być niepokojące, długoterminowy trend globalnej gospodarki jest wzrostowy. Twój horyzont {{timeHorizon}} lat pozwala Ci patrzeć poza codzienne nagłówki i skupić się na fundamentalnym wzroście firm, w które inwestujesz.</p>
   `,
 }
 
@@ -326,146 +317,147 @@ export const spanishTemplates: ContentTemplate = {
  */
 export const polishTemplates: ContentTemplate = {
   investment_overview: `
-    <h2>Przegląd Twojego Planu Inwestycyjnego</h2>
-    <p>Z początkową inwestycją <strong>{{ initialAmount }}</strong> i miesięcznymi składkami <strong>{{ monthlyContribution }}</strong>, przygotowujesz się na solidną strategię {{goal}}. Przez {{timeHorizon}} lat przy oczekiwanym rocznym zwrocie {{annualReturn}}%, Twoja inwestycja może wzrosnąć do około <strong>{{ futureValue }}</strong>.</p>
+    <h2>Kompleksowy Przegląd Twojego Planu Inwestycyjnego</h2>
+    <p>Rozpoczęcie podróży finansowej z początkową inwestycją <strong>{{ initialAmount }}</strong> i regularnymi miesięcznymi składkami <strong>{{ monthlyContribution }}</strong> stawia Cię na drodze do znacznego gromadzenia majątku. Ta strategia jest specjalnie dostosowana do Twoich celów {{goal}}, wykorzystując siłę czasu i konsekwencji. W okresie {{timeHorizon}} lat, przy założeniu ostrożnego rocznego zwrotu na poziomie {{annualReturn}}%, przewiduje się, że Twój portfel wzrośnie do około <strong>{{ futureValue }}</strong>.</p>
     
-    <p>To podejście inwestycyjne jest zgodne z Twoimi celami {{goal}}, zapewniając ustrukturyzowaną ścieżkę do wzrostu finansowego. Twoje całkowite składki w okresie inwestycyjnym wyniosą {{ totalContributions }}, potencjalnie generując {{ totalGains }} zysków z inwestycji dzięki sile procentu składanego.</p>
+    <p>To zdyscyplinowane podejście inwestycyjne jest kamieniem węgielnym skutecznego planowania finansowego. Trzymając się tego harmonogramu, Twoje całkowite wpłaty wyniosą {{ totalContributions }}, podczas gdy magia procentu składanego może wygenerować imponujące {{ totalGains }} czystych zysków z inwestycji. Podkreśla to efektywność sprawiania, by Twoje pieniądze pracowały dla Ciebie.</p>
     
-    <p>Piękno tej strategii inwestycyjnej leży w jej konsekwencji i długoterminowym skupieniu. Zobowiązując się do regularnych miesięcznych składek, wykorzystujesz uśrednianie kosztów w dolarach, które może pomóc wygładzić zmienność rynku w czasie.</p>
+    <p>Strategia wykorzystuje <strong>uśrednianie kosztów w dolarach</strong> (Dollar-Cost Averaging), sprawdzoną technikę, w której regularne miesięczne inwestycje pomagają złagodzić wpływ zmienności rynku. Kupując więcej jednostek, gdy ceny są niskie, a mniej, gdy są wysokie, skutecznie wygładzasz średni koszt zakupu w długim okresie. Jest to szczególnie korzystne dla planowania {{goal}}, gdzie stały, długoterminowy wzrost jest priorytetem nad krótkoterminową spekulacją.</p>
     
-    <p>Twój harmonogram inwestycyjny {{timeHorizon}} lat zapewnia szeroki zakres możliwości dla wzrostu składanego. Wczesne lata skupiają się na budowaniu bazy inwestycyjnej, podczas gdy późniejsze lata korzystają z przyspieszonego wzrostu.</p>
+    <p>Z horyzontem czasowym {{timeHorizon}} lat jesteś w dobrej pozycji, aby skorzystać z cykli rynkowych. Początkowe lata budują Twoją bazę kapitałową, podczas gdy późniejsze lata wykorzystują wzrost wykładniczy, ponieważ Twoje zyski zaczynają generować własne zyski — zjawisko znane jako procent składany.</p>
   `,
 
   growth_projection: `
-    <h2>Szczegółowa Analiza Projekcji Wzrostu</h2>
-    <p>Twoja podróż inwestycyjna rozpoczyna się od {{ initialAmount }} i rośnie dzięki konsekwentnym miesięcznym dodatkom {{ monthlyContribution }}. Przy rocznym zwrocie {{annualReturn}}%, oto jak Twoje bogactwo może się akumulować przez {{timeHorizon}} lat:</p>
+    <h2>Szczegółowa Projekcja Wzrostu Majątku</h2>
+    <p>Twoja droga do sukcesu finansowego zaczyna się od {{ initialAmount }} i jest napędzana Twoim zaangażowaniem w dodawanie {{ monthlyContribution }} każdego miesiąca. Przy przewidywanym rocznym zwrocie {{annualReturn}}%, oto zestawienie, jak oczekuje się, że Twój majątek będzie się gromadził w ciągu najbliższych {{timeHorizon}} lat:</p>
     
-    <p><strong>Rok 1-5:</strong> W fazie początkowej Twoja inwestycja rośnie z {{ initialAmount }} do około {{ fiveYearValue }}. Ten okres skupia się na budowaniu fundamentów inwestycyjnych, z miesięcznymi składkami odgrywającymi kluczową rolę.</p>
+    <p><strong>Lata 1-5 (Faza Fundamentów):</strong> W tych wczesnych latach przewiduje się, że Twoja inwestycja wzrośnie z {{ initialAmount }} do około {{ fiveYearValue }}. Głównym motorem wzrostu jest tutaj Twoja stopa oszczędności. Ustanowienie tego nawyku jest kluczowe dla długoterminowego sukcesu.</p>
     
-    <p><strong>Rok 6-10:</strong> Faza średnia widzi przyspieszony wzrost, gdy procent składany staje się bardziej znaczący. Twój portfel może osiągnąć około {{ tenYearValue }}.</p>
+    <p><strong>Lata 6-10 (Faza Przyspieszenia):</strong> W miarę dojrzewania portfela procent składany zaczyna odgrywać bardziej znaczącą rolę. Twoje saldo może osiągnąć około {{ tenYearValue }}. Zauważysz, że zyski z inwestycji zaczynają wnosić większy udział w całkowitym wzroście w porównaniu do samych Twoich składek.</p>
     
-    <p><strong>Rok 11-{{timeHorizon}}:</strong> Ostatnia faza pokazuje wykładniczy wzrost, gdzie Twoje zyski z inwestycji zaczynają generować znaczne zwroty same z siebie.</p>
+    <p><strong>Lata 11-{{timeHorizon}} (Faza Składana):</strong> To tutaj "efekt kuli śnieżnej" przejmuje kontrolę. Przewiduje się, że Twój portfel wzrośnie w kierunku {{ futureValue }}. W tej fazie roczne zyski z inwestycji mogą ostatecznie przekroczyć Twoje roczne składki, demonstrując prawdziwy impet finansowy.</p>
     
-    <p>Zasada matematyczna za tym wzrostem to procent składany, często nazywany ósmym cudem świata. Każdego roku otrzymujesz zwroty nie tylko z pierwotnej inwestycji i składek, ale także ze wszystkich zysków z poprzednich lat.</p>
-    
-    <p>Twoje miesięczne składki {{ monthlyContribution }} odgrywają istotną rolę w tej historii wzrostu. Przez {{timeHorizon}} lat te konsekwentne dodatki sumują się do {{ monthlyTotal }}.</p>
+    <p>Matematycznym silnikiem napędzającym ten wzrost jest <strong>procent składany</strong> — często cytowany jako najpotężniejsza siła w finansach. Pozwala on zarabiać odsetki od kapitału, składek i skumulowanych odsetek. Przez {{timeHorizon}} lat Twoje całkowite miesięczne składki w wysokości {{ monthlyTotal }} są wzmacniane przez tę siłę.</p>
   `,
 
   investment_insights: `
-    <h2>Wgląd Inwestycyjny dla Twojego Portfela</h2>
-    <p>Z oczekiwanym rocznym zwrotem {{annualReturn}}% i horyzontem inwestycyjnym {{timeHorizon}} lat, Twój portfel mieści się w kategorii {{riskCategory}}. To oczekiwanie zwrotu sugeruje zdywersyfikowane podejście, które równoważy potencjał wzrostu z zarządzaniem ryzykiem.</p>
+    <h2>Strategiczne Spostrzeżenia Inwestycyjne</h2>
+    <p>Celowanie w roczny zwrot {{annualReturn}}% w horyzoncie {{timeHorizon}} lat umieszcza Twój portfel w kategorii {{riskCategory}}. Ten cel stanowi równowagę między ochroną kapitału a osiągnięciem realnego wzrostu powyżej inflacji.</p>
     
-    <p><strong>Ocena Ryzyka:</strong> Twój profil inwestycyjny wskazuje tolerancję ryzyka {{riskLevel}}. Historyczne dane rynkowe pokazują, że portfele celujące w zwroty {{annualReturn}}% typowo doświadczają {{volatilityRange}} rocznej zmienności.</p>
+    <p><strong>Analiza Ryzyka i Zmienności:</strong> Twój profil sugeruje tolerancję ryzyka na poziomie {{riskLevel}}. Historycznie portfele celujące w zwroty {{annualReturn}}% doświadczały rocznej zmienności w zakresie {{volatilityRange}}. Wahania są normalne; jednak Twój długi horyzont czasowy jest Twoim największym atutem w wygładzaniu tych nierówności.</p>
     
-    <p><strong>Kontekst Historyczny:</strong> W ciągu ostatnich 30 lat portfele inwestycyjne o podobnych profilach zwrotu przyniosły pozytywne wyniki w około {{positiveYears}}% wszystkich lat.</p>
+    <p><strong>Wyniki Historyczne:</strong> Patrząc wstecz na ostatnie 30 lat danych rynkowych, portfele o podobnych alokacjach przyniosły pozytywne wyniki w około {{positiveYears}}% okresów kroczących. Chociaż wyniki z przeszłości nie gwarantują przyszłych rezultatów, stanowią solidną podstawę statystyczną dla Twojego planu.</p>
     
-    <p><strong>Oczekiwania Zmienności:</strong> Twój harmonogram inwestycyjny {{timeHorizon}} lat zapewnia wystarczający czas na przetrwanie cykli rynkowych. Historycznie, dłuższe okresy inwestycyjne zmniejszają wpływ krótkoterminowej zmienności.</p>
+    <p><strong>Przewaga Czasu:</strong> Harmonogram inwestycyjny {{timeHorizon}} lat znacznie zmniejsza prawdopodobieństwo straty. Dane historyczne wskazują, że im dłużej pozostajesz zainwestowany, tym większe jest prawdopodobieństwo pozytywnych zwrotów, a okresy {{timeHorizon}}-letnie wykazują wskaźnik sukcesu na poziomie {{successRate}}%.</p>
     
-    <p><strong>Korzyści z Uśredniania Kosztów w Dolarach:</strong> Twoja strategia miesięcznych składek pomaga zmniejszyć ryzyko czasowe. Inwestując {{ monthlyContribution }} konsekwentnie, kupisz więcej akcji gdy ceny są niskie i mniej gdy są wysokie.</p>
+    <p><strong>Łagodzenie Ryzyka Czasu Rynkowego:</strong> Twoja strategia inwestowania {{ monthlyContribution }} miesięcznie eliminuje stres związany z próbą "wyczucia rynku". To stałe uczestnictwo zapewnia, że wychwytujesz wzrosty rynku, jednocześnie kupując ze zniżką podczas spadków.</p>
     
-    <p>Kluczem do sukcesu w tym podejściu inwestycyjnym jest utrzymanie dyscypliny podczas zmienności rynku. Twój harmonogram {{goal}} zapewnia luksus przetrwania krótkoterminowych wahań rynku.</p>
+    <p>Sukces w tej strategii {{goal}} zależy mniej od wyboru "idealnej" akcji, a bardziej od utrzymania dyscypliny. Twoja zdolność do utrzymania kursu podczas zmienności rynku będzie kluczowym wyznacznikiem Twojego wyniku finansowego.</p>
   `,
 
   strategy_analysis: `
-    <h2>Analiza Strategiczna dla Twojego Celu {{goal}}</h2>
-    <p>Twój cel {{goal}} wymaga dostosowanej strategii inwestycyjnej, która równoważy potencjał wzrostu z Twoim konkretnym harmonogramem i tolerancją ryzyka. Z {{timeHorizon}} latami na osiągnięcie celu, ta analiza bada optymalne podejście do Twojej sytuacji.</p>
+    <h2>Dostosowana Strategia dla Twojego Celu {{goal}}</h2>
+    <p>Osiągnięcie celu {{goal}} wymaga czegoś więcej niż tylko oszczędzania; wymaga strategicznej alokacji kapitału. Mając {{timeHorizon}} lat do celu, zalecamy dynamiczne podejście, które ewoluuje wraz ze zmieniającymi się potrzebami.</p>
     
-    <p><strong>Rekomendacje Alokacji Aktywów:</strong> Dla {{timeHorizon}}-letniej strategii {{goal}}, rozważ alokację aktywów {{stockAllocation}}% akcje, {{bondAllocation}}% obligacje i {{alternativeAllocation}}% inwestycje alternatywne.</p>
+    <p><strong>Zalecana Alokacja Aktywów:</strong> Aby wesprzeć plan {{goal}} na {{timeHorizon}} lat, niezbędny jest zdywersyfikowany miks. Rozważ alokację około {{stockAllocation}}% w akcje (dla wzrostu), {{bondAllocation}}% w instrumenty o stałym dochodzie (obligacje dla stabilności) i {{alternativeAllocation}}% w alternatywy (takie jak nieruchomości lub surowce) dla dywersyfikacji.</p>
     
-    <p><strong>Dostosowania Strategii Oparte na Czasie:</strong> Twoje podejście inwestycyjne powinno ewoluować w czasie. Wczesne lata mogą kłaść nacisk na inwestycje zorientowane na wzrost, stopniowo przesuwając się w kierunku bardziej konserwatywnych alokacji.</p>
+    <p><strong>Strategia Ścieżki Schodzenia (Glide Path):</strong> W miarę zbliżania się do celu Twoja strategia powinna zmienić się z "gromadzenia majątku" na "ochronę majątku". Zalecamy stopniowe zmniejszanie ekspozycji na zmienne aktywa i zwiększanie udziału w stabilnych aktywach generujących dochód w miarę zbliżania się do granicy {{timeHorizon}} lat.</p>
     
-    <p><strong>Strategia Składek:</strong> Twoje miesięczne składki {{ monthlyContribution }} reprezentują {{contributionPercentage}}% całkowitej przewidywanej wartości Twojego portfela.</p>
+    <p><strong>Wpływ Składek:</strong> Twoja miesięczna składka w wysokości {{ monthlyContribution }} jest paliwem dla tego silnika, stanowiąc {{contributionPercentage}}% całkowitej przewidywanej wartości. Podkreśla to, że Twoja dyscyplina oszczędzania jest równie ważna jak zwroty z rynku.</p>
     
-    <p><strong>Rozważania Dotyczące Przywracania Równowagi:</strong> Z harmonogramem {{timeHorizon}} lat, rozważ przywracanie równowagi portfela rocznie lub gdy alokacje odchylą się więcej niż 5% od celów.</p>
+    <p><strong>Równoważenie Portfela:</strong> Rynki zmieniają się w czasie. Sugerujemy coroczny przegląd portfela w celu przywrócenia równowagi do docelowej alokacji. To zdyscyplinowane podejście "sprzedawaj drogo, kupuj tanio" pomaga zarządzać ryzykiem i może zwiększyć długoterminowe zwroty o około 0,5% do 1% rocznie.</p>
     
-    <p><strong>Optymalizacja Podatkowa:</strong> W zależności od typu konta, rozważ strategie efektywne podatkowo, takie jak maksymalizacja kont z ulgami podatkowymi, zbieranie strat podatkowych i pozycjonowanie nieefektywnych podatkowo inwestycji w kontach chronionych przed podatkami.</p>
-    
-    <p>Piękno dobrze ustrukturyzowanej strategii {{goal}} leży w jej adaptacyjności. Gdy okoliczności życiowe się zmieniają, Twoje podejście inwestycyjne może być dostosowane przy jednoczesnym utrzymaniu skupienia na ostatecznym celu.</p>
+    <p><strong>Efektywność Podatkowa:</strong> Nie lekceważ wpływu podatków. Wykorzystanie kont z ulgami podatkowymi (takich jak IKE lub IKZE) do oszczędzania na {{goal}} może znacznie zwiększyć Twoje zwroty netto. Rozważ trzymanie aktywów nieefektywnych podatkowo na tych chronionych kontach.</p>
   `,
 
   comparative_scenarios: `
-    <h2>Alternatywne Scenariusze Inwestycyjne</h2>
-    <p>Zrozumienie jak różne zmienne wpływają na wynik Twojej inwestycji pomaga zoptymalizować strategię. Oto jak modyfikacja kluczowych parametrów może wpłynąć na Twój plan {{goal}}:</p>
+    <h2>Porównawcze Scenariusze Inwestycyjne</h2>
+    <p>Zrozumienie, jak różne zmienne wpływają na wynik inwestycji, jest kluczowe dla optymalizacji strategii {{goal}}. Oto kompleksowa analiza tego, jak modyfikacja kluczowych parametrów może wpłynąć na Twoją przyszłość finansową:</p>
     
-    <p><strong>Wyższe Miesięczne Składki:</strong> Zwiększenie miesięcznej inwestycji do {{ higherContribution }} może skutkować wartością portfela {{ higherContributionValue }}, reprezentując dodatkowe {{ higherContributionGain }} w porównaniu z obecnym planem.</p>
+    <h3>Wyższe Składki Miesięczne</h3>
+    <p><strong>Strategia Wyższych Składek ({{higherContribution}}):</strong> Zwiększenie miesięcznej inwestycji do {{higherContribution}} może skutkować wartością portfela {{higherContributionValue}}, co stanowi dodatkowe {{higherContributionGain}} w porównaniu z obecnym planem. To pokazuje, jak wzrost składek o {{contributionIncreasePercent}}% może prowadzić do znacznie większego portfela.</p>
     
-    <p><strong>Przedłużony Harmonogram:</strong> Gdybyś mógł przedłużyć okres inwestycyjny o 5 lat do {{extendedTimeline}} lat, Twój portfel mógłby wzrosnąć do {{ extendedValue }}.</p>
+    <h3>Niższe Składki Miesięczne</h3>
+    <p><strong>Scenariusz Niższych Składek ({{lowerContribution}}):</strong> Jeśli okoliczności wymagałyby zmniejszenia miesięcznej inwestycji do {{lowerContribution}}, Twój portfel osiągnąłby {{lowerContributionValue}}, co jest o {{lowerContributionLoss}} mniej niż w obecnym planie. To porównanie podkreśla znaczenie utrzymania stałych składek, gdy jest to możliwe.</p>
     
-    <p><strong>Różne Scenariusze Zwrotu:</strong> Warunki rynkowe różnią się, więc rozważ te alternatywne scenariusze zwrotu:</p>
-    <ul>
-      <li><strong>Konserwatywny ({{conservativeReturn}}%):</strong> Wartość portfela {{ conservativeValue }}</li>
-      <li><strong>Obecny Plan ({{annualReturn}}%):</strong> Wartość portfela {{ futureValue }}</li>
-      <li><strong>Agresywny ({{aggressiveReturn}}%):</strong> Wartość portfela {{ aggressiveValue }}</li>
-    </ul>
+    <h3>Analiza Przedłużonego Harmonogramu</h3>
+    <p><strong>Przedłużony Harmonogram:</strong> Gdybyś mógł przedłużyć okres inwestycyjny do {{extendedTimeline}} lat, Twój portfel mógłby wzrosnąć do {{extendedValue}}. Te dodatkowe lata na rynku demonstrują potężny wpływ procentu składanego i wartości pieniądza w czasie.</p>
     
-    <p><strong>Suma Ryczałtowa vs. Uśrednianie Kosztów w Dolarach:</strong> Gdybyś zainwestował całkowitą kwotę składek ({{ totalContributions }}) jako sumę ryczałtową dzisiaj, Twój portfel mógłby być wart {{ lumpSumValue }} za {{timeHorizon}} lat.</p>
+    <p><strong>Krótszy Harmonogram:</strong> Z drugiej strony, jeśli musiałbyś osiągnąć swój cel w mniejszą liczbę lat ({{shorterTimeline}} lat), Twój portfel byłby wart {{shorterValue}}. Ten scenariusz pokazuje, jak skrócenie harmonogramu inwestycyjnego znacząco wpływa na wynik końcowy.</p>
     
-    <p><strong>Wpływ Opóźnionego Startu:</strong> Czekanie tylko rok na rozpoczęcie inwestowania może zmniejszyć końcową wartość Twojego portfela o około {{ delayedStartLoss }}.</p>
+    <h3>Alternatywne Podejścia</h3>
+    <p><strong>Podejście Konserwatywne ({{conservativeReturn}}%):</strong> Przy bardziej ostrożnej strategii inwestycyjnej Twój portfel mógłby osiągnąć {{conservativeValue}}. Chociaż zmniejsza to ryzyko, ogranicza również potencjał wzrostu.</p>
     
-    <p>Te scenariusze ilustrują, że małe zmiany w zmiennych inwestycyjnych mogą znacząco wpłynąć na długoterminowe wyniki. Kluczem jest znalezienie właściwej równowagi między kwotą składki, harmonogramem i tolerancją ryzyka.</p>
+    <p><strong>Podejście Agresywne ({{aggressiveReturn}}%):</strong> Strategia o wyższym zwrocie mogłaby potencjalnie przynieść {{aggressiveValue}}, ale wiąże się ze zwiększoną zmiennością i ryzykiem.</p>
+    
+    <h3>Inwestycja Jednorazowa vs Uśrednianie Kosztów w Dolarach</h3>
+    <p><strong>Inwestycja Jednorazowa:</strong> Gdybyś zainwestował całkowitą kwotę składek ({{totalContributions}}) jako sumę jednorazową dzisiaj, Twój portfel mógłby być wart {{lumpSumValue}} za {{timeHorizon}} lat, w porównaniu do {{futureValue}} przy miesięcznych składkach. To demonstruje kompromisy między natychmiastową inwestycją a korzyściami z uśredniania kosztów.</p>
+    
+    <h3>Praktyczne Wnioski Decyzyjne</h3>
+    <p>Te scenariusze dostarczają praktycznych wskazówek dla Twojej strategii {{goal}}. Porównanie między wyższymi i niższymi składkami pokazuje, że nawet skromne wzrosty mogą mieć znaczący wpływ długoterminowy. Rozważ, czy zwiększenie składek o małe kwoty może być zrównoważone i opłacalne.</p>
+    
+    <p>Najskuteczniejsze strategie obejmują wczesne rozpoczęcie i dłuższe pozostawanie na rynku. Jeśli możesz opóźnić dostęp do swoich środków, dodatkowe lata zapewniają nieproporcjonalne korzyści dzięki wzrostowi składanemu z największym wpływem na końcową wartość portfela.</p>
+    
+    <p>Zrozumienie tych różnych scenariuszy pomaga w podejmowaniu świadomych decyzji dotyczących kompromisów między bezpieczeństwem a potencjałem wzrostu. Twoje obecne założenie {{annualReturn}}% reprezentuje podejście {{riskLevel}}, które równoważy potencjał wzrostu z rozsądnym zarządzaniem ryzykiem.</p>
+    
+    <p>Kluczowym wnioskiem jest to, że małe zmiany w zmiennych inwestycyjnych mogą znacząco wpłynąć na wyniki długoterminowe. Wzrost składki o {{contributionIncreasePercent}}% prowadzi do znacznej poprawy wartości końcowej. Regularne przeglądy i dostosowania zapewniają, że strategia pozostaje zgodna ze zmieniającymi się okolicznościami i celami {{goal}}.</p>
   `,
 
   community_insights: `
-    <h2>Wglądy Społeczności Podobnych Inwestorów</h2>
+    <h2>Spostrzeżenia Społeczności Podobnych Inwestorów</h2>
     <p>Nie jesteś sam w swojej podróży {{goal}}. Oto czego nauczyliśmy się od tysięcy inwestorów o podobnych profilach i celach:</p>
     
-    <p><strong>Dopasowanie Profilu Inwestora:</strong> Inwestorzy z podobnymi parametrami (początkowa inwestycja {{initialAmount}}, miesięczne składki {{ monthlyContribution }}, harmonogram {{timeHorizon}} lat) typowo osiągają swoje cele {{goal}} {{successRate}}% czasu gdy utrzymują konsekwentne składki.</p>
+    <p><strong>Dopasowanie Profilu Inwestora:</strong> Inwestorzy z podobnymi parametrami (początkowa inwestycja {{initialAmount}}, miesięczne składki {{ monthlyContribution }}, harmonogram {{timeHorizon}} lat) zazwyczaj osiągają swoje cele {{goal}} w {{successRate}}% przypadków, gdy utrzymują stałe składki.</p>
     
-    <p><strong>Wspólne Wzorce Sukcesu:</strong> Najskuteczniejsi inwestorzy w Twojej kategorii dzielą kilka cech: automatyzują swoje miesięczne składki, rzadko sprawdzają swoje portfele podczas zmienności rynku i zwiększają składki gdy dochody pozwalają.</p>
+    <p><strong>Wspólne Wzorce Sukcesu:</strong> Najskuteczniejsi inwestorzy w Twojej kategorii dzielą kilka cech: automatyzują swoje miesięczne składki, rzadko sprawdzają swoje portfele podczas zmienności rynku i zwiększają składki, gdy dochody na to pozwalają. Średnio zwiększają swoje miesięczne składki o {{averageIncrease}}% rocznie.</p>
     
-    <p><strong>Nawigacja Wyzwań:</strong> Inwestorzy realizujący podobne strategie {{goal}} napotykają przewidywalne wyzwania. Najczęstsze to pozostanie zaangażowanym podczas spadków rynku i opieranie się pokusie czasowania rynku.</p>
+    <p><strong>Nawigacja przez Wyzwania:</strong> Inwestorzy realizujący podobne strategie {{goal}} napotykają przewidywalne wyzwania. Najczęstsze z nich to utrzymanie zaangażowania podczas spadków rynkowych (dotykające {{marketDownturnPercent}}% inwestorów) oraz opieranie się pokusie wyczucia rynku (kuszące {{timingPercent}}% inwestorów).</p>
     
-    <p><strong>Osiągnięcia Kamieni Milowych:</strong> Na podstawie danych społeczności inwestorzy typowo osiągają swój pierwszy ważny kamień milowy ({{firstMilestone}}) w ciągu {{milestoneTimeframe}} lat.</p>
+    <p><strong>Osiąganie Kamieni Milowych:</strong> Na podstawie danych społeczności inwestorzy zazwyczaj osiągają swój pierwszy ważny kamień milowy ({{firstMilestone}}) w ciągu {{milestoneTimeframe}} lat. Ten wczesny sukces często zapewnia motywację potrzebną do kontynuowania długoterminowej podróży.</p>
     
-    <p><strong>Historie Adaptacji:</strong> Prawdziwi inwestorzy skutecznie zmodyfikowali swoje strategie gdy okoliczności życiowe się zmieniły. Wspólne adaptacje obejmują tymczasowe zmniejszenie składek podczas trudności finansowych i zwiększenie składek po awansie zawodowym.</p>
+    <p><strong>Historie Adaptacji:</strong> Prawdziwi inwestorzy skutecznie modyfikowali swoje strategie, gdy zmieniały się okoliczności życiowe. Typowe adaptacje obejmują tymczasowe zmniejszenie składek podczas trudności finansowych ({{adaptationPercent}}% inwestorów) oraz zwiększenie składek po awansie zawodowym ({{increasePercent}}% inwestorów).</p>
     
-    <p><strong>Długoterminowe Wyniki:</strong> Inwestorzy którzy ukończyli podobne podróże inwestycyjne {{timeHorizon}} lat raportowali wysoką satysfakcję z wyników, z {{satisfactionRate}}% mówiących, że zastosowaliby tę samą strategię ponownie.</p>
+    <p><strong>Wyniki Długoterminowe:</strong> Inwestorzy, którzy ukończyli podobne {{timeHorizon}}-letnie podróże inwestycyjne, zgłaszali wysokie zadowolenie ze swoich wyników, przy czym {{satisfactionRate}}% twierdziło, że zastosowałoby tę samą strategię ponownie.</p>
     
-    <p>Zbiorowa mądrość społeczności podkreśla konsekwencję nad perfekcją. Twoje zobowiązanie do regularnego inwestowania, niezależnie od warunków rynkowych, dobrze Cię pozycjonuje na długoterminowy sukces.</p>
+    <p>Zbiorowa mądrość społeczności podkreśla konsekwencję nad perfekcją. Twoje zaangażowanie w regularne inwestowanie, niezależnie od warunków rynkowych, dobrze pozycjonuje Cię na długoterminowy sukces.</p>
   `,
 
   optimization_tips: `
-    <h2>Wskazówki Optymalizacji dla Maksymalnych Zwrotów</h2>
-    <p>Dostrajanie strategii inwestycyjnej może znacząco wpłynąć na długoterminowe wyniki. Oto sprawdzone techniki optymalizacji dla Twojego planu {{goal}}:</p>
+    <h2>Wskazówki Optymalizacyjne dla Maksymalnych Zwrotów</h2>
+    <p>Dostrajanie strategii inwestycyjnej może znacząco wpłynąć na wyniki długoterminowe. Oto sprawdzone techniki optymalizacji dla Twojego planu {{goal}}:</p>
     
-    <p><strong>Czasowanie Składek:</strong> Rozważ dokonywanie miesięcznej składki na początku każdego miesiąca zamiast na końcu. Ta prosta zmiana może dodać około {{ timingBenefit }} do końcowej wartości portfela dzięki dodatkowemu czasowi ekspozycji rynkowej.</p>
+    <p><strong>Czasowanie Składek:</strong> Rozważ dokonywanie miesięcznej składki na początku każdego miesiąca zamiast na końcu. Ta prosta zmiana może dodać około {{ timingBenefit }} do końcowej wartości portfela dzięki dodatkowemu czasowi ekspozycji na rynek.</p>
     
-    <p><strong>Automatyczna Eskalacja:</strong> Ustaw automatyczne roczne zwiększenia miesięcznej składki. Nawet skromne {{escalationPercent}}% roczne zwiększenie może podnieść końcową wartość portfela do {{ escalatedValue }}.</p>
+    <p><strong>Automatyczna Eskalacja:</strong> Ustaw automatyczne roczne zwiększenia miesięcznej składki. Nawet skromny roczny wzrost o {{escalationPercent}}% może podnieść końcową wartość portfela do {{ escalatedValue }}, dodając {{ escalationBenefit }} do Twojego majątku.</p>
     
-    <p><strong>Konta z Ulgami Podatkowymi:</strong> Maksymalizuj składki na konta z ulgami podatkowymi jak 401(k), IRA, czy Roth IRA. Oszczędności podatkowe mogą zwiększyć efektywny zwrot o {{taxSavings}}%.</p>
+    <p><strong>Konta z Ulgami Podatkowymi:</strong> Maksymalizuj składki na konta z ulgami podatkowymi, takie jak IKE, IKZE czy PPK. Oszczędności podatkowe mogą zwiększyć Twój efektywny zwrot o {{taxSavings}}%, znacząco wpływając na długoterminowy wzrost.</p>
     
-    <p><strong>Minimalizacja Opłat:</strong> Zmniejszenie opłat inwestycyjnych o zaledwie {{feeReduction}}% rocznie może dodać {{ feeSavings }} do końcowej wartości portfela.</p>
+    <p><strong>Minimalizacja Opłat:</strong> Zmniejszenie opłat inwestycyjnych o zaledwie {{feeReduction}}% rocznie może dodać {{ feeSavings }} do końcowej wartości portfela. Skup się na tanich funduszach indeksowych i ETF-ach dla głównych aktywów portfela.</p>
     
-    <p><strong>Strategia Przywracania Równowagi:</strong> Wdróż zdyscyplinowane podejście do przywracania równowagi. Roczne przywracanie równowagi historycznie dodało {{rebalancingBonus}}% do zwrotów.</p>
+    <p><strong>Strategia Równoważenia:</strong> Wdróż zdyscyplinowane podejście do równoważenia portfela. Coroczne równoważenie historycznie dodawało {{rebalancingBonus}}% do zwrotów poprzez systematyczne kupowanie tanio i sprzedawanie drogo.</p>
     
-    <p><strong>Integracja Niespodzianek:</strong> Planuj inwestowanie niespodzianek jak premie, zwroty podatków czy spadki. Dodanie zaledwie {{ windfallAmount }} rocznie może zwiększyć końcową wartość do {{ windfallValue }}.</p>
+    <p><strong>Integracja Dodatkowych Środków:</strong> Zaplanuj inwestowanie dodatkowych środków, takich jak premie, zwroty podatków czy spadki. Dodanie zaledwie {{ windfallAmount }} rocznie może zwiększyć Twoją wartość końcową do {{ windfallValue }}.</p>
     
-    <p><strong>Optymalizacja Behawioralna:</strong> Automatyzuj wszystko co możliwe aby usunąć emocjonalne podejmowanie decyzji. Automatyczne inwestowanie, przywracanie równowagi i zwiększenia składek pomagają utrzymać dyscyplinę podczas turbulencji rynkowych.</p>
+    <p><strong>Optymalizacja Behawioralna:</strong> Zautomatyzuj wszystko, co możliwe, aby wyeliminować emocjonalne podejmowanie decyzji. Automatyczne inwestowanie, równoważenie i zwiększanie składek pomagają utrzymać dyscyplinę podczas turbulencji rynkowych.</p>
     
-    <p><strong>Regularny Harmonogram Przeglądów:</strong> Zaplanuj półroczne przeglądy aby ocenić postęp i dokonać niezbędnych dostosowań. To zdyscyplinowane podejście zapewnia, że strategia pozostaje zgodna z celami {{goal}}.</p>
+    <p><strong>Regularny Harmonogram Przeglądów:</strong> Zaplanuj półroczne przeglądy, aby ocenić postępy i dokonać niezbędnych korekt. To zdyscyplinowane podejście zapewnia, że Twoja strategia pozostaje zgodna z celami {{goal}}.</p>
     
-    <p>Pamiętaj, optymalizacja dotyczy konsekwentnego doskonalenia w czasie, nie perfekcji. Małe, systematyczne ulepszenia składają się podczas {{timeHorizon}}-letniej podróży inwestycyjnej tworząc znaczne dodatkowe bogactwo.</p>
+    <p>Pamiętaj, że optymalizacja polega na konsekwentnym doskonaleniu w czasie, a nie na perfekcji. Małe, systematyczne ulepszenia kumulują się podczas Twojej {{timeHorizon}}-letniej podróży inwestycyjnej, tworząc znaczny dodatkowy majątek.</p>
   `,
 
   market_context: `
-    <h2>Obecny Kontekst Rynkowy i Perspektywa Historyczna</h2>
-    <p>Zrozumienie dzisiejszego środowiska rynkowego i wzorców historycznych zapewnia cenny kontekst dla Twojej {{timeHorizon}}-letniej podróży inwestycyjnej {{goal}}.</p>
+    <h2>Obecny Kontekst Rynkowy i Perspektywa Ekonomiczna</h2>
+    <p>Skuteczne inwestowanie wymaga zrozumienia szerszego krajobrazu gospodarczego. Oto jak obecne warunki rynkowe odnoszą się do Twojego {{timeHorizon}}-letniego planu {{goal}}.</p>
     
-    <p><strong>Obecne Środowisko Ekonomiczne:</strong> Dzisiejszy krajobraz inwestycyjny przedstawia inflację {{currentInflation}}%, stopy procentowe {{currentInterestRates}}% i zmienność rynku {{marketVolatility}}. Twój oczekiwany zwrot {{annualReturn}}% uwzględnia te obecne warunki.</p>
+    <p><strong>Środowisko Ekonomiczne:</strong> Obecnie poruszamy się w okresie z inflacją na poziomie {{currentInflation}}% i stopami procentowymi wokół {{currentInterestRates}}%. Chociaż zmienność rynku wynosi obecnie {{marketVolatility}}, Twoje założenie zwrotu {{annualReturn}}% jest realistyczne, biorąc pod uwagę historyczne średnie dla zdywersyfikowanych portfeli.</p>
     
-    <p><strong>Historyczna Wydajność Rynku:</strong> W ciągu ostatnich {{historicalPeriod}} lat rynki dostarczyły średnie roczne zwroty {{historicalReturn}}%. Twój docelowy zwrot {{annualReturn}}% znajduje się {{returnComparison}} tej historycznej średniej.</p>
+    <p><strong>Inflacja i Siła Nabywcza:</strong> Inflacja jest cichym niszczycielem majątku. Przy inflacji na poziomie {{currentInflation}}%, Twój "realny" zwrot (to, co faktycznie zachowujesz w sile nabywczej) wynosi około {{realReturn}}%. Inwestowanie jest jednym z niewielu niezawodnych sposobów na wyprzedzenie inflacji i podniesienie standardu życia w czasie.</p>
     
-    <p><strong>Analiza Wpływu Inflacji:</strong> Z obecną inflacją na {{currentInflation}}%, Twój realny (dostosowany do inflacji) zwrot wynosiłby około {{realReturn}}%. To oznacza, że Twoja siła nabywcza rośnie {{realReturn}}% rocznie.</p>
+    <p><strong>Cykle Rynkowe:</strong> W okresie {{timeHorizon}} lat powinieneś spodziewać się napotkania około {{expectedCycles}} pełnych cykli rynkowych (hossy i bessy). Historia pokazuje, że inwestorzy, którzy utrzymują kurs przez te cykle, zazwyczaj osiągają lepsze wyniki niż ci, którzy próbują wchodzić i wychodzić z rynku.</p>
     
-    <p><strong>Rozważania Cyklu Rynkowego:</strong> Twój {{timeHorizon}}-letni okres inwestycyjny prawdopodobnie obejmuje {{expectedCycles}} kompletnych cykli rynkowych. Dane historyczne pokazują, że dłuższe okresy inwestycyjne wygładzają cykliczną zmienność.</p>
+    <p><strong>Dywersyfikacja na Dzisiejszym Rynku:</strong> Biorąc pod uwagę obecną dynamikę globalną, mieszanka aktywów krajowych ({{domesticAllocation}}%) i międzynarodowych ({{internationalAllocation}}%) jest rozsądna. Zmniejsza to zależność od jakiejkolwiek pojedynczej gospodarki i wychwytuje wzrost, gdziekolwiek on występuje.</p>
     
-    <p><strong>Oczekiwania Zmienności:</strong> Rynki typowo doświadczają korekt (spadki 10%) co {{correctionFrequency}} miesięcy i bessy (spadki 20%) co {{bearMarketFrequency}} lat.</p>
-    
-    <p><strong>Dywersyfikacja Sektorowa i Geograficzna:</strong> Obecne warunki rynkowe faworyzują zdywersyfikowaną ekspozycję przez sektory i geografię. Twoja strategia inwestycyjna powinna obejmować rynki krajowe i międzynarodowe.</p>
-    
-    <p><strong>Środowisko Stóp Procentowych:</strong> Obecne stopy procentowe {{currentInterestRates}}% wpływają na różne klasy aktywów w różny sposób. To środowisko {{rateImpact}} dla Twojej strategii inwestycyjnej.</p>
-    
-    <p>Kluczowym wnioskiem jest to, że podczas gdy obecne warunki rynkowe mają znaczenie dla krótkoterminowej wydajności, Twój {{timeHorizon}}-letni harmonogram pozwala skupić się na fundamentalnym wzroście gospodarczym zamiast na tymczasowych wahaniach rynkowych.</p>
+    <p><strong>Długa Perspektywa:</strong> Chociaż krótkoterminowe wiadomości mogą być niepokojące, długoterminowy trend globalnej gospodarki jest wzrostowy. Twój horyzont {{timeHorizon}} lat pozwala Ci patrzeć poza codzienne nagłówki i skupić się na fundamentalnym wzroście firm, w które inwestujesz.</p>
   `,
 }
 
