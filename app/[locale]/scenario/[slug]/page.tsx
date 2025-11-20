@@ -636,23 +636,6 @@ export default async function ScenarioPage({ params }: Props) {
                 </li>
               </ol>
             </nav>
-            <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-100 to-cyan-100 px-4 py-2 rounded-full text-indigo-700 text-sm font-medium mb-6">
-              <span>📊</span>
-              <span>
-                {source === 'database' && !isUserGenerated
-                  ? scenarioPage?.databaseScenario || 'Database Scenario'
-                  : isUserGenerated
-                    ? scenarioPage?.userScenario || 'User Scenario'
-                    : scenarioPage?.predefinedScenario || 'Scenario'}
-              </span>
-              <span className="bg-green-500 text-white text-xs px-2 py-1 rounded-full">
-                {source === 'database'
-                  ? 'DB'
-                  : source === 'api'
-                    ? 'API'
-                    : 'SYS'}
-              </span>
-            </div>
 
             <h1 className="text-4xl lg:text-6xl font-bold font-playfair bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent mb-6">
               {translatedScenario.name}
