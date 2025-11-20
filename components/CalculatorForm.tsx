@@ -125,11 +125,12 @@ const CalculatorForm = ({ content = {} }: CalculatorFormProps) => {
     return formatCurrencyUtil(convertedAmount, selectedCurrency)
   }
 
-  // Initialize state with default values (no URL parsing)
+  // Initialize state with URL parameters or default values
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      // Use default parameters only
-      const validatedParams = validateParams(DEFAULT_PARAMS)
+      // Parse parameters from URL query string
+      const urlParams = decodeParamsFromUrl(window.location.search)
+      const validatedParams = validateParams(urlParams)
       setInputs(validatedParams)
       setIsInitialized(true)
     }

@@ -15,6 +15,7 @@ import { getRecentScenarios, getHomeContent } from '@/lib/db/queries'
 import { SEOContentSection } from '@/components/SEOContentSection'
 import Link from 'next/link'
 import { formatCurrencyUSD } from '@/lib/format'
+import { ScenarioCard } from '@/components/ScenarioCard'
 
 type Props = {
   params: { locale: string }
@@ -197,6 +198,44 @@ export default async function HomePage({ params: { locale } }: Props) {
     recentScenarios = await getRecentScenarios(locale, 36) // Increased from 6 to 36 to show more scenarios
   } catch (error) {
     console.error('Error fetching recent scenarios:', error)
+  }
+
+  const scenarioLabels = {
+    initial: getContentWithFallback(
+      dbContent,
+      'scenarios',
+      'initial_label',
+      'Initial',
+      locale
+    ),
+    monthly: getContentWithFallback(
+      dbContent,
+      'scenarios',
+      'monthly_label',
+      'Monthly',
+      locale
+    ),
+    returnRate: getContentWithFallback(
+      dbContent,
+      'scenarios',
+      'return_label',
+      'Return',
+      locale
+    ),
+    time: getContentWithFallback(
+      dbContent,
+      'scenarios',
+      'timeline_label',
+      'Timeline',
+      locale
+    ),
+    userCreated: getContentWithFallback(
+      dbContent,
+      'scenarios',
+      'user_created_label',
+      'User Created',
+      locale
+    ),
   }
 
   return (
@@ -402,94 +441,19 @@ export default async function HomePage({ params: { locale } }: Props) {
           <div className="max-w-6xl mx-auto">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {PREDEFINED_SCENARIOS.slice(0, 6).map((scenario) => (
-                <Link
+                <ScenarioCard
                   key={scenario.id}
-                  href={`/${locale}/scenario/${scenario.id}`}
-                  className="group block"
-                >
-                  <div className="bg-white rounded-3xl p-8 border border-slate-200/50 shadow-lg hover:shadow-xl transition-all duration-300 group-hover:scale-105">
-                    <div className="mb-6">
-                      <h3 className="text-xl font-bold mb-3 group-hover:text-indigo-600 transition-colors">
-                        {scenario.name}
-                      </h3>
-                      <p className="text-slate-600 text-sm">
-                        {scenario.description}
-                      </p>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4 mb-6">
-                      <div>
-                        <div className="text-2xl font-bold text-indigo-600">
-                          {formatCurrencyUSD(scenario.params.initialAmount)}
-                        </div>
-                        <div className="text-xs text-slate-500">
-                          {getContentWithFallback(
-                            dbContent,
-                            'scenarios',
-                            'initial_label',
-                            'Initial',
-                            locale
-                          )}
-                        </div>
-                      </div>
-                      <div>
-                        <div className="text-2xl font-bold text-emerald-600">
-                          {formatCurrencyUSD(
-                            scenario.params.monthlyContribution
-                          )}
-                        </div>
-                        <div className="text-xs text-slate-500">
-                          {getContentWithFallback(
-                            dbContent,
-                            'scenarios',
-                            'monthly_label',
-                            'Monthly',
-                            locale
-                          )}
-                        </div>
-                      </div>
-                      <div>
-                        <div className="text-2xl font-bold text-purple-600">
-                          {scenario.params.annualReturn}%
-                        </div>
-                        <div className="text-xs text-slate-500">
-                          {getContentWithFallback(
-                            dbContent,
-                            'scenarios',
-                            'return_label',
-                            'Return',
-                            locale
-                          )}
-                        </div>
-                      </div>
-                      <div>
-                        <div className="text-2xl font-bold text-orange-600">
-                          {scenario.params.timeHorizon}y
-                        </div>
-                        <div className="text-xs text-slate-500">
-                          {getContentWithFallback(
-                            dbContent,
-                            'scenarios',
-                            'timeline_label',
-                            'Timeline',
-                            locale
-                          )}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="flex flex-wrap gap-2">
-                      {scenario.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-xs font-medium"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </Link>
+                  id={scenario.id}
+                  name={scenario.name}
+                  description={scenario.description}
+                  initialAmount={scenario.params.initialAmount}
+                  monthlyContribution={scenario.params.monthlyContribution}
+                  annualReturn={scenario.params.annualReturn}
+                  timeHorizon={scenario.params.timeHorizon}
+                  tags={scenario.tags}
+                  locale={locale}
+                  labels={scenarioLabels}
+                />
               ))}
             </div>
 
@@ -548,120 +512,22 @@ export default async function HomePage({ params: { locale } }: Props) {
             <div className="max-w-6xl mx-auto">
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {recentScenarios.map((scenario) => (
-                  <Link
+                  <ScenarioCard
                     key={scenario.id}
-                    href={
-                      locale === 'en'
-                        ? `/scenario/${scenario.slug}`
-                        : `/${locale}/scenario/${scenario.slug}`
-                    }
-                    className="group block"
-                  >
-                    <div className="bg-white rounded-3xl p-8 border border-slate-200/50 shadow-lg hover:shadow-xl transition-all duration-300 group-hover:scale-105">
-                      <div className="mb-6">
-                        <div className="flex items-center justify-between mb-3">
-                          <span className="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-medium">
-                            {getContentWithFallback(
-                              dbContent,
-                              'scenarios',
-                              'user_created_label',
-                              'User Created',
-                              locale
-                            )}
-                          </span>
-                          <span className="text-xs text-slate-400">
-                            {new Date(scenario.createdAt).toLocaleDateString(
-                              locale
-                            )}
-                          </span>
-                        </div>
-                        <h3 className="text-xl font-bold mb-3 group-hover:text-emerald-600 transition-colors">
-                          {scenario.name}
-                        </h3>
-                        {scenario.description && (
-                          <p className="text-slate-600 text-sm line-clamp-2">
-                            {scenario.description}
-                          </p>
-                        )}
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-4 mb-6">
-                        <div>
-                          <div className="text-2xl font-bold text-indigo-600">
-                            {formatCurrencyUSD(
-                              parseInt(scenario.initialAmount)
-                            )}
-                          </div>
-                          <div className="text-xs text-slate-500">
-                            {getContentWithFallback(
-                              dbContent,
-                              'scenarios',
-                              'initial_label',
-                              'Initial',
-                              locale
-                            )}
-                          </div>
-                        </div>
-                        <div>
-                          <div className="text-2xl font-bold text-emerald-600">
-                            {formatCurrencyUSD(
-                              parseInt(scenario.monthlyContribution)
-                            )}
-                          </div>
-                          <div className="text-xs text-slate-500">
-                            {getContentWithFallback(
-                              dbContent,
-                              'scenarios',
-                              'monthly_label',
-                              'Monthly',
-                              locale
-                            )}
-                          </div>
-                        </div>
-                        <div>
-                          <div className="text-2xl font-bold text-purple-600">
-                            {parseFloat(scenario.annualReturn)}%
-                          </div>
-                          <div className="text-xs text-slate-500">
-                            {getContentWithFallback(
-                              dbContent,
-                              'scenarios',
-                              'return_label',
-                              'Return',
-                              locale
-                            )}
-                          </div>
-                        </div>
-                        <div>
-                          <div className="text-2xl font-bold text-orange-600">
-                            {scenario.timeHorizon}y
-                          </div>
-                          <div className="text-xs text-slate-500">
-                            {getContentWithFallback(
-                              dbContent,
-                              'scenarios',
-                              'timeline_label',
-                              'Timeline',
-                              locale
-                            )}
-                          </div>
-                        </div>
-                      </div>
-
-                      {scenario.tags && scenario.tags.length > 0 && (
-                        <div className="flex flex-wrap gap-2">
-                          {scenario.tags.slice(0, 3).map((tag) => (
-                            <span
-                              key={tag}
-                              className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-xs font-medium"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </Link>
+                    id={scenario.id}
+                    slug={scenario.slug}
+                    name={scenario.name}
+                    description={scenario.description}
+                    initialAmount={parseInt(scenario.initialAmount)}
+                    monthlyContribution={parseInt(scenario.monthlyContribution)}
+                    annualReturn={parseFloat(scenario.annualReturn)}
+                    timeHorizon={scenario.timeHorizon}
+                    tags={scenario.tags}
+                    locale={locale}
+                    isUserCreated={true}
+                    createdAt={scenario.createdAt}
+                    labels={scenarioLabels}
+                  />
                 ))}
               </div>
             </div>

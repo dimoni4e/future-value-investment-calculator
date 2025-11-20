@@ -85,68 +85,88 @@ export default function PersonalizedInsights({
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            <div className="bg-white rounded-2xl p-6 border border-slate-200/50 shadow-lg">
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="p-2 bg-green-100 rounded-lg">
-                  <TrendingUp className="w-5 h-5 text-green-600" />
+            <div className="group bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div className="flex items-start justify-between mb-4">
+                <div className="p-3 bg-gradient-to-br from-green-100 to-emerald-100 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                  <TrendingUp className="w-6 h-6 text-green-600" />
                 </div>
-                <div>
-                  <div className="text-2xl font-bold text-green-600">
+                <div className="text-right">
+                  <div className="text-3xl font-bold text-slate-900 group-hover:text-green-600 transition-colors">
                     {growthRate.toFixed(1)}%
                   </div>
-                  <div className="text-sm text-slate-600">
-                    {translations?.totalGrowthRate || 'Total Growth Rate'}
-                  </div>
+                </div>
+              </div>
+              <div>
+                <div className="text-sm font-medium text-slate-500 uppercase tracking-wider">
+                  {translations?.totalGrowthRate || 'Total Growth Rate'}
+                </div>
+                <div className="text-xs text-slate-400 mt-1">
+                  Return on investment
                 </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl p-6 border border-slate-200/50 shadow-lg">
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="p-2 bg-blue-100 rounded-lg">
-                  <Target className="w-5 h-5 text-blue-600" />
+            <div className="group bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div className="flex items-start justify-between mb-4">
+                <div className="p-3 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                  <Target className="w-6 h-6 text-blue-600" />
                 </div>
-                <div>
-                  <div className="text-2xl font-bold text-blue-600">
+                <div className="text-right">
+                  <div className="text-3xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
                     {formatCurrencyUSD(monthlyGrowth)}
                   </div>
-                  <div className="text-sm text-slate-600">
-                    {translations?.avgMonthlyGrowth || 'Avg Monthly Growth'}
-                  </div>
+                </div>
+              </div>
+              <div>
+                <div className="text-sm font-medium text-slate-500 uppercase tracking-wider">
+                  {translations?.avgMonthlyGrowth || 'Avg Monthly Growth'}
+                </div>
+                <div className="text-xs text-slate-400 mt-1">
+                  Average monthly gain
                 </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl p-6 border border-slate-200/50 shadow-lg">
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="p-2 bg-purple-100 rounded-lg">
-                  <Clock className="w-5 h-5 text-purple-600" />
+            <div className="group bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div className="flex items-start justify-between mb-4">
+                <div className="p-3 bg-gradient-to-br from-purple-100 to-fuchsia-100 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                  <Clock className="w-6 h-6 text-purple-600" />
                 </div>
-                <div>
-                  <div className="text-2xl font-bold text-purple-600">
+                <div className="text-right">
+                  <div className="text-3xl font-bold text-slate-900 group-hover:text-purple-600 transition-colors">
                     {compoundEffect.toFixed(1)}x
                   </div>
-                  <div className="text-sm text-slate-600">
-                    {translations?.compoundMultiplier || 'Compound Multiplier'}
-                  </div>
+                </div>
+              </div>
+              <div>
+                <div className="text-sm font-medium text-slate-500 uppercase tracking-wider">
+                  {translations?.compoundMultiplier || 'Compound Multiplier'}
+                </div>
+                <div className="text-xs text-slate-400 mt-1">
+                  Wealth multiplication factor
                 </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl p-6 border border-slate-200/50 shadow-lg">
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="p-2 bg-yellow-100 rounded-lg">
-                  <BarChart3 className="w-5 h-5 text-yellow-600" />
+            <div className="group bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div className="flex items-start justify-between mb-4">
+                <div className="p-3 bg-gradient-to-br from-yellow-100 to-orange-100 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                  <BarChart3 className="w-6 h-6 text-yellow-600" />
                 </div>
-                <div>
-                  <div className="text-2xl font-bold text-yellow-600">
+                <div className="text-right">
+                  <div className="text-3xl font-bold text-slate-900 group-hover:text-yellow-600 transition-colors">
                     {formatCurrencyUSD(
                       result.futureValue / (params.timeHorizonYears * 12)
                     )}
                   </div>
-                  <div className="text-sm text-slate-600">
-                    {translations?.avgMonthlyValue || 'Avg Monthly Value'}
-                  </div>
+                </div>
+              </div>
+              <div>
+                <div className="text-sm font-medium text-slate-500 uppercase tracking-wider">
+                  {translations?.avgMonthlyValue || 'Avg Monthly Value'}
+                </div>
+                <div className="text-xs text-slate-400 mt-1">
+                  Future value per month
                 </div>
               </div>
             </div>
@@ -183,46 +203,71 @@ export default function PersonalizedInsights({
           </div>
 
           {/* Investment Milestones */}
-          <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-3xl p-8">
-            <h4 className="text-2xl font-bold mb-6 text-center">
+          <div className="bg-gradient-to-br from-indigo-50/80 to-purple-50/80 backdrop-blur-sm rounded-3xl p-8 border border-indigo-100/50 shadow-lg">
+            <h4 className="text-2xl font-bold mb-8 text-center text-slate-900">
               {translations?.milestones || 'Investment Milestones'}
             </h4>
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-indigo-600 mb-2">
-                  {Math.round(params.timeHorizonYears / 3)}{' '}
-                  {translations?.years || 'years'}
+            <div className="grid md:grid-cols-3 gap-8 relative">
+              {/* Connecting Line (Desktop) */}
+              <div className="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-indigo-200 via-purple-200 to-green-200 -translate-y-8 z-0"></div>
+
+              <div className="relative z-10 text-center group">
+                <div className="w-16 h-16 mx-auto bg-white rounded-full shadow-md border-4 border-indigo-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 group-hover:border-indigo-200">
+                  <span className="text-xl font-bold text-indigo-600">1/3</span>
                 </div>
-                <div className="text-lg font-semibold mb-2">
-                  {formatCurrencyUSD(Math.round(result.futureValue * 0.25))}
-                </div>
-                <div className="text-sm text-slate-600">
-                  {translations?.firstMilestone || 'First Quarter Milestone'}
+                <div className="bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-white/50 shadow-sm hover:shadow-md transition-all">
+                  <div className="text-3xl font-bold text-indigo-600 mb-1">
+                    {Math.round(params.timeHorizonYears / 3)}{' '}
+                    <span className="text-base font-medium text-indigo-400">
+                      {translations?.years || 'years'}
+                    </span>
+                  </div>
+                  <div className="text-lg font-semibold text-slate-800 mb-1">
+                    {formatCurrencyUSD(Math.round(result.futureValue * 0.25))}
+                  </div>
+                  <div className="text-xs font-medium text-slate-500 uppercase tracking-wider">
+                    {translations?.firstMilestone || 'First Quarter Milestone'}
+                  </div>
                 </div>
               </div>
 
-              <div className="text-center">
-                <div className="text-3xl font-bold text-purple-600 mb-2">
-                  {Math.round(params.timeHorizonYears / 2)}{' '}
-                  {translations?.years || 'years'}
+              <div className="relative z-10 text-center group">
+                <div className="w-16 h-16 mx-auto bg-white rounded-full shadow-md border-4 border-purple-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 group-hover:border-purple-200">
+                  <span className="text-xl font-bold text-purple-600">1/2</span>
                 </div>
-                <div className="text-lg font-semibold mb-2">
-                  {formatCurrencyUSD(Math.round(result.futureValue * 0.5))}
-                </div>
-                <div className="text-sm text-slate-600">
-                  {translations?.midpointMilestone || 'Halfway Milestone'}
+                <div className="bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-white/50 shadow-sm hover:shadow-md transition-all">
+                  <div className="text-3xl font-bold text-purple-600 mb-1">
+                    {Math.round(params.timeHorizonYears / 2)}{' '}
+                    <span className="text-base font-medium text-purple-400">
+                      {translations?.years || 'years'}
+                    </span>
+                  </div>
+                  <div className="text-lg font-semibold text-slate-800 mb-1">
+                    {formatCurrencyUSD(Math.round(result.futureValue * 0.5))}
+                  </div>
+                  <div className="text-xs font-medium text-slate-500 uppercase tracking-wider">
+                    {translations?.midpointMilestone || 'Halfway Milestone'}
+                  </div>
                 </div>
               </div>
 
-              <div className="text-center">
-                <div className="text-3xl font-bold text-green-600 mb-2">
-                  {params.timeHorizonYears} {translations?.years || 'years'}
+              <div className="relative z-10 text-center group">
+                <div className="w-16 h-16 mx-auto bg-white rounded-full shadow-md border-4 border-green-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 group-hover:border-green-200">
+                  <Target className="w-8 h-8 text-green-600" />
                 </div>
-                <div className="text-lg font-semibold mb-2">
-                  {formatCurrencyUSD(result.futureValue)}
-                </div>
-                <div className="text-sm text-slate-600">
-                  {translations?.finalGoal || 'Final Goal'}
+                <div className="bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-white/50 shadow-sm hover:shadow-md transition-all">
+                  <div className="text-3xl font-bold text-green-600 mb-1">
+                    {params.timeHorizonYears}{' '}
+                    <span className="text-base font-medium text-green-400">
+                      {translations?.years || 'years'}
+                    </span>
+                  </div>
+                  <div className="text-lg font-semibold text-slate-800 mb-1">
+                    {formatCurrencyUSD(result.futureValue)}
+                  </div>
+                  <div className="text-xs font-medium text-slate-500 uppercase tracking-wider">
+                    {translations?.finalGoal || 'Final Goal'}
+                  </div>
                 </div>
               </div>
             </div>

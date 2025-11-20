@@ -13,6 +13,7 @@ import {
   generateScenarioHeadline,
   generateScenarioPageTitle,
 } from '@/lib/scenarioUtils'
+import { encodeParamsToUrl } from '@/lib/urlState'
 import { createScenario, getScenarioBySlug } from '@/lib/db/queries'
 import { getSupportedLocales } from '@/lib/db/queries'
 import LazyContentSection from '@/components/scenario/LazyContentSection'
@@ -23,6 +24,16 @@ import OptimizationTips from '@/components/scenario/OptimizationTips'
 import StructuredData from '@/components/scenario/StructuredData'
 import ScenarioSEOSection from '@/components/scenario/ScenarioSEOSection'
 import Link from 'next/link'
+import {
+  TrendingUp,
+  Calendar,
+  DollarSign,
+  Percent,
+  ArrowRight,
+  Settings2,
+  ChevronRight,
+  Home,
+} from 'lucide-react'
 import RelatedScenarios from '@/components/scenario/RelatedScenarios'
 import { formatPercent, formatCurrencyUSD } from '@/lib/format'
 
@@ -602,133 +613,153 @@ export default async function ScenarioPage({ params }: Props) {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
             {/* Breadcrumbs */}
-            <nav
-              className="text-sm text-slate-500 mb-4"
-              aria-label="Breadcrumb"
-            >
-              <ol className="inline-flex items-center space-x-1">
+            <nav className="flex justify-center mb-8" aria-label="Breadcrumb">
+              <ol className="inline-flex flex-wrap items-center justify-center gap-2 text-sm text-slate-500 bg-white/50 backdrop-blur-sm px-4 py-2 rounded-full border border-slate-200/50 shadow-sm">
                 <li>
                   <Link
                     href={params.locale === 'en' ? '/' : `/${params.locale}`}
-                    className="hover:text-slate-700"
+                    className="hover:text-indigo-600 transition-colors flex items-center gap-1"
                   >
-                    {(messages as any)?.navigation?.home || 'Home'}
+                    <Home className="w-3.5 h-3.5" />
+                    <span>{(messages as any)?.navigation?.home || 'Home'}</span>
                   </Link>
                 </li>
+                <li className="flex items-center text-slate-300">
+                  <ChevronRight className="w-4 h-4" />
+                </li>
                 <li>
-                  <span className="px-1">/</span>
                   <Link
                     href={
                       params.locale === 'en'
                         ? '/scenario'
                         : `/${params.locale}/scenario`
                     }
-                    className="hover:text-slate-700"
+                    className="hover:text-indigo-600 transition-colors"
                   >
                     {(messages as any)?.scenarios?.title || 'Scenarios'}
                   </Link>
                 </li>
-                <li>
-                  <span className="px-1">/</span>
-                  <span className="text-slate-700">
-                    {translatedScenario.name}
-                  </span>
+                <li className="flex items-center text-slate-300">
+                  <ChevronRight className="w-4 h-4" />
+                </li>
+                <li
+                  className="text-slate-900 font-medium max-w-[150px] sm:max-w-xs md:max-w-sm truncate"
+                  title={translatedScenario.name}
+                >
+                  {translatedScenario.name}
                 </li>
               </ol>
             </nav>
 
-            <h1 className="text-4xl lg:text-6xl font-bold font-playfair bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent mb-6">
+            <h1 className="text-4xl lg:text-6xl font-bold font-playfair bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent mb-6 leading-tight">
               {translatedScenario.name}
             </h1>
 
-            <p className="text-lg lg:text-xl text-slate-600 mb-6 max-w-2xl mx-auto">
+            <p className="text-lg lg:text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
               {translatedScenario.description}
             </p>
 
-            {/* Scenario Stats */}
-            <h2 className="sr-only">Investment Metrics</h2>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
-              <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50">
-                <div className="text-2xl font-bold text-indigo-600">
-                  {formatCurrencyUSD(scenario.params.initialAmount)}
+            {/* Unified Scenario Card */}
+            <div className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/50 overflow-hidden">
+              {/* Input Stats Grid */}
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-slate-100/50">
+                <div className="bg-white/60 p-6 flex flex-col items-center justify-center group hover:bg-white transition-colors">
+                  <div className="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <DollarSign className="w-5 h-5" />
+                  </div>
+                  <div className="text-2xl font-bold text-slate-800">
+                    {formatCurrencyUSD(scenario.params.initialAmount)}
+                  </div>
+                  <div className="text-xs font-medium text-slate-500 uppercase tracking-wider mt-1">
+                    {scenarioPage?.initialInvestment || 'Initial'}
+                  </div>
                 </div>
-                <div className="text-sm text-slate-600">
-                  {scenarioPage?.initialInvestment || 'Initial Investment'}
+
+                <div className="bg-white/60 p-6 flex flex-col items-center justify-center group hover:bg-white transition-colors">
+                  <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Calendar className="w-5 h-5" />
+                  </div>
+                  <div className="text-2xl font-bold text-slate-800">
+                    {formatCurrencyUSD(scenario.params.monthlyContribution)}
+                  </div>
+                  <div className="text-xs font-medium text-slate-500 uppercase tracking-wider mt-1">
+                    {scenarioPage?.monthlyContribution || 'Monthly'}
+                  </div>
+                </div>
+
+                <div className="bg-white/60 p-6 flex flex-col items-center justify-center group hover:bg-white transition-colors">
+                  <div className="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Percent className="w-5 h-5" />
+                  </div>
+                  <div className="text-2xl font-bold text-slate-800">
+                    {formatPercent(normalizedAnnualReturnPct, 1)}
+                  </div>
+                  <div className="text-xs font-medium text-slate-500 uppercase tracking-wider mt-1">
+                    {scenarioPage?.annualReturn || 'Return'}
+                  </div>
+                </div>
+
+                <div className="bg-white/60 p-6 flex flex-col items-center justify-center group hover:bg-white transition-colors">
+                  <div className="w-10 h-10 rounded-full bg-cyan-100 text-cyan-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <TrendingUp className="w-5 h-5" />
+                  </div>
+                  <div className="text-2xl font-bold text-slate-800">
+                    {scenario.params.timeHorizon}{' '}
+                    {scenarioPage?.years || 'years'}
+                  </div>
+                  <div className="text-xs font-medium text-slate-500 uppercase tracking-wider mt-1">
+                    {scenarioPage?.timeHorizon || 'Duration'}
+                  </div>
                 </div>
               </div>
 
-              <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50">
-                <div className="text-2xl font-bold text-emerald-600">
-                  {formatCurrencyUSD(scenario.params.monthlyContribution)}
-                </div>
-                <div className="text-sm text-slate-600">
-                  {scenarioPage?.monthlyContribution || 'Monthly Contribution'}
+              {/* Result & CTA Section */}
+              <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white p-8 lg:p-10 relative overflow-hidden">
+                {/* Decorative background elements */}
+                <div className="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-0 left-0 -mb-10 -ml-10 w-64 h-64 bg-emerald-500/20 rounded-full blur-3xl"></div>
+
+                <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
+                  <div className="text-center lg:text-left">
+                    <div className="text-slate-400 font-medium mb-2 flex items-center justify-center lg:justify-start gap-2">
+                      {scenarioPage?.projectedResult ||
+                        'Projected Future Value'}
+                    </div>
+                    <div className="text-5xl lg:text-6xl font-bold tracking-tight mb-2 bg-gradient-to-r from-white via-white to-slate-300 bg-clip-text text-transparent">
+                      {formatCurrencyUSD(result.futureValue)}
+                    </div>
+                    <div className="text-emerald-400 font-medium flex items-center justify-center lg:justify-start gap-2">
+                      <TrendingUp className="w-4 h-4" />
+                      <span>
+                        +{formatCurrencyUSD(result.totalGrowth)} (
+                        {(
+                          (result.totalGrowth / result.totalContributions) *
+                          100
+                        ).toFixed(0)}
+                        % growth)
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+                    <a
+                      href={`${params.locale === 'en' ? '/' : `/${params.locale}`}${encodeParamsToUrl(
+                        {
+                          initialAmount: scenario.params.initialAmount,
+                          monthlyContribution:
+                            scenario.params.monthlyContribution,
+                          annualReturn: normalizedAnnualReturnPct,
+                          timeHorizon: scenario.params.timeHorizon,
+                        }
+                      )}#calculator`}
+                      className="group flex items-center justify-center gap-2 bg-white text-slate-900 px-8 py-4 rounded-xl font-bold hover:bg-indigo-50 transition-all duration-300 shadow-lg hover:shadow-indigo-500/25"
+                    >
+                      <Settings2 className="w-5 h-5 text-indigo-600 group-hover:rotate-90 transition-transform duration-500" />
+                      <span>{scenarioPage?.customizeTitle || 'Customize'}</span>
+                    </a>
+                  </div>
                 </div>
               </div>
-
-              <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50">
-                <div className="text-2xl font-bold text-purple-600">
-                  {formatPercent(normalizedAnnualReturnPct, 0)}
-                </div>
-                <div className="text-sm text-slate-600">
-                  {scenarioPage?.annualReturn || 'Annual Return'}
-                </div>
-              </div>
-
-              <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50">
-                <div className="text-2xl font-bold text-cyan-600">
-                  {scenario.params.timeHorizon} {scenarioPage?.years || 'years'}
-                </div>
-                <div className="text-sm text-slate-600">
-                  {scenarioPage?.timeHorizon || 'Time Horizon'}
-                </div>
-              </div>
-            </div>
-
-            {/* Result Preview */}
-            <div className="bg-gradient-to-r from-emerald-500 to-cyan-500 text-white rounded-3xl p-8 mb-10">
-              <h2 className="text-2xl font-bold mb-4">
-                {scenarioPage?.projectedResult || 'Projected Result'}
-              </h2>
-              <div className="text-5xl font-bold mb-2">
-                {formatCurrencyUSD(result.futureValue)}
-              </div>
-              <div className="text-emerald-100">
-                {scenarioPage?.totalGrowth || 'Total Growth'}:{' '}
-                {formatCurrencyUSD(result.totalGrowth)} (
-                {(
-                  (result.totalGrowth / result.totalContributions) *
-                  100
-                ).toFixed(1)}
-                %)
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Interactive Calculator */}
-      <section className="py-12">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12">
-              {scenarioPage?.customizeTitle || 'Customize This Scenario'}
-            </h2>
-
-            <div className="text-center">
-              <p className="text-lg text-slate-600 mb-6">
-                {scenarioPage?.customizeDescription ||
-                  'Visit the main calculator to customize these parameters and explore different scenarios.'}
-              </p>
-              <a
-                href={`${params.locale === 'en' ? '/' : `/${params.locale}`}#calculator`}
-                className="inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-700 hover:to-cyan-700 text-white px-8 py-4 rounded-2xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
-              >
-                <span>
-                  {scenarioPage?.openCalculator ||
-                    'Open Interactive Calculator'}
-                </span>
-              </a>
             </div>
           </div>
         </div>
