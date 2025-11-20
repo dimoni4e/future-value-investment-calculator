@@ -23,6 +23,7 @@
     "db:backfill-locales": "tsx scripts/backfill-scenarios-locales.ts",
     "db:backfill-locales:tsnode": "tsx scripts/backfill-scenarios-locales.ts",
     "db:health": "tsx scripts/db-health-check.ts",
+    "db:generate-daily": "tsx scripts/generate-daily-scenario.ts",
     "snapshots:refresh": "tsx scripts/refresh-snapshots.ts"
   },
   "dependencies": {
