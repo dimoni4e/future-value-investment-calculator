@@ -6,6 +6,7 @@ import { Bookmark, TrendingUp, Eye, Calendar } from 'lucide-react'
 import { calculateFutureValue, type InvestmentParameters } from '@/lib/finance'
 import { getHomeContent } from '@/lib/db/queries'
 import { formatCurrencyUSD } from '@/lib/format'
+import { generateScenarioHeadline } from '@/lib/scenarioUtils'
 
 interface UserScenario {
   id: string
@@ -119,6 +120,15 @@ export function RecentScenarios({ locale, limit = 3 }: RecentScenariosProps) {
         }
 
         const result = calculateFutureValue(investmentParams)
+        const headline = generateScenarioHeadline(
+          locale as 'en' | 'pl' | 'es',
+          {
+            initialAmount: scenario.params.initialAmount,
+            monthlyContribution: scenario.params.monthlyContribution,
+            annualReturn: scenario.params.annualReturnRate,
+            timeHorizon: scenario.params.timeHorizonYears,
+          }
+        )
 
         return (
           <Link
@@ -142,9 +152,7 @@ export function RecentScenarios({ locale, limit = 3 }: RecentScenariosProps) {
                   </div>
                 </div>
 
-                <h4 className="font-semibold text-gray-900 mb-1">
-                  {scenario.name}
-                </h4>
+                <h4 className="font-semibold text-gray-900 mb-1">{headline}</h4>
 
                 {scenario.description && (
                   <p className="text-sm text-gray-600 mb-2 line-clamp-2">

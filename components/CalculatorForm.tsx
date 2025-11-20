@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import * as Sentry from '@sentry/nextjs'
 import OptimizedGrowthChart from './OptimizedGrowthChart'
 import ScenarioSlider from './ScenarioSlider'
@@ -135,6 +135,92 @@ const CalculatorForm = ({ content = {} }: CalculatorFormProps) => {
     }
   }, [])
 
+  const validateInput = useCallback(
+    (field: keyof CalculatorInputs, value: number) => {
+      let validationState: 'valid' | 'warning' | 'error' | 'neutral' = 'neutral'
+      let helperText = ''
+
+      switch (field) {
+        case 'initialAmount':
+          if (value < 0) {
+            validationState = 'error'
+            helperText = 'Amount cannot be negative'
+          } else if (value === 0) {
+            validationState = 'warning'
+            helperText = 'Consider adding an initial investment to see growth'
+          } else if (value >= 100) {
+            validationState = 'valid'
+            helperText =
+              content.calculator_good_starting_amount || 'Good starting amount!'
+          } else {
+            validationState = 'neutral'
+            helperText = 'Enter your initial investment amount'
+          }
+          break
+
+        case 'monthlyContribution':
+          if (value < 0) {
+            validationState = 'error'
+            helperText = 'Monthly contribution cannot be negative'
+          } else if (value === 0) {
+            validationState = 'warning'
+            helperText = 'Regular contributions accelerate growth'
+          } else if (value >= 50) {
+            validationState = 'valid'
+            helperText =
+              content.calculator_excellent_regular_investing ||
+              'Excellent! Regular investing builds wealth'
+          } else {
+            validationState = 'neutral'
+            helperText = 'Enter your monthly contribution'
+          }
+          break
+
+        case 'annualReturn':
+          if (value < 0) {
+            validationState = 'error'
+            helperText = 'Return rate cannot be negative'
+          } else if (value > 20) {
+            validationState = 'warning'
+            helperText = 'Very high return rates are risky'
+          } else if (value >= 5 && value <= 15) {
+            validationState = 'valid'
+            helperText =
+              content.calculator_realistic_return_rate ||
+              'Realistic return rate for long-term investing'
+          } else {
+            validationState = 'neutral'
+            helperText = 'Expected annual return percentage'
+          }
+          break
+
+        case 'timeHorizon':
+          if (value < 1) {
+            validationState = 'error'
+            helperText = 'Time horizon must be at least 1 year'
+          } else if (value < 5) {
+            validationState = 'warning'
+            helperText = 'Longer time horizons benefit from compound growth'
+          } else if (value >= 10) {
+            validationState = 'valid'
+            helperText =
+              content.calculator_time_best_friend ||
+              'Great! Time is your best friend in investing'
+          } else {
+            validationState = 'neutral'
+            helperText =
+              content.calculator_time_horizon_label ||
+              'Investment time horizon in years'
+          }
+          break
+      }
+
+      setValidation((prev) => ({ ...prev, [field]: validationState }))
+      setHelperTexts((prev) => ({ ...prev, [field]: helperText }))
+    },
+    [content]
+  )
+
   // Initialize validation on mount
   useEffect(() => {
     if (isInitialized) {
@@ -149,6 +235,7 @@ const CalculatorForm = ({ content = {} }: CalculatorFormProps) => {
     inputs.monthlyContribution,
     inputs.annualReturn,
     inputs.timeHorizon,
+    validateInput,
   ])
 
   // Remove URL updating (clean URLs without parameters)
@@ -219,89 +306,6 @@ const CalculatorForm = ({ content = {} }: CalculatorFormProps) => {
       Sentry.captureException(error)
       setIsRedirecting(false)
     }
-  }
-
-  const validateInput = (field: keyof CalculatorInputs, value: number) => {
-    let validationState: 'valid' | 'warning' | 'error' | 'neutral' = 'neutral'
-    let helperText = ''
-
-    switch (field) {
-      case 'initialAmount':
-        if (value < 0) {
-          validationState = 'error'
-          helperText = 'Amount cannot be negative'
-        } else if (value === 0) {
-          validationState = 'warning'
-          helperText = 'Consider adding an initial investment to see growth'
-        } else if (value >= 100) {
-          validationState = 'valid'
-          helperText =
-            content.calculator_good_starting_amount || 'Good starting amount!'
-        } else {
-          validationState = 'neutral'
-          helperText = 'Enter your initial investment amount'
-        }
-        break
-
-      case 'monthlyContribution':
-        if (value < 0) {
-          validationState = 'error'
-          helperText = 'Monthly contribution cannot be negative'
-        } else if (value === 0) {
-          validationState = 'warning'
-          helperText = 'Regular contributions accelerate growth'
-        } else if (value >= 50) {
-          validationState = 'valid'
-          helperText =
-            content.calculator_excellent_regular_investing ||
-            'Excellent! Regular investing builds wealth'
-        } else {
-          validationState = 'neutral'
-          helperText = 'Enter your monthly contribution'
-        }
-        break
-
-      case 'annualReturn':
-        if (value < 0) {
-          validationState = 'error'
-          helperText = 'Return rate cannot be negative'
-        } else if (value > 20) {
-          validationState = 'warning'
-          helperText = 'Very high return rates are risky'
-        } else if (value >= 5 && value <= 15) {
-          validationState = 'valid'
-          helperText =
-            content.calculator_realistic_return_rate ||
-            'Realistic return rate for long-term investing'
-        } else {
-          validationState = 'neutral'
-          helperText = 'Expected annual return percentage'
-        }
-        break
-
-      case 'timeHorizon':
-        if (value < 1) {
-          validationState = 'error'
-          helperText = 'Time horizon must be at least 1 year'
-        } else if (value < 5) {
-          validationState = 'warning'
-          helperText = 'Longer time horizons benefit from compound growth'
-        } else if (value >= 10) {
-          validationState = 'valid'
-          helperText =
-            content.calculator_time_best_friend ||
-            'Great! Time is your best friend in investing'
-        } else {
-          validationState = 'neutral'
-          helperText =
-            content.calculator_time_horizon_label ||
-            'Investment time horizon in years'
-        }
-        break
-    }
-
-    setValidation((prev) => ({ ...prev, [field]: validationState }))
-    setHelperTexts((prev) => ({ ...prev, [field]: helperText }))
   }
 
   const handleInputChange = (field: keyof CalculatorInputs, value: number) => {

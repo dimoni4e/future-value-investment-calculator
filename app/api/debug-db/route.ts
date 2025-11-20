@@ -4,6 +4,8 @@ import { scenario } from '@/lib/db/schema'
 import { eq, and, desc } from 'drizzle-orm'
 import { getRecentScenarios } from '@/lib/db/queries'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET(request: NextRequest) {
   try {
     const url = new URL(request.url)

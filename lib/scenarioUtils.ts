@@ -31,6 +31,42 @@ export const INVESTMENT_GOALS = {
 
 export type InvestmentGoal = keyof typeof INVESTMENT_GOALS
 
+const SUPPORTED_LOCALES = ['en', 'pl', 'es'] as const
+type SupportedLocale = (typeof SUPPORTED_LOCALES)[number]
+
+const GOAL_LABELS: Record<SupportedLocale, Record<InvestmentGoal, string>> = {
+  en: {
+    retirement: 'Retirement Planning',
+    emergency: 'Emergency Fund',
+    house: 'House Down Payment',
+    education: 'Education Fund',
+    wealth: 'Wealth Building',
+    vacation: 'Vacation Fund',
+    starter: 'Starter Investment',
+    investment: 'Investment Plan',
+  },
+  pl: {
+    retirement: 'Planowanie emerytalne',
+    emergency: 'Fundusz awaryjny',
+    house: 'Wkład własny na dom',
+    education: 'Fundusz edukacyjny',
+    wealth: 'Budowanie majątku',
+    vacation: 'Fundusz wakacyjny',
+    starter: 'Inwestycja startowa',
+    investment: 'Plan inwestycyjny',
+  },
+  es: {
+    retirement: 'Plan de jubilación',
+    emergency: 'Fondo de emergencia',
+    house: 'Entrada para vivienda',
+    education: 'Fondo educativo',
+    wealth: 'Construcción de patrimonio',
+    vacation: 'Fondo de vacaciones',
+    starter: 'Inversión inicial',
+    investment: 'Plan de inversión',
+  },
+}
+
 /**
  * Detects the most appropriate investment goal based on parameters
  */
@@ -185,21 +221,11 @@ export function validateScenarioParams(params: CalculatorInputs): boolean {
  */
 export function generateScenarioName(params: CalculatorInputs): string {
   const goal = detectInvestmentGoal(params)
-  const goalNames = {
-    retirement: 'Retirement Planning',
-    emergency: 'Emergency Fund',
-    house: 'House Down Payment',
-    education: 'Education Fund',
-    wealth: 'Wealth Building',
-    vacation: 'Vacation Fund',
-    starter: 'Starter Investment',
-    investment: 'Investment Plan',
-  }
 
   const initial = params.initialAmount.toLocaleString()
   const monthly = params.monthlyContribution.toLocaleString()
 
-  return `${goalNames[goal]}: $${initial} + $${monthly}/month`
+  return `${GOAL_LABELS.en[goal]}: $${initial} + $${monthly}/month`
 }
 
 /**
@@ -214,42 +240,6 @@ export function generateLocalizedScenarioName(
 ): string {
   const goal = detectInvestmentGoal(params)
 
-  const goalNames: Record<
-    'en' | 'pl' | 'es',
-    Record<InvestmentGoal, string>
-  > = {
-    en: {
-      retirement: 'Retirement Planning',
-      emergency: 'Emergency Fund',
-      house: 'House Down Payment',
-      education: 'Education Fund',
-      wealth: 'Wealth Building',
-      vacation: 'Vacation Fund',
-      starter: 'Starter Investment',
-      investment: 'Investment Plan',
-    },
-    pl: {
-      retirement: 'Planowanie emerytalne',
-      emergency: 'Fundusz awaryjny',
-      house: 'Wkład własny na dom',
-      education: 'Fundusz edukacyjny',
-      wealth: 'Budowanie majątku',
-      vacation: 'Fundusz wakacyjny',
-      starter: 'Inwestycja startowa',
-      investment: 'Plan inwestycyjny',
-    },
-    es: {
-      retirement: 'Plan de jubilación',
-      emergency: 'Fondo de emergencia',
-      house: 'Entrada para vivienda',
-      education: 'Fondo educativo',
-      wealth: 'Construcción de patrimonio',
-      vacation: 'Fondo de vacaciones',
-      starter: 'Inversión inicial',
-      investment: 'Plan de inversión',
-    },
-  }
-
   const nf = new Intl.NumberFormat(
     locale === 'en' ? 'en-US' : locale === 'pl' ? 'pl-PL' : 'es-ES',
     { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }
@@ -261,7 +251,65 @@ export function generateLocalizedScenarioName(
     es: 'mes',
   }
 
-  return `${goalNames[locale][goal]}: ${nf.format(params.initialAmount)} + ${nf.format(params.monthlyContribution)}/${perMonth[locale]}`
+  return `${GOAL_LABELS[locale][goal]}: ${nf.format(params.initialAmount)} + ${nf.format(params.monthlyContribution)}/${perMonth[locale]}`
+}
+
+const numberFormatLocale = {
+  en: 'en-US',
+  pl: 'pl-PL',
+  es: 'es-ES',
+} as const
+
+const perMonthLabel: Record<SupportedLocale, string> = {
+  en: 'month',
+  pl: 'mies.',
+  es: 'mes',
+}
+
+function normalizeAnnualReturn(value: number): number {
+  if (Number.isNaN(value)) return 0
+  return value <= 1 ? value * 100 : value
+}
+
+function formatPercentDisplay(value: number): string {
+  const normalized = normalizeAnnualReturn(value)
+  return Number.isInteger(normalized)
+    ? normalized.toFixed(0)
+    : normalized.toFixed(1).replace(/\.0$/, '')
+}
+
+function coerceLocale(locale: string): SupportedLocale {
+  return SUPPORTED_LOCALES.includes(locale as SupportedLocale)
+    ? (locale as SupportedLocale)
+    : 'en'
+}
+
+export function generateScenarioHeadline(
+  locale: 'en' | 'pl' | 'es',
+  params: CalculatorInputs
+): string {
+  const safeLocale = coerceLocale(locale)
+  const goal = detectInvestmentGoal(params)
+  const nf = new Intl.NumberFormat(numberFormatLocale[safeLocale], {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0,
+  })
+  const initial = nf.format(params.initialAmount)
+  const monthly = nf.format(params.monthlyContribution)
+  const years = params.timeHorizon
+  const rate = formatPercentDisplay(params.annualReturn)
+
+  if (safeLocale === 'pl') {
+    return `${GOAL_LABELS.pl[goal]} | Zainwestuj ${initial} na start + ${monthly}/${perMonthLabel.pl} przez ${years} lat przy ${rate}% rocznego zwrotu`
+  }
+
+  if (safeLocale === 'es') {
+    return `${GOAL_LABELS.es[goal]} | Invierte ${initial} inicial + ${monthly}/${perMonthLabel.es} durante ${years} años con ${rate}% de rendimiento anual`
+  }
+
+  const yearLabel = years === 1 ? '1-year' : `${years}-year`
+  return `${GOAL_LABELS.en[goal]} | Invest ${initial} upfront + ${monthly}/${perMonthLabel.en} for a ${yearLabel} horizon at ${rate}% annual return`
 }
 
 /**

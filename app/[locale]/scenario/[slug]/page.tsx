@@ -8,9 +8,9 @@ import { PREDEFINED_SCENARIOS, PREDEFINED_SCENARIOS_MAP } from '@/lib/scenarios'
 import { generateSEO } from '@/lib/seo'
 import {
   parseSlugToScenario,
-  detectInvestmentGoal,
   generateLocalizedScenarioName,
   generateLocalizedScenarioDescription,
+  generateScenarioHeadline,
 } from '@/lib/scenarioUtils'
 import { createScenario, getScenarioBySlug } from '@/lib/db/queries'
 import { getSupportedLocales } from '@/lib/db/queries'
@@ -311,14 +311,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (scenarioData?.scenario) {
     // Prefer localized scenario name/description
     const s = scenarioData.scenario
-    const annualPct = (s.params.annualReturn * 100).toFixed(0)
+    const annualPctValue =
+      s.params.annualReturn <= 1
+        ? s.params.annualReturn * 100
+        : s.params.annualReturn
+    const annualPct = annualPctValue.toFixed(0)
     const initialStr = `${formatCurrencyUSD(s.params.initialAmount)}`
     const monthlyStr = `${formatCurrencyUSD(s.params.monthlyContribution)}`
     const timeStr = `${s.params.timeHorizon}`
 
     // If predefined, try localized name/desc from messages; else use DB (already localized per-locale)
     const predefined = messages?.scenarios?.predefinedScenarios?.[s.id]
-    const scenarioName = predefined?.name || s.name
+    const scenarioName =
+      generateScenarioHeadline(locale as any, {
+        initialAmount: s.params.initialAmount,
+        monthlyContribution: s.params.monthlyContribution,
+        annualReturn: annualPctValue,
+        timeHorizon: s.params.timeHorizon,
+      }) ||
+      predefined?.name ||
+      s.name
 
     title = (
       seoMsgs.scenarioTitle || 'Investment Scenario: {scenarioName}'
@@ -340,7 +352,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         {
           initialAmount: s.params.initialAmount,
           monthlyContribution: s.params.monthlyContribution,
-          annualReturn: Number(annualPct), // percent
+          annualReturn: annualPctValue,
           timeHorizon: s.params.timeHorizon,
         },
         undefined,
@@ -365,7 +377,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       const timeStr = `${parsed.timeHorizon}`
 
       // Build a localized scenarioName using our helper
-      const scenarioName = generateLocalizedScenarioName(locale as any, {
+      const scenarioName = generateScenarioHeadline(locale as any, {
         initialAmount: parsed.initialAmount,
         monthlyContribution: parsed.monthlyContribution,
         annualReturn: parsed.annualReturn,
@@ -392,7 +404,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
           {
             initialAmount: parsed.initialAmount,
             monthlyContribution: parsed.monthlyContribution,
-            annualReturn: Number(annualPct),
+            annualReturn: parsed.annualReturn,
             timeHorizon: parsed.timeHorizon,
           },
           undefined,
@@ -418,9 +430,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   // Trim to SEO-friendly lengths
-  if (title.length > 60) title = title.substring(0, 57) + '...'
-  if (description.length > 160)
-    description = description.substring(0, 157) + '...'
+  // if (title.length > 60) title = title.substring(0, 57) + '...'
+  // if (description.length > 160)
+  //   description = description.substring(0, 157) + '...'
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://fvinvestcalc.com'
   const pageUrl =
@@ -510,40 +522,44 @@ export default async function ScenarioPage({ params }: Props) {
     }
   }
 
-  // Prefer localized name/description for user-generated or parsed scenarios
-  const translatedScenario = (() => {
-    if (isUserGenerated) {
-      // For DB-backed, use already-localized strings if present; otherwise generate on the fly
-      try {
-        const name = generateLocalizedScenarioName(params.locale as any, {
-          initialAmount: scenario.params.initialAmount,
-          monthlyContribution: scenario.params.monthlyContribution,
-          annualReturn: scenario.params.annualReturn * 100,
-          timeHorizon: scenario.params.timeHorizon,
-        })
-        const description = generateLocalizedScenarioDescription(
-          params.locale as any,
-          {
-            initialAmount: scenario.params.initialAmount,
-            monthlyContribution: scenario.params.monthlyContribution,
-            annualReturn: scenario.params.annualReturn * 100,
-            timeHorizon: scenario.params.timeHorizon,
-          }
-        )
-        return { name, description }
-      } catch {
-        return getScenarioTranslation(scenario)
-      }
-    }
-    return getScenarioTranslation(scenario)
-  })()
-
   // Normalize annual return so that downstream calculations always receive a percentage (e.g., 8 for 8%).
   // Some sources (DB/slug parsing) may express return as decimal (0.08) while predefined scenarios already use 8.
   const normalizedAnnualReturnPct =
     scenario.params.annualReturn <= 1
       ? scenario.params.annualReturn * 100
       : scenario.params.annualReturn
+
+  const translationFallback = getScenarioTranslation(scenario)
+
+  let scenarioDescription = translationFallback.description || ''
+  if (isUserGenerated) {
+    try {
+      scenarioDescription = generateLocalizedScenarioDescription(
+        params.locale as any,
+        {
+          initialAmount: scenario.params.initialAmount,
+          monthlyContribution: scenario.params.monthlyContribution,
+          annualReturn: normalizedAnnualReturnPct,
+          timeHorizon: scenario.params.timeHorizon,
+        }
+      )
+    } catch {
+      // fall back to translation fallback description
+    }
+  }
+
+  const scenarioHeadline =
+    generateScenarioHeadline(params.locale as any, {
+      initialAmount: scenario.params.initialAmount,
+      monthlyContribution: scenario.params.monthlyContribution,
+      annualReturn: normalizedAnnualReturnPct,
+      timeHorizon: scenario.params.timeHorizon,
+    }) || translationFallback.name
+
+  const translatedScenario = {
+    name: scenarioHeadline,
+    description: scenarioDescription,
+  }
 
   const investmentParams: InvestmentParameters = {
     initialAmount: scenario.params.initialAmount,

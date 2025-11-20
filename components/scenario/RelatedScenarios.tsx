@@ -4,7 +4,11 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { InvestmentParameters } from '@/lib/finance'
 import { PREDEFINED_SCENARIOS, ScenarioConfig } from '@/lib/scenarios'
-import { generateScenarioSlug, detectInvestmentGoal } from '@/lib/scenarioUtils'
+import {
+  generateScenarioSlug,
+  detectInvestmentGoal,
+  generateScenarioHeadline,
+} from '@/lib/scenarioUtils'
 import { useTranslations } from 'next-intl'
 import { formatPercent, formatCurrencyUSD } from '@/lib/format'
 
@@ -280,92 +284,107 @@ export default function RelatedScenarios({
 
           {/* Related Scenarios Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {relatedScenarios.map((scenario, index) => (
-              <Link
-                key={scenario.slug}
-                href={`/${locale}/scenario/${scenario.slug}`}
-                className="block group"
-              >
-                <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200/50 hover:shadow-lg hover:border-indigo-200 transition-all duration-300 group-hover:scale-105">
-                  {/* Scenario Header */}
-                  <div className="mb-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-xs font-medium text-indigo-600 bg-indigo-50 px-2 py-1 rounded-full">
-                        {(
-                          {
-                            'Similar initial amount': t(
-                              'reasons.similarInitial'
-                            ),
-                            'Different monthly contribution': t(
-                              'reasons.differentMonthly'
-                            ),
-                            'Different time horizon': t(
-                              'reasons.differentTime'
-                            ),
-                            'Different return rate': t(
-                              'reasons.differentReturn'
-                            ),
-                            'Same goal category': t('reasons.sameGoal'),
-                          } as Record<string, string>
-                        )[scenario.reason] || scenario.reason}
-                      </span>
-                      <span className="text-xs text-slate-500">
-                        {Math.round(scenario.similarity * 100)}% {t('similar')}
-                      </span>
-                    </div>
-                    <h3 className="text-lg font-semibold text-slate-900 group-hover:text-indigo-600 transition-colors">
-                      {scenario.name}
-                    </h3>
-                    <p className="text-sm text-slate-600 mt-1">
-                      {scenario.description}
-                    </p>
-                  </div>
+            {relatedScenarios.map((scenario, index) => {
+              const headline = generateScenarioHeadline(
+                locale as 'en' | 'pl' | 'es',
+                {
+                  initialAmount: scenario.params.initialAmount,
+                  monthlyContribution: scenario.params.monthlyContribution,
+                  annualReturn: scenario.params.annualReturnRate,
+                  timeHorizon: scenario.params.timeHorizonYears,
+                }
+              )
 
-                  {/* Scenario Parameters */}
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-slate-600">
-                        {t('labels.initial')}:
-                      </span>
-                      <span className="font-medium text-slate-900">
-                        {formatCurrencyUSD(scenario.params.initialAmount)}
-                      </span>
+              return (
+                <Link
+                  key={scenario.slug}
+                  href={`/${locale}/scenario/${scenario.slug}`}
+                  className="block group"
+                >
+                  <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200/50 hover:shadow-lg hover:border-indigo-200 transition-all duration-300 group-hover:scale-105">
+                    {/* Scenario Header */}
+                    <div className="mb-4">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-xs font-medium text-indigo-600 bg-indigo-50 px-2 py-1 rounded-full">
+                          {(
+                            {
+                              'Similar initial amount': t(
+                                'reasons.similarInitial'
+                              ),
+                              'Different monthly contribution': t(
+                                'reasons.differentMonthly'
+                              ),
+                              'Different time horizon': t(
+                                'reasons.differentTime'
+                              ),
+                              'Different return rate': t(
+                                'reasons.differentReturn'
+                              ),
+                              'Same goal category': t('reasons.sameGoal'),
+                            } as Record<string, string>
+                          )[scenario.reason] || scenario.reason}
+                        </span>
+                        <span className="text-xs text-slate-500">
+                          {Math.round(scenario.similarity * 100)}%{' '}
+                          {t('similar')}
+                        </span>
+                      </div>
+                      <h3 className="text-lg font-semibold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                        {headline}
+                      </h3>
+                      <p className="text-sm text-slate-600 mt-1">
+                        {scenario.description}
+                      </p>
                     </div>
-                    <div className="flex justify-between">
-                      <span className="text-slate-600">
-                        {t('labels.monthly')}:
-                      </span>
-                      <span className="font-medium text-slate-900">
-                        {formatCurrencyUSD(scenario.params.monthlyContribution)}
-                      </span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-slate-600">
-                        {t('labels.return')}:
-                      </span>
-                      <span className="font-medium text-slate-900">
-                        {formatPercent(scenario.params.annualReturnRate, 0)}
-                      </span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-slate-600">
-                        {t('labels.timeline')}:
-                      </span>
-                      <span className="font-medium text-slate-900">
-                        {scenario.params.timeHorizonYears} {t('labels.years')}
-                      </span>
-                    </div>
-                  </div>
 
-                  {/* Call to Action */}
-                  <div className="mt-4 pt-4 border-t border-slate-100">
-                    <span className="text-sm font-medium text-indigo-600 group-hover:text-indigo-700 transition-colors">
-                      {t('viewScenario')} →
-                    </span>
+                    {/* Scenario Parameters */}
+                    <div className="space-y-2 text-sm">
+                      <div className="flex justify-between">
+                        <span className="text-slate-600">
+                          {t('labels.initial')}:
+                        </span>
+                        <span className="font-medium text-slate-900">
+                          {formatCurrencyUSD(scenario.params.initialAmount)}
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-600">
+                          {t('labels.monthly')}:
+                        </span>
+                        <span className="font-medium text-slate-900">
+                          {formatCurrencyUSD(
+                            scenario.params.monthlyContribution
+                          )}
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-600">
+                          {t('labels.return')}:
+                        </span>
+                        <span className="font-medium text-slate-900">
+                          {formatPercent(scenario.params.annualReturnRate, 0)}
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-600">
+                          {t('labels.timeline')}:
+                        </span>
+                        <span className="font-medium text-slate-900">
+                          {scenario.params.timeHorizonYears} {t('labels.years')}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Call to Action */}
+                    <div className="mt-4 pt-4 border-t border-slate-100">
+                      <span className="text-sm font-medium text-indigo-600 group-hover:text-indigo-700 transition-colors">
+                        {t('viewScenario')} →
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              )
+            })}
           </div>
 
           {/* View More Link */}

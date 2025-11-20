@@ -16,6 +16,7 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 import { calculateFutureValue } from '@/lib/finance'
+import { generateScenarioHeadline } from '@/lib/scenarioUtils'
 import type { Scenario } from '@/lib/db/schema'
 
 interface ScenarioExplorerProps {
@@ -628,6 +629,12 @@ function ScenarioCard({
   isTrending?: boolean
 }) {
   const projectedValue = calculateScenarioValue(scenario)
+  const headline = generateScenarioHeadline(locale as 'en' | 'pl' | 'es', {
+    initialAmount: parseFloat(scenario.initialAmount),
+    monthlyContribution: parseFloat(scenario.monthlyContribution),
+    annualReturn: parseFloat(scenario.annualReturn),
+    timeHorizon: scenario.timeHorizon,
+  })
 
   return (
     <Link
@@ -639,7 +646,7 @@ function ScenarioCard({
         <div className="flex items-start justify-between mb-4">
           <div className="flex-1">
             <h3 className="font-semibold text-slate-900 mb-2 group-hover:text-indigo-600 transition-colors line-clamp-2">
-              {scenario.name}
+              {headline}
             </h3>
             <p className="text-sm text-slate-600 line-clamp-2">
               {scenario.description}
