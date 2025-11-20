@@ -9,6 +9,7 @@ import {
   detectInvestmentGoal,
   validateScenarioParams,
   generateScenarioName,
+  generateScenarioPageTitle,
   generateMetaDescription,
   generateSEOKeywords,
   CalculatorInputs,
@@ -327,6 +328,51 @@ describe('scenarioUtils', () => {
       const name = generateScenarioName(params)
       expect(name).toContain('$1,000,000')
       expect(name).toContain('$5,000')
+    })
+  })
+
+  describe('generateScenarioPageTitle', () => {
+    it('should generate correct title format for English', () => {
+      const params = {
+        initialAmount: 10000,
+        monthlyContribution: 200,
+        annualReturn: 7,
+        timeHorizon: 10,
+      }
+      const title = generateScenarioPageTitle('en', params)
+      expect(title).toBe(
+        'Future Value of $10,000 in 10 Years at 7% Monthly $200 Contributions'
+      )
+    })
+
+    it('should generate correct title format for Polish', () => {
+      const params = {
+        initialAmount: 10000,
+        monthlyContribution: 200,
+        annualReturn: 7,
+        timeHorizon: 10,
+      }
+      // Note: The exact formatting of currency depends on the locale environment in the test runner
+      // We'll check for the structure and key words
+      const title = generateScenarioPageTitle('pl', params)
+      expect(title).toContain('Przyszła wartość')
+      expect(title).toContain('po 10 latach')
+      expect(title).toContain('przy 7%')
+      expect(title).toContain('i składkach miesięcznych')
+    })
+
+    it('should generate correct title format for Spanish', () => {
+      const params = {
+        initialAmount: 10000,
+        monthlyContribution: 200,
+        annualReturn: 7,
+        timeHorizon: 10,
+      }
+      const title = generateScenarioPageTitle('es', params)
+      expect(title).toContain('Valor Futuro de')
+      expect(title).toContain('en 10 Años')
+      expect(title).toContain('al 7%')
+      expect(title).toContain('con Contribuciones Mensuales de')
     })
   })
 

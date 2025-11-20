@@ -11,6 +11,7 @@ import {
   generateLocalizedScenarioName,
   generateLocalizedScenarioDescription,
   generateScenarioHeadline,
+  generateScenarioPageTitle,
 } from '@/lib/scenarioUtils'
 import { createScenario, getScenarioBySlug } from '@/lib/db/queries'
 import { getSupportedLocales } from '@/lib/db/queries'
@@ -332,9 +333,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       predefined?.name ||
       s.name
 
-    title = (
-      seoMsgs.scenarioTitle || 'Investment Scenario: {scenarioName}'
-    ).replace('{scenarioName}', scenarioName)
+    title = generateScenarioPageTitle(locale as any, {
+      initialAmount: s.params.initialAmount,
+      monthlyContribution: s.params.monthlyContribution,
+      annualReturn: annualPctValue,
+      timeHorizon: s.params.timeHorizon,
+    })
 
     description = (
       seoMsgs.scenarioDescription ||
@@ -384,9 +388,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         timeHorizon: parsed.timeHorizon,
       })
 
-      title = (
-        seoMsgs.scenarioTitle || 'Investment Scenario: {scenarioName}'
-      ).replace('{scenarioName}', scenarioName)
+      title = generateScenarioPageTitle(locale as any, {
+        initialAmount: parsed.initialAmount,
+        monthlyContribution: parsed.monthlyContribution,
+        annualReturn: parsed.annualReturn,
+        timeHorizon: parsed.timeHorizon,
+      })
 
       description = (
         seoMsgs.scenarioDescription ||

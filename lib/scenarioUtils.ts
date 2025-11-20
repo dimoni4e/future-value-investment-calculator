@@ -313,6 +313,36 @@ export function generateScenarioHeadline(
 }
 
 /**
+ * Generates the specific page title format requested:
+ * "Future Value of $10,000 in 10 Years at 7% Monthly $200 Contributions"
+ */
+export function generateScenarioPageTitle(
+  locale: 'en' | 'pl' | 'es',
+  params: CalculatorInputs
+): string {
+  const safeLocale = coerceLocale(locale)
+  const nf = new Intl.NumberFormat(numberFormatLocale[safeLocale], {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0,
+  })
+  const initial = nf.format(params.initialAmount)
+  const monthly = nf.format(params.monthlyContribution)
+  const years = params.timeHorizon
+  const rate = formatPercentDisplay(params.annualReturn)
+
+  if (safeLocale === 'pl') {
+    return `Przyszła wartość ${initial} po ${years} latach przy ${rate}% i składkach miesięcznych ${monthly}`
+  }
+
+  if (safeLocale === 'es') {
+    return `Valor Futuro de ${initial} en ${years} Años al ${rate}% con Contribuciones Mensuales de ${monthly}`
+  }
+
+  return `Future Value of ${initial} in ${years} Years at ${rate}% Monthly ${monthly} Contributions`
+}
+
+/**
  * Generates a localized short description suitable for DB and previews
  */
 export function generateLocalizedScenarioDescription(
