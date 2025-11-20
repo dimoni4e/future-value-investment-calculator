@@ -172,11 +172,11 @@ export function generateStructuredData(
  */
 export function getDefaultSEO(locale: string = 'en'): SEOData {
   return {
-    title: 'Financial Growth Planner - Plan Your Financial Future',
+    title: 'Future Investment Calculator - Plan Your Financial Future',
     description:
       'Advanced financial growth planning platform with compound interest projections, scenario analysis, and interactive charts. Transform your investment strategy with data-driven insights.',
     keywords: [
-      'financial growth planner',
+      'future investment calculator',
       'investment projections',
       'compound interest',
       'financial planning',
@@ -186,12 +186,12 @@ export function getDefaultSEO(locale: string = 'en'): SEOData {
       'wealth building',
     ],
     openGraph: {
-      title: 'Financial Growth Planner',
+      title: 'Future Investment Calculator',
       description:
         'Plan your financial future with advanced compound interest calculations and interactive charts.',
     },
     twitter: {
-      title: 'Financial Growth Planner',
+      title: 'Future Investment Calculator',
       description:
         'Plan your financial future with compound interest projections.',
     },

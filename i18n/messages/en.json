@@ -1,6 +1,6 @@
 {
   "layout": {
-    "title": "Financial Growth Planner",
+    "title": "Future Investment Calculator",
     "description": "Plan Your Financial Future"
   },
   "navigation": {
@@ -33,7 +33,7 @@
     "goalPlanningDesc": "Set financial targets and see exactly what it takes to achieve your investment goals"
   },
   "calculator": {
-    "title": "Financial Growth Planner",
+    "title": "Future Investment Calculator",
     "subtitle": "Enter your investment details below to see how your money can grow over time with compound interest",
     "currency": "Currency",
     "loadingRates": "Loading exchange rates...",
@@ -114,7 +114,7 @@
     "cookies": "Cookie Policy",
     "tools": "Tools",
     "resources": "Resources",
-    "investmentCalculator": "Financial Growth Planner",
+    "investmentCalculator": "Future Investment Calculator",
     "compoundInterest": "Compound Interest",
     "scenarioPlanning": "Scenario Planning",
     "growthCharts": "Growth Charts",

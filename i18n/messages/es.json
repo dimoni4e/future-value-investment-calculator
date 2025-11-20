@@ -1,6 +1,6 @@
 {
   "layout": {
-    "title": "Planificador de Crecimiento Financiero",
+    "title": "Calculadora de inversión futura",
     "description": "Planifica Tu Futuro Financiero"
   },
   "navigation": {
@@ -33,7 +33,7 @@
     "goalPlanningDesc": "Establece metas financieras y ve exactamente lo que se necesita para lograr tus objetivos de inversión"
   },
   "calculator": {
-    "title": "Planificador de Crecimiento Financiero",
+    "title": "Calculadora de inversión futura",
     "subtitle": "Ingresa los detalles de tu inversión a continuación para ver cómo tu dinero puede crecer con el tiempo con interés compuesto",
     "currency": "Moneda",
     "loadingRates": "Cargando tipos de cambio...",
@@ -104,7 +104,6 @@
     "allRightsReserved": "Todos los derechos reservados",
     "description": "Transforma tu planificación financiera con nuestra plataforma avanzada de proyección de crecimiento. Analiza escenarios de inversión, visualiza el crecimiento compuesto y toma decisiones basadas en datos para tu futuro financiero.",
     "navigation": "Navegación",
-    "legal": "Legal",
     "social": "Social",
     "home": "Inicio",
     "about": "Acerca de",
@@ -114,7 +113,7 @@
     "cookies": "Política de Cookies",
     "tools": "Herramientas",
     "resources": "Recursos",
-    "investmentCalculator": "Planificador de Crecimiento Financiero",
+    "investmentCalculator": "Calculadora de inversión futura",
     "compoundInterest": "Interés Compuesto",
     "scenarioPlanning": "Planificación de Escenarios",
     "growthCharts": "Gráficos de Crecimiento",
@@ -122,7 +121,6 @@
     "helpFaq": "Ayuda y FAQ",
     "financialBlog": "Blog Financiero",
     "privacyPolicy": "Política de Privacidad",
-    "termsOfService": "Términos de Servicio",
     "cookiePolicy": "Política de Cookies"
   },
   "legal": {

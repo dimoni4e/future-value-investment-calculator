@@ -1,9 +1,9 @@
 {
   "layout": {
-    "title": "Planer Wzrostu Finansowego",
+    "title": "Kalkulator przyszłej inwestycji",
     "tools": "Narzędzia",
     "resources": "Zasoby",
-    "investmentCalculator": "Planer Wzrostu Finansowego",
+    "investmentCalculator": "Kalkulator przyszłej inwestycji",
     "compoundInterest": "Odsetki Składane",
     "description": "Zaplanuj Swoją Przyszłość Finansową"
   },
@@ -37,7 +37,7 @@
     "goalPlanningDesc": "Ustaw cele finansowe i zobacz dokładnie, co trzeba zrobić, aby osiągnąć swoje cele inwestycyjne"
   },
   "calculator": {
-    "title": "Planer Wzrostu Finansowego",
+    "title": "Kalkulator przyszłej inwestycji",
     "subtitle": "Wprowadź szczegóły swojej inwestycji poniżej, aby zobaczyć, jak twoje pieniądze mogą rosnąć w czasie dzięki odsetkom składanym",
     "currency": "Waluta",
     "loadingRates": "Ładowanie kursów walut...",
@@ -118,7 +118,7 @@
     "cookies": "Polityka Cookies",
     "tools": "Narzędzia",
     "resources": "Zasoby",
-    "investmentCalculator": "Kalkulator Inwestycji",
+    "investmentCalculator": "Kalkulator przyszłej inwestycji",
     "compoundInterest": "Odsetki Składane",
     "scenarioPlanning": "Planowanie Scenariuszy",
     "growthCharts": "Wykresy Wzrostu",

@@ -22,11 +22,11 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: 'Financial Growth Planner - Plan Your Financial Future',
+  title: 'Future Investment Calculator - Plan Your Financial Future',
   description:
     'Advanced financial growth planning platform with compound interest projections, scenario analysis, and interactive charts. Transform your investment strategy with data-driven insights.',
   keywords:
-    'financial growth planner, investment projections, compound interest, financial planning, future value, investment returns, retirement planning, wealth building',
+    'future investment calculator, investment projections, compound interest, financial planning, future value, investment returns, retirement planning, wealth building',
   authors: [{ name: 'fvinvestcalc' }],
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_BASE_URL || 'https://fvinvestcalc.com'
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     shortcut: '/favicon.png',
   },
   openGraph: {
-    title: 'Financial Growth Planner - Plan Your Financial Future',
+    title: 'Future Investment Calculator - Plan Your Financial Future',
     description:
       'Advanced financial growth planning platform with compound interest projections, scenario analysis, and interactive charts.',
     type: 'website',
@@ -48,13 +48,13 @@ export const metadata: Metadata = {
         url: '/api/og',
         width: 1200,
         height: 630,
-        alt: 'Financial Growth Planner',
+        alt: 'Future Investment Calculator',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Financial Growth Planner - Plan Your Financial Future',
+    title: 'Future Investment Calculator - Plan Your Financial Future',
     description:
       'Advanced financial growth planning platform with compound interest projections, scenario analysis, and interactive charts.',
     images: ['/api/og'],

@@ -4,7 +4,7 @@
 -- Spanish (es) home content
 INSERT INTO home_content (locale, section, key, value) VALUES
 -- Layout section
-('es', 'layout', 'title', 'Planificador de Crecimiento Financiero'),
+('es', 'layout', 'title', 'Calculadora de inversión futura'),
 ('es', 'layout', 'description', 'Planifica Tu Futuro Financiero'),
 
 -- Navigation section  
@@ -35,7 +35,7 @@ INSERT INTO home_content (locale, section, key, value) VALUES
 -- Polish (pl) home content
 INSERT INTO home_content (locale, section, key, value) VALUES
 -- Layout section
-('pl', 'layout', 'title', 'Planer Wzrostu Finansowego'),
+('pl', 'layout', 'title', 'Kalkulator przyszłej inwestycji'),
 ('pl', 'layout', 'description', 'Zaplanuj Swoją Przyszłość Finansową'),
 
 -- Navigation section

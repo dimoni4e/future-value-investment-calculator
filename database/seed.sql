@@ -7,7 +7,7 @@
 
 -- Layout content
 INSERT INTO home_content (locale, section, key, value) VALUES
-('en', 'layout', 'title', 'Financial Growth Planner'),
+('en', 'layout', 'title', 'Future Investment Calculator'),
 ('en', 'layout', 'description', 'Plan Your Financial Future');
 
 -- Navigation content

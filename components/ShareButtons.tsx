@@ -22,7 +22,7 @@ interface ShareButtonsProps {
 const ShareButtons: React.FC<ShareButtonsProps> = ({
   calculatorParams,
   url,
-  title = 'Financial Growth Planner',
+  title = 'Future Investment Calculator',
   description = 'Calculate the future value of your investments with compound interest',
 }) => {
   const [copied, setCopied] = useState(false)
