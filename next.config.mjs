@@ -18,6 +18,7 @@ const nextConfig = {
     // Define your environment variables here
     API_URL: process.env.API_URL,
   },
+  output: 'standalone',
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
 }
 
