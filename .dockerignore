@@ -1,0 +1,13 @@
+node_modules
+.next
+out
+coverage
+playwright-report
+.git
+.gitignore
+npm-debug.log*
+yarn-error.log*
+.DS_Store
+.env*
+backup-*.sql
+backup-full.custom
