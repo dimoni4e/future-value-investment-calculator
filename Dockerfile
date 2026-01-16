@@ -20,6 +20,9 @@ FROM base AS runner
 ENV NODE_ENV=production
 ENV PORT=3000
 
+# Provide tsx for cron/maintenance scripts that run TypeScript directly
+RUN npm install -g tsx
+
 # Non-root user
 RUN groupadd -r nextjs && useradd -r -g nextjs nextjs \
   && mkdir -p /app/.next /app/public
