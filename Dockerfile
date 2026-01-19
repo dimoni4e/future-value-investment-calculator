@@ -23,12 +23,16 @@ ENV PORT=3000
 # Provide tsx for cron/maintenance scripts that run TypeScript directly
 RUN npm install -g tsx
 
+# Copy production dependencies for app runtime and cron scripts
+COPY --from=deps /app/node_modules ./node_modules
+
 # Non-root user
 RUN groupadd -r nextjs && useradd -r -g nextjs nextjs \
   && mkdir -p /app/.next /app/public
 
 # Copy the standalone server and assets
 COPY --from=builder /app/public ./public
+COPY --from=builder /app/scripts ./scripts
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 
