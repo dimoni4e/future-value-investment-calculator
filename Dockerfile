@@ -33,6 +33,7 @@ RUN groupadd -r nextjs && useradd -r -g nextjs nextjs \
 # Copy the standalone server and assets
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/scripts ./scripts
+COPY --from=builder /app/lib ./lib
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 
