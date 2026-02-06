@@ -118,9 +118,28 @@ export function Footer() {
         </div>
 
         <div className="border-t border-slate-700/50 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between">
-          <div className="flex items-center space-x-2 text-sm text-slate-400">
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-slate-400">
             <span>© {new Date().getFullYear()} FvInvestCalc.com.</span>
             <span>{tFooter('allRightsReserved')}</span>
+            <span aria-hidden="true">•</span>
+            <a
+              href={
+                locale === 'pl'
+                  ? 'https://tremontale.com/pl/'
+                  : locale === 'es'
+                    ? 'https://tremontale.com/es/'
+                    : 'https://tremontale.com/'
+              }
+              className="text-slate-400 hover:text-white transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {locale === 'pl'
+                ? 'Kalkulator narzutu i marzy'
+                : locale === 'es'
+                  ? 'Calculadora de margen y recargo'
+                  : 'Markup &amp; Margin Calculator'}
+            </a>
           </div>
           <div className="flex items-center space-x-2 text-sm text-slate-400 mt-4 md:mt-0">
             <span>Made with</span>
